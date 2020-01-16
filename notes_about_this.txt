@@ -4,6 +4,9 @@ Using Sphinx
 Getting Started with Sphinx (install guide and more)
 https://docs.readthedocs.io/en/stable/intro/getting-started-with-sphinx.html
 
+Getting Started
+http://www.sphinx-doc.org/en/master/usage/quickstart.html
+
 "reStructuredText is the preferred format for technical documentation"
 reStructuredText Primer
 http://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
@@ -34,7 +37,15 @@ https://sphinx-rtd-theme.readthedocs.io/en/latest/
 
 Liked one other theme but it had NPM/Node crap, so no.
 
+Run the Server
+--------------
+python -m http.server (or not in env: python3 -m http.server)
+localhost:8000
 
+
+Sphinx Tutorial
+---------------
+https://buildmedia.readthedocs.org/media/pdf/brandons-sphinx-tutorial/latest/brandons-sphinx-tutorial.pdf
 
 
 
