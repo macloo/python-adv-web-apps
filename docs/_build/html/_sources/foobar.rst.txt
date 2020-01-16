@@ -1,8 +1,6 @@
-======
 Foobar
 ======
 
-.. contents:: Table of Contents
-
-
 Some text here.
+
+Some more text here.
