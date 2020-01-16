@@ -1,0 +1,8 @@
+======
+Foobar
+======
+
+.. contents:: Table of Contents
+
+
+Some text here.
