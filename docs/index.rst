@@ -8,13 +8,6 @@ Python Beginners
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
+   :caption: foobar
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   foobar
