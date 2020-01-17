@@ -24,7 +24,9 @@ https://sphinx-rtd-theme.readthedocs.io/en/latest/configuring.html
 
 Use the Makefile to build the docs, like so -- `make builder`
 
--- where *builder* is one of the supported builders, e.g. html, latex or linkcheck
+-- where *builder* is one of the supported builders, e.g. `html`, `latex` or `linkcheck`
+
+https://www.sphinx-doc.org/en/master/usage/builders/index.html
 
 ## Themes
 
@@ -34,9 +36,9 @@ https://sphinx-themes.org/
 Picked this one
 https://sphinx-rtd-theme.readthedocs.io/en/latest/
 
-Liked one other theme but it had NPM/Node crap, so no.
+Liked one other theme more, but it had NPM/Node crap, so no.
 
-## Run the Server
+## Run the Python dev server
 
 `python -m http.server` (or, not in env, Mac: `python3 -m http.server`)
 
@@ -44,18 +46,21 @@ Then: `localhost:8000`
 
 ## Build
 
+Be in the `docs` dir
+
 ```
 $ conda deactivate
-$ cd /Users/mcadams/Documents/python/the_sphinx_dir
+$ cd /Users/username/Documents/python/the_sphinx_dir
 $ source env/bin/activate
 $ cd docs
 $ make html
 ```
 
-## Create New Page/Chapter
+## Create new page/chapter in docs
 
-Create a new .rst file in /docs/ e.g. `foobar.rst`
-In `index.rst`, add filename (case-sensitive) to any tree --
+1. Create a new .rst file in /docs/ e.g. `foobar.rst`
+
+2. In `index.rst`, add filename (case-sensitive) to any tree --
 
 ```
 .. toctree::
@@ -65,14 +70,15 @@ In `index.rst`, add filename (case-sensitive) to any tree --
    foobar
 ```
 
+`:caption: Contents` is a subheading; can have more than one list here
 
-## Sphinx Tutorials
+## Sphinx tutorials
 
 https://buildmedia.readthedocs.org/media/pdf/brandons-sphinx-tutorial/latest/brandons-sphinx-tutorial.pdf
 
 https://medium.com/@richdayandnight/a-simple-tutorial-on-how-to-document-your-python-project-using-sphinx-and-rinohtype-177c22a15b5b
 
-## Scannable Documentation
+## Scannable Sphinx documentation
 
 https://pythonhosted.org/an_example_pypi_project/sphinx.html
 
