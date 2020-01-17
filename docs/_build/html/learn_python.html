@@ -83,12 +83,14 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Starting Python</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#interactively-learning-python">Interactively learning Python</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#using-mu-or-using-atom">Using Mu or using Atom</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#do-not-use-idle-to-run-your-scripts">Do not use IDLE to run your scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-mu">Using Mu</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#saving-python-scripts-and-running-them">Saving Python scripts and running them</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#your-first-python-program">Your first Python program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#code-blocks-and-indentation">Code blocks and indentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#chapter-review-chapters-1-and-2">Chapter review: chapters 1 and 2</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#chapter-1">Chapter 1</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#chapter-2">Chapter 2</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#slides">Slides</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slides-chapters-1-and-2">Slides: chapters 1 and 2</a></li>
 </ul>
 </li>
 </ul>
@@ -181,48 +183,31 @@
 <p>It’s very important to play with these simple statements and try things. Do not only type what is in the book or what you see here. Make up your own examples and try them. Type to understand how things work. If you don’t type the code yourself, you will not learn it.</p>
 </div>
 </div>
-<div class="section" id="using-mu-or-using-atom">
-<h2>Using Mu or using Atom<a class="headerlink" href="#using-mu-or-using-atom" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="using-mu">
+<h2>Using Mu<a class="headerlink" href="#using-mu" title="Permalink to this headline">¶</a></h2>
 <p>In his <a class="reference external" href="https://automatetheboringstuff.com/2e/chapter0/">Introduction</a>, Sweigart recommends using the <a class="reference external" href="https://codewith.mu/en/about">Mu editing program</a>, which you can download (free) for Mac or Windows.</p>
 <div class="figure align-default">
 <a class="reference internal image-reference" href="_images/mu_editor.png"><img alt="Python 3 script running in Mu the editor screenshot" src="_images/mu_editor.png" style="width: 700.0px; height: 437.5px;" /></a>
 </div>
-<p>Until about halfway through chapter 1, Sweigart has us using the interactive Python interpreter, as seen above. Then he switches to writing a program in a file, which he assumes we will run in IDLE. However, we write our code in <a class="reference external" href="https://atom.io/">Atom</a> and run it in Terminal (Mac) or Command Prompt (Windows).</p>
+<p>If you are using Mu, you can type Python code interactively into the segment labeled “Python3 (Jupyter) REPL” <em>instead of</em> using Terminal or Command Prompt.</p>
 </div>
-<div class="section" id="do-not-use-idle-to-run-your-scripts">
-<h2>Do not use IDLE to run your scripts<a class="headerlink" href="#do-not-use-idle-to-run-your-scripts" title="Permalink to this headline">¶</a></h2>
-<p>You can run any of the scripts in this folder in the manner described below.</p>
-<p>In the middle of chapter 1 in <strong>Automate the Boring Stuff with Python,</strong> Sweigart invites you to leave the interactive Python shell (where you have the <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span></code> prompt) and create a little program in a file.</p>
-<p>Do not use IDLE. We are never using IDLE.</p>
-<p>Instead, you can use <a class="reference external" href="https://atom.io/">Atom</a>, our trusted code editor. Code is code. You can write any code in Atom. Instead of saving the file with a <code class="docutils literal notranslate"><span class="pre">.html</span></code> or <code class="docutils literal notranslate"><span class="pre">.js</span></code> extension, we save it with a <code class="docutils literal notranslate"><span class="pre">.py</span></code> extension when it is a Python file.</p>
-<p>Then, how do you run it? Never try to run a file at the <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span></code> prompt. You need to be at the bash prompt (<code class="docutils literal notranslate"><span class="pre">$</span></code>) in Terminal, or the Command Prompt if you’re using Windows.</p>
-<p>It’s easiest if you are in the same directory where the <code class="docutils literal notranslate"><span class="pre">.py</span></code> file was saved. Use your <code class="docutils literal notranslate"><span class="pre">cd</span></code> command (<a class="reference external" href="http://bit.ly/mm-commandline">Command Line Tips</a>) to get there.</p>
+<div class="section" id="saving-python-scripts-and-running-them">
+<h2>Saving Python scripts and running them<a class="headerlink" href="#saving-python-scripts-and-running-them" title="Permalink to this headline">¶</a></h2>
+<p>If you use Mu, you can write and save your Python scripts in the upper segment. When you run the script, the results will appear in the segment labeled “Running: filename.py.” Python scripts must end with a <code class="docutils literal notranslate"><span class="pre">.py</span></code> extension.</p>
+<p>Instead of Mu, you can use <a class="reference external" href="https://atom.io/">Atom</a>, our trusted code editor, to write and save your Python scripts. Code is code. You can write any code in Atom. Instead of saving the file with a <code class="docutils literal notranslate"><span class="pre">.html</span></code> or <code class="docutils literal notranslate"><span class="pre">.js</span></code> extension, just save it with a <code class="docutils literal notranslate"><span class="pre">.py</span></code> extension when it is a Python file.</p>
+<p>If you write and save the file in Atom, how do you run it?</p>
+<p>It’s easiest if you are in the same directory where the <code class="docutils literal notranslate"><span class="pre">.py</span></code> file was saved. Use the <code class="docutils literal notranslate"><span class="pre">cd</span></code> command (<a class="reference external" href="http://bit.ly/mm-commandline">Command Line Tips</a>) to get there.</p>
 <p>At the bash prompt, type this (using your actual filename, of course):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">myfilename</span><span class="o">.</span><span class="n">py</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">myfilename</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
-<p>And it runs!</p>
-<p>Here’s where that comes in the chapter:</p>
-<div class="figure align-default">
-<a class="reference internal image-reference" href="_images/contents.png"><img alt="Book contents screenshot" src="_images/contents.png" style="width: 318.0px; height: 269.0px;" /></a>
+<p>And it runs! (Mac users: If not in a virtualenv, type <code class="docutils literal notranslate"><span class="pre">python3</span></code> instead of <code class="docutils literal notranslate"><span class="pre">python</span></code>.)</p>
+<p>Never try to run a file at the <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span></code> shell prompt. You need to be at the bash prompt (<code class="docutils literal notranslate"><span class="pre">$</span></code>) in Terminal (Mac), or <code class="docutils literal notranslate"><span class="pre">C:\Users\yourname&gt;</span></code> (Windows) to run a file.</p>
 </div>
-<p>Here’s what the program looks like in Atom:</p>
-<div class="figure align-default">
-<a class="reference internal image-reference" href="_images/atom.png"><img alt="Python code in Atom screenshot" src="_images/atom.png" style="width: 724.0px; height: 431.0px;" /></a>
-</div>
-<p>Here’s how I ran it in Terminal (I made a folder named <code class="docutils literal notranslate"><span class="pre">automate</span></code> for my files from the book):</p>
-<div class="figure align-default">
-<a class="reference internal image-reference" href="_images/terminal.png"><img alt="Python 3 script running in Terminal screenshot" src="_images/terminal.png" style="width: 559.0px; height: 352.0px;" /></a>
-</div>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>13
-14
-15
-16
-17
-18
-19
-20
-21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello world!&#39;</span><span class="p">)</span>
+<div class="section" id="your-first-python-program">
+<h2>Your first Python program<a class="headerlink" href="#your-first-python-program" title="Permalink to this headline">¶</a></h2>
+<p>This is from Sweigart’s chapter 1 (pp. 11–13). After you’ve practiced basic expressions and variables in the interactive shell, you need to learn how to save a script as a file and run it.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello world!&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;What is your name?&#39;</span><span class="p">)</span> <span class="c1"># ask for their name</span>
 <span class="n">myName</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;It is good to meet you, &#39;</span> <span class="o">+</span> <span class="n">myName</span><span class="p">)</span>
@@ -232,7 +217,57 @@
 <span class="n">myAge</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;You will be &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">myAge</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; in a year.&#39;</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
+</div>
+<p>You can use Mu, or you can write the script in Atom and run it in the Terminal.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Make sure to note exactly <em>where</em> you save the <code class="docutils literal notranslate"><span class="pre">.py</span></code> file. You need to know where it is on your computer so that you can run it!</p>
+</div>
+<p>This interactive program says hello and asks for your name and age. It assigns your name and age to variables. It then uses the variables to print out strings, which will differ depending on what you responded.</p>
+<p>These Python built-in functions are demonstrated in the interactive program:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">print()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">input()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">len()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">int()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">str()</span></code></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All the code in the program is explained in Sweigart’s chapter 1.</p>
+</div>
+<p>Here’s what the program looks like in Atom:</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/atom.png"><img alt="Python code in Atom screenshot" src="_images/atom.png" style="width: 724.0px; height: 431.0px;" /></a>
+</div>
+<p>Here’s how I ran it in Terminal (note, I made a folder named <code class="docutils literal notranslate"><span class="pre">automate</span></code> for my files from the book):</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/terminal.png"><img alt="Python 3 script running in Terminal screenshot" src="_images/terminal.png" style="width: 559.0px; height: 352.0px;" /></a>
+</div>
+</div>
+<div class="section" id="code-blocks-and-indentation">
+<h2>Code blocks and indentation<a class="headerlink" href="#code-blocks-and-indentation" title="Permalink to this headline">¶</a></h2>
+<p>Python relies on consistent indentation of all code blocks. You need to pick a number of spaces (or use only tabs) and stick with it. Your code will throw errors if you are inconsistent.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;What is your name?&quot;</span><span class="p">)</span>
+<span class="n">name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;How old are you?&quot;</span><span class="p">)</span>
+<span class="n">age</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;Alice&#39;</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">age</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">13</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;How&#39;s Wonderland?&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;Alice&#39;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You are too old to enter through the looking glass, Alice.&quot;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="nb">int</span><span class="p">(</span><span class="n">age</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">13</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This is only for Alice, kiddo.&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;You are not Alice, and you are 13 or older.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note how the indents are exactly the same for each code block.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When you run the code for an example, try entering many combinations and try to understand each result. For the script above, enter a name other than Alice and an age above 13, as well as <em>Alice</em> and an age below 13. By  entering different name and age values, you should be able to figure out how conditional statements work together.</p>
+</div>
 </div>
 <div class="section" id="chapter-review-chapters-1-and-2">
 <h2>Chapter review: chapters 1 and 2<a class="headerlink" href="#chapter-review-chapters-1-and-2" title="Permalink to this headline">¶</a></h2>
@@ -249,7 +284,7 @@
 <li><p>String replication, e.g. <code class="docutils literal notranslate"><span class="pre">'Alice'</span> <span class="pre">*</span> <span class="pre">5</span></code></p></li>
 <li><p>Assign a value to a variable with <code class="docutils literal notranslate"><span class="pre">=</span></code></p></li>
 <li><p>Rules for variable names: No spaces. Use only letters, numbers, and the underscore (<code class="docutils literal notranslate"><span class="pre">_</span></code>) character. Cannot begin with a number. Case sensitive. (p. 11)</p></li>
-<li><p>Comments start with `` # ``</p></li>
+<li><p>Comments start with <cite>#</cite></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">print()</span></code> function</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">input()</span></code> function — assign user input to a variable: <code class="docutils literal notranslate"><span class="pre">answer</span> <span class="pre">=</span> <span class="pre">input()</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">len()</span></code> function</p></li>
@@ -259,31 +294,31 @@
 <div class="section" id="chapter-2">
 <h3>Chapter 2<a class="headerlink" href="#chapter-2" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li><p>The Boolean data type</p></li>
+<li><p>The Boolean data type: <code class="docutils literal notranslate"><span class="pre">True</span></code>, <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
 <li><p>Comparison operators, e.g. greater than, less than</p></li>
 <li><p>Difference between <code class="docutils literal notranslate"><span class="pre">==</span></code> and <code class="docutils literal notranslate"><span class="pre">=</span></code> (what do they do?)</p></li>
-<li><p>Boolean operators — <code class="docutils literal notranslate"><span class="pre">and</span></code>, <code class="docutils literal notranslate"><span class="pre">or</span></code>, <code class="docutils literal notranslate"><span class="pre">not</span></code></p></li>
-<li><p>Condition and block (p. 37ff) — blocks are indented</p></li>
+<li><p>Boolean operators: <code class="docutils literal notranslate"><span class="pre">and</span></code>, <code class="docutils literal notranslate"><span class="pre">or</span></code>, <code class="docutils literal notranslate"><span class="pre">not</span></code></p></li>
+<li><p>Conditions and blocks (pp. 27-28)</p></li>
 <li><p>Flow control statements</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">if</span></code> statements — they will evaluate to <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">else</span></code> and <code class="docutils literal notranslate"><span class="pre">elif</span></code> statements</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">while</span></code> loops</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">break</span></code> statements (p. 49)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">continue</span></code> statements (p. 50)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">break</span></code> statements</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">continue</span></code> statements</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">for</span></code> loops with <code class="docutils literal notranslate"><span class="pre">range()</span></code></p></li>
 </ul>
 </li>
 <li><p>Press Control-C to break out of an infinite loop</p></li>
-<li><p>What is an infinite loop?</p></li>
-<li><p>“When used in conditions, <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">0.0</span></code>, and <code class="docutils literal notranslate"><span class="pre">''</span></code> (the empty string) are considered False, while all other values are considered True.” (Truthiness, p. 53)</p></li>
+<li><p>What <em>is</em> an infinite loop?</p></li>
+<li><p>“When used in conditions, <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">0.0</span></code>, and <code class="docutils literal notranslate"><span class="pre">''</span></code> (the empty string) are considered False, while all other values are considered True.” (Truthiness, p. 43)</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">random</span></code> module, from Python’s standard library</p></li>
-<li><p>Use the <code class="docutils literal notranslate"><span class="pre">import</span></code> statement to import this module</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">random.randint()</span></code></p></li>
+<li><p>Use of the <code class="docutils literal notranslate"><span class="pre">import</span></code> statement</p></li>
+<li><p>Use of <code class="docutils literal notranslate"><span class="pre">random.randint()</span></code></p></li>
 </ol>
 </div>
-<div class="section" id="slides">
-<h3>Slides<a class="headerlink" href="#slides" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="slides-chapters-1-and-2">
+<h3>Slides: chapters 1 and 2<a class="headerlink" href="#slides-chapters-1-and-2" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="http://bit.ly/pythonrev1">Python Review 1</a></p>
 </div>
 </div>

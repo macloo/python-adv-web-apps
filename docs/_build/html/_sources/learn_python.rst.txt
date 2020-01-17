@@ -1,7 +1,7 @@
 Starting Python
 ===============
 
-To begin learning Python, read chapters 1 and 2 in Sweigart's `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition). Some scripts in this folder are based on Sweigart’s — naturally, he has more examples than only these. At his website, there’s a link to download files used in the book.
+To begin learning Python, read chapters 1 and 2 in Sweigart’s `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition). Some scripts in this folder are based on Sweigart’s — naturally, he has more examples than only these. At his website, there’s a link to download files used in the book.
 
 Interactively learning Python
 -----------------------------
@@ -22,9 +22,8 @@ Start by running simple expressions and statements in the interactive Python int
 
 .. attention:: It’s very important to play with these simple statements and try things. Do not only type what is in the book or what you see here. Make up your own examples and try them. Type to understand how things work. If you don’t type the code yourself, you will not learn it.
 
-
-Using Mu or using Atom
-----------------------
+Using Mu
+--------
 
 In his `Introduction <https://automatetheboringstuff.com/2e/chapter0/>`_, Sweigart recommends using the `Mu editing program <https://codewith.mu/en/about>`_, which you can download (free) for Mac or Windows.
 
@@ -32,37 +31,49 @@ In his `Introduction <https://automatetheboringstuff.com/2e/chapter0/>`_, Sweiga
    :scale: 50 %
    :alt: Python 3 script running in Mu the editor screenshot
 
+If you are using Mu, you can type Python code interactively into the segment labeled “Python3 (Jupyter) REPL” *instead of* using Terminal or Command Prompt.
 
+Saving Python scripts and running them
+--------------------------------------
 
+If you use Mu, you can write and save your Python scripts in the upper segment. When you run the script, the results will appear in the segment labeled “Running: filename.py.” Python scripts must end with a ``.py`` extension.
 
-Until about halfway through chapter 1, Sweigart has us using the interactive Python interpreter, as seen above. Then he switches to writing a program in a file, which he assumes we will run in IDLE. However, we write our code in `Atom <https://atom.io/>`_ and run it in Terminal (Mac) or Command Prompt (Windows).
+Instead of Mu, you can use `Atom <https://atom.io/>`_, our trusted code editor, to write and save your Python scripts. Code is code. You can write any code in Atom. Instead of saving the file with a ``.html`` or ``.js`` extension, just save it with a ``.py`` extension when it is a Python file.
 
-Do not use IDLE to run your scripts
------------------------------------
+If you write and save the file in Atom, how do you run it?
 
-You can run any of the scripts in this folder in the manner described below.
-
-In the middle of chapter 1 in **Automate the Boring Stuff with Python,** Sweigart invites you to leave the interactive Python shell (where you have the ``>>>`` prompt) and create a little program in a file.
-
-Do not use IDLE. We are never using IDLE.
-
-Instead, you can use `Atom <https://atom.io/>`_, our trusted code editor. Code is code. You can write any code in Atom. Instead of saving the file with a ``.html`` or ``.js`` extension, we save it with a ``.py`` extension when it is a Python file.
-
-Then, how do you run it? Never try to run a file at the ``>>>`` prompt. You need to be at the bash prompt (``$``) in Terminal, or the Command Prompt if you’re using Windows.
-
-It’s easiest if you are in the same directory where the ``.py`` file was saved. Use your ``cd`` command (`Command Line Tips <http://bit.ly/mm-commandline>`_) to get there.
+It’s easiest if you are in the same directory where the ``.py`` file was saved. Use the ``cd`` command (`Command Line Tips <http://bit.ly/mm-commandline>`_) to get there.
 
 At the bash prompt, type this (using your actual filename, of course): ::
 
-    python3 myfilename.py
+   python myfilename.py
 
-And it runs!
+And it runs! (Mac users: If not in a virtualenv, type ``python3`` instead of ``python``.)
 
-Here’s where that comes in the chapter:
+Never try to run a file at the ``>>>`` shell prompt. You need to be at the bash prompt (``$``) in Terminal (Mac), or ``C:\Users\yourname>`` (Windows) to run a file.
 
-.. figure:: _static/images/contents.png
-   :scale: 50 %
-   :alt: Book contents screenshot
+Your first Python program
+-------------------------
+
+This is from Sweigart’s chapter 1 (pp. 11–13). After you’ve practiced basic expressions and variables in the interactive shell, you need to learn how to save a script as a file and run it.
+
+.. literalinclude:: ../python_code_examples/learn_python/a_tiny_script.py
+
+You can use Mu, or you can write the script in Atom and run it in the Terminal.
+
+.. attention:: Make sure to note exactly *where* you save the ``.py`` file. You need to know where it is on your computer so that you can run it!
+
+This interactive program says hello and asks for your name and age. It assigns your name and age to variables. It then uses the variables to print out strings, which will differ depending on what you responded.
+
+These Python built-in functions are demonstrated in the interactive program:
+
+- ``print()``
+- ``input()``
+- ``len()``
+- ``int()``
+- ``str()``
+
+.. note:: All the code in the program is explained in Sweigart’s chapter 1.
 
 Here’s what the program looks like in Atom:
 
@@ -70,20 +81,28 @@ Here’s what the program looks like in Atom:
    :scale: 50 %
    :alt: Python code in Atom screenshot
 
-Here’s how I ran it in Terminal (I made a folder named ``automate`` for my files from the book):
+Here’s how I ran it in Terminal (note, I made a folder named ``automate`` for my files from the book):
 
 .. figure:: _static/images/terminal.png
    :scale: 50 %
    :alt: Python 3 script running in Terminal screenshot
 
-.. literalinclude:: ../python_code_examples/starting_from_scratch/a_tiny_script.py
-   :lineno-start: 13
+
+Code blocks and indentation
+---------------------------
+
+Python relies on consistent indentation of all code blocks. You need to pick a number of spaces (or use only tabs) and stick with it. Your code will throw errors if you are inconsistent.
+
+.. literalinclude:: ../python_code_examples/learn_python/b_if_statements.py
+
+Note how the indents are exactly the same for each code block.
+
+.. tip:: When you run the code for an example, try entering many combinations and try to understand each result. For the script above, enter a name other than Alice and an age above 13, as well as *Alice* and an age below 13. By  entering different name and age values, you should be able to figure out how conditional statements work together.
 
 Chapter review: chapters 1 and 2
 --------------------------------
 
 These are the takeaways from the first two chapters.
-
 
 Chapter 1
 +++++++++
@@ -97,7 +116,7 @@ Chapter 1
 7. String replication, e.g. ``'Alice' * 5``
 8. Assign a value to a variable with ``=``
 9. Rules for variable names: No spaces. Use only letters, numbers, and the underscore (``_``) character. Cannot begin with a number. Case sensitive. (p. 11)
-10. Comments start with `` # ``
+10. Comments start with `#`
 11. ``print()`` function
 12. ``input()`` function — assign user input to a variable: ``answer = input()``
 13. ``len()`` function
@@ -106,29 +125,28 @@ Chapter 1
 Chapter 2
 +++++++++
 
-1. The Boolean data type
+1. The Boolean data type: ``True``, ``False``
 2. Comparison operators, e.g. greater than, less than
 3. Difference between ``==`` and ``=`` (what do they do?)
-4. Boolean operators — ``and``, ``or``, ``not``
-5. Condition and block (p. 37ff) — blocks are indented
+4. Boolean operators: ``and``, ``or``, ``not``
+5. Conditions and blocks (pp. 27-28)
 6. Flow control statements
 
    * ``if`` statements — they will evaluate to ``True`` or ``False``
    * ``else`` and ``elif`` statements
    * ``while`` loops
-   * ``break`` statements (p. 49)
-   * ``continue`` statements (p. 50)
+   * ``break`` statements
+   * ``continue`` statements
    * ``for`` loops with ``range()``
 
-
 7. Press Control-C to break out of an infinite loop
-8. What is an infinite loop?
-9. “When used in conditions, ``0``, ``0.0``, and ``''`` (the empty string) are considered False, while all other values are considered True.” (Truthiness, p. 53)
+8. What *is* an infinite loop?
+9. “When used in conditions, ``0``, ``0.0``, and ``''`` (the empty string) are considered False, while all other values are considered True.” (Truthiness, p. 43)
 10. The ``random`` module, from Python’s standard library
-11. Use the ``import`` statement to import this module
-12. Use ``random.randint()``
+11. Use of the ``import`` statement
+12. Use of ``random.randint()``
 
-Slides
-++++++
+Slides: chapters 1 and 2
+++++++++++++++++++++++++
 
 `Python Review 1 <http://bit.ly/pythonrev1>`_
