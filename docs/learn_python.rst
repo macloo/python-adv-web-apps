@@ -3,6 +3,8 @@ Starting Python
 
 To begin learning Python, read chapters 1 and 2 in Sweigart’s `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition). Some scripts in this folder are based on Sweigart’s — naturally, he has more examples than only these. At his website, there’s a link to download files used in the book.
 
+`Python scripts for this section <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/learn_python>`_
+
 Interactively learning Python
 -----------------------------
 
