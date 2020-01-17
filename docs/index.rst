@@ -1,13 +1,15 @@
 .. python-adv-web-apps documentation master file, created by
    sphinx-quickstart on Mon Jan 13 15:00:37 2020.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
 
 Python Beginners
 ================
 
+Welcome to the documentation for the Python portion of Advanced Web Apps, a course for communications students at the University of Florida.
+
+In this course, students who have learned HTML, CSS, and some JavaScript learn to use Python for web scraping and other tasks useful in media organizations.
+
 .. toctree::
    :maxdepth: 2
-   :caption: foobar
+   :caption: Contents
 
-   foobar
+   learn_python
