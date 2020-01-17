@@ -23,6 +23,7 @@ project = 'Python Beginners'
 copyright = '2020 Mindy McAdams'
 author = 'Mindy McAdams'
 
+master_doc = 'index'
 
 # -- General configuration ---------------------------------------------------
 
