@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Foobar" href="foobar.html" /> 
+    <link rel="prev" title="Python Beginners" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -81,9 +81,9 @@
             
               <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="foobar.html">Foobar</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Starting Python</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#interactively-learning-python">Interactively learning Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-mu-or-using-atom">Using Mu or using Atom</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#do-not-use-idle-to-run-your-scripts">Do not use IDLE to run your scripts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#chapter-review-chapters-1-and-2">Chapter review: chapters 1 and 2</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#chapter-1">Chapter 1</a></li>
@@ -159,11 +159,10 @@
             
   <div class="section" id="starting-python">
 <h1>Starting Python<a class="headerlink" href="#starting-python" title="Permalink to this headline">¶</a></h1>
-<p>To begin learning Python, read chapters 1 and 2 in Sweigart’s <a class="reference external" href="https://automatetheboringstuff.com/">Automate the Boring Stuff with Python</a>. Some scripts in this folder are based on Sweigart’s — naturally, he has more examples than only these. At his website, there’s a link to download files used in the book.</p>
-<p>This is the students’ first look at Python. We use only Python 3.</p>
+<p>To begin learning Python, read chapters 1 and 2 in Sweigart’s <a class="reference external" href="https://automatetheboringstuff.com/">Automate the Boring Stuff with Python</a> (second edition). Some scripts in this folder are based on Sweigart’s — naturally, he has more examples than only these. At his website, there’s a link to download files used in the book.</p>
 <div class="section" id="interactively-learning-python">
 <h2>Interactively learning Python<a class="headerlink" href="#interactively-learning-python" title="Permalink to this headline">¶</a></h2>
-<p>Start by running simple expressions and statements in the interactive Python interpreter (type <code class="docutils literal notranslate"><span class="pre">python3</span></code> (Mac) or <code class="docutils literal notranslate"><span class="pre">python</span></code> (Windows) at the command prompt). This gets you comfortable with variables and basic math operators.</p>
+<p>Start by running simple expressions and statements in the interactive Python interpreter (interactive shell). Open Terminal (Mac) or Command Prompt (Windows). Type <code class="docutils literal notranslate"><span class="pre">python3</span></code> (Mac) or <code class="docutils literal notranslate"><span class="pre">python</span></code> (Windows) at the prompt to start the interpreter. When you see <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span></code>, you’re in the shell. This will help you get comfortable with variables and basic math operators:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fruit</span> <span class="o">=</span> <span class="s1">&#39;apple&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">fruit</span><span class="p">)</span>
 <span class="go">apple</span>
@@ -176,6 +175,17 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
 <span class="go">7</span>
 </pre></div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>It’s very important to play with these simple statements and try things. Do not only type what is in the book or what you see here. Make up your own examples and try them. Type to understand how things work. If you don’t type the code yourself, you will not learn it.</p>
+</div>
+</div>
+<div class="section" id="using-mu-or-using-atom">
+<h2>Using Mu or using Atom<a class="headerlink" href="#using-mu-or-using-atom" title="Permalink to this headline">¶</a></h2>
+<p>In his <a class="reference external" href="https://automatetheboringstuff.com/2e/chapter0/">Introduction</a>, Sweigart recommends using the <a class="reference external" href="https://codewith.mu/en/about">Mu editing program</a>, which you can download (free) for Mac or Windows.</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/mu_editor.png"><img alt="Python 3 script running in Mu the editor screenshot" src="_images/mu_editor.png" style="width: 700.0px; height: 437.5px;" /></a>
 </div>
 <p>Until about halfway through chapter 1, Sweigart has us using the interactive Python interpreter, as seen above. Then he switches to writing a program in a file, which he assumes we will run in IDLE. However, we write our code in <a class="reference external" href="https://atom.io/">Atom</a> and run it in Terminal (Mac) or Command Prompt (Windows).</p>
 </div>
@@ -193,11 +203,36 @@
 </div>
 <p>And it runs!</p>
 <p>Here’s where that comes in the chapter:</p>
-<p>&lt;img src=”images/contents.png” alt=”Book contents” width=”50%”&gt;</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/contents.png"><img alt="Book contents screenshot" src="_images/contents.png" style="width: 318.0px; height: 269.0px;" /></a>
+</div>
 <p>Here’s what the program looks like in Atom:</p>
-<p>&lt;img src=”images/atom.png” alt=”Python code in Atom” width=”75%”&gt;</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/atom.png"><img alt="Python code in Atom screenshot" src="_images/atom.png" style="width: 724.0px; height: 431.0px;" /></a>
+</div>
 <p>Here’s how I ran it in Terminal (I made a folder named <code class="docutils literal notranslate"><span class="pre">automate</span></code> for my files from the book):</p>
-<p>&lt;img src=”images/terminal.png” alt=”Python 3 script running in Terminal” width=”60%”&gt;</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/terminal.png"><img alt="Python 3 script running in Terminal screenshot" src="_images/terminal.png" style="width: 559.0px; height: 352.0px;" /></a>
+</div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello world!&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;What is your name?&#39;</span><span class="p">)</span> <span class="c1"># ask for their name</span>
+<span class="n">myName</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;It is good to meet you, &#39;</span> <span class="o">+</span> <span class="n">myName</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The length of your name is:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">myName</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;What is your age?&#39;</span><span class="p">)</span> <span class="c1"># ask for their age</span>
+<span class="n">myAge</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;You will be &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">myAge</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; in a year.&#39;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
 </div>
 <div class="section" id="chapter-review-chapters-1-and-2">
 <h2>Chapter review: chapters 1 and 2<a class="headerlink" href="#chapter-review-chapters-1-and-2" title="Permalink to this headline">¶</a></h2>
@@ -205,21 +240,20 @@
 <div class="section" id="chapter-1">
 <h3>Chapter 1<a class="headerlink" href="#chapter-1" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic simple">
-<li><p>Use the interactive Python shell to enter basic math expressions and get results (math operators)</p></li>
-<li><p>Compare <code class="docutils literal notranslate"><span class="pre">23</span> <span class="pre">/</span> <span class="pre">7</span></code> and <code class="docutils literal notranslate"><span class="pre">23</span> <span class="pre">//</span> <span class="pre">7</span></code></p></li>
+<li><p>Use the interactive Python shell to enter basic math expressions and get results (using the math operators)</p></li>
+<li><p>Compare the output from <code class="docutils literal notranslate"><span class="pre">23</span> <span class="pre">/</span> <span class="pre">7</span></code> and <code class="docutils literal notranslate"><span class="pre">23</span> <span class="pre">//</span> <span class="pre">7</span></code></p></li>
 <li><p>Exponents, e.g. <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">**</span> <span class="pre">4</span></code></p></li>
-<li><p>Order of operations: PEMDAS</p></li>
+<li><p>Order of operations: <a class="reference external" href="https://www.mathsisfun.com/operation-order-pemdas.html">PEMDAS</a></p></li>
 <li><p>Main data types: string, float, integer</p></li>
 <li><p>String concatenation, e.g. <code class="docutils literal notranslate"><span class="pre">'Alice'</span> <span class="pre">+</span> <span class="pre">'Bob'</span></code></p></li>
 <li><p>String replication, e.g. <code class="docutils literal notranslate"><span class="pre">'Alice'</span> <span class="pre">*</span> <span class="pre">5</span></code></p></li>
 <li><p>Assign a value to a variable with <code class="docutils literal notranslate"><span class="pre">=</span></code></p></li>
-<li><p>Rules for variable names: No spaces. Can use only letters, numbers, and the underscore (_) character. Cannot begin with a number. (p. 20)</p></li>
-<li><p>Case sensitive</p></li>
-<li><p>Comments start with <code class="docutils literal notranslate"><span class="pre">#</span></code></p></li>
+<li><p>Rules for variable names: No spaces. Use only letters, numbers, and the underscore (<code class="docutils literal notranslate"><span class="pre">_</span></code>) character. Cannot begin with a number. Case sensitive. (p. 11)</p></li>
+<li><p>Comments start with `` # ``</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">print()</span></code> function</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">input()</span></code> function — assign it to a variable: <code class="docutils literal notranslate"><span class="pre">answer</span> <span class="pre">=</span> <span class="pre">input()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">input()</span></code> function — assign user input to a variable: <code class="docutils literal notranslate"><span class="pre">answer</span> <span class="pre">=</span> <span class="pre">input()</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">len()</span></code> function</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">str()</span></code>, <code class="docutils literal notranslate"><span class="pre">int()</span></code>, and <code class="docutils literal notranslate"><span class="pre">float()</span></code> functions — when we insert a numeral into a string, for example (pp. 25–27)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">str()</span></code>, <code class="docutils literal notranslate"><span class="pre">int()</span></code>, and <code class="docutils literal notranslate"><span class="pre">float()</span></code> functions — when we insert a numeral into a string, for example (pp. 15–18)</p></li>
 </ol>
 </div>
 <div class="section" id="chapter-2">
@@ -264,7 +298,7 @@
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="foobar.html" class="btn btn-neutral float-left" title="Foobar" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Python Beginners" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
