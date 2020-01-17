@@ -1,9 +1,3 @@
-'''
-    An interactive demo of a while-loop.
-    Depending on what you type when prompted, the loop
-    will either continue or quit.
-'''
-
 word = "spam"
 
 while word == "spam":

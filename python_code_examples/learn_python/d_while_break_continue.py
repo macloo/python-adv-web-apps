@@ -1,6 +1,6 @@
-# note that making the conditional True (as here) may
-# sometimes cause an infinite loop
-# press Control-C to get out of an infinite loop 
+# Note that making the conditional True (as here) may
+# sometimes cause an infinite loop.
+# Press Control-C to get out of an infinite loop.
 
 while True:
     print('Who are you?')
