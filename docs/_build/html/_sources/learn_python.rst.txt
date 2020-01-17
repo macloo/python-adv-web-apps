@@ -58,6 +58,7 @@ Your first Python program
 This is from Sweigart’s chapter 1 (pp. 11–13). After you’ve practiced basic expressions and variables in the interactive shell, you need to learn how to save a script as a file and run it.
 
 .. literalinclude:: ../python_code_examples/learn_python/a_tiny_script.py
+   :caption:
 
 You can use Mu, or you can write the script in Atom and run it in the Terminal.
 
@@ -94,6 +95,7 @@ Code blocks and indentation
 Python relies on consistent indentation of all code blocks. You need to pick a number of spaces (or use only tabs) and stick with it. Your code will throw errors if you are inconsistent.
 
 .. literalinclude:: ../python_code_examples/learn_python/b_if_statements.py
+   :caption:
 
 Note how the indents are exactly the same for each code block.
 

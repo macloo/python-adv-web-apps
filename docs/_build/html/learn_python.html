@@ -207,6 +207,8 @@
 <div class="section" id="your-first-python-program">
 <h2>Your first Python program<a class="headerlink" href="#your-first-python-program" title="Permalink to this headline">¶</a></h2>
 <p>This is from Sweigart’s chapter 1 (pp. 11–13). After you’ve practiced basic expressions and variables in the interactive shell, you need to learn how to save a script as a file and run it.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/learn_python/a_tiny_script.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello world!&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;What is your name?&#39;</span><span class="p">)</span> <span class="c1"># ask for their name</span>
 <span class="n">myName</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
@@ -217,6 +219,7 @@
 <span class="n">myAge</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;You will be &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">myAge</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; in a year.&#39;</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 <p>You can use Mu, or you can write the script in Atom and run it in the Terminal.</p>
 <div class="admonition attention">
@@ -248,6 +251,8 @@
 <div class="section" id="code-blocks-and-indentation">
 <h2>Code blocks and indentation<a class="headerlink" href="#code-blocks-and-indentation" title="Permalink to this headline">¶</a></h2>
 <p>Python relies on consistent indentation of all code blocks. You need to pick a number of spaces (or use only tabs) and stick with it. Your code will throw errors if you are inconsistent.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/learn_python/b_if_statements.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;What is your name?&quot;</span><span class="p">)</span>
 <span class="n">name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;How old are you?&quot;</span><span class="p">)</span>
@@ -262,6 +267,7 @@
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;You are not Alice, and you are 13 or older.&#39;</span><span class="p">)</span>
 </pre></div>
+</div>
 </div>
 <p>Note how the indents are exactly the same for each code block.</p>
 <div class="admonition tip">
