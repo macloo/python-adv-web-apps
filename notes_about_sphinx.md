@@ -7,18 +7,18 @@ Quick Start
 http://www.sphinx-doc.org/en/master/usage/quickstart.html
 
 "reStructuredText is the preferred format for technical documentation"
+
 reStructuredText Primer
 http://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
 
 reStructuredText: See also demo
 https://github.com/readthedocs/sphinx_rtd_theme/blob/master/docs/demo/demo.rst
 
-Sphinx theme
-https://sphinx-rtd-theme.readthedocs.io/en/stable/
-https://github.com/readthedocs/sphinx_rtd_theme
+reStructuredText directives (comprehensive list)
+https://docutils.sourceforge.io/docs/ref/rst/directives.html
 
-Configuring the Theme
-https://sphinx-rtd-theme.readthedocs.io/en/latest/configuring.html
+Handle images
+https://docutils.sourceforge.io/docs/ref/rst/directives.html#figure
 
 ## Viewing the docs you create
 
@@ -30,10 +30,18 @@ https://www.sphinx-doc.org/en/master/usage/builders/index.html
 
 ## Themes
 
+Sphinx theme
+https://sphinx-rtd-theme.readthedocs.io/en/stable/
+
+https://github.com/readthedocs/sphinx_rtd_theme
+
+Configuring the theme
+https://sphinx-rtd-theme.readthedocs.io/en/latest/configuring.html
+
 Looked at a bunch of themes
 https://sphinx-themes.org/
 
-Picked this one
+Picked this one 
 https://sphinx-rtd-theme.readthedocs.io/en/latest/
 
 Liked one other theme more, but it had NPM/Node crap, so no.
