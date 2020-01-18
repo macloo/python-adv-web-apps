@@ -1,6 +1,9 @@
 import random
 
-while True:
+# set value for the while-loop
+answer = ""
+
+while answer != 'q':
     # get 2 random numbers
     card = random.randint(1,13)
     suit = random.randint(0,3)
@@ -15,7 +18,7 @@ while True:
     elif card == 13:
         card = "King"
     else:
-        # convert the number to a string
+        # convert any other number to a string
         card = str(card)
 
     # this is a list, much like an array in JavaScript
@@ -27,10 +30,9 @@ while True:
 
     print('You drew the ' + card + ' of ' + suit + '.\n')
 
-    # user chooses whether to draw another card
+    # user chooses whether to draw another card - only q will stop the loop
     print("Draw a new card?")
     answer = input("Press Enter/Return to continue or q to quit.\n")
 
-    # stop the while loop
-    if answer == 'q':
-        break
+# continue here after while-loop is finished
+print("\nThanks for playing!\n")
