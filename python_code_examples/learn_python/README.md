@@ -22,7 +22,14 @@ These Python **built-in functions** are demonstrated in the interactive program:
 
 *b_if_statements.py*
 
-This interactive program also asks you to type your name and age. Depending on the values you enter, different responses will be printed. You should try to make each of the four different responses appear, and recognize how each pair of values is evaluated as `True` or `False` by Python.
+This interactive program also asks you to type your name and age. Depending on the values you enter, different responses will be printed. You should try to make each of the four different responses appear, and recognize how each expression (the "condition") is *evaluated* as `True` or `False` by Python.
+
+The four conditions:
+
+1. the value of name is 'Alice' and the age is less than 13
+2. the value of name is 'Alice' (and the age is *not* less than 13)
+3. the age is less than 13 (and the name is *not* 'Alice')
+4. any other combination (e.g. name is 'Fred' and age is 14)
 
 Note that the **order** of the statements matters.
 
@@ -39,6 +46,8 @@ A while-loop may contain a `break` statement, a `continue` statement, or both, o
 This script demonstrates four different for-loops that all use `range()`. This is not the only pattern for using a for-loop in Python, but it's the only pattern that's covered in chapter 2.
 
 It would be good for you to practice some of these for-loops in the interactive Python shell. Experiment with using one, two, or three **arguments** inside the parentheses.
+
+**Notice** how starting with 0 or starting with 1 affects the final number shown in the first and fourth for-loops here.
 
 *f_random.py*
 
