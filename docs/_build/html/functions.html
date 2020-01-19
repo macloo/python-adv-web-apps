@@ -1,0 +1,283 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Functions in Python &mdash; Python Beginners  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Starting Python" href="learn_python.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Python Beginners
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="learn_python.html">Starting Python</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Functions in Python</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#write-and-run-a-python-script">Write and run a Python script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-parameters-and-returns-in-functions">Using parameters and returns in functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-functions-for-each-task-in-a-program">Building functions for each task in a program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#chapter-review-chapter-3">Chapter review: chapter 3</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#key-points">Key points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slides-chapter-3">Slides: chapter 3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Beginners</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Functions in Python</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/functions.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="functions-in-python">
+<h1>Functions in Python<a class="headerlink" href="#functions-in-python" title="Permalink to this headline">¶</a></h1>
+<p>This section is based on chapter 3 in Sweigart’s <a class="reference external" href="https://automatetheboringstuff.com/">Automate the Boring Stuff with Python</a> (second edition).</p>
+<p>At the same time, students also begin to learn about web scraping; that is covered in a separate part of this documentation.</p>
+<div class="section" id="write-and-run-a-python-script">
+<h2>Write and run a Python script<a class="headerlink" href="#write-and-run-a-python-script" title="Permalink to this headline">¶</a></h2>
+<p>To write functions in Python, you will be saving files with the <cite>.py</cite> extension. You can write and save Python files in <a class="reference external" href="https://atom.io/">Atom</a> or in <a class="reference external" href="https://codewith.mu/en/about">Mu</a>.</p>
+<p>To run a script named <cite>foobar.py</cite> that’s in the current directory, type this at the bash prompt (<cite>$</cite>) in Mac or the Windows Command Prompt:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="n">foobar</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>On Windows, or in a <em>virtualenv</em> on Mac or Windows, drop the <code class="docutils literal notranslate"><span class="pre">3</span></code> from <code class="docutils literal notranslate"><span class="pre">python3</span></code>.</p>
+<p>You do not need to be in your <em>virtualenv</em> to do this, but it’s okay if you are.</p>
+</div>
+<div class="section" id="using-parameters-and-returns-in-functions">
+<h2>Using parameters and returns in functions<a class="headerlink" href="#using-parameters-and-returns-in-functions" title="Permalink to this headline">¶</a></h2>
+<p>Sweigart notes that many functions operate as “black boxes”: This describes a function with parameters (it takes arguments) and a <cite>return</cite> statement. Something goes into it (arguments) and something comes out of it (whatever is returned). You don’t need to know how it works; you just need to know what it does.</p>
+<p>View the example file in this folder: <em>a_black_box.py</em></p>
+<p>This is true for many functions we use from imported libraries, such as BeautifulSoup (for web scraping). We run a function such as this:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">print(</span> <span class="pre">varname.get_text()</span> <span class="pre">)</span>
+<span class="pre">`</span></code></p>
+<p>… and it prints only the text content from inside an HTML element (such as <cite>title</cite> or <cite>li</cite>) that is stored in <cite>varname</cite>. The variable <cite>varname</cite> contains the HTML tags (possibly quite a lot of tags), but the BeautifulSoup function <cite>get_text()</cite> removes them neatly, giving us just text. How does <cite>get_text()</cite> do that? <em>We don’t need to know.</em> That’s the beauty of a function as a black box: It just works.</p>
+<p>We don’t need to know how a toaster toasts bread to get toast out of it. We put in two pieces of bread (the <em>arguments</em> we pass into a function), and toast is <em>returned</em> after the function runs.</p>
+</div>
+<div class="section" id="building-functions-for-each-task-in-a-program">
+<h2>Building functions for each task in a program<a class="headerlink" href="#building-functions-for-each-task-in-a-program" title="Permalink to this headline">¶</a></h2>
+<p>Near the end of chapter 3, Sweigart gives us a program that (oddly enough) does not include any functions. In the folder named [modular-code](<a class="reference external" href="https://github.com/macloo/python-beginners/tree/master/week02/modular-code">https://github.com/macloo/python-beginners/tree/master/week02/modular-code</a>), we will walk through how to convert that program into a collection of three modular functions.</p>
+<p><em>Modular</em> can mean that each function accomplishes <em>one</em> task. It’s not sensible to write a function that contains only one line, so don’t take this too literally. However, writing a lot of small, short functions gives you an easy way to test and perfect each part of your program in a very manageable way.</p>
+<p>It keeps the larger job &amp;mdash; the complete program &amp;mdash; from overwhelming you.</p>
+</div>
+<div class="section" id="chapter-review-chapter-3">
+<h2>Chapter review: chapter 3<a class="headerlink" href="#chapter-review-chapter-3" title="Permalink to this headline">¶</a></h2>
+<p>These are the takeaways from this chapter. Slides below.</p>
+<div class="section" id="key-points">
+<h3>Key points<a class="headerlink" href="#key-points" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>The <cite>def</cite> statement (how and where to use it)</p></li>
+<li><p><em>When</em> is the code in a function executed? (Know the difference between <em>defining</em> a function and <em>running</em> it.)</p></li>
+<li><p>Parameters or arguments: Where are these, in a function?</p>
+<ul class="simple">
+<li><p>How do they work when you <em>define</em> the function?</p></li>
+<li><p>How do they work when you <em>run</em> the function? (<em>Note:</em> Instead of <em>run,</em> we may say <em>call</em> or <em>execute</em> the function. All have the same meaning.)</p></li>
+</ul>
+</li>
+<li><p>The <cite>return</cite> keyword (used in a function)</p></li>
+<li><p>The <cite>NoneType</cite> data type: value is <cite>None</cite></p>
+<ul class="simple">
+<li><p>This will be important in scraping! If you get an error that says something does not work because it cannot be applied to <cite>NoneType</cite>, it means something returned <cite>None</cite> when you were expecting another value.</p></li>
+<li><p>“Python adds <cite>return None</cite> to the end of any function definition with no <cite>return</cite> statement” (Sweigart, p. 62). In other words, a function with no <cite>return</cite> statement returns <cite>None</cite>.</p></li>
+<li><p>An empty <cite>return</cite> statement (that is, the word <cite>return</cite> alone on a line) also returns <cite>None</cite>.</p></li>
+</ul>
+</li>
+<li><p>Keyword arguments: You can forget this for the time being</p></li>
+<li><p><strong>Important!</strong> Scope of variables:</p>
+<ul class="simple">
+<li><p>A variable has <em>local</em> scope or <em>global</em> scope. It cannot have both.</p></li>
+<li><p>A local variable exists only <em>inside</em> a function. It cannot be transmitted outside the function (although its <em>value</em> can be — via <cite>return</cite>).</p></li>
+<li><p>A global variable exists <em>outside</em> any function. It may be used inside a function.</p></li>
+<li><p>Sometimes you will make a mistake about the scope of a variable, and then your answers or results will not be correct.</p></li>
+<li><p>“It is a <strong>bad habit</strong> to rely on global variables as your programs get larger and larger” (Sweigart, p. 66).</p></li>
+<li><p><strong>Avoid</strong> repeating the names of variables in different scopes. If you have a global variable named <cite>foobar</cite>, do not name a local variable <cite>foobar</cite>.</p></li>
+<li><p>Four rules, p. 69 in Sweigart</p></li>
+</ul>
+</li>
+<li><p>Functions as “black boxes”: Describes a function with <em>parameters</em> (meaning that it takes <em>arguments</em>) and a <cite>return</cite> statement. One or more values go into the function (arguments) and some value comes out of it (whatever is returned).</p></li>
+<li><p>Exception handling (also called error handling): <cite>try</cite>/<cite>except</cite> pattern</p></li>
+</ol>
+</div>
+<div class="section" id="slides-chapter-3">
+<h3>Slides: chapter 3<a class="headerlink" href="#slides-chapter-3" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://bit.ly/pythonrev2">Python Review 2</a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="learn_python.html" class="btn btn-neutral float-left" title="Starting Python" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020 Mindy McAdams
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

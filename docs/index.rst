@@ -6,6 +6,8 @@ Python Beginners
 
 Welcome to the documentation for the Python portion of Advanced Web Apps, a course for communications students at the University of Florida.
 
+`View the code on GitHub <https://github.com/macloo/python-adv-web-apps>`_
+
 In this course, students who have learned HTML, CSS, and some JavaScript learn to use Python for web scraping and other tasks useful in media organizations.
 
 .. toctree::
@@ -13,3 +15,4 @@ In this course, students who have learned HTML, CSS, and some JavaScript learn t
    :caption: Contents
 
    learn_python
+   functions
