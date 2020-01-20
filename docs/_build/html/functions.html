@@ -86,7 +86,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#write-and-run-a-python-script">Write and run a Python script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#put-something-in-get-something-out">Put something in, get something out</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#using-parameters-and-returns-in-functions">Using parameters and returns in functions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#building-functions-for-each-task-in-a-program">Building functions for each task in a program</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#scope">Scope</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#key-points-about-scope">Key points about scope</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#try-except">try/except</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#chapter-review-chapter-3">Chapter review: chapter 3</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#key-points">Key points</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#slides-chapter-3">Slides: chapter 3</a></li>
@@ -194,6 +198,9 @@
 </pre></div>
 </div>
 <p>Then you can print <cite>output</cite> or send it to a database or write it into the HTML of a live web page — or whatever you need.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>This is true for many functions we use from imported libraries. We know how to <em>call</em> the function, and we know what to expect as output, but we don’t need to know how it works.</p>
 <p>We don’t need to know how a toaster toasts bread to get toast out of it. We put in two pieces of bread (the <em>arguments</em> we pass into a function), and toast is <em>returned</em> after the function runs.</p>
 </div>
@@ -239,19 +246,104 @@
    <span class="n">total</span> <span class="o">=</span> <span class="n">price</span> <span class="o">*</span> <span class="n">count</span>
    <span class="k">return</span> <span class="n">total</span>
 
-<span class="c1"># assign the returned value to a new variable, output</span>
-<span class="n">output</span> <span class="o">=</span> <span class="n">drink_expenses</span><span class="p">(</span><span class="mf">4.49</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="c1"># assign the returned value to a new variable, result</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">drink_expenses</span><span class="p">(</span><span class="mf">4.49</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>A function can have many lines of instructions inside its code block (including conditionals, loops, and more). It’s best to write functions that perform one specific task, rather than several tasks.</p>
+<p>A function can have many lines of instructions inside its code block (including conditionals, loops, and more).</p>
+<p>It’s best to write functions that perform one specific task, rather than several tasks.</p>
 </div>
-<div class="section" id="building-functions-for-each-task-in-a-program">
-<h2>Building functions for each task in a program<a class="headerlink" href="#building-functions-for-each-task-in-a-program" title="Permalink to this headline">¶</a></h2>
-<p>Near the end of chapter 3, Sweigart gives us a program that (oddly enough) does not include any functions. In the folder named [modular-code](<a class="reference external" href="https://github.com/macloo/python-beginners/tree/master/week02/modular-code">https://github.com/macloo/python-beginners/tree/master/week02/modular-code</a>), we will walk through how to convert that program into a collection of three modular functions.</p>
-<p><em>Modular</em> can mean that each function accomplishes <em>one</em> task. It’s not sensible to write a function that contains only one line, so don’t take this too literally. However, writing a lot of small, short functions gives you an easy way to test and perfect each part of your program in a very manageable way.</p>
-<p>It keeps the larger job — the complete program — from overwhelming you.</p>
+<div class="section" id="scope">
+<h2>Scope<a class="headerlink" href="#scope" title="Permalink to this headline">¶</a></h2>
+<p>This is a bit of a hard topic for beginners, because you don’t have much experience writing longer or complex scripts.</p>
+<p>Consider the following example:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/functions/f_scope_global_vs_local.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># example of badly using scope of variables</span>
+
+<span class="k">def</span> <span class="nf">breakfast</span><span class="p">():</span>
+    <span class="n">food</span> <span class="o">=</span> <span class="s1">&#39;eggs&#39;</span>
+    <span class="n">drink</span> <span class="o">=</span> <span class="s1">&#39;coffee&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Breakfast:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">food</span><span class="p">,</span> <span class="n">drink</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">lunch</span><span class="p">():</span>
+    <span class="n">food</span> <span class="o">=</span> <span class="s1">&#39;salad&#39;</span>
+    <span class="n">drink</span> <span class="o">=</span> <span class="s1">&#39;iced tea&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Lunch:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">food</span><span class="p">,</span> <span class="n">drink</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># run the functions</span>
+<span class="n">lunch</span><span class="p">()</span>
+<span class="n">breakfast</span><span class="p">()</span>
+
+<span class="c1"># attempt to print local variables (will not work)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">food</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">drink</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Everything will work fine <em>except the last two lines.</em> If you run the script, you’ll see what the two functions print:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Lunch</span><span class="p">:</span>
+<span class="n">salad</span> <span class="n">iced</span> <span class="n">tea</span>
+
+<span class="n">Breakfast</span><span class="p">:</span>
+<span class="n">eggs</span> <span class="n">coffee</span>
+</pre></div>
+</div>
+<p>But then you’ll see an error:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Traceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">):</span>
+   <span class="n">File</span> <span class="s2">&quot;f_scope_global_vs_local.py&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">20</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+      <span class="nb">print</span><span class="p">(</span><span class="n">food</span><span class="p">)</span>
+<span class="ne">NameError</span><span class="p">:</span> <span class="n">name</span> <span class="s1">&#39;food&#39;</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">defined</span>
+</pre></div>
+</div>
+<p>The error message (last line) clearly states the problem: You tried to print the value of the variable <code class="docutils literal notranslate"><span class="pre">food</span></code>, but there is no such variable <em>outside the functions.</em> The script stopped with <code class="docutils literal notranslate"><span class="pre">print(food)</span></code>, but if you tried <code class="docutils literal notranslate"><span class="pre">print</span> <span class="pre">(drink)</span></code> instead, you’d get the same error.</p>
+<p>Note that it’s fine to have <code class="docutils literal notranslate"><span class="pre">food</span></code> in both functions and <code class="docutils literal notranslate"><span class="pre">drink</span></code> in both functions — there is no conflict or confusion because of local scope.</p>
+<div class="section" id="key-points-about-scope">
+<h3>Key points about scope<a class="headerlink" href="#key-points-about-scope" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p>A variable has <em>local</em> scope or <em>global</em> scope. It cannot have both.</p></li>
+<li><p>A local variable exists only <em>inside</em> a function. It cannot be transmitted outside the function (although its <em>value</em> can be — via <cite>return</cite>).</p></li>
+<li><p>Sometimes you will make a mistake about the scope of a variable, and then you will get an error — or (worse) your answers or results will not be correct.</p></li>
+<li><p>A global variable exists <em>outside</em> any function. It may be used inside a function.</p></li>
+<li><p>“It is a <strong>bad habit</strong> to rely on global variables as your programs get larger and larger” (Sweigart, p. 66).</p></li>
+<li><p><strong>Avoid</strong> repeating the names of variables in different scopes. If you have a global variable named <cite>foobar</cite>, do not name a local variable <cite>foobar</cite>.</p></li>
+<li><p>See four rules, p. 69 in Sweigart</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="try-except">
+<h2>try/except<a class="headerlink" href="#try-except" title="Permalink to this headline">¶</a></h2>
+<p>When your program throws an error, your script stops. In most cases you want to be informed of the error but <em>not</em> have the script come to a halt. The usual way to accomplish this in Python is to write the code you want to run within the <code class="docutils literal notranslate"><span class="pre">try</span></code> block, and write instructions for handling the error inside the <code class="docutils literal notranslate"><span class="pre">except</span></code> block.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/functions/h_try_except.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># error handling: use this try/except pattern</span>
+
+<span class="k">def</span> <span class="nf">test_for_int</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; is an integer. Good job!&quot;</span>
+
+    <span class="c1"># this exception handles any entry that was NOT an integer</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;Error: You did not provide a whole number.&quot;</span>
+
+    <span class="k">return</span> <span class="n">message</span>
+
+<span class="c1"># ask for user input</span>
+<span class="n">response</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Enter a number: &quot;</span><span class="p">)</span>
+
+<span class="c1"># run the function, and print what is returned</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">test_for_int</span><span class="p">(</span><span class="n">response</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The code above requires the user to type a whole number. A string or a decimal (float) will trigger the exception.</p>
+<p>To find out what kind of error would be thrown, experiment at the Python command line (error types are case sensitive). Also, there is a list of <a class="reference external" href="https://docs.python.org/3/library/exceptions.html">built-in exceptions</a>.</p>
 </div>
 <div class="section" id="chapter-review-chapter-3">
 <h2>Chapter review: chapter 3<a class="headerlink" href="#chapter-review-chapter-3" title="Permalink to this headline">¶</a></h2>
@@ -276,17 +368,7 @@
 </ul>
 </li>
 <li><p>Keyword arguments: You can forget this for the time being</p></li>
-<li><p><strong>Important!</strong> Scope of variables:</p>
-<ul class="simple">
-<li><p>A variable has <em>local</em> scope or <em>global</em> scope. It cannot have both.</p></li>
-<li><p>A local variable exists only <em>inside</em> a function. It cannot be transmitted outside the function (although its <em>value</em> can be — via <cite>return</cite>).</p></li>
-<li><p>A global variable exists <em>outside</em> any function. It may be used inside a function.</p></li>
-<li><p>Sometimes you will make a mistake about the scope of a variable, and then your answers or results will not be correct.</p></li>
-<li><p>“It is a <strong>bad habit</strong> to rely on global variables as your programs get larger and larger” (Sweigart, p. 66).</p></li>
-<li><p><strong>Avoid</strong> repeating the names of variables in different scopes. If you have a global variable named <cite>foobar</cite>, do not name a local variable <cite>foobar</cite>.</p></li>
-<li><p>Four rules, p. 69 in Sweigart</p></li>
-</ul>
-</li>
+<li><p><strong>Important!</strong> Scope of variables</p></li>
 <li><p>Functions as “black boxes”: Describes a function with <em>parameters</em> (meaning that it takes <em>arguments</em>) and a <cite>return</cite> statement. One or more values go into the function (arguments) and some value comes out of it (whatever is returned).</p></li>
 <li><p>Exception handling (also called error handling): <cite>try</cite>/<cite>except</cite> pattern</p></li>
 </ol>

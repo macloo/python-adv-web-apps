@@ -4,7 +4,7 @@ def drink_expenses(price, count):
    total = price * count
    return total
 
-# assign the returned value to a new variable, output
+# assign the returned value to a new variable, result
 result = drink_expenses(4.49, 5)
 
 print(result)

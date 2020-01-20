@@ -41,7 +41,9 @@ However, you will not *see* the returned value *unless* you capture it, or “ca
 
    output = add_things("love", "Gators")
 
-Then you can print `output` or send it to a database or write it into the HTML of a live web page — or whatever you need.
+Then you can print `output` or send it to a database or write it into the HTML of a live web page — or whatever you need. ::
+
+   print(output)
 
 This is true for many functions we use from imported libraries. We know how to *call* the function, and we know what to expect as output, but we don’t need to know how it works.
 
@@ -66,16 +68,61 @@ The function is good, but the way you *call* it needs to change. To assign the *
 
 .. literalinclude:: ../python_code_examples/functions/e_function_demo_4.py
 
-A function can have many lines of instructions inside its code block (including conditionals, loops, and more). It’s best to write functions that perform one specific task, rather than several tasks.
+A function can have many lines of instructions inside its code block (including conditionals, loops, and more).
 
-Building functions for each task in a program
----------------------------------------------
+It’s best to write functions that perform one specific task, rather than several tasks.
 
-Near the end of chapter 3, Sweigart gives us a program that (oddly enough) does not include any functions. In the folder named [modular-code](https://github.com/macloo/python-beginners/tree/master/week02/modular-code), we will walk through how to convert that program into a collection of three modular functions.
+Scope
+-----
 
-*Modular* can mean that each function accomplishes *one* task. It’s not sensible to write a function that contains only one line, so don’t take this too literally. However, writing a lot of small, short functions gives you an easy way to test and perfect each part of your program in a very manageable way.
+This is a bit of a hard topic for beginners, because you don’t have much experience writing longer or complex scripts.
 
-It keeps the larger job — the complete program — from overwhelming you.
+Consider the following example:
+
+.. literalinclude:: ../python_code_examples/functions/f_scope_global_vs_local.py
+   :caption:
+
+Everything will work fine *except the last two lines.* If you run the script, you’ll see what the two functions print: ::
+
+   Lunch:
+   salad iced tea
+
+   Breakfast:
+   eggs coffee
+
+But then you'll see an error: ::
+
+   Traceback (most recent call last):
+      File "f_scope_global_vs_local.py", line 20, in <module>
+         print(food)
+   NameError: name 'food' is not defined
+
+The error message (last line) clearly states the problem: You tried to print the value of the variable ``food``, but there is no such variable *outside the functions.* The script stopped with ``print(food)``, but if you tried ``print (drink)`` instead, you’d get the same error.
+
+Note that it’s fine to have ``food`` in both functions and ``drink`` in both functions — there is no conflict or confusion because of local scope.
+
+Key points about scope
+++++++++++++++++++++++
+
+- A variable has *local* scope or *global* scope. It cannot have both.
+- A local variable exists only *inside* a function. It cannot be transmitted outside the function (although its *value* can be — via `return`).
+- Sometimes you will make a mistake about the scope of a variable, and then you will get an error — or (worse) your answers or results will not be correct.
+- A global variable exists *outside* any function. It may be used inside a function.
+- “It is a **bad habit** to rely on global variables as your programs get larger and larger” (Sweigart, p. 66).
+- **Avoid** repeating the names of variables in different scopes. If you have a global variable named `foobar`, do not name a local variable `foobar`.
+- See four rules, p. 69 in Sweigart
+
+try/except
+----------
+
+When your program throws an error, your script stops. In most cases you want to be informed of the error but *not* have the script come to a halt. The usual way to accomplish this in Python is to write the code you want to run within the ``try`` block, and write instructions for handling the error inside the ``except`` block.
+
+.. literalinclude:: ../python_code_examples/functions/h_try_except.py
+   :caption:
+
+The code above requires the user to type a whole number. A string or a decimal (float) will trigger the exception.
+
+To find out what kind of error would be thrown, experiment at the Python command line (error types are case sensitive). Also, there is a list of `built-in exceptions <https://docs.python.org/3/library/exceptions.html>`_.
 
 Chapter review: chapter 3
 -------------------------
@@ -100,16 +147,7 @@ Key points
    - An empty `return` statement (that is, the word `return` alone on a line) also returns `None`.
 
 6. Keyword arguments: You can forget this for the time being
-7. **Important!** Scope of variables:
-
-   - A variable has *local* scope or *global* scope. It cannot have both.
-   - A local variable exists only *inside* a function. It cannot be transmitted outside the function (although its *value* can be — via `return`).
-   - A global variable exists *outside* any function. It may be used inside a function.
-   - Sometimes you will make a mistake about the scope of a variable, and then your answers or results will not be correct.
-   - “It is a **bad habit** to rely on global variables as your programs get larger and larger” (Sweigart, p. 66).
-   - **Avoid** repeating the names of variables in different scopes. If you have a global variable named `foobar`, do not name a local variable `foobar`.
-   - Four rules, p. 69 in Sweigart
-
+7. **Important!** Scope of variables
 8. Functions as “black boxes”: Describes a function with *parameters* (meaning that it takes *arguments*) and a `return` statement. One or more values go into the function (arguments) and some value comes out of it (whatever is returned).
 9. Exception handling (also called error handling): `try`/`except` pattern
 
