@@ -14,7 +14,9 @@ To run a script named `foobar.py` that’s in the current directory, type this a
 
    python3 foobar.py
 
-On Windows, or in a *virtualenv* on Mac or Windows, drop the ``3`` from ``python3``.
+On Windows, or in a *virtualenv* on Mac or Windows, drop the ``3`` from ``python3``: ::
+
+   python foobar.py
 
 You do not need to be in your *virtualenv* to do this, but it’s okay if you are.
 
@@ -47,7 +49,7 @@ Then you can print `output` or send it to a database or write it into the HTML o
 
 This is true for many functions we use from imported libraries. We know how to *call* the function, and we know what to expect as output, but we don’t need to know how it works.
 
-We don’t need to know how a toaster toasts bread to get toast out of it. We put in two pieces of bread (the *arguments* we pass into a function), and toast is *returned* after the function runs.
+.. note:: We don’t need to know how a toaster toasts bread to get toast out of it. We put in two pieces of bread (the *arguments* we pass into a function), and toast is *returned* after the function runs.
 
 Using parameters and returns in functions
 -----------------------------------------
@@ -70,7 +72,7 @@ The function is good, but the way you *call* it needs to change. To assign the *
 
 A function can have many lines of instructions inside its code block (including conditionals, loops, and more).
 
-It’s best to write functions that perform one specific task, rather than several tasks.
+.. tip:: It’s best to write functions that perform one specific task, rather than several tasks.
 
 Scope
 -----
@@ -122,7 +124,7 @@ When your program throws an error, your script stops. In most cases you want to 
 
 The code above requires the user to type a whole number. A string or a decimal (float) will trigger the exception.
 
-To find out what kind of error would be thrown, experiment at the Python command line (error types are case sensitive). Also, there is a list of `built-in exceptions <https://docs.python.org/3/library/exceptions.html>`_.
+.. hint:: To find out what kind of error would be thrown, experiment at the Python command line (error types are case sensitive). Also, there is a list of `built-in exceptions <https://docs.python.org/3/library/exceptions.html>`_.
 
 Chapter review: chapter 3
 -------------------------
