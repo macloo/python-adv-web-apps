@@ -20,6 +20,13 @@ https://docutils.sourceforge.io/docs/ref/rst/directives.html
 Handle images
 https://docutils.sourceforge.io/docs/ref/rst/directives.html#figure
 
+Embed code
+https://www.sphinx-doc.org/en/1.5/markup/code.html
+
+https://pythonhosted.org/an_example_pypi_project/pkgcode.html
+
+https://pythonhosted.org/an_example_pypi_project/sphinx.html#full-code-example
+
 ## Viewing the docs you create
 
 Use the Makefile to build the docs, like so -- `make builder`
@@ -41,7 +48,7 @@ https://sphinx-rtd-theme.readthedocs.io/en/latest/configuring.html
 Looked at a bunch of themes
 https://sphinx-themes.org/
 
-Picked this one 
+Picked this one
 https://sphinx-rtd-theme.readthedocs.io/en/latest/
 
 Liked one other theme more, but it had NPM/Node crap, so no.

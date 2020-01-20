@@ -3,7 +3,7 @@ Functions in Python
 
 This section is based on chapter 3 in Sweigart’s `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition).
 
-At the same time, students also begin to learn about web scraping; that is covered in a separate part of this documentation.
+`Python scripts for this section <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/functions>`_
 
 Write and run a Python script
 -----------------------------
@@ -18,22 +18,55 @@ On Windows, or in a *virtualenv* on Mac or Windows, drop the ``3`` from ``python
 
 You do not need to be in your *virtualenv* to do this, but it’s okay if you are.
 
-Using parameters and returns in functions
------------------------------------------
+Put something in, get something out
+-----------------------------------
 
 Sweigart notes that many functions operate as “black boxes”: This describes a function with parameters (it takes arguments) and a `return` statement. Something goes into it (arguments) and something comes out of it (whatever is returned). You don’t need to know how it works; you just need to know what it does.
 
-View the example file in this folder: *a_black_box.py*
+*a_black_box.py* ::
 
-This is true for many functions we use from imported libraries, such as BeautifulSoup (for web scraping). We run a function such as this:
+   def add_things(a, b):
+      result = (a * 3) + (b * 3)
+      return result
 
-```python
-print( varname.get_text() )
-```
+To run that function, *call it,* passing in two strings as arguments: ::
 
-... and it prints only the text content from inside an HTML element (such as `title` or `li`) that is stored in `varname`. The variable `varname` contains the HTML tags (possibly quite a lot of tags), but the BeautifulSoup function `get_text()` removes them neatly, giving us just text. How does `get_text()` do that? *We don’t need to know.* That’s the beauty of a function as a black box: It just works.
+   add_things("love", "Gators")
+
+The function will *return* this: ::
+
+   loveloveloveGatorsGatorsGators
+
+However, you will not *see* the returned value *unless* you capture it, or “catch” it, with a variable, like this: ::
+
+   output = add_things("love", "Gators")
+
+Then you can print `output` or send it to a database or write it into the HTML of a live web page — or whatever you need.
+
+This is true for many functions we use from imported libraries. We know how to *call* the function, and we know what to expect as output, but we don’t need to know how it works.
 
 We don’t need to know how a toaster toasts bread to get toast out of it. We put in two pieces of bread (the *arguments* we pass into a function), and toast is *returned* after the function runs.
+
+Using parameters and returns in functions
+-----------------------------------------
+
+Let’s build a function step by step to help you understand parameters and returns. Assume that you buy the same coffee (or other beverage) daily, and you want to calculate how much you spend per week.
+
+.. literalinclude:: ../python_code_examples/functions/b_function_demo_1.py
+
+It’s not very useful like that. What if the price of the drink changes? What if you want to calculate a different time period?
+
+.. literalinclude:: ../python_code_examples/functions/c_function_demo_2.py
+
+Now you're able to *pass in* any price and any time span you want. However, you can’t use the value for `total` if there’s no `return` statement. So — return the total amount spent on coffee.
+
+.. literalinclude:: ../python_code_examples/functions/d_function_demo_3.py
+
+The function is good, but the way you *call* it needs to change. To assign the *returned value* of a function to a new variable, follow this pattern:
+
+.. literalinclude:: ../python_code_examples/functions/e_function_demo_4.py
+
+A function can have many lines of instructions inside its code block (including conditionals, loops, and more). It’s best to write functions that perform one specific task, rather than several tasks.
 
 Building functions for each task in a program
 ---------------------------------------------
@@ -42,7 +75,7 @@ Near the end of chapter 3, Sweigart gives us a program that (oddly enough) does 
 
 *Modular* can mean that each function accomplishes *one* task. It’s not sensible to write a function that contains only one line, so don’t take this too literally. However, writing a lot of small, short functions gives you an easy way to test and perfect each part of your program in a very manageable way.
 
-It keeps the larger job &mdash; the complete program &mdash; from overwhelming you.
+It keeps the larger job — the complete program — from overwhelming you.
 
 Chapter review: chapter 3
 -------------------------
