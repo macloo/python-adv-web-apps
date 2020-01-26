@@ -1,0 +1,338 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Reading and Writing Files &mdash; Python Beginners  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Working with Lists" href="lists.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Python Beginners
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="learn_python.html">Starting Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lists.html">Working with Lists</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Reading and Writing Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#check-whether-a-file-exists">Check whether a file exists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#read-a-file-line-by-line">Read a file line by line</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#open-and-read-a-file-write-to-another-file">Open and read a file, write to another file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#an-alternative-way-to-open-a-file">An alternative way to open a file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#key-points-from-chapter-9">Key points from chapter 9</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Beginners</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Reading and Writing Files</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/working_with_files.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="reading-and-writing-files">
+<h1>Reading and Writing Files<a class="headerlink" href="#reading-and-writing-files" title="Permalink to this headline">¶</a></h1>
+<p>Python can access files on your computer. It can create new text files and write into them. It can also read text files and copy text from them.</p>
+<p>In Sweigart’s chapter 9 (second edition), we are mainly interested in pages 215–219, “The File Reading/Writing Process.” Nevertheless, the previous section in chapter 9, under “Files and File Paths,” does contain useful information. I suggest you scan through the chapter up to page 215 and then read pages 215–219 carefully.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">pathlib</span></code> module can be a bit confusing. <a class="reference external" href="https://realpython.com/python-pathlib/">You can learn more here.</a></p>
+<p>Most students will benefit from a review of “Absolute vs. Relative Paths” (pages 206–207).</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Be sure to note the differences between paths on Mac and paths on Windows. If you write Python code meant for others to use, and your code includes a reference to a path, then you should use the <code class="docutils literal notranslate"><span class="pre">pathlib</span></code> module to ensure that your code for a path would work on both Mac and Windows.</p>
+</div>
+<div class="section" id="check-whether-a-file-exists">
+<h2>Check whether a file exists<a class="headerlink" href="#check-whether-a-file-exists" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">pathlib</span></code> method <code class="docutils literal notranslate"><span class="pre">.exists()</span></code> is useful if your Python program needs to check for the existence of a file in the current directory on your computer:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pathlib</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;foobar.txt&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+<span class="go">False</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>If <code class="docutils literal notranslate"><span class="pre">False</span></code> is returned, no file with that name exists in that location.</p>
+</div>
+<div class="section" id="read-a-file-line-by-line">
+<h2>Read a file line by line<a class="headerlink" href="#read-a-file-line-by-line" title="Permalink to this headline">¶</a></h2>
+<p>Sweigart explains the <code class="docutils literal notranslate"><span class="pre">readlines()</span></code> method (page 218), but he does not cover the <code class="docutils literal notranslate"><span class="pre">readline()</span></code> method, which reads exactly <em>one</em> line at a time. These two different methods can come in handy for solving different problems.</p>
+<p>In the following example, first we write two new lines into a new file. Then we read them, one at a time, with <code class="docutils literal notranslate"><span class="pre">readline()</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;temp.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;hello my little file</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="go">21</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;goodbye my little file</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="go">23</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;temp.txt&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="n">myfile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span> <span class="p">)</span>
+<span class="go">hello my little file</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="n">myfile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span> <span class="p">)</span>
+<span class="go">goodbye my little file</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>Compare that with this example, using <code class="docutils literal notranslate"><span class="pre">readlines()</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;temp.txt&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="n">myfile</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span> <span class="p">)</span>
+<span class="go">[&#39;hello my little file\n&#39;, &#39;goodbye my little file\n&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>When you call <code class="docutils literal notranslate"><span class="pre">readlines()</span></code> on a file, it returns a Python <strong>list</strong> that contains each line in the file as a list item. You can then loop over the list, search the items, sort them, etc.</p>
+<p>There’s a method Sweigart does not cover, <code class="docutils literal notranslate"><span class="pre">seek()</span></code>. This comes in handy if you have a file open for reading and you have come to the bottom of it. Calling <code class="docutils literal notranslate"><span class="pre">seek(0)</span></code> on the File object returns to the <em>top</em> of the file so you can read it or search its contents again.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">myfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;temp.txt&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myfile</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>          <span class="c1"># file has been read top to bottom</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="n">myfile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span> <span class="p">)</span>  <span class="c1"># nothing happens</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myfile</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>              <span class="c1"># return to top</span>
+<span class="go">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="n">myfile</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span> <span class="p">)</span>  <span class="c1"># try again</span>
+<span class="go">hello my little file</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">myfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="open-and-read-a-file-write-to-another-file">
+<h2>Open and read a file, write to another file<a class="headerlink" href="#open-and-read-a-file-write-to-another-file" title="Permalink to this headline">¶</a></h2>
+<p>In this example, we have a plain-text file that contains four items of information about each U.S. state, one line per state. In each line, the four items are separated by tabs.</p>
+<p>Our task is to use that file, <em>state_data.txt,</em> to create a new file, <em>capitals.txt,</em> that has only a list of state capitals. So we want to get this:</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/capitals.png"><img alt="screenshot of capitals file" src="_images/capitals.png" style="width: 414.0px; height: 234.0px;" /></a>
+</div>
+<p>From this:</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/state_data.png"><img alt="screenshot of state_data file" src="_images/state_data.png" style="width: 784.0px; height: 235.0px;" /></a>
+</div>
+<p>Here’s how we can do that:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/working_with_files/readlines_example.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># open a file for reading</span>
+<span class="n">states</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;state_data.txt&#39;</span><span class="p">)</span>
+<span class="c1"># open a new file for writing</span>
+<span class="n">capitals</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;capitals.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="c1"># store the result of readlines() in a variable</span>
+<span class="n">states_list</span> <span class="o">=</span> <span class="n">states</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+<span class="c1"># loop over the list that resulted from readlines()</span>
+<span class="k">for</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">states_list</span><span class="p">:</span>
+    <span class="n">foo</span> <span class="o">=</span> <span class="n">state</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>               <span class="c1"># split the line at the tabs</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">foo</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span> <span class="o">+</span> <span class="n">foo</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>  <span class="c1"># create text: capital, state</span>
+    <span class="n">capitals</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>                  <span class="c1"># write text into the new file</span>
+<span class="c1"># close both files</span>
+<span class="n">capitals</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">states</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="an-alternative-way-to-open-a-file">
+<h2>An alternative way to open a file<a class="headerlink" href="#an-alternative-way-to-open-a-file" title="Permalink to this headline">¶</a></h2>
+<p>This opens a File object — <code class="docutils literal notranslate"><span class="pre">f</span></code> — for appending, writes to it, closes it and saves it, without using <code class="docutils literal notranslate"><span class="pre">close()</span></code>. <a class="reference external" href="https://docs.python.org/3/tutorial/inputoutput.html#reading-and-writing-files">Read more about it here.</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;temp.txt&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="s2">&quot;I would not like to eat any spam.&quot;</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>That code would open a file named <em>myfile.txt</em> for <em>appending</em> — <code class="docutils literal notranslate"><span class="pre">a</span></code> — and assign the File object to the variable <code class="docutils literal notranslate"><span class="pre">f</span></code>. It would write the string into <em>myfile.txt</em> and then save and close the file.</p>
+<p>If this alternative makes sense to you, feel free to use it instead of using <code class="docutils literal notranslate"><span class="pre">f</span> <span class="pre">=</span> <span class="pre">open('temp.txt')</span></code> etc.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The indentation after the <code class="docutils literal notranslate"><span class="pre">with</span></code> line is <em>essential.</em> Any code related to the open file must be inside the indented block, or you will get errors.</p>
+</div>
+</div>
+<div class="section" id="key-points-from-chapter-9">
+<h2>Key points from chapter 9<a class="headerlink" href="#key-points-from-chapter-9" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Ways to use the <code class="docutils literal notranslate"><span class="pre">pathlib</span></code> module.</p></li>
+<li><p>Use of the <code class="docutils literal notranslate"><span class="pre">pathlib</span></code> method <code class="docutils literal notranslate"><span class="pre">.exists()</span></code>.</p></li>
+<li><p>Files can be opened and read without using <code class="docutils literal notranslate"><span class="pre">Path</span></code> if they are in the same folder as the Python script.</p></li>
+<li><p>Call the <code class="docutils literal notranslate"><span class="pre">open()</span></code> function to return a File object</p></li>
+<li><p>Call the <code class="docutils literal notranslate"><span class="pre">read()</span></code> or <code class="docutils literal notranslate"><span class="pre">write()</span></code> method on a File object</p></li>
+<li><p>Close the file by calling the <code class="docutils literal notranslate"><span class="pre">close()</span></code> method on a File object — this also <em>saves</em> the file</p></li>
+<li><p>Distinguish between the File object and the <em>contents</em> of the file</p></li>
+<li><p>Call the <code class="docutils literal notranslate"><span class="pre">readlines()</span></code> method to create a <strong>list</strong> from a file that contains line breaks</p></li>
+<li><p>The difference between the <code class="docutils literal notranslate"><span class="pre">readline()</span></code> method and the <code class="docutils literal notranslate"><span class="pre">readlines()</span></code> method</p></li>
+<li><p>The difference between <em>write</em> mode — <code class="docutils literal notranslate"><span class="pre">'w'</span></code> — and <em>append</em> mode — <code class="docutils literal notranslate"><span class="pre">'a'</span></code> — when using <code class="docutils literal notranslate"><span class="pre">open()</span></code></p></li>
+<li><p>Use of the alternative syntax <code class="docutils literal notranslate"><span class="pre">with</span> <span class="pre">open('temp.txt',</span> <span class="pre">'a')</span> <span class="pre">as</span> <span class="pre">f:</span></code></p></li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="lists.html" class="btn btn-neutral float-left" title="Working with Lists" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020 Mindy McAdams
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+state	capital	population 2010 census	population 2018 estimate
+Alabama	Montgomery	(2010) 205,764	(2018 est.) 198,218
+Alaska	Juneau	(2010) 31,275	(2018 est.) 32,113
+Arizona	Phoenix	(2010) 1,445,632	(2018 est.) 1,660,272
+Arkansas	Little Rock	(2010) 193,524	(2018 est.) 197,881
+California	Sacramento	(2010) 466,488	(2018 est.) 508,529
+Colorado	Denver	(2010) 600,158	(2018 est.) 716,492
+Connecticut	Hartford	(2010) 124,775	(2018 est.) 122,587
+Delaware	Dover	(2010) 26,047	(2018 est.) 38,079
+Florida	Tallahassee	(2010) 181,376	(2018 est.) 193,551
+Georgia	Atlanta	(2010) 420,003	(2018 est.) 498,044
+Hawaii	Honolulu	(2010) 337,256	(2018 est.) 347,397
+Idaho	Boise	(2010) 206,100	(2018 est.) 228,790
+Illinois	Springfield	(2010) 116,250	(2018 est.) 114,694
+Indiana	Indianapolis	(2010) 820,445	(2018 est.) 867,125
+Iowa	Des Moines	(2010) 203,433	(2018 est.) 216,853
+Kansas	Topeka	(2010) 127,473	(2018 est.) 125,904
+Kentucky	Frankfort	(2010) 25,527	(2018 est.) 27,679
+Louisiana	Baton Rouge	(2010) 229,493	(2018 est.) 221,599
+Maine	Augusta	(2010) 19,136	(2018 est.) 18,681
+Maryland	Annapolis	(2010) 38,394	(2018 est.) 39,174
+Massachusetts	Boston	(2010) 617,594	(2018 est.) 694,583
+Michigan	Lansing	(2010) 114,297	(2018 est.) 118,427
+Minnesota	Saint Paul	(2010) 285,068	(2018 est.) 307,695
+Mississippi	Jackson	(2010) 173,514	(2018 est.) 164,422
+Missouri	Jefferson City	(2010) 43,079	(2018 est.) 42,838
+Montana	Helena	(2010) 28,190	(2018 est.) 32,315
+Nebraska	Lincoln	(2010) 258,379	(2018 est.) 287,401
+Nevada	Carson City	(2010) 55,274	(2018 est.) 55,414
+New Hampshire	Concord	(2010) 42,695	(2018 est.) 43,412
+New Jersey	Trenton	(2010) 84,913	(2018 est.) 83,974
+New Mexico	Santa Fe	(2010) 67,947	(2018 est.) 84,612
+New York	Albany	(2010) 97,856	(2018 est.) 97,279
+North Carolina	Raleigh	(2010) 403,892	(2018 est.) 469,298
+North Dakota	Bismarck	(2010) 61,272	(2018 est.) 73,112
+Ohio	Columbus	(2010) 787,033	(2018 est.) 892,533
+Oklahoma	Oklahoma City	(2010) 579,999	(2018 est.) 649,021
+Oregon	Salem	(2010) 154,637	(2018 est.) 173,442
+Pennsylvania	Harrisburg	(2010) 49,528	(2018 est.) 49,229
+Rhode Island	Providence	(2010) 178,042	(2018 est.) 179,335
+South Carolina	Columbia	(2010) 129,272	(2018 est.) 133,451
+South Dakota	Pierre	(2010) 13,646	(2018 est.) 13,980
+Tennessee	Nashville	(2010) 601,222	(2018 est.) 669,053
+Texas	Austin	(2010) 790,390	(2018 est.) 964,254
+Utah	Salt Lake City	(2010) 186,440	(2018 est.) 200,591
+Vermont	Montpelier	(2010) 7,855	(2018 est.) 7,436
+Virginia	Richmond	(2010) 204,214	(2018 est.) 228,783
+Washington	Olympia	(2010) 46,478	(2018 est.) 52,555
+West Virginia	Charleston	(2010) 51,400	(2018 est.) 47,215
+Wisconsin	Madison	(2010) 233,209	(2017 est.) 255,214
+Wyoming	Cheyenne	(2010) 64,019	(2018 est.) 63,957

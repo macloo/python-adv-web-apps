@@ -16,3 +16,5 @@ In this course, students who have learned HTML, CSS, and some JavaScript learn t
 
    learn_python
    functions
+   lists
+   working_with_files

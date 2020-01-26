@@ -1,0 +1,417 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Working with Lists &mdash; Python Beginners  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Reading and Writing Files" href="working_with_files.html" />
+    <link rel="prev" title="Functions in Python" href="functions.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Python Beginners
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="learn_python.html">Starting Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions in Python</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Working with Lists</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#looping-over-a-list">Looping over a list</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#augmented-assignment-operators">Augmented assignment operators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#methods-and-finding-things-in-lists">Methods, and finding things in lists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tuples-and-immutability">Tuples and immutability</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lists-and-references">Lists and references</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#review-of-chapter-4">Review of chapter 4</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#key-points">Key points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slides-for-sweigart-chapters-8-and-4">Slides for Sweigart chapters 8 and 4</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_files.html">Reading and Writing Files</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Beginners</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Working with Lists</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/lists.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="working-with-lists">
+<h1>Working with Lists<a class="headerlink" href="#working-with-lists" title="Permalink to this headline">¶</a></h1>
+<p>This section is based on chapter 4 in Sweigart’s <a class="reference external" href="https://automatetheboringstuff.com/">Automate the Boring Stuff with Python</a> (second edition).</p>
+<p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/functions">Python scripts for this section</a></p>
+<p>Python lists are very similar to JavaScript arrays. However, in Python, an <strong>array</strong> is a different thing, and we will be using lists, not arrays. <a class="reference external" href="https://www.pythoncentral.io/the-difference-between-a-list-and-an-array/">Read this if you’re curious about the difference.</a></p>
+<p>A new list can be made like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;bat&#39;</span><span class="p">,</span> <span class="s1">&#39;rat&#39;</span><span class="p">,</span> <span class="s1">&#39;elephant&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>As with JavaScript arrays, a Python list contains items that can be accessed via an <strong>index</strong> number. Each item in the list has a unique index, <em>starting with 0</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;bat&#39;</span><span class="p">,</span> <span class="s1">&#39;rat&#39;</span><span class="p">,</span> <span class="s1">&#39;elephant&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">my_list</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="go">bat</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">my_list</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">cat</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>This next bit is pretty sophisticated, but you will probably use it: We can put <strong>lists *inside* of lists</strong>. When we do, we can access the list items with index numbers as usual, but you’ll need to use one index to access a list (in the list of lists) and a <em>second</em> index to access an item inside that list. See Sweigart page 79 for this. It’s like a double-decker list.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">new_list</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">]</span> <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="n">new_list</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span>
+<span class="go">red</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>Above is an example of a list (<cite>new_list</cite>) that contains three items. Each of the three items is a different list. To access the first item in the third list, we use the index of the third list, <cite>2</cite>, followed by the index of the first item, <cite>0</cite>.</p>
+<p><strong>Slices</strong> provide a way to get several consecutive items from a list all at once; see Sweigart pages 80–81.</p>
+<p>The <strong>length</strong> of a list (just like the length of a string) can be found with <code class="docutils literal notranslate"><span class="pre">len()</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;bat&#39;</span><span class="p">,</span> <span class="s1">&#39;rat&#39;</span><span class="p">,</span> <span class="s1">&#39;elephant&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<span class="go">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">word</span> <span class="o">=</span> <span class="s2">&quot;fantastic&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)</span>
+<span class="go">9</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="section" id="looping-over-a-list">
+<h2>Looping over a list<a class="headerlink" href="#looping-over-a-list" title="Permalink to this headline">¶</a></h2>
+<p>Sweigart covers a variety of things we can do to or with Python lists, including adding new items to them and deleting items from them. Perhaps the most common thing we do with lists is <strong>loop through them</strong> to print or inspect their contents:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;bat&#39;</span><span class="p">,</span> <span class="s1">&#39;rat&#39;</span><span class="p">,</span> <span class="s1">&#39;elephant&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">thing</span> <span class="ow">in</span> <span class="n">my_list</span><span class="p">:</span>
+<span class="gp">... </span>  <span class="nb">print</span><span class="p">(</span><span class="n">thing</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">cat</span>
+<span class="go">bat</span>
+<span class="go">rat</span>
+<span class="go">elephant</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Above, <code class="docutils literal notranslate"><span class="pre">thing</span></code> is a new variable. Its value is the value of the current list item. Each time the loop runs, the value of <code class="docutils literal notranslate"><span class="pre">thing</span></code> is the <em>next</em> item in the list.</p>
+</div>
+<p>If we need to know the index number while we are looping through a list, we can get it with <code class="docutils literal notranslate"><span class="pre">enumerate()</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;bat&#39;</span><span class="p">,</span> <span class="s1">&#39;rat&#39;</span><span class="p">,</span> <span class="s1">&#39;elephant&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">my_list</span><span class="p">):</span>
+<span class="gp">... </span>  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The index: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; The item: &#39;</span> <span class="o">+</span> <span class="n">item</span><span class="p">)</span>
+<span class="gp">...</span>
+<span class="go">The index: 0 The item: cat</span>
+<span class="go">The index: 1 The item: bat</span>
+<span class="go">The index: 2 The item: rat</span>
+<span class="go">The index: 3 The item: elephant</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Above, <code class="docutils literal notranslate"><span class="pre">index</span></code> and <code class="docutils literal notranslate"><span class="pre">item</span></code> are both new variables. The words <em>index</em> and <em>item</em> are not special. You could just as well use <code class="docutils literal notranslate"><span class="pre">a</span></code> and <code class="docutils literal notranslate"><span class="pre">b</span></code>, or <code class="docutils literal notranslate"><span class="pre">i</span></code> and <code class="docutils literal notranslate"><span class="pre">thing</span></code>.</p>
+</div>
+<p>You don’t need to loop through a list to find out if a particular item exists there. See Sweigart pages 84–85 for details (“The <code class="docutils literal notranslate"><span class="pre">in</span></code> and <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">in</span></code> Operators”). He also shows you how to assign list items to individual variables (pages 85–86, “The Multiple Assignment Trick”).</p>
+</div>
+<div class="section" id="augmented-assignment-operators">
+<h2>Augmented assignment operators<a class="headerlink" href="#augmented-assignment-operators" title="Permalink to this headline">¶</a></h2>
+<p>I have no clue why this is in the middle of the lists chapter, but you should know that in Python we cannot increment a value with <code class="docutils literal notranslate"><span class="pre">++</span></code> as we can in JavaScript.</p>
+<p>We can, however, use a shortened form instead of <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">=</span> <span class="pre">x</span> <span class="pre">+</span> <span class="pre">1</span></code> to increment a value:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">+=</span> <span class="mi">100</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="go">101</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>The same technique works with <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">*</span></code>, <code class="docutils literal notranslate"><span class="pre">\</span></code>, and <code class="docutils literal notranslate"><span class="pre">%</span></code> (modulus).</p>
+</div>
+<div class="section" id="methods-and-finding-things-in-lists">
+<h2>Methods, and finding things in lists<a class="headerlink" href="#methods-and-finding-things-in-lists" title="Permalink to this headline">¶</a></h2>
+<p>In web scraping, we use a BeautifulSoup <em>method</em> on tag objects: <code class="docutils literal notranslate"><span class="pre">object.get_text()</span></code></p>
+<p>A <em>method</em> is a function (e.g. <code class="docutils literal notranslate"><span class="pre">get_text()</span></code>), but it must be <em>called on</em> a <em>value</em>. In the <code class="docutils literal notranslate"><span class="pre">object.get_text()</span></code> example, <code class="docutils literal notranslate"><span class="pre">object</span></code> contains one or more HTML elements and (probably) text. Calling <code class="docutils literal notranslate"><span class="pre">get_text()</span></code> on <code class="docutils literal notranslate"><span class="pre">object</span></code> returns the text alone, without any HTML tags.</p>
+<p>For use with Python lists, Sweigart shows us the <em>method</em> <code class="docutils literal notranslate"><span class="pre">index()</span></code>: If <code class="docutils literal notranslate"><span class="pre">spam</span></code> is a Python list and that list contains an item with the value <code class="docutils literal notranslate"><span class="pre">&quot;hello&quot;</span></code>, then <code class="docutils literal notranslate"><span class="pre">spam.index('hello')</span></code> will return the <strong>index number</strong> of that item.</p>
+<p>It’s useful to know that if the list <em>does not</em> contain that value, then the <em>method</em> <code class="docutils literal notranslate"><span class="pre">index()</span></code> will return a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>. This is useful because (like any error) <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> could be used in a <code class="docutils literal notranslate"><span class="pre">try</span></code>/<code class="docutils literal notranslate"><span class="pre">except</span></code> combo. When you are scraping, that can be very useful indeed.</p>
+<p>Other list methods include <code class="docutils literal notranslate"><span class="pre">append()</span></code> and <code class="docutils literal notranslate"><span class="pre">insert()</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;bat&#39;</span><span class="p">,</span> <span class="s1">&#39;rat&#39;</span><span class="p">,</span> <span class="s1">&#39;elephant&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;rhino&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<span class="go">[&#39;cat&#39;, &#39;bat&#39;, &#39;rat&#39;, &#39;elephant&#39;, &#39;rhino&#39;]</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">append()</span></code> method is used often in web scraping.</p>
+<p>Earlier in the chapter, we saw <code class="docutils literal notranslate"><span class="pre">del</span> <span class="pre">spam[2]</span></code> — this deletes the item with <strong>index</strong> 2 from the list <code class="docutils literal notranslate"><span class="pre">spam</span></code>. Note how that is different from the <code class="docutils literal notranslate"><span class="pre">remove()</span></code> method:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;bat&#39;</span><span class="p">,</span> <span class="s1">&#39;rat&#39;</span><span class="p">,</span> <span class="s1">&#39;elephant&#39;</span><span class="p">,</span> <span class="s1">&#39;rhino&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;bat&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<span class="go">[&#39;cat&#39;, &#39;rat&#39;, &#39;elephant&#39;, &#39;rhino&#39;]</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">sort()</span></code> method will only work if your list items are all strings or all numbers. Also, strings that begin with an uppercase letter will be sorted separately from strings that begin with a lowercase letter.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">water_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lake&#39;</span><span class="p">,</span> <span class="s1">&#39;Ontario&#39;</span><span class="p">,</span> <span class="s1">&#39;river&#39;</span><span class="p">,</span> <span class="s1">&#39;Hudson&#39;</span><span class="p">,</span> <span class="s1">&#39;ocean&#39;</span><span class="p">,</span> <span class="s1">&#39;Atlantic&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">water_list</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">water_list</span><span class="p">)</span>
+<span class="go">[&#39;Atlantic&#39;, &#39;Hudson&#39;, &#39;Ontario&#39;, &#39;lake&#39;, &#39;ocean&#39;, &#39;river&#39;]</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>If you try to use <code class="docutils literal notranslate"><span class="pre">.sort()</span></code> on a list that contains both strings and integers, you’ll see this error:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ne">TypeError</span><span class="p">:</span> <span class="s1">&#39;&lt;&#39;</span> <span class="ow">not</span> <span class="n">supported</span> <span class="n">between</span> <span class="n">instances</span> <span class="n">of</span> <span class="s1">&#39;str&#39;</span> <span class="ow">and</span> <span class="s1">&#39;int&#39;</span>
+</pre></div>
+</div>
+<p>Note that by using the <code class="docutils literal notranslate"><span class="pre">sort()</span></code> method, the list is changed. The old order cannot be regained. The old indexes are destroyed. Originally, <code class="docutils literal notranslate"><span class="pre">water_list[0]</span></code> was <code class="docutils literal notranslate"><span class="pre">'lake'</span></code>. Now it is <code class="docutils literal notranslate"><span class="pre">'Atlantic'</span></code>.</p>
+<p>There is a <em>method</em> Sweigart did not cover, and it’s very handy: <code class="docutils literal notranslate"><span class="pre">pop()</span></code>. We can put an index inside the parentheses, and then the item at that index will be removed, permanently, from the list. If no index is specified, <code class="docutils literal notranslate"><span class="pre">pop()</span></code> removes <em>and returns</em> the <em>last</em> item in the list. Note that leaving the parentheses empty is <em>the most common way</em> to use <code class="docutils literal notranslate"><span class="pre">pop()</span></code>. Here’s how it works:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">water_list</span><span class="p">)</span>
+<span class="go">[&#39;Atlantic&#39;, &#39;Hudson&#39;, &#39;Ontario&#39;, &#39;lake&#39;, &#39;ocean&#39;, &#39;river&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">water_list</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="go">&#39;river&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">next_item</span> <span class="o">=</span> <span class="n">water_list</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">another_item</span> <span class="o">=</span> <span class="n">water_list</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">water_list</span><span class="p">)</span>
+<span class="go">[&#39;Atlantic&#39;, &#39;Hudson&#39;, &#39;Ontario&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">next_item</span><span class="p">)</span>
+<span class="go">ocean</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">another_item</span><span class="p">)</span>
+<span class="go">lake</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://docs.python.org/3/tutorial/datastructures.html#more-on-lists">Here are all of the methods of Python lists.</a></p>
+</div>
+<div class="section" id="tuples-and-immutability">
+<h2>Tuples and immutability<a class="headerlink" href="#tuples-and-immutability" title="Permalink to this headline">¶</a></h2>
+<p>Sweigart explains the difference between <em>mutable</em> and <em>immutable</em> data types and then goes on to introduce <strong>tuples</strong> (pronounced <em>too-puls</em>). A tuple might look like a list at first glance, but it’s not — and it doesn’t behave like a list, either.</p>
+<p>A tuple can contain one or more items, like a list, but the items cannot be changed. They cannot be sorted into order, and they cannot be deleted or removed. Perhaps most surprising, you cannot even add a new item to a tuple. Once it is made, a tuple is <em>immutable</em>.</p>
+<p>Lists are <em>mutable</em>, and that means we can change and reorder their contents at any time.</p>
+</div>
+<div class="section" id="lists-and-references">
+<h2>Lists and references<a class="headerlink" href="#lists-and-references" title="Permalink to this headline">¶</a></h2>
+<p>Another important thing to know about Python lists is that you can’t simply duplicate one. You might think, “Oh, I’m going to change the contents of <code class="docutils literal notranslate"><span class="pre">my_list</span></code>, so I’ll make a copy of it as a backup.” This is not going to do what you probably expect:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;bat&#39;</span><span class="p">,</span> <span class="s1">&#39;rat&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">foobar</span> <span class="o">=</span> <span class="n">my_list</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">foobar</span><span class="p">)</span>
+<span class="go">[&#39;cat&#39;, &#39;bat&#39;, &#39;rat&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># you think you have a copy of my_list in foobar - you are wrong</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;aardvark&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;zebra&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;rat&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<span class="go">[&#39;aardvark&#39;, &#39;bat&#39;, &#39;cat&#39;, &#39;zebra&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">foobar</span><span class="p">)</span>
+<span class="go">[&#39;aardvark&#39;, &#39;bat&#39;, &#39;cat&#39;, &#39;zebra&#39;]</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>Sweigart explains this in chapter 4. Both <code class="docutils literal notranslate"><span class="pre">my_list</span></code> and <code class="docutils literal notranslate"><span class="pre">foobar</span></code> are simply <em>references</em> to the list, which exists elsewhere in memory. To make a real copy that is independent of the original, you have to use other means.</p>
+</div>
+<div class="section" id="review-of-chapter-4">
+<h2>Review of chapter 4<a class="headerlink" href="#review-of-chapter-4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="key-points">
+<h3>Key points<a class="headerlink" href="#key-points" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic simple">
+<li><p>Create a new list</p></li>
+<li><p>Get the value of one item in a list using its index</p></li>
+<li><p>Make a double-decker list (lists inside a list) and access specific items in the inner lists.</p></li>
+<li><p>Use slices to get multiple items from a list all at once</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">len()</span></code> to get the number of items in a list</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">del()</span></code> to delete an item from a list using its index</p></li>
+<li><p>Loop through a list in different ways</p></li>
+<li><p>Increment a value using <code class="docutils literal notranslate"><span class="pre">+=</span></code></p></li>
+<li><p>Use the following <em>methods</em> correctly:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">index()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">append()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">remove()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">sort()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pop()</span></code> <em>not in Sweigart; see above</em></p></li>
+</ul>
+</li>
+<li><p>The differences between a Python list and a tuple</p></li>
+<li><p>You can’t simply make a copy of a list in the way you might expect (know how to look up the <em>correct way</em> to make a copy if you need to do so)</p></li>
+</ol>
+</div>
+<div class="section" id="slides-for-sweigart-chapters-8-and-4">
+<h3>Slides for Sweigart chapters 8 and 4<a class="headerlink" href="#slides-for-sweigart-chapters-8-and-4" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://bit.ly/pythonrev3">Slide deck</a></p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="working_with_files.html" class="btn btn-neutral float-right" title="Reading and Writing Files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="functions.html" class="btn btn-neutral float-left" title="Functions in Python" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020 Mindy McAdams
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
