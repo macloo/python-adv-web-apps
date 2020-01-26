@@ -3,7 +3,7 @@ Reading and Writing Files
 
 This section is based on chapter 9 in Sweigart’s `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition).
 
-`Python scripts for this section <hhttps://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/working_with_files>`_
+`Python scripts for this section <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/working_with_files>`_
 
 Python can access files on your computer. It can create new text files and write into them. It can also read text files and copy text from them.
 
