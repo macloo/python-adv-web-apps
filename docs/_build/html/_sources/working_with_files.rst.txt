@@ -112,8 +112,11 @@ If this alternative makes sense to you, feel free to use it instead of using ``f
 
 .. important:: The indentation after the ``with`` line is *essential.* Any code related to the open file must be inside the indented block, or you will get errors.
 
-Key points from chapter 9
+Chapter review: chapter 9
 -------------------------
+
+Key points
+++++++++++
 
 1. Ways to use the ``pathlib`` module.
 2. Use of the ``pathlib`` method ``.exists()``.
@@ -126,3 +129,8 @@ Key points from chapter 9
 9. The difference between the ``readline()`` method and the ``readlines()`` method
 10. The difference between *write* mode — ``'w'`` — and *append* mode — ``'a'`` — when using ``open()``
 11. Use of the alternative syntax ``with open('temp.txt', 'a') as f:``
+
+Slides: chapters 9 and 4
+++++++++++++++++++++++++
+
+`Slide deck <http://bit.ly/pythonrev3>`_

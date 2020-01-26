@@ -184,8 +184,8 @@ Another important thing to know about Python lists is that you can’t simply du
 
 Sweigart explains this in chapter 4. Both ``my_list`` and ``foobar`` are simply *references* to the list, which exists elsewhere in memory. To make a real copy that is independent of the original, you have to use other means.
 
-Review of chapter 4
--------------------
+Chapter review: chapter 4
+-------------------------
 
 Key points
 ++++++++++
@@ -208,7 +208,7 @@ Key points
 10. The differences between a Python list and a tuple
 11. You can’t simply make a copy of a list in the way you might expect (know how to look up the *correct way* to make a copy if you need to do so)
 
-Slides for Sweigart chapters 8 and 4
-++++++++++++++++++++++++++++++++++++
+Slides: chapters 9 and 4
+++++++++++++++++++++++++
 
 `Slide deck <http://bit.ly/pythonrev3>`_
