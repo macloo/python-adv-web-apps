@@ -2,9 +2,7 @@
 
 Read the documention: [Python Beginners](https://python-adv-web-apps.readthedocs.io/en/latest/)
 
-This repo is being built out in January 2020. It's based on an earlier repo:
-
-https://github.com/macloo/python-beginners
+This repo is being built out in spring 2020. It's based on [an earlier repo](https://github.com/macloo/python-beginners).
 
 In this new repo I'm using [Sphinx](http://www.sphinx-doc.org/en/master/intro.html) and [Read the Docs](https://readthedocs.org/) *for the first time* (so that's a journey in itself) to build a text for journalism students learning Python.
 
