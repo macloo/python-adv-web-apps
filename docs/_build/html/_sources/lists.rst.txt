@@ -3,7 +3,7 @@ Working with Lists
 
 This section is based on chapter 4 in Sweigart’s `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition).
 
-`Python scripts for this section <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/functions>`_
+`Python scripts for this section <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/loops_and_lists>`_
 
 Python lists are very similar to JavaScript arrays. However, in Python, an **array** is a different thing, and we will be using lists, not arrays. `Read this if you're curious about the difference. <https://www.pythoncentral.io/the-difference-between-a-list-and-an-array/>`_
 

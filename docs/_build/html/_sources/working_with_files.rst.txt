@@ -1,9 +1,13 @@
 Reading and Writing Files
 =========================
 
+This section is based on chapter 9 in Sweigart’s `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition).
+
+`Python scripts for this section <hhttps://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/working_with_files>`_
+
 Python can access files on your computer. It can create new text files and write into them. It can also read text files and copy text from them.
 
-In Sweigart’s chapter 9 (second edition), we are mainly interested in pages 215–219, “The File Reading/Writing Process.” Nevertheless, the previous section in chapter 9, under “Files and File Paths,” does contain useful information. I suggest you scan through the chapter up to page 215 and then read pages 215–219 carefully.
+In Sweigart’s chapter 9, we are mainly interested in pages 215–219, “The File Reading/Writing Process.” Nevertheless, the previous section in chapter 9, under “Files and File Paths,” does contain useful information. I suggest you scan through the chapter up to page 215 and then read pages 215–219 carefully.
 
 The ``pathlib`` module can be a bit confusing. `You can learn more here. <https://realpython.com/python-pathlib/>`_
 
