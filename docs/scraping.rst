@@ -218,6 +218,13 @@ There’s a lot more to learn about BeautifulSoup, and we’ll be working with v
 A BeautifulSoup scraping example
 --------------------------------
 
-To demonstrate a whole process of thinking through a small scraping project, I made a [Jupyter Notebook](soup_practice.ipynb) that — through the comments in the code — shows how I thought about the problem step by step and tested each step, one thing at a time, to reach the solution I wanted. Open the Notebook here on GitHub to follow along and see all the steps.
+To demonstrate a whole process of thinking through a small scraping project, I made a `Jupyter Notebook <soup_practice.ipynb>`_ that shows how I broke down the problem step by step, and tested one thing at a time, to reach the solution I wanted. Open the notebook here on GitHub to follow along and see all the steps.
 
-The code in the *final cell* of the Jupyter Notebook produces this 51-line CSV file movies.csv by scraping 10 separate web pages.
+The code in the *final cell* of the notebook produces `this 51-line CSV file <movies.csv>`_ by scraping 10 separate web pages.
+
+To *run* the notebook, you will need to have installed the `Requests <https://requests.readthedocs.io/en/master/>`_ module and also Jupyter Notebook. ::
+
+    pip install requests
+    pip install jupyter
+
+See `these instructions <http://bit.ly/install-python3-jupyter>`_ for information about how to run Jupyter Notebooks.
