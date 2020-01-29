@@ -1,0 +1,420 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Web Scraping Intro &mdash; Python Beginners  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Reading and Writing Files" href="working_with_files.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Python Beginners
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="learn_python.html">Starting Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lists.html">Working with Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_files.html">Reading and Writing Files</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Web Scraping Intro</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setup-for-beautifulsoup">Setup for BeautifulSoup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-directory-and-change-into-it">Create a directory and change into it</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-new-virtualenv-in-that-directory-and-activate-it">Create a new virtualenv in that directory and activate it</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-the-beautifulsoup-library">Install the BeautifulSoup library</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#test-beautifulsoup">Test BeautifulSoup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#understanding-beautifulsoup">Understanding BeautifulSoup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-the-beautifulsoup-object">What is the BeautifulSoup object?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-beautifulsoup-handles-the-object">How BeautifulSoup handles the object</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#some-basic-beautifulsoup-commands">Some basic BeautifulSoup commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#finding-elements-that-have-a-particular-class">Finding elements that have a particular class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#finding-all-vs-finding-one">Finding all vs. finding one</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#finding-the-contents-of-a-particular-attribute">Finding the contents of a particular attribute</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#a-beautifulsoup-scraping-example">A BeautifulSoup scraping example</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Beginners</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Web Scraping Intro</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/scraping.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="web-scraping-intro">
+<h1>Web Scraping Intro<a class="headerlink" href="#web-scraping-intro" title="Permalink to this headline">¶</a></h1>
+<p>This document assumes you have already installed Python 3, and you have used both <em>pip</em> and <em>venv</em>. If not, refer to <a class="reference external" href="http://bit.ly/install-python3-jupyter">these instructions</a>.</p>
+<p>Sweigart briefly covers scraping in chapter 12 of <a class="reference external" href="https://automatetheboringstuff.com/">Automate the Boring Stuff with Python</a> (second edition).</p>
+<p>BeautifulSoup documentation:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://media.readthedocs.org/pdf/beautiful-soup-4/latest/beautiful-soup-4.pdf">A nicely formatted PDF</a></p></li>
+<li><p><a class="reference external" href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">The official docs</a></p></li>
+</ul>
+<div class="section" id="setup-for-beautifulsoup">
+<h2>Setup for BeautifulSoup<a class="headerlink" href="#setup-for-beautifulsoup" title="Permalink to this headline">¶</a></h2>
+<p><strong>BeautifulSoup</strong> is a scraping library for Python. We want to run all our scraping projects in a virtual environment, so we will set that up first. (Students have already installed Python 3.)</p>
+<div class="section" id="create-a-directory-and-change-into-it">
+<h3>Create a directory and change into it<a class="headerlink" href="#create-a-directory-and-change-into-it" title="Permalink to this headline">¶</a></h3>
+<p>The first step is to create a new folder (directory) for all your scraping projects. Mine is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Documents</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">scraping</span>
+</pre></div>
+</div>
+<p><strong>Do not use any spaces in your folder names.</strong> If you must use punctuation, do not use anything other than an underscore <code class="docutils literal notranslate"><span class="pre">_</span></code>. It’s best if you use only lowercase letters.</p>
+<p><strong>Change into that directory.</strong> For me, the command would be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">Documents</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">scraping</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-a-new-virtualenv-in-that-directory-and-activate-it">
+<h3>Create a new virtualenv in that directory and activate it<a class="headerlink" href="#create-a-new-virtualenv-in-that-directory-and-activate-it" title="Permalink to this headline">¶</a></h3>
+<p><strong>Create</strong> a new <em>virtual environment</em> there (this is done only once).</p>
+<p>MacOS:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">venv</span> <span class="n">env</span>
+</pre></div>
+</div>
+<p>Windows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">venv</span> <span class="n">env</span>
+</pre></div>
+</div>
+<p><strong>Activate</strong> the <em>virtual environment</em>:</p>
+<p>MacOS:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">env</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+</pre></div>
+</div>
+<p>Windows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">env</span>\<span class="n">Scripts</span>\<span class="n">activate</span><span class="o">.</span><span class="n">bat</span>
+</pre></div>
+</div>
+<p><strong>Important:</strong> You should now see <code class="docutils literal notranslate"><span class="pre">(env)</span></code> at the far left side of your prompt. This indicates that the <em>virtual environment</em> is active. For example (MacOS):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(env) mcadams scraping $
+</pre></div>
+</div>
+<p>When you are <em>finished</em> working in a virtual environment, you should <strong>deactivate</strong> it. The command is the same in MacOS or Windows (DO <strong>NOT</strong> DO THIS NOW):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">deactivate</span>
+</pre></div>
+</div>
+<p>You’ll know it worked because <code class="docutils literal notranslate"><span class="pre">(env)</span></code> will no longer be at the far left side of your prompt.</p>
+</div>
+<div class="section" id="install-the-beautifulsoup-library">
+<h3>Install the BeautifulSoup library<a class="headerlink" href="#install-the-beautifulsoup-library" title="Permalink to this headline">¶</a></h3>
+<p>In MacOS or Windows, at the command prompt, type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">beautifulsoup4</span>
+</pre></div>
+</div>
+<p>This is how you install <em>any</em> Python library that exists in the <a class="reference external" href="https://pypi.python.org/pypi">Python Package Index</a>. Pretty handy. <strong>pip</strong> is a tool for installing Python packages, which is what you just did.</p>
+<p><strong>Note:</strong> You have installed BeautifulSoup in the Python virtual environment that is currently active. When that virtual environment is <em>not</em> active, BeautifulSoup will not be available to you. This is ideal, because you will create different virtual environments for different Python projects, and you won’t need to worry about updated libraries in the future breaking your (past) code.</p>
+</div>
+</div>
+<div class="section" id="test-beautifulsoup">
+<h2>Test BeautifulSoup<a class="headerlink" href="#test-beautifulsoup" title="Permalink to this headline">¶</a></h2>
+<p><strong>Start Python.</strong> Because you are already in a Python 3 virtual environment, Mac users need only type <code class="docutils literal notranslate"><span class="pre">python</span></code> (NOT <code class="docutils literal notranslate"><span class="pre">python3</span></code>). Windows users also type <code class="docutils literal notranslate"><span class="pre">python</span></code> as usual.</p>
+<p>You should now be at the <code class="docutils literal notranslate"><span class="pre">&gt;&gt;&gt;</span></code> prompt — the Python interactive shell prompt.</p>
+<p>In MacOS or Windows, type (or copy/paste) <em>one line at a time</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="n">page</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="s2">&quot;https://weimergeeks.com/examples/scraping/example1.html&quot;</span><span class="p">)</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">soup</span><span class="o">.</span><span class="n">h1</span><span class="p">)</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>You imported two Python modules, <code class="docutils literal notranslate"><span class="pre">urlopen</span></code> and <code class="docutils literal notranslate"><span class="pre">BeautifulSoup</span></code> (the first two lines).</p></li>
+<li><p>You used <code class="docutils literal notranslate"><span class="pre">urlopen</span></code> to copy the entire contents of the URL given into a new Python variable, <code class="docutils literal notranslate"><span class="pre">page</span></code> (line 3).</p></li>
+<li><p>You used the <code class="docutils literal notranslate"><span class="pre">BeautifulSoup</span></code> <em>function</em> to process the value of that variable (the plain-text contents of the file at that URL) through a built-in HTML parser called <code class="docutils literal notranslate"><span class="pre">html.parser</span></code>.</p></li>
+<li><p>The result: All the HTML from the file is now in a BeautifulSoup object with the new Python variable name <code class="docutils literal notranslate"><span class="pre">soup</span></code>. (It is just a variable name.)</p></li>
+<li><p>Last line: Using the syntax of the BeautifulSoup library, you printed the first <code class="docutils literal notranslate"><span class="pre">h1</span></code> element (including its tags) from that parsed value.</p></li>
+</ol>
+<p>If it works, you’ll see:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;h1&gt;We Are Learning About Web Scraping!&lt;/h1&gt;
+</pre></div>
+</div>
+<p>Check out <a class="reference external" href="https://weimergeeks.com/examples/scraping/example1.html">the page on the web</a> to see what you scraped.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>If you got an error about SSL, quit Python (<code class="docutils literal notranslate"><span class="pre">quit()</span></code> or Command-D) and COPY/PASTE this at the command prompt (MacOS only):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">Python</span>\ <span class="mf">3.8</span><span class="o">/</span><span class="n">Install</span>\ <span class="n">Certificates</span><span class="o">.</span><span class="n">command</span>
+</pre></div>
+</div>
+<p>Then return to the Python prompt and retry the five lines above.</p>
+</div>
+<p>The command <code class="docutils literal notranslate"><span class="pre">soup.h1</span></code> would work the same way for any HTML tag (if it exists in the file). Instead of printing it, you might stash it in a variable:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">heading</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">h1</span>
+</pre></div>
+</div>
+<p>Then, to see the text in the element without the tags:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">heading</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="understanding-beautifulsoup">
+<h2>Understanding BeautifulSoup<a class="headerlink" href="#understanding-beautifulsoup" title="Permalink to this headline">¶</a></h2>
+<p>BeautifulSoup is a Python library that enables us to extract information from web pages and even entire websites.</p>
+<p>We use BeautifulSoup commands to create a well-structured data <em>object</em> (more about objects below) from which we can extract, for example, everything with an <code class="docutils literal notranslate"><span class="pre">&lt;li&gt;</span></code> tag, or everything with <code class="docutils literal notranslate"><span class="pre">class=&quot;book-title&quot;</span></code>.</p>
+<p>After extracting the desired information, we can use other Python commands (and libraries) to write the data into a database, CSV file, or other usable format — and then we can search it, sort it, etc.</p>
+<div class="section" id="what-is-the-beautifulsoup-object">
+<h3>What is the BeautifulSoup object?<a class="headerlink" href="#what-is-the-beautifulsoup-object" title="Permalink to this headline">¶</a></h3>
+<p>It’s  important to understand that many of the BeautifulSoup commands work on an <em>object,</em> which is not the same as a simple <em>string.</em></p>
+<p>Many programming languages include objects as a data type. Python does, JavaScript does, etc. An <em>object</em> is an even more powerful and complex data type than an <em>array</em> (JavaScript) or a <em>list</em> (Python) and can contain many other data types in a structured format.</p>
+<p>When you extract information from an <em>object</em> with a BeautifulSoup command, sometimes you get a simple string, and sometimes you get a Python <em>list</em> (similar to an <em>array</em> in JavaScript). The way you treat that extracted information will be <strong>different</strong> depending on whether it is a string (<em>one</em> item) or a list (usually <em>more than one</em> item).</p>
+<p>That last paragraph is <strong>REALLY IMPORTANT,</strong> so read it again.</p>
+</div>
+<div class="section" id="how-beautifulsoup-handles-the-object">
+<h3>How BeautifulSoup handles the object<a class="headerlink" href="#how-beautifulsoup-handles-the-object" title="Permalink to this headline">¶</a></h3>
+<p>In the previous code, when this line ran:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">page</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="s2">&quot;https://weimergeeks.com/examples/scraping/example1.html&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>… you copied the <em>entire contents of a file</em> into a new Python variable named <code class="docutils literal notranslate"><span class="pre">page</span></code>. The contents were stored as an <em>HTTPResponse object</em>. We can read the contents of that object like this:</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/url_blob.png"><img alt="Results of html.read() screenshot" src="_images/url_blob.png" style="width: 715.2px; height: 219.20000000000002px;" /></a>
+</div>
+<p>… but that’s not going to be very usable, or useful — especially for a file with a lot more content in it.</p>
+<p>When you transform that <em>HTTPResponse object</em> into a <em>BeautifulSoup object</em> — with the following line — you create a well-structured object from which you can extract <em>any HTML element</em> and the text <em>within</em> any HTML element.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="some-basic-beautifulsoup-commands">
+<h2>Some basic BeautifulSoup commands<a class="headerlink" href="#some-basic-beautifulsoup-commands" title="Permalink to this headline">¶</a></h2>
+<p>Let’s look at a few examples of what BeautifulSoup can do.</p>
+<div class="section" id="finding-elements-that-have-a-particular-class">
+<h3>Finding elements that have a particular class<a class="headerlink" href="#finding-elements-that-have-a-particular-class" title="Permalink to this headline">¶</a></h3>
+<p>Deciding the best way to extract what you want from a large HTML file requires you to dig around in the source before you write the Python/BeautifulSoup commands. In many cases, you’ll see that everything you want has the same <strong>CSS class</strong> on it. After creating a <em>BeautifulSoup object</em> (here, as before, it is <code class="docutils literal notranslate"><span class="pre">soup</span></code>), this line will create a Python <em>list</em> containing all the <code class="docutils literal notranslate"><span class="pre">&lt;td&gt;</span></code> elements that have the class <code class="docutils literal notranslate"><span class="pre">city</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">city_list</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span> <span class="s2">&quot;td&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;city&quot;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>The word <em>class</em> is a <strong>reserved word</strong> in Python. Using <em>class</em> (alone) in the code above would give you a syntax error. So when we search by CSS class with BeautifulSoup, we use the keyword argument <code class="docutils literal notranslate"><span class="pre">class_</span></code> with an <em>underscore</em> added. Other HTML attributes DO NOT need the underscore.</p>
+</div>
+<p>Maybe there were 10 cities in <code class="docutils literal notranslate"><span class="pre">&lt;td&gt;</span></code> tags in that HTML file. Maybe there were 10,000. No matter how many, they are now in a <em>list</em> (assigned to the variable <code class="docutils literal notranslate"><span class="pre">city_list</span></code>), and you can search them, print them, write them out to a database or a JSON file — whatever you like. Often you will want to perform the same actions on each item in the list, so you will use a normal Python <em>for-loop</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">city</span> <span class="ow">in</span> <span class="n">city_list</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="n">city</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">get_text()</span></code> is a handy BeautifulSoup method that will extract the text — and only the text — from the item. If instead you wrote just <code class="docutils literal notranslate"><span class="pre">print(city)</span></code>, you’d get the <code class="docutils literal notranslate"><span class="pre">&lt;td&gt;</span></code> and any other tags inside them as well.</p>
+</div>
+<div class="section" id="finding-all-vs-finding-one">
+<h3>Finding all vs. finding one<a class="headerlink" href="#finding-all-vs-finding-one" title="Permalink to this headline">¶</a></h3>
+<p>The BeautifulSoup <code class="docutils literal notranslate"><span class="pre">find_all()</span></code> method you just saw always produces a <em>list</em>. (Note: <code class="docutils literal notranslate"><span class="pre">findAll()</span></code> will also work.) If you know there will be only one item of the kind you want in a file, you should use the <code class="docutils literal notranslate"><span class="pre">find()</span></code> method instead.</p>
+<p>For example, maybe you are scraping the address and phone number from every page in a large website. There is only one phone number on the page, and it is enclosed in a pair of tags with the attribute <code class="docutils literal notranslate"><span class="pre">id=&quot;call&quot;</span></code>. One line of your code gets the phone number from the current page:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">phone_number</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;call&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Naturally, you don’t need to loop through that result — the variable <code class="docutils literal notranslate"><span class="pre">phone_number</span></code> will contain only a string, including any HTML tags. To test what the text alone will look like, just print it using <code class="docutils literal notranslate"><span class="pre">get_text()</span></code> to strip out the tags.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span> <span class="n">phone_number</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>Notice that you’re always using <code class="docutils literal notranslate"><span class="pre">soup</span></code>. Review above if you’ve forgotten where that came from. (You may use another variable name instead, but <code class="docutils literal notranslate"><span class="pre">soup</span></code> is the usual choice.)</p>
+</div>
+<div class="section" id="finding-the-contents-of-a-particular-attribute">
+<h3>Finding the contents of a particular attribute<a class="headerlink" href="#finding-the-contents-of-a-particular-attribute" title="Permalink to this headline">¶</a></h3>
+<p>One last example from <a class="reference external" href="https://weimergeeks.com/examples/scraping/example1.html">the example page</a> we have been using.</p>
+<p>Say you’ve made a BeautifulSoup object from a page that has dozens of images on it. You want to capture <em>the path to each image file</em> on that page (perhaps so that you can download all the images). This requires two steps:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">image_list</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">image_list</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;src&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>First, you make a Python <em>list</em> containing all the <code class="docutils literal notranslate"><span class="pre">img</span></code> elements that exist in the object.</p>
+<p>Second, you loop through that list and print the contents of the <code class="docutils literal notranslate"><span class="pre">src</span></code> attribute from each <code class="docutils literal notranslate"><span class="pre">img</span></code> tag in the list.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>We do not need <code class="docutils literal notranslate"><span class="pre">get_text()</span></code> in this case, because the contents of the <code class="docutils literal notranslate"><span class="pre">src</span></code> attribute (or any HTML attribute) are nothing but text. There are never tags inside the <code class="docutils literal notranslate"><span class="pre">src</span></code> attribute. So <em>think</em> about <em>exactly</em> what you’re trying to get, and what is it like inside the HTML of the page.</p>
+</div>
+<p>There’s a lot more to learn about BeautifulSoup, and we’ll be working with various examples. You can always <a class="reference external" href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">read the docs</a>. Most of what we do with BeautifulSoup, though, involves these tasks:</p>
+<ul class="simple">
+<li><p>Find everything with a particular class</p></li>
+<li><p>Find everything with a particular attribute</p></li>
+<li><p>Find everything with a particular HTML tag</p></li>
+<li><p>Find one thing on a page, often using its <code class="docutils literal notranslate"><span class="pre">id</span></code> attribute</p></li>
+<li><p>Find one thing that’s inside another thing</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="a-beautifulsoup-scraping-example">
+<h2>A BeautifulSoup scraping example<a class="headerlink" href="#a-beautifulsoup-scraping-example" title="Permalink to this headline">¶</a></h2>
+<p>To demonstrate a whole process of thinking through a small scraping project, I made a [Jupyter Notebook](soup_practice.ipynb) that — through the comments in the code — shows how I thought about the problem step by step and tested each step, one thing at a time, to reach the solution I wanted. Open the Notebook here on GitHub to follow along and see all the steps.</p>
+<p>The code in the <em>final cell</em> of the Jupyter Notebook produces this 51-line CSV file movies.csv by scraping 10 separate web pages.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="working_with_files.html" class="btn btn-neutral float-left" title="Reading and Writing Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020 Mindy McAdams
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
