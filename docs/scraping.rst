@@ -70,7 +70,7 @@ In MacOS or Windows, at the command prompt, type: ::
 
 This is how you install *any* Python library that exists in the `Python Package Index <https://pypi.python.org/pypi>`_. Pretty handy. **pip** is a tool for installing Python packages, which is what you just did.
 
-**Note:** You have installed BeautifulSoup in the Python virtual environment that is currently active. When that virtual environment is *not* active, BeautifulSoup will not be available to you. This is ideal, because you will create different virtual environments for different Python projects, and you won’t need to worry about updated libraries in the future breaking your (past) code.
+.. note:: You have installed BeautifulSoup in the Python virtual environment that is currently active. When that virtual environment is *not* active, BeautifulSoup will not be available to you. This is ideal, because you will create different virtual environments for different Python projects, and you won’t need to worry about updated libraries in the future breaking your (past) code.
 
 Test BeautifulSoup
 ------------------
@@ -130,7 +130,7 @@ It’s  important to understand that many of the BeautifulSoup commands work on 
 
 Many programming languages include objects as a data type. Python does, JavaScript does, etc. An *object* is an even more powerful and complex data type than an *array* (JavaScript) or a *list* (Python) and can contain many other data types in a structured format.
 
-When you extract information from an *object* with a BeautifulSoup command, sometimes you get a simple string, and sometimes you get a Python *list* (similar to an *array* in JavaScript). The way you treat that extracted information will be **different** depending on whether it is a string (*one* item) or a list (usually *more than one* item).
+When you extract information from an *object* with a BeautifulSoup command, sometimes you get a single **tag object,** and sometimes you get a Python *list* (similar to an *array* in JavaScript) of tag objects. The way you treat that extracted information will be **different** depending on whether it is *one* item or a list (usually, but not always, containing *more than one* item).
 
 That last paragraph is **REALLY IMPORTANT,** so read it again.
 
@@ -149,7 +149,7 @@ In the previous code, when this line ran: ::
 
 ... but that’s not going to be very usable, or useful — especially for a file with a lot more content in it.
 
-When you transform that *HTTPResponse object* into a *BeautifulSoup object* — with the following line — you create a well-structured object from which you can extract *any HTML element* and the text *within* any HTML element. ::
+When you transform that *HTTPResponse object* into a *BeautifulSoup object* — with the following line — you create a well-structured object from which you can extract *any HTML element* and the text and/or attributes *within* any HTML element. ::
 
     soup = BeautifulSoup(page, "html.parser")
 
@@ -173,7 +173,7 @@ Maybe there were 10 cities in ``<td>`` tags in that HTML file. Maybe there were 
     for city in city_list:
         print( city.get_text() )
 
-``get_text()`` is a handy BeautifulSoup method that will extract the text — and only the text — from the item. If instead you wrote just ``print(city)``, you’d get the ``<td>`` and any other tags inside them as well.
+``get_text()`` is a handy BeautifulSoup method that will extract the text — and only the text — from the item. If instead you wrote just ``print(city)``, you’d get the ``<td>`` and any other tags inside that as well.
 
 Finding all vs. finding one
 +++++++++++++++++++++++++++
