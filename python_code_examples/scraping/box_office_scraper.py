@@ -1,4 +1,7 @@
-"""Scrape info about the five top-grossing movies for each year, for 10 years. Get the title and rank of the movie, the year, and how much money it grossed at the box office. Put the scraped data into a CSV file.
+"""Scrape info about the five top-grossing movies for each year,
+    for 10 years. Get the title and rank of the movie, the year, and
+    how much money it grossed at the box office. Put the scraped data
+    into a CSV file.
 """
 
 from bs4 import BeautifulSoup
