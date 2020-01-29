@@ -59,3 +59,12 @@ Still in Terminal &mdash; type `y` (lowercase) and press Enter/Return.
 ```bash
 deactivate
 ```
+
+## Handy Jupyter Notebook commands
+
+* Hold the Shift key and press Enter/Return to run the code in the current cell in the notebook.
+* Press a to insert a cell above the current cell
+* Press b to insert a cell below the current cell
+* Press d twice to delete the current cell
+* Press m to convert the current cell from code to Markdown (this allows you to write text notes in the notebook using [Markdown](https://guides.github.com/features/mastering-markdown/#syntax)); you can use # to write Python comments in your code, but sometimes you want to paste in an explanation or even a URL, and Markdown makes that nicer.
+* Press Command S (Mac) or Control S (Win) to save your work
