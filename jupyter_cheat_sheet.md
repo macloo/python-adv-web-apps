@@ -54,7 +54,7 @@ Still in Terminal &mdash; type `y` (lowercase) and press Enter/Return.
 
 ## Quit from your virtual environment
 
-**Deactivate** the *virtual environment* (at the bash prompt):
+**Deactivate** the *virtual environment* (at the command prompt):
 
 ```bash
 deactivate
