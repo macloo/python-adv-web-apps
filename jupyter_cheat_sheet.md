@@ -1,10 +1,10 @@
 # Jupyter Cheat Sheet
 
-We use [Jupyter Notebook](http://jupyter.org/) for several assignments with Python. This app allows us to write, test and store Python code in one interactive file that opens in a web browser.
+We use [Jupyter Notebook](http://jupyter.org/) for several assignments with Python. This app allows us to write, run and store Python code in one interactive file that opens in a web browser.
 
 We installed Jupyter in a Python virtual environment using these instructions:
 
-[Install Python3, virtualenv, Jupyter](http://bit.ly/install-python3-jupyter)
+[Install virtualenv and Jupyter](http://bit.ly/install-python3-jupyter)
 
 We created the *virtual environment* in a folder named `jupyter_work` and installed Jupyter there.
 
@@ -34,7 +34,7 @@ env\Scripts\activate.bat
 jupyter notebook
 ```
 
-Everything else happens *in your web browser.* Choose the file you want to open from the list there. If the file isn't there yet, you can use the Mac Finder or Windows File Explorer to drag it into the folder in the usual way.
+Everything else happens *in your web browser.* Choose the file you want to open from the list there. If the file isn’t there yet, you can use the Mac Finder or Windows File Explorer to drag it into the folder in the usual way.
 
 <img src="images/jupyter_in_browser.png" alt="Jupyter in the browser" width="75%">
 
