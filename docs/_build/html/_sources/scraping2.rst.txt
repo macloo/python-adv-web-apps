@@ -26,29 +26,3 @@ This method might hold special appeal to people used to working with JavaScript,
     document.querySelectorAll()
 
 So instead of ``( "td", class_="city" )``, we would write ``( "td.city" )``, and instead of ``(id="call")``, we would write ``("#call")``.
-
-Note that ``select()`` *always* returns a list, even when only one item is found.
-
-Be mindful that the way you write out what you’re looking for depends on whether you are calling ``select()`` or you are calling ``find()`` or ``find_all()``. You’ll get errors if you mix up the syntax.
-
-Working with lists of Tag objects
----------------------------------
-
-Both ``find_all()`` and ``select()`` always return a Python list. Each item in the list is a BeautifulSoup **Tag object.** You can access any list item using its index — just as you would with any normal Python list.
-
-Try this code in the Python interpreter: ::
-
-    from bs4 import BeautifulSoup
-    import requests
-    url = "https://weimergeeks.com/examples/scraping/example1.html"
-    page = requests.get(url)
-    soup = BeautifulSoup(page.text, 'html.parser')
-    images = soup.find_all('img')
-
-You can call ``.get_text()`` or ``.text`` on a Tag object to get only the text inside the element.
-
-If the element has attributes, you can get a Python dictionary containing all of them.
-
-
-
-.
