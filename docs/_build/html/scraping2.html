@@ -88,6 +88,7 @@
 <li class="toctree-l1"><a class="reference internal" href="scraping.html">Web Scraping Intro</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Web Scraping, Part 2</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#using-select-instead-of-find-or-find-all">Using <code class="docutils literal notranslate"><span class="pre">select()</span></code> instead of <code class="docutils literal notranslate"><span class="pre">find()</span></code> or <code class="docutils literal notranslate"><span class="pre">find_all()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#working-with-lists-of-tag-objects">Working with lists of Tag objects</a></li>
 </ul>
 </li>
 </ul>
@@ -177,6 +178,45 @@
 </pre></div>
 </div>
 <p>So instead of <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">&quot;td&quot;,</span> <span class="pre">class_=&quot;city&quot;</span> <span class="pre">)</span></code>, we would write <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">&quot;td.city&quot;</span> <span class="pre">)</span></code>, and instead of <code class="docutils literal notranslate"><span class="pre">(id=&quot;call&quot;)</span></code>, we would write <code class="docutils literal notranslate"><span class="pre">(&quot;#call&quot;)</span></code>.</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">select()</span></code> <em>always</em> returns a list, even when only one item is found.</p>
+<p>Be mindful that the way you write out what you’re looking for depends on whether you are calling <code class="docutils literal notranslate"><span class="pre">select()</span></code> or you are calling <code class="docutils literal notranslate"><span class="pre">find()</span></code> or <code class="docutils literal notranslate"><span class="pre">find_all()</span></code>. You’ll get errors if you mix up the syntax.</p>
+</div>
+<div class="section" id="working-with-lists-of-tag-objects">
+<h2>Working with lists of Tag objects<a class="headerlink" href="#working-with-lists-of-tag-objects" title="Permalink to this headline">¶</a></h2>
+<p>Both <code class="docutils literal notranslate"><span class="pre">find_all()</span></code> and <code class="docutils literal notranslate"><span class="pre">select()</span></code> always return a Python list. Each item in the list is a BeautifulSoup <strong>Tag object.</strong> You can access any list item using its index — just as you would with any normal Python list.</p>
+<p>Try this code in the Python interpreter:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://weimergeeks.com/examples/scraping/example1.html&quot;</span>
+<span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+<span class="n">images</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You’ll see that you have a list of IMG elements.</p>
+<p>You can call <code class="docutils literal notranslate"><span class="pre">.get_text()</span></code> or <code class="docutils literal notranslate"><span class="pre">.text</span></code> on a Tag object to get only the text inside the element. To get the text from just one Tag object, use its index:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cities</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;td.city&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cities</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cities</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To get the text from all the items in the list, you need a for-loop:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">city</span> <span class="ow">in</span> <span class="n">cities</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">city</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If an element has <strong>attributes,</strong> you can get a Python <strong>dictionary</strong> containing all of them — again, use an index to see just one item from the list:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">images</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">images</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">attrs</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>To get a particular attribute for all the IMG elements, you need a for-loop:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">images</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="n">image</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;src&#39;</span><span class="p">]</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>.</p>
 </div>
 </div>
 

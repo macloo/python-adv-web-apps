@@ -26,3 +26,48 @@ This method might hold special appeal to people used to working with JavaScript,
     document.querySelectorAll()
 
 So instead of ``( "td", class_="city" )``, we would write ``( "td.city" )``, and instead of ``(id="call")``, we would write ``("#call")``.
+
+Note that ``select()`` *always* returns a list, even when only one item is found.
+
+Be mindful that the way you write out what you’re looking for depends on whether you are calling ``select()`` or you are calling ``find()`` or ``find_all()``. You’ll get errors if you mix up the syntax.
+
+Working with lists of Tag objects
+---------------------------------
+
+Both ``find_all()`` and ``select()`` always return a Python list. Each item in the list is a BeautifulSoup **Tag object.** You can access any list item using its index — just as you would with any normal Python list.
+
+Try this code in the Python interpreter: ::
+
+    from bs4 import BeautifulSoup
+    import requests
+    url = "https://weimergeeks.com/examples/scraping/example1.html"
+    page = requests.get(url)
+    soup = BeautifulSoup(page.text, 'html.parser')
+    images = soup.select('img')
+    print(images)
+
+You’ll see that you have a list of IMG elements.
+
+You can call ``.get_text()`` or ``.text`` on a Tag object to get only the text inside the element. To get the text from just one Tag object, use its index: ::
+
+    cities = soup.select('td.city')
+    print(cities[0])
+    print(cities[0].text)
+
+To get the text from all the items in the list, you need a for-loop: ::
+
+    for city in cities:
+        print(city.text)
+
+If an element has **attributes,** you can get a Python **dictionary** containing all of them — again, use an index to see just one item from the list: ::
+
+    images = soup.select('img')
+    print( images[0].attrs )
+
+To get a particular attribute for all the IMG elements, you need a for-loop: ::
+
+    for image in images:
+        print( image.attrs['src'] )
+
+
+.
