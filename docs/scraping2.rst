@@ -43,12 +43,31 @@ Try this code in the Python interpreter: ::
     url = "https://weimergeeks.com/examples/scraping/example1.html"
     page = requests.get(url)
     soup = BeautifulSoup(page.text, 'html.parser')
-    images = soup.find_all('img')
+    images = soup.select('img')
+    print(images)
 
-You can call ``.get_text()`` or ``.text`` on a Tag object to get only the text inside the element.
+You’ll see that you have a list of IMG elements.
 
-If the element has attributes, you can get a Python dictionary containing all of them.
+You can call ``.get_text()`` or ``.text`` on a Tag object to get only the text inside the element. To get the text from just one Tag object, use its index: ::
 
+    cities = soup.select('td.city')
+    print(cities[0])
+    print(cities[0].text)
+
+To get the text from all the items in the list, you need a for-loop: ::
+
+    for city in cities:
+        print(city.text)
+
+If an element has **attributes,** you can get a Python **dictionary** containing all of them — again, use an index to see just one item from the list: ::
+
+    images = soup.select('img')
+    print( images[0].attrs )
+
+To get a particular attribute for all the IMG elements, you need a for-loop: ::
+
+    for image in images:
+        print( image.attrs['src'] )
 
 
 .
