@@ -216,6 +216,12 @@
     <span class="nb">print</span><span class="p">(</span> <span class="n">image</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;src&#39;</span><span class="p">]</span> <span class="p">)</span>
 </pre></div>
 </div>
+<p>Another way to get a particular attribute is with <code class="docutils literal notranslate"><span class="pre">.get()</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">images</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="n">image</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;src&#39;</span><span class="p">)</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>As you see, there are various ways to do the same thing with BeautifulSoup. If you find it confusing, choose one way and stick with it.</p>
 <p>.</p>
 </div>
 </div>

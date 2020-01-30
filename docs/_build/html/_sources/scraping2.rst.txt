@@ -69,5 +69,15 @@ To get a particular attribute for all the IMG elements, you need a for-loop: ::
     for image in images:
         print( image.attrs['src'] )
 
+Another way to get a particular attribute is with ``.get()``: ::
+
+    for image in images:
+        print( image.get('src') )
+
+As you see, there are various ways to do the same thing with BeautifulSoup. If you find it confusing, choose one way and stick with it. 
+
+
+
+
 
 .
