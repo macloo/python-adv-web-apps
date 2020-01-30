@@ -232,7 +232,10 @@
 </pre></div>
 </div>
 <p>This is how you install <em>any</em> Python library that exists in the <a class="reference external" href="https://pypi.python.org/pypi">Python Package Index</a>. Pretty handy. <strong>pip</strong> is a tool for installing Python packages, which is what you just did.</p>
-<p><strong>Note:</strong> You have installed BeautifulSoup in the Python virtual environment that is currently active. When that virtual environment is <em>not</em> active, BeautifulSoup will not be available to you. This is ideal, because you will create different virtual environments for different Python projects, and you won’t need to worry about updated libraries in the future breaking your (past) code.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You have installed BeautifulSoup in the Python virtual environment that is currently active. When that virtual environment is <em>not</em> active, BeautifulSoup will not be available to you. This is ideal, because you will create different virtual environments for different Python projects, and you won’t need to worry about updated libraries in the future breaking your (past) code.</p>
+</div>
 </div>
 </div>
 <div class="section" id="test-beautifulsoup">
@@ -285,7 +288,7 @@
 <h3>What is the BeautifulSoup object?<a class="headerlink" href="#what-is-the-beautifulsoup-object" title="Permalink to this headline">¶</a></h3>
 <p>It’s  important to understand that many of the BeautifulSoup commands work on an <em>object,</em> which is not the same as a simple <em>string.</em></p>
 <p>Many programming languages include objects as a data type. Python does, JavaScript does, etc. An <em>object</em> is an even more powerful and complex data type than an <em>array</em> (JavaScript) or a <em>list</em> (Python) and can contain many other data types in a structured format.</p>
-<p>When you extract information from an <em>object</em> with a BeautifulSoup command, sometimes you get a simple string, and sometimes you get a Python <em>list</em> (similar to an <em>array</em> in JavaScript). The way you treat that extracted information will be <strong>different</strong> depending on whether it is a string (<em>one</em> item) or a list (usually <em>more than one</em> item).</p>
+<p>When you extract information from an <em>object</em> with a BeautifulSoup command, sometimes you get a single <strong>tag object,</strong> and sometimes you get a Python <em>list</em> (similar to an <em>array</em> in JavaScript) of tag objects. The way you treat that extracted information will be <strong>different</strong> depending on whether it is <em>one</em> item or a list (usually, but not always, containing <em>more than one</em> item).</p>
 <p>That last paragraph is <strong>REALLY IMPORTANT,</strong> so read it again.</p>
 </div>
 <div class="section" id="how-beautifulsoup-handles-the-object">
@@ -299,7 +302,7 @@
 <a class="reference internal image-reference" href="_images/url_blob.png"><img alt="Results of html.read() screenshot" src="_images/url_blob.png" style="width: 715.2px; height: 219.20000000000002px;" /></a>
 </div>
 <p>… but that’s not going to be very usable, or useful — especially for a file with a lot more content in it.</p>
-<p>When you transform that <em>HTTPResponse object</em> into a <em>BeautifulSoup object</em> — with the following line — you create a well-structured object from which you can extract <em>any HTML element</em> and the text <em>within</em> any HTML element.</p>
+<p>When you transform that <em>HTTPResponse object</em> into a <em>BeautifulSoup object</em> — with the following line — you create a well-structured object from which you can extract <em>any HTML element</em> and the text and/or attributes <em>within</em> any HTML element.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -323,7 +326,7 @@
     <span class="nb">print</span><span class="p">(</span> <span class="n">city</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span> <span class="p">)</span>
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">get_text()</span></code> is a handy BeautifulSoup method that will extract the text — and only the text — from the item. If instead you wrote just <code class="docutils literal notranslate"><span class="pre">print(city)</span></code>, you’d get the <code class="docutils literal notranslate"><span class="pre">&lt;td&gt;</span></code> and any other tags inside them as well.</p>
+<p><code class="docutils literal notranslate"><span class="pre">get_text()</span></code> is a handy BeautifulSoup method that will extract the text — and only the text — from the item. If instead you wrote just <code class="docutils literal notranslate"><span class="pre">print(city)</span></code>, you’d get the <code class="docutils literal notranslate"><span class="pre">&lt;td&gt;</span></code> and any other tags inside that as well.</p>
 </div>
 <div class="section" id="finding-all-vs-finding-one">
 <h3>Finding all vs. finding one<a class="headerlink" href="#finding-all-vs-finding-one" title="Permalink to this headline">¶</a></h3>
@@ -365,8 +368,15 @@
 </div>
 <div class="section" id="a-beautifulsoup-scraping-example">
 <h2>A BeautifulSoup scraping example<a class="headerlink" href="#a-beautifulsoup-scraping-example" title="Permalink to this headline">¶</a></h2>
-<p>To demonstrate a whole process of thinking through a small scraping project, I made a [Jupyter Notebook](soup_practice.ipynb) that — through the comments in the code — shows how I thought about the problem step by step and tested each step, one thing at a time, to reach the solution I wanted. Open the Notebook here on GitHub to follow along and see all the steps.</p>
-<p>The code in the <em>final cell</em> of the Jupyter Notebook produces this 51-line CSV file movies.csv by scraping 10 separate web pages.</p>
+<p>To demonstrate the process of thinking through a small scraping project, I made a <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/soup_practice.ipynb">Jupyter Notebook</a> that shows how I broke down the problem step by step, and tested one thing at a time, to reach the solution I wanted. Open the notebook here on GitHub to follow along and see all the steps. (If that link doesn’t work, <a class="reference external" href="https://nbviewer.jupyter.org/github/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/soup_practice.ipynb">try this instead</a>.)</p>
+<p>The code in the <em>final cell</em> of the notebook produces <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/movies.csv">this 51-line CSV file</a> by scraping 10 separate web pages.</p>
+<p>To <em>run</em> the notebook, you will need to have installed the <a class="reference external" href="https://requests.readthedocs.io/en/master/">Requests</a> module and also Jupyter Notebook.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">requests</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">jupyter</span>
+</pre></div>
+</div>
+<p>See <a class="reference external" href="http://bit.ly/install-python3-jupyter">these instructions</a> for information about how to run Jupyter Notebooks.</p>
+<p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/box_office_scraper.py">View the code as a complete script outside the notebook.</a></p>
 </div>
 </div>
 
