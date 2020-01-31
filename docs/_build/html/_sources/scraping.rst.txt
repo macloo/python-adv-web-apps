@@ -207,6 +207,8 @@ Second, you loop through that list and print the contents of the ``src`` attribu
 
 .. important:: We do not need ``get_text()`` in this case, because the contents of the ``src`` attribute (or any HTML attribute) are nothing but text. There are never tags inside the ``src`` attribute. So *think* about *exactly* what you’re trying to get, and what is it like inside the HTML of the page.
 
+You can see the code from above `all in one file <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/first_bs_test.py>_`.
+
 There’s a lot more to learn about BeautifulSoup, and we’ll be working with various examples. You can always `read the docs <https://www.crummy.com/software/BeautifulSoup/bs4/doc/>`_. Most of what we do with BeautifulSoup, though, involves these tasks:
 
 - Find everything with a particular class
