@@ -74,7 +74,9 @@ Another way to get a particular attribute is with ``.get()``: ::
     for image in images:
         print( image.get('src') )
 
-As you see, there are various ways to do the same thing with BeautifulSoup. If you find it confusing, choose one way and stick with it. 
+As you see, there are various ways to do the same thing with BeautifulSoup. If you find it confusing, choose one way and stick with it.
+
+When in doubt, refer to the `BeautifulSoup documentation <https://www.crummy.com/software/BeautifulSoup/bs4/doc/>`_ — it’s all on one page, so search it with Command-F.
 
 
 
