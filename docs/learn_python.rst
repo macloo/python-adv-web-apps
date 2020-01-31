@@ -46,13 +46,13 @@ If you write and save the file in Atom, how do you run it?
 
 It’s easiest if you are in the same directory where the ``.py`` file was saved. Use the ``cd`` command (`Command Line Tips <http://bit.ly/mm-commandline>`_) to get there.
 
-At the bash prompt, type this (using your actual filename, of course): ::
+At the **command prompt** (``$`` in Mac, ``C:\Users\yourname>`` in Windows), type this (using your actual filename, of course): ::
 
    python myfilename.py
 
 And it runs! (Mac users: If not in a virtualenv, type ``python3`` instead of ``python``.)
 
-Never try to run a file at the ``>>>`` shell prompt. You need to be at the bash prompt (``$``) in Terminal (Mac), or ``C:\Users\yourname>`` (Windows) to run a file.
+.. tip:: Never try to run a file at the ``>>>`` Python shell prompt. You need to be at the command prompt to run a file.
 
 Your first Python program
 -------------------------
