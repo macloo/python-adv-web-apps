@@ -275,7 +275,11 @@
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Once we’ve got <code class="docutils literal notranslate"><span class="pre">table</span></code> out of <code class="docutils literal notranslate"><span class="pre">soup</span></code> (line 9 above), we can go on to find elements inside the Tag object <code class="docutils literal notranslate"><span class="pre">table</span></code>. First we get a list of all rows (line 12). Then we can loop over the list of row objects (starting on line 15) and make a list of all table cells in each row (line 17). From that list, we can extract the contents of one or more cells. By printing <code class="docutils literal notranslate"><span class="pre">cells[1].text</span></code> (line 19), we will see a list of all Scottish kings.</p>
+<p>Once we’ve got <code class="docutils literal notranslate"><span class="pre">table</span></code> out of <code class="docutils literal notranslate"><span class="pre">soup</span></code> (line 9 above), we can go on to find elements inside the Tag object <code class="docutils literal notranslate"><span class="pre">table</span></code>. First we get a list of all rows (line 12). Then we can loop over the list of row objects (starting on line 15) and make a list of all table cells in each row (line 17). From that list, we can extract the contents of one or more cells. By printing <code class="docutils literal notranslate"><span class="pre">cells[1].text</span></code> (line 19), we will see a list of all Scottish monarchs in the first table on the page.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">try</span></code> / <code class="docutils literal notranslate"><span class="pre">except</span></code> in the script above enables us to skip over the header row of the table, where the HTML tags are <code class="docutils literal notranslate"><span class="pre">th</span></code> instead of <code class="docutils literal notranslate"><span class="pre">td</span></code>.</p>
+</div>
 <p>.</p>
 </div>
 </div>
