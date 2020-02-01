@@ -48,7 +48,7 @@ Try this code in the Python interpreter: ::
 
 You’ll see that you have a list of IMG elements.
 
-You can call ``.get_text()`` or ``.text`` on a Tag object to get only the text inside the element. To get the text from just one Tag object, use its index: ::
+You can call ``.get_text()`` or ``.text`` on a Tag object to get only the text inside the element. To get the text from just one Tag object in a list, use its **list index**: ::
 
     cities = soup.select('td.city')
     print(cities[0])
