@@ -9,6 +9,8 @@ If you have not yet installed the `Requests <https://requests.readthedocs.io/en/
 
 If you have not made a virtual environment yet, see `these instructions <http://bit.ly/install-python3-jupyter>`_.
 
+`The code for this chapter is here. <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/scraping>`_
+
 Using ``select()`` instead of ``find()`` or ``find_all()``
 ----------------------------------------------------------
 
@@ -78,8 +80,14 @@ As you see, there are various ways to do the same thing with BeautifulSoup. If y
 
 When in doubt, refer to the `BeautifulSoup documentation <https://www.crummy.com/software/BeautifulSoup/bs4/doc/>`_ — it’s all on one page, so search it with Command-F.
 
+Finding inside a Tag object
+---------------------------
 
+The methods ``find()``, ``find_all()``, and ``select()`` work on Tag objects as well as BeautifulSoup objects (`types of objects are covered here <https://www.crummy.com/software/BeautifulSoup/bs4/doc/#kinds-of-objects>`_). Here is an example: ::
 
+.. literalinclude:: ../python_code_examples/scraping/table_scrape.py
+   :caption:
 
+Once we’ve got ``table`` out of ``soup``, we can go on to find elements inside the tag object ``table``.
 
 .
