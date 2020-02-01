@@ -1,6 +1,8 @@
 Web Scraping Intro
 ==================
 
+`The code for this chapter is here. <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/scraping>`_
+
 This document assumes you have already installed Python 3, and you have used both *pip* and *venv*. If not, refer to `these instructions <http://bit.ly/install-python3-jupyter>`_.
 
 Sweigart briefly covers scraping in chapter 12 of `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition).
