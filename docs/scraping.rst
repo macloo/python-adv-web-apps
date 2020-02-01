@@ -195,15 +195,17 @@ Finding the contents of a particular attribute
 
 One last example from `the example page <https://weimergeeks.com/examples/scraping/example1.html>`_ we have been using.
 
-Say you’ve made a BeautifulSoup object from a page that has dozens of images on it. You want to capture *the path to each image file* on that page (perhaps so that you can download all the images). This requires two steps: ::
+Say you’ve made a BeautifulSoup object from a page that has dozens of images on it. You want to capture *the path to each image file* on that page (perhaps so that you can download all the images). I would do this in two steps: ::
 
     image_list = soup.find_all('img')
     for image in image_list:
         print(image.attrs['src'])
 
-First, you make a Python *list* containing all the ``img`` elements that exist in the object.
+1. First, you make a Python *list* containing all the ``img`` elements that exist in the object.
 
-Second, you loop through that list and print the contents of the ``src`` attribute from each ``img`` tag in the list.
+2. Second, you loop through that list and print the contents of the ``src`` attribute from each ``img`` tag in the list.
+
+It is possible to condense that code and do the task in two lines, or even one line, but for beginners it is clearer to get the list of elements and name it, then use the named list and get what is wanted from it.
 
 .. important:: We do not need ``get_text()`` in this case, because the contents of the ``src`` attribute (or any HTML attribute) are nothing but text. There are never tags inside the ``src`` attribute. So *think* about *exactly* what you’re trying to get, and what is it like inside the HTML of the page.
 
