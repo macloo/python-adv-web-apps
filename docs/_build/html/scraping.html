@@ -175,6 +175,7 @@
             
   <div class="section" id="web-scraping-intro">
 <h1>Web Scraping Intro<a class="headerlink" href="#web-scraping-intro" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/scraping">The code for this chapter is here.</a></p>
 <p>This document assumes you have already installed Python 3, and you have used both <em>pip</em> and <em>venv</em>. If not, refer to <a class="reference external" href="http://bit.ly/install-python3-jupyter">these instructions</a>.</p>
 <p>Sweigart briefly covers scraping in chapter 12 of <a class="reference external" href="https://automatetheboringstuff.com/">Automate the Boring Stuff with Python</a> (second edition).</p>
 <p>BeautifulSoup documentation:</p>
@@ -346,14 +347,17 @@
 <div class="section" id="finding-the-contents-of-a-particular-attribute">
 <h3>Finding the contents of a particular attribute<a class="headerlink" href="#finding-the-contents-of-a-particular-attribute" title="Permalink to this headline">¶</a></h3>
 <p>One last example from <a class="reference external" href="https://weimergeeks.com/examples/scraping/example1.html">the example page</a> we have been using.</p>
-<p>Say you’ve made a BeautifulSoup object from a page that has dozens of images on it. You want to capture <em>the path to each image file</em> on that page (perhaps so that you can download all the images). This requires two steps:</p>
+<p>Say you’ve made a BeautifulSoup object from a page that has dozens of images on it. You want to capture <em>the path to each image file</em> on that page (perhaps so that you can download all the images). I would do this in two steps:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">image_list</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">image_list</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;src&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>First, you make a Python <em>list</em> containing all the <code class="docutils literal notranslate"><span class="pre">img</span></code> elements that exist in the object.</p>
-<p>Second, you loop through that list and print the contents of the <code class="docutils literal notranslate"><span class="pre">src</span></code> attribute from each <code class="docutils literal notranslate"><span class="pre">img</span></code> tag in the list.</p>
+<ol class="arabic simple">
+<li><p>First, you make a Python <em>list</em> containing all the <code class="docutils literal notranslate"><span class="pre">img</span></code> elements that exist in the object.</p></li>
+<li><p>Second, you loop through that list and print the contents of the <code class="docutils literal notranslate"><span class="pre">src</span></code> attribute from each <code class="docutils literal notranslate"><span class="pre">img</span></code> tag in the list.</p></li>
+</ol>
+<p>It is possible to condense that code and do the task in two lines, or even one line, but for beginners it is clearer to get the list of elements and name it, then use the named list and get what is wanted from it.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>We do not need <code class="docutils literal notranslate"><span class="pre">get_text()</span></code> in this case, because the contents of the <code class="docutils literal notranslate"><span class="pre">src</span></code> attribute (or any HTML attribute) are nothing but text. There are never tags inside the <code class="docutils literal notranslate"><span class="pre">src</span></code> attribute. So <em>think</em> about <em>exactly</em> what you’re trying to get, and what is it like inside the HTML of the page.</p>

@@ -83,11 +83,12 @@ When in doubt, refer to the `BeautifulSoup documentation <https://www.crummy.com
 Finding inside a Tag object
 ---------------------------
 
-The methods ``find()``, ``find_all()``, and ``select()`` work on Tag objects as well as BeautifulSoup objects (`types of objects are covered here <https://www.crummy.com/software/BeautifulSoup/bs4/doc/#kinds-of-objects>`_). Here is an example: ::
+The methods ``find()``, ``find_all()``, and ``select()`` work on Tag objects as well as BeautifulSoup objects (`types of objects are covered here <https://www.crummy.com/software/BeautifulSoup/bs4/doc/#kinds-of-objects>`_). Here is an example:
 
 .. literalinclude:: ../python_code_examples/scraping/table_scrape.py
    :caption:
+   :linenos:
 
-Once we’ve got ``table`` out of ``soup``, we can go on to find elements inside the tag object ``table``.
+Once we’ve got ``table`` out of ``soup`` (line 9 above), we can go on to find elements inside the Tag object ``table``. First we get a list of all rows (line 12). Then we can loop over the list of row objects (starting on line 15) and make a list of all table cells in each row (line 17). From that list, we can extract the contents of one or more cells. By printing ``cells[1].text`` (line 19), we will see a list of all Scottish kings.
 
 .
