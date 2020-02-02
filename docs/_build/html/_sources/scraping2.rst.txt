@@ -95,7 +95,7 @@ It’s as if we are taking apart a set of nested boxes. We go inside the table t
 
 .. note:: Using ``try`` / ``except`` in the script above enables us to skip over the header row of the table, where the HTML tags are ``th`` instead of ``td``.
 
-Since the Scottish monarchs page has multiple tables, the code above should be modified to get them all: ::
+Since `the Scottish monarchs page <https://en.wikipedia.org/wiki/List_of_Scottish_monarchs>`_ has multiple tables, the code above should be modified to get them all: ::
 
     tables = soup.find_all( 'table', class_='wikitable' )
 
@@ -112,6 +112,50 @@ And then we will need to loop through the tables: ::
                 pass
 
 Our set of nested boxes actually begins with the page. Inside the page are several tables. Inside each table, we find rows, and inside each row, we find cells. Inside the second cell in each row, we find the name of a king.
+
+Moving from page to page while scraping
+---------------------------------------
+
+In chapter 12 of `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition), Sweigart provides a script to scrape the XKCD comics website (“Project: Downloading All XKCD Comics”). The code in step 4, which is part of a longer while-loop, gets the URL from an element on the page that links to the previous comic. In this way, the script starts on the home page of the site, downloads one comic, and then moves to the previous day’s comic page and downloads the comic there  b. The script does this until all comics have been downloaded.
+
+This method is often exactly what you need to scrape the data that you want.
+
+The trick is to determine exactly **how to get the URL** that leads to the next page to be scraped.
+
+In the case of the XKCD site, this code works: ::
+
+    prevLink = soup.select('a[rel="prev"]')[0]
+    url = 'https://xkcd.com' + prevLink.get('href')
+
+The code ``select('a[rel="prev"]')`` gets all ``a`` elements on the page that contain the attribute ``rel`` with the value ``"prev"``. This code returns a **list,** so it’s necessary to use the list index ``[0]`` to get the first list **item.** If you inspect the HTML on any XKCD page with Developer Tools, you can find this A element.
+
+.. figure:: _static/images/xkcd_prev_button.png
+   :scale: 50 %
+   :alt: Developer Tools and an XKCD web page screenshot
+
+The next line extracts the *value* of the ``href`` attribute from that A element and concatenates it with the base URL, ``https://xkcd.com``.
+
+To understand this code better, you can run it in the Python shell. Here I have started on the page at https://xkcd.com/2260/ — ::
+
+    >>> prevLink = soup.select('a[rel="prev"]')[0]
+    >>> print(prevLink)
+    <a accesskey="p" href="/2259/" rel="prev">&lt; Prev</a>
+    >>> print( prevLink.get('href') )
+    /2259/
+    >>> url = 'https://xkcd.com' + prevLink.get('href')
+    >>> print(url)
+    https://xkcd.com/2259/
+    >>>
+
+Above, I have printed ``prevLink``, ``prevLink.get('href')``, and ``url`` so you can see exactly what is being extracted and used. Once the script has that last URL, the while-loop restarts and goes to that page — https://xkcd.com/2259/ — and downloads the comic from it.
+
+.. important:: You must understand that every website is different, so probably no other website in the world has the same HTML as the XKCD website. However, many websites do have Previous and Next buttons. It is necessary to **inspect** the HTML and determine how to extract the next- or previous-page URL (or partial URL) from the HTML on the button.
+
+Some websites use JavaScript to activate their Previous and Next buttons. In those cases, you will need to use the Selenium module to navigate while scraping. Selenium is covered in the next chapter.
+
+Harvesting URLs from a page
+---------------------------
+
 
 
 

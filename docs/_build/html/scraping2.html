@@ -90,6 +90,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#using-select-instead-of-find-or-find-all">Using <code class="docutils literal notranslate"><span class="pre">select()</span></code> instead of <code class="docutils literal notranslate"><span class="pre">find()</span></code> or <code class="docutils literal notranslate"><span class="pre">find_all()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#working-with-lists-of-tag-objects">Working with lists of Tag objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#finding-inside-a-tag-object">Finding inside a Tag object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#moving-from-page-to-page-while-scraping">Moving from page to page while scraping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#harvesting-urls-from-a-page">Harvesting URLs from a page</a></li>
 </ul>
 </li>
 </ul>
@@ -229,8 +231,8 @@
 <div class="section" id="finding-inside-a-tag-object">
 <h2>Finding inside a Tag object<a class="headerlink" href="#finding-inside-a-tag-object" title="Permalink to this headline">¶</a></h2>
 <p>The methods <code class="docutils literal notranslate"><span class="pre">find()</span></code>, <code class="docutils literal notranslate"><span class="pre">find_all()</span></code>, and <code class="docutils literal notranslate"><span class="pre">select()</span></code> work on Tag objects as well as BeautifulSoup objects (<a class="reference external" href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/#kinds-of-objects">types of objects are covered here</a>). Here is an example:</p>
-<div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/scraping/table_scrape.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/scraping/table_scrape.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -281,7 +283,7 @@
 <p class="admonition-title">Note</p>
 <p>Using <code class="docutils literal notranslate"><span class="pre">try</span></code> / <code class="docutils literal notranslate"><span class="pre">except</span></code> in the script above enables us to skip over the header row of the table, where the HTML tags are <code class="docutils literal notranslate"><span class="pre">th</span></code> instead of <code class="docutils literal notranslate"><span class="pre">td</span></code>.</p>
 </div>
-<p>Since the Scottish monarchs page has multiple tables, the code above should be modified to get them all:</p>
+<p>Since <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_Scottish_monarchs">the Scottish monarchs page</a> has multiple tables, the code above should be modified to get them all:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tables</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span> <span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s1">&#39;wikitable&#39;</span> <span class="p">)</span>
 </pre></div>
 </div>
@@ -298,6 +300,43 @@
 </pre></div>
 </div>
 <p>Our set of nested boxes actually begins with the page. Inside the page are several tables. Inside each table, we find rows, and inside each row, we find cells. Inside the second cell in each row, we find the name of a king.</p>
+</div>
+<div class="section" id="moving-from-page-to-page-while-scraping">
+<h2>Moving from page to page while scraping<a class="headerlink" href="#moving-from-page-to-page-while-scraping" title="Permalink to this headline">¶</a></h2>
+<p>In chapter 12 of <a class="reference external" href="https://automatetheboringstuff.com/">Automate the Boring Stuff with Python</a> (second edition), Sweigart provides a script to scrape the XKCD comics website (“Project: Downloading All XKCD Comics”). The code in step 4, which is part of a longer while-loop, gets the URL from an element on the page that links to the previous comic. In this way, the script starts on the home page of the site, downloads one comic, and then moves to the previous day’s comic page and downloads the comic there  b. The script does this until all comics have been downloaded.</p>
+<p>This method is often exactly what you need to scrape the data that you want.</p>
+<p>The trick is to determine exactly <strong>how to get the URL</strong> that leads to the next page to be scraped.</p>
+<p>In the case of the XKCD site, this code works:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">prevLink</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;a[rel=&quot;prev&quot;]&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://xkcd.com&#39;</span> <span class="o">+</span> <span class="n">prevLink</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The code <code class="docutils literal notranslate"><span class="pre">select('a[rel=&quot;prev&quot;]')</span></code> gets all <code class="docutils literal notranslate"><span class="pre">a</span></code> elements on the page that contain the attribute <code class="docutils literal notranslate"><span class="pre">rel</span></code> with the value <code class="docutils literal notranslate"><span class="pre">&quot;prev&quot;</span></code>. This code returns a <strong>list,</strong> so it’s necessary to use the list index <code class="docutils literal notranslate"><span class="pre">[0]</span></code> to get the first list <strong>item.</strong> If you inspect the HTML on any XKCD page with Developer Tools, you can find this A element.</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/xkcd_prev_button.png"><img alt="Developer Tools and an XKCD web page screenshot" src="_images/xkcd_prev_button.png" style="width: 455.0px; height: 259.0px;" /></a>
+</div>
+<p>The next line extracts the <em>value</em> of the <code class="docutils literal notranslate"><span class="pre">href</span></code> attribute from that A element and concatenates it with the base URL, <code class="docutils literal notranslate"><span class="pre">https://xkcd.com</span></code>.</p>
+<p>To understand this code better, you can run it in the Python shell. Here I have started on the page at <a class="reference external" href="https://xkcd.com/2260/">https://xkcd.com/2260/</a> —</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">prevLink</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;a[rel=&quot;prev&quot;]&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">prevLink</span><span class="p">)</span>
+<span class="go">&lt;a accesskey=&quot;p&quot; href=&quot;/2259/&quot; rel=&quot;prev&quot;&gt;&amp;lt; Prev&lt;/a&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="n">prevLink</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span> <span class="p">)</span>
+<span class="go">/2259/</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://xkcd.com&#39;</span> <span class="o">+</span> <span class="n">prevLink</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;href&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="go">https://xkcd.com/2259/</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>Above, I have printed <code class="docutils literal notranslate"><span class="pre">prevLink</span></code>, <code class="docutils literal notranslate"><span class="pre">prevLink.get('href')</span></code>, and <code class="docutils literal notranslate"><span class="pre">url</span></code> so you can see exactly what is being extracted and used. Once the script has that last URL, the while-loop restarts and goes to that page — <a class="reference external" href="https://xkcd.com/2259/">https://xkcd.com/2259/</a> — and downloads the comic from it.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>You must understand that every website is different, so probably no other website in the world has the same HTML as the XKCD website. However, many websites do have Previous and Next buttons. It is necessary to <strong>inspect</strong> the HTML and determine how to extract the next- or previous-page URL (or partial URL) from the HTML on the button.</p>
+</div>
+<p>Some websites use JavaScript to activate their Previous and Next buttons. In those cases, you will need to use the Selenium module to navigate while scraping. Selenium is covered in the next chapter.</p>
+</div>
+<div class="section" id="harvesting-urls-from-a-page">
+<h2>Harvesting URLs from a page<a class="headerlink" href="#harvesting-urls-from-a-page" title="Permalink to this headline">¶</a></h2>
 <p>.</p>
 </div>
 </div>
