@@ -116,7 +116,7 @@ Our set of nested boxes actually begins with the page. Inside the page are sever
 Moving from page to page while scraping
 ---------------------------------------
 
-In chapter 12 of `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition), Sweigart provides a script to scrape the XKCD comics website (“Project: Downloading All XKCD Comics”). The code in step 4, which is part of a longer while-loop, gets the URL from an element on the page that links to the previous comic. In this way, the script starts on the home page of the site, downloads one comic, and then moves to the previous day’s comic page and downloads the comic there  b. The script does this until all comics have been downloaded.
+In chapter 12 of `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition), Sweigart provides a script to scrape the XKCD comics website (“Project: Downloading All XKCD Comics”). The code in step 4, which is part of a longer while-loop, gets the URL from an element on the page that links to the previous comic. In this way, the script starts on the home page of the site, downloads one comic, and then moves to the previous day’s comic page and downloads the comic there. The script repeats this until all comics have been downloaded.
 
 This method is often exactly what you need to scrape the data that you want.
 
@@ -153,10 +153,41 @@ Above, I have printed ``prevLink``, ``prevLink.get('href')``, and ``url`` so you
 
 Some websites use JavaScript to activate their Previous and Next buttons. In those cases, you will need to use the Selenium module to navigate while scraping. Selenium is covered in the next chapter.
 
-Harvesting URLs from a page
----------------------------
+Harvesting multiple URLs from a page
+------------------------------------
 
+In some cases, you will want to get all the URLs from one page and save them in a file. You would then use another script to open them one by one and scrape multiple pages.
 
+.. literalinclude:: ../python_code_examples/scraping/harvest_urls.py
+   :caption:
+   :linenos:
 
+First, it’s likely that you do not want header and footer links from the page. You need to inspect the HTML and ascertain what element holds the main text. For a Wikipedia article, there’s an ``id`` attribute with the value ``'mw-content-text'``, so that’s what we start with in line 24.
+
+When we get all the ``a`` elements with ``links_list = article.find_all('a')`` (line 27), we are getting only the ``a`` elements that are inside the DIV element with ``id='mw-content-text'``.
+
+Then we use a loop (lines 30–33) to look at each item in ``links_list``. We check if an ``href`` attribute exists in the item with the line ``if 'href' in link.attrs:`` — if there *is* an HREF, then we write the value of that HREF into the file (line 33).
+
+The script above writes more than 1,400 partial URLs into a file.
+
+As with the XKCD script in the previous section, we would concatenate a base URL with the partial URL in a scraping script: ::
+
+    base_url = 'https://en.wikipedia.org'
+    url = base_url + '/wiki/Blade_Runner'
+
+It should be noted that the *harvest_urls.py* script collects a lot of partial URLs we would never want, such as internal anchors that link to parts of the same page — ``#cite_note-1`` and ``#Early_career``. To prevent those from being written to the file, we could use: ::
+
+    for link in links_list:
+        if 'href' in link.attrs:
+            # eliminate internal anchor links
+            if link.attrs['href'][:6] == '/wiki/':
+                # eliminate Wikipedia photo and template links
+                if link.attrs['href'][6:11] != 'File:' and link.attrs['href'][6:14] != 'Template':
+                    # write one href into the text file - \n is newline
+                    myfile.write(link.attrs['href'] + '\n')
+
+That is a bit clunky, but if you look up `how to slice strings with Python <https://docs.python.org/3/tutorial/introduction.html>_`, I think the code will make sense to you.
+
+As a result, we have about 900 partial URLs instead of more than 1,400.
 
 .
