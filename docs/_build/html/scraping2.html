@@ -91,7 +91,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#working-with-lists-of-tag-objects">Working with lists of Tag objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#finding-inside-a-tag-object">Finding inside a Tag object</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#moving-from-page-to-page-while-scraping">Moving from page to page while scraping</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#harvesting-multiple-urls-from-a-page">Harvesting multiple URLs from a page</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#harvesting-multiple-urls-from-one-page">Harvesting multiple URLs from one page</a></li>
 </ul>
 </li>
 </ul>
@@ -198,14 +198,14 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>You’ll see that you have a list of IMG elements.</p>
-<p>You can call <code class="docutils literal notranslate"><span class="pre">.get_text()</span></code> or <code class="docutils literal notranslate"><span class="pre">.text</span></code> on a Tag object to get only the text inside the element. To get the text from just one Tag object in a list, use its <strong>list index</strong>:</p>
+<p>You’ll see that you have a <strong>list</strong> of IMG elements.</p>
+<p>You can call <code class="docutils literal notranslate"><span class="pre">.get_text()</span></code> or <code class="docutils literal notranslate"><span class="pre">.text</span></code> on a Tag object to get only the text inside the element. To get the text from <em>just one</em> Tag object in a list, use its <strong>list index</strong>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cities</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;td.city&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">cities</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">cities</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>To get the text from all the items in the list, you need a for-loop:</p>
+<p>To get the text from <em>all the items</em> in the list, you need a for-loop:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">city</span> <span class="ow">in</span> <span class="n">cities</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">city</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
 </pre></div>
@@ -335,8 +335,8 @@
 </div>
 <p>Some websites use JavaScript to activate their Previous and Next buttons. In those cases, you will need to use the Selenium module to navigate while scraping. Selenium is covered in the next chapter.</p>
 </div>
-<div class="section" id="harvesting-multiple-urls-from-a-page">
-<h2>Harvesting multiple URLs from a page<a class="headerlink" href="#harvesting-multiple-urls-from-a-page" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="harvesting-multiple-urls-from-one-page">
+<h2>Harvesting multiple URLs from one page<a class="headerlink" href="#harvesting-multiple-urls-from-one-page" title="Permalink to this headline">¶</a></h2>
 <p>In some cases, you will want to get all the URLs from one page and save them in a file. You would then use another script to open them one by one and scrape multiple pages.</p>
 <div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">../python_code_examples/scraping/harvest_urls.py</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
@@ -420,16 +420,16 @@
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>First, it’s likely that you do not want header and footer links from the page. You need to inspect the HTML and ascertain what element holds the main text. For a Wikipedia article, there’s an <code class="docutils literal notranslate"><span class="pre">id</span></code> attribute with the value <code class="docutils literal notranslate"><span class="pre">'mw-content-text'</span></code>, so that’s what we start with in line 24.</p>
+<p>It is likely that you do not want header and footer links from the page. You need to inspect the HTML and ascertain what element holds the main text. For a Wikipedia article, there’s an <code class="docutils literal notranslate"><span class="pre">id</span></code> attribute with the value <code class="docutils literal notranslate"><span class="pre">'mw-content-text'</span></code>, so that’s what we start with in line 24.</p>
 <p>When we get all the <code class="docutils literal notranslate"><span class="pre">a</span></code> elements with <code class="docutils literal notranslate"><span class="pre">links_list</span> <span class="pre">=</span> <span class="pre">article.find_all('a')</span></code> (line 27), we are getting only the <code class="docutils literal notranslate"><span class="pre">a</span></code> elements that are inside the DIV element with <code class="docutils literal notranslate"><span class="pre">id='mw-content-text'</span></code>.</p>
-<p>Then we use a loop (lines 30–33) to look at each item in <code class="docutils literal notranslate"><span class="pre">links_list</span></code>. We check if an <code class="docutils literal notranslate"><span class="pre">href</span></code> attribute exists in the item with the line <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">'href'</span> <span class="pre">in</span> <span class="pre">link.attrs:</span></code> — if there <em>is</em> an HREF, then we write the value of that HREF into the file (line 33).</p>
+<p>Then we use a loop (lines 30–33) to look at each item in <code class="docutils literal notranslate"><span class="pre">links_list</span></code>. We check if an <code class="docutils literal notranslate"><span class="pre">href</span></code> attribute exists in the item with this line — <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">'href'</span> <span class="pre">in</span> <span class="pre">link.attrs:</span></code> — and if there <em>is</em> an HREF, then we write the value of that HREF into the file (line 33).</p>
 <p>The script above writes more than 1,400 partial URLs into a file.</p>
 <p>As with the XKCD script in the previous section, we would concatenate a base URL with the partial URL in a scraping script:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">base_url</span> <span class="o">=</span> <span class="s1">&#39;https://en.wikipedia.org&#39;</span>
 <span class="n">url</span> <span class="o">=</span> <span class="n">base_url</span> <span class="o">+</span> <span class="s1">&#39;/wiki/Blade_Runner&#39;</span>
 </pre></div>
 </div>
-<p>It should be noted that the <em>harvest_urls.py</em> script collects a lot of partial URLs we would never want, such as internal anchors that link to parts of the same page — <code class="docutils literal notranslate"><span class="pre">#cite_note-1</span></code> and <code class="docutils literal notranslate"><span class="pre">#Early_career</span></code>. To prevent those from being written to the file, we could use:</p>
+<p>It should be noted that the <em>harvest_urls.py</em> script collects a lot of partial URLs we would never want, such as internal anchors that link to parts of the same page — <code class="docutils literal notranslate"><span class="pre">#cite_note-1</span></code> and <code class="docutils literal notranslate"><span class="pre">#Early_career</span></code>, for example. To prevent those from being written to the file, we could use:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">links_list</span><span class="p">:</span>
     <span class="k">if</span> <span class="s1">&#39;href&#39;</span> <span class="ow">in</span> <span class="n">link</span><span class="o">.</span><span class="n">attrs</span><span class="p">:</span>
         <span class="c1"># eliminate internal anchor links</span>
@@ -440,8 +440,9 @@
                 <span class="n">myfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">link</span><span class="o">.</span><span class="n">attrs</span><span class="p">[</span><span class="s1">&#39;href&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>That is a bit clunky, but if you look up <cite>how to slice strings with Python &lt;https://docs.python.org/3/tutorial/introduction.html&gt;_</cite>, I think the code will make sense to you.</p>
+<p>That is a bit clunky, but if you look up <a class="reference external" href="https://docs.python.org/3/tutorial/introduction.html">how to slice strings with Python</a>, I think the code will make sense to you.</p>
 <p>As a result, we have about 900 partial URLs instead of more than 1,400.</p>
+<p>You will <em>always</em> need to inspect the HTML of a page to figure out how best to harvest URLs from <em>that</em> particular page.</p>
 <p>.</p>
 </div>
 </div>
