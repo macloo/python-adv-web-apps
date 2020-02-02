@@ -91,6 +91,28 @@ The methods ``find()``, ``find_all()``, and ``select()`` work on Tag objects as 
 
 Once we’ve got ``table`` out of ``soup`` (line 9 above), we can go on to find elements inside the Tag object ``table``. First we get a list of all rows (line 12). Then we can loop over the list of row objects (starting on line 15) and make a list of all table cells in each row (line 17). From that list, we can extract the contents of one or more cells. By printing ``cells[1].text`` (line 19), we will see a list of all Scottish monarchs in the first table on the page.
 
+It’s as if we are taking apart a set of nested boxes. We go inside the table to get the rows. We go inside a row to get its cells.
+
 .. note:: Using ``try`` / ``except`` in the script above enables us to skip over the header row of the table, where the HTML tags are ``th`` instead of ``td``.
+
+Since the Scottish monarchs page has multiple tables, the code above should be modified to get them all: ::
+
+    tables = soup.find_all( 'table', class_='wikitable' )
+
+And then we will need to loop through the tables: ::
+
+    for table in tables:
+        rows = table.find_all('tr')
+        for row in rows:
+            try:
+                cells = row.find_all('td')
+                # print contents of the second cell in the row
+                print( cells[1].text )
+            except:
+                pass
+
+Our set of nested boxes actually begins with the page. Inside the page are several tables. Inside each table, we find rows, and inside each row, we find cells. Inside the second cell in each row, we find the name of a king.
+
+
 
 .

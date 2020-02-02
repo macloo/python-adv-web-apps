@@ -276,10 +276,28 @@
 </td></tr></table></div>
 </div>
 <p>Once we’ve got <code class="docutils literal notranslate"><span class="pre">table</span></code> out of <code class="docutils literal notranslate"><span class="pre">soup</span></code> (line 9 above), we can go on to find elements inside the Tag object <code class="docutils literal notranslate"><span class="pre">table</span></code>. First we get a list of all rows (line 12). Then we can loop over the list of row objects (starting on line 15) and make a list of all table cells in each row (line 17). From that list, we can extract the contents of one or more cells. By printing <code class="docutils literal notranslate"><span class="pre">cells[1].text</span></code> (line 19), we will see a list of all Scottish monarchs in the first table on the page.</p>
+<p>It’s as if we are taking apart a set of nested boxes. We go inside the table to get the rows. We go inside a row to get its cells.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Using <code class="docutils literal notranslate"><span class="pre">try</span></code> / <code class="docutils literal notranslate"><span class="pre">except</span></code> in the script above enables us to skip over the header row of the table, where the HTML tags are <code class="docutils literal notranslate"><span class="pre">th</span></code> instead of <code class="docutils literal notranslate"><span class="pre">td</span></code>.</p>
 </div>
+<p>Since the Scottish monarchs page has multiple tables, the code above should be modified to get them all:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tables</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span> <span class="s1">&#39;table&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s1">&#39;wikitable&#39;</span> <span class="p">)</span>
+</pre></div>
+</div>
+<p>And then we will need to loop through the tables:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">tables</span><span class="p">:</span>
+    <span class="n">rows</span> <span class="o">=</span> <span class="n">table</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;tr&#39;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cells</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;td&#39;</span><span class="p">)</span>
+            <span class="c1"># print contents of the second cell in the row</span>
+            <span class="nb">print</span><span class="p">(</span> <span class="n">cells</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">text</span> <span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+</pre></div>
+</div>
+<p>Our set of nested boxes actually begins with the page. Inside the page are several tables. Inside each table, we find rows, and inside each row, we find cells. Inside the second cell in each row, we find the name of a king.</p>
 <p>.</p>
 </div>
 </div>
