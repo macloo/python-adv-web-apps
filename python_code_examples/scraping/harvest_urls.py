@@ -23,15 +23,13 @@ def capture_urls(filename, soup):
     # get all contents of only the article
     article = soup.find(id='mw-content-text')
 
-    # get all elements
+    # get all <a> elements
     links_list = article.find_all('a')
 
     # get contents of all href='' attributes with a loop
-    # [:6], [6:11] - see https://docs.python.org/3/tutorial/introduction.html
-    # and search for 'Slice indices'
     for link in links_list:
         if 'href' in link.attrs:
-            # write one href into the text file - \n is newline
+            # write one href into the text file - '\n' is newline
             myfile.write(link.attrs['href'] + '\n')
 
     # close and save the file after loop ends

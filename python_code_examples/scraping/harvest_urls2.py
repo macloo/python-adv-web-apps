@@ -12,7 +12,7 @@ page = requests.get(start)
 soup = BeautifulSoup(page.text, 'html.parser')
 
 # name the text file that will be created or overwritten
-filename = 'myfile.txt'
+filename = 'myfile2.txt'
 
 def capture_urls(filename, soup):
     """harvest the URLs and write them to file"""
