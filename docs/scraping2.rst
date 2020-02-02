@@ -192,4 +192,19 @@ As a result, we have about 900 partial URLs instead of more than 1,400.
 
 You will *always* need to inspect the HTML of a page to figure out how best to harvest URLs from *that* particular page.
 
+Scrape multiple pages with one script
+-------------------------------------
+
+This example shows how you can scrape multiple items from multiple pages, not using a Previous and Next button but (instead) using a collected list of partial URLs.
+
+.. literalinclude:: ../python_code_examples/scraping/scrape_several_pages.py
+   :caption:
+
+We are just *printing* the H1 and the paragraph (rather than saving them to a file or a database) for the sake of simplicity. We are using a list of only eight partial URLs for the same reason; normally you would probably have a longer list of pages to scrape.
+
+The key is to write a **function** that scrapes all the data you want from **one** page. Then **call** that function inside a for-loop that feeds each URL into the function. Here, that function is ``get_info()``.
+
+.. tip:: To create a Python list from a file such as `myfile2.txt <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/myfile2.txt>`_, use the ``readlines()`` method. See `Reading and Writing Files <working_with_files.html>`_ for details.
+
+
 .
