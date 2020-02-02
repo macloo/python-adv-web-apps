@@ -91,6 +91,48 @@ The methods ``find()``, ``find_all()``, and ``select()`` work on Tag objects as 
 
 Once we’ve got ``table`` out of ``soup`` (line 9 above), we can go on to find elements inside the Tag object ``table``. First we get a list of all rows (line 12). Then we can loop over the list of row objects (starting on line 15) and make a list of all table cells in each row (line 17). From that list, we can extract the contents of one or more cells. By printing ``cells[1].text`` (line 19), we will see a list of all Scottish monarchs in the first table on the page.
 
+It’s as if we are taking apart a set of nested boxes. We go inside the table to get the rows. We go inside a row to get its cells.
+
 .. note:: Using ``try`` / ``except`` in the script above enables us to skip over the header row of the table, where the HTML tags are ``th`` instead of ``td``.
+
+Since `the Scottish monarchs page <https://en.wikipedia.org/wiki/List_of_Scottish_monarchs>`_ has multiple tables, the code above should be modified to get them all: ::
+
+    tables = soup.find_all( 'table', class_='wikitable' )
+
+And then we will need to loop through the tables: ::
+
+    for table in tables:
+        rows = table.find_all('tr')
+        for row in rows:
+            try:
+                cells = row.find_all('td')
+                # print contents of the second cell in the row
+                print( cells[1].text )
+            except:
+                pass
+
+Our set of nested boxes actually begins with the page. Inside the page are several tables. Inside each table, we find rows, and inside each row, we find cells. Inside the second cell in each row, we find the name of a king.
+
+Moving from page to page while scraping
+---------------------------------------
+
+In chapter 12 of `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition), Sweigart provides a script to scrape the XKCD comics website (“Project: Downloading All XKCD Comics”). The code in step 4, which is part of a longer while-loop, gets the URL from an element on the page that links to the previous comic. In this way, the script starts on the home page of the site, downloads one comic, and then moves to the previous day’s comic page and downloads the comic there  b. The script does this until all comics have been downloaded.
+
+This method is often exactly what you need to scrape the data that you want.
+
+The trick is to determine exactly **how to get the URL** that leads to the next page to be scraped.
+
+In the case of the XKCD site, this code works: ::
+
+    prevLink = soup.select('a[rel="prev"]')[0]
+    url = 'https://xkcd.com' + prevLink.get('href')
+
+The code ``select('a[rel="prev"]')`` gets all ``a`` elements on the page that contain the attribute ``rel`` with the value ``"prev"``. This code returns a **list,** so it’s necessary to use the list index ``[0]`` to get the first list **item.** If you inspect the HTML on any XKCD page with Developer Tools, you can find this A element.
+
+.. figure:: _static/images/xkcd_prev_button.png
+   :scale: 50 %
+   :alt: Developer Tools and an XKCD web page screenshot
+
+The next line extracts the *value* of the ``href`` attribute from that A element and concatenates it with the base URL, ``https://xkcd.com``.
 
 .
