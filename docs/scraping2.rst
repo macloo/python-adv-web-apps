@@ -113,12 +113,14 @@ And then we will need to loop through the tables: ::
 
 Our set of nested boxes actually begins with the page. Inside the page are several tables. Inside each table, we find rows, and inside each row, we find cells. Inside the second cell in each row, we find the name of a king.
 
+.. note:: The revised script will not work perfectly on `the Scottish monarchs page <https://en.wikipedia.org/wiki/List_of_Scottish_monarchs>`_ because the tables in that page are not formatted consistently. The first table on the page has the monarch’s name in the second column, but the other tables have it in the *first* column.
+
 Moving from page to page while scraping
 ---------------------------------------
 
-In chapter 12 of `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition), Sweigart provides a script to scrape the XKCD comics website (“Project: Downloading All XKCD Comics”). The code in step 4, which is part of a longer while-loop, gets the URL from an element on the page that links to the previous comic. In this way, the script starts on the home page of the site, downloads one comic, and then moves to the previous day’s comic page and downloads the comic there. The script repeats this until all comics have been downloaded.
+In chapter 12 of `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition), Sweigart provides a script to scrape the XKCD comics website (“Project: Downloading All XKCD Comics”). The code in step 4, which is part of a longer while-loop, gets the URL from an element on the page that links to the previous comic. In this way, the script **starts on the home page** of the site, downloads one comic, and then **moves to the previous day’s comic page** and downloads the comic there. The script repeats this, moving to the previous page each time, until all comics have been downloaded.
 
-This method is often exactly what you need to scrape the data that you want.
+.. note:: This method is often exactly what you need to scrape the data that you want.
 
 The trick is to determine exactly **how to get the URL** that leads to the next page to be scraped.
 
@@ -127,7 +129,7 @@ In the case of the XKCD site, this code works: ::
     prevLink = soup.select('a[rel="prev"]')[0]
     url = 'https://xkcd.com' + prevLink.get('href')
 
-The code ``select('a[rel="prev"]')`` gets all ``a`` elements on the page that contain the attribute ``rel`` with the value ``"prev"``. This code returns a **list,** so it’s necessary to use the list index ``[0]`` to get the first list **item.** If you inspect the HTML on any XKCD page with Developer Tools, you can find this A element.
+The code ``select('a[rel="prev"]')`` gets all ``a`` elements on the page that contain the attribute ``rel`` with the value ``"prev"`` — that is, ``rel="prev"``. This code returns a **list,** so it’s necessary to use the list index ``[0]`` to get the first **list item.** If you inspect the HTML on any XKCD page with Developer Tools, you can find this A element.
 
 .. figure:: _static/images/xkcd_prev_button.png
    :scale: 50 %
@@ -136,6 +138,16 @@ The code ``select('a[rel="prev"]')`` gets all ``a`` elements on the page that co
 The next line extracts the *value* of the ``href`` attribute from that A element and concatenates it with the base URL, ``https://xkcd.com``.
 
 To understand this code better, you can run it in the Python shell. Here I have started on the page at https://xkcd.com/2260/ — ::
+
+    >>> from bs4 import BeautifulSoup
+    >>> import requests
+    >>> url = 'https://xkcd.com/2260/'
+    >>> page = requests.get(url)
+    >>> soup = BeautifulSoup(page.text, 'html.parser')
+
+.. note:: I am not starting at the home page and I am not looping, because I want to provide a simple demonstration of what the code is getting for us.
+
+Then I continued with the code to get only the “Prev” code from that one page: ::
 
     >>> prevLink = soup.select('a[rel="prev"]')[0]
     >>> print(prevLink)
@@ -147,11 +159,15 @@ To understand this code better, you can run it in the Python shell. Here I have 
     https://xkcd.com/2259/
     >>>
 
-Above, I have printed ``prevLink``, ``prevLink.get('href')``, and ``url`` so you can see exactly what is being extracted and used. Once the script has that last URL, the while-loop restarts and goes to that page — https://xkcd.com/2259/ — and downloads the comic from it.
+Above, I have **printed** three things — ``prevLink``, ``prevLink.get('href')`` and ``url`` — so I can see exactly what is being extracted and used.
+
+In the complete script in chapter 12, once the script has that last URL, the while-loop restarts. It opens that page — https://xkcd.com/2259/ — and downloads the comic from it.
+
+This practice of **printing the value each time** is a way of testing your code as you go — to make sure you are getting what you intend to get. If you have an error, then you must modify the line and print it again, and repeat until that line of code gets what you want.
 
 .. important:: You must understand that every website is different, so probably no other website in the world has the same HTML as the XKCD website. However, many websites do have Previous and Next buttons. It is necessary to **inspect** the HTML and determine how to extract the next- or previous-page URL (or partial URL) from the HTML on the button.
 
-Some websites use JavaScript to activate their Previous and Next buttons. In those cases, you will need to use the Selenium module to navigate while scraping. Selenium is covered in the next chapter.
+**Some websites use JavaScript** to activate their Previous and Next buttons. In those cases, you will need to use the Selenium module to navigate while scraping. **Selenium** is covered in the next chapter.
 
 Harvesting multiple URLs from one page
 --------------------------------------
@@ -170,7 +186,7 @@ Then we use a loop (lines 30–33) to look at each item in ``links_list``. We ch
 
 The script above writes more than 1,400 partial URLs into a file.
 
-As with the XKCD script in the previous section, we would concatenate a base URL with the partial URL in a scraping script: ::
+As with the XKCD script in the previous section, here we would also concatenate a base URL with the partial URL in a scraping script: ::
 
     base_url = 'https://en.wikipedia.org'
     url = base_url + '/wiki/Blade_Runner'
@@ -190,7 +206,7 @@ That is a bit clunky, but if you look up `how to slice strings with Python <http
 
 As a result, we have about 900 partial URLs instead of more than 1,400.
 
-You will *always* need to inspect the HTML of a page to figure out how best to harvest URLs from *that* particular page.
+.. important:: You will *always* need to inspect the HTML of a page to figure out how best to harvest URLs from *that* particular page.
 
 Scrape multiple pages with one script
 -------------------------------------
@@ -199,12 +215,13 @@ This example shows how you can scrape multiple items from multiple pages, not us
 
 .. literalinclude:: ../python_code_examples/scraping/scrape_several_pages.py
    :caption:
+   :linenos:
 
 We are just *printing* the H1 and the paragraph (rather than saving them to a file or a database) for the sake of simplicity. We are using a list of only eight partial URLs for the same reason; normally you would probably have a longer list of pages to scrape.
 
-The key is to write a **function** that scrapes all the data you want from **one** page. Then **call** that function inside a for-loop that feeds each URL into the function. Here, that function is ``get_info()``.
+The key is to write a **function** that scrapes all the data you want from **one** page (lines 19–35 above). Then **call** that function inside a for-loop that feeds each URL into the function (lines 38–39).
 
-.. tip:: To create a Python list from a file such as `myfile2.txt <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/myfile2.txt>`_, use the ``readlines()`` method. See `Reading and Writing Files <working_with_files.html>`_ for details.
+.. tip:: To create a Python list **from a file** such as `myfile2.txt <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/myfile2.txt>`_, use the ``readlines()`` method. See `Reading and Writing Files <working_with_files.html>`_ for details.
 
 
 .
