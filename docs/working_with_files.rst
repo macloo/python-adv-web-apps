@@ -75,6 +75,9 @@ There's a method Sweigart does not cover, ``seek()``. This comes in handy if you
     >>> myfile.close()
     >>>
 
+.. tip:: To create a Python list from a file, use ``readlines()``.
+
+
 Open and read a file, write to another file
 -------------------------------------------
 
