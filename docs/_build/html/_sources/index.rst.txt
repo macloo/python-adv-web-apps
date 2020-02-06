@@ -31,3 +31,4 @@ See also the `official Python documentation <https://docs.python.org/3/>`_.
    working_with_files
    scraping
    scraping2
+   scraping3

@@ -1,0 +1,337 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Web Scraping, Part 3 &mdash; Python Beginners  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Python Beginners
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="learn_python.html">Starting Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lists.html">Working with Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_files.html">Reading and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scraping.html">Web Scraping Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scraping2.html">Web Scraping, Part 2</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Beginners</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Web Scraping, Part 3</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/scraping3.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="web-scraping-part-3">
+<h1>Web Scraping, Part 3<a class="headerlink" href="#web-scraping-part-3" title="Permalink to this headline">¶</a></h1>
+<p>In the previous two scraping chapters here, you downloaded and installed both <strong>BeautifulSoup</strong> and <strong>Requests</strong> in a Python virtual environment. (We will continue in the same environment.) You also learned the basics of scraping with BeautifulSoup.</p>
+<p>In this chapter, more advanced topics are covered.</p>
+<p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/scraping">The code for this chapter is here.</a></p>
+<div class="section" id="using-selenium">
+<h2>Using Selenium<a class="headerlink" href="#using-selenium" title="Permalink to this headline">¶</a></h2>
+<p>We can use <a class="reference external" href="https://www.seleniumhq.org/">Selenium</a> together with BeautifulSoup when BeautifulSoup <em>alone</em> is unable to get the contents we want from a web page. <strong>Two situations where this comes up:</strong> (1) JavaScript is writing the contents into the page after it opens; and/or (2) contents are not available until you click a button, fill a form, open a menu, etc.</p>
+<p>The Selenium documentation is not easy to use, so <strong>follow this step-by-step guide</strong>:</p>
+<p><a class="reference external" href="http://bit.ly/selenium-intro">Getting started with Selenium</a></p>
+<p>You will need to install Selenium and also a <strong>driver</strong> for the web browser you want to use (Chrome or Firefox). This is all covered in the “Getting Started” doc. Make sure to do the Selenium install with your virtual environment activated.</p>
+<p>When you examine the test scripts (linked in the “Getting Started” doc and also found in this repo), notice that after doing the <code class="docutils literal notranslate"><span class="pre">driver</span></code> stuff, <strong>this line</strong> creates a <code class="docutils literal notranslate"><span class="pre">page</span></code> variable just like we have been doing all along with our BeautifulSoup scrapers:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">page</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">page_source</span>
+</pre></div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Once you have that <code class="docutils literal notranslate"><span class="pre">page</span></code> variable, you can proceed as usual with a <code class="docutils literal notranslate"><span class="pre">soup</span></code> variable and BeautifulSoup scraping. You DO NOT need to use <code class="docutils literal notranslate"><span class="pre">driver</span></code> and a new set of selectors as shown in the Selenium documentation and many tutorials.</p>
+</div>
+<div class="section" id="selenium-commands">
+<h3>Selenium commands<a class="headerlink" href="#selenium-commands" title="Permalink to this headline">¶</a></h3>
+<p>To manipulate elements on the page with Selenium, you <em>will</em> need to use Selenium commands such as <code class="docutils literal notranslate"><span class="pre">.find_element_by_css_selector()</span></code> — as seen in the example below.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/scraping/selenium_test3.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+
+<span class="c1"># my path is &#39;/Users/mcadams/Documents/python/&#39;</span>
+<span class="c1"># yours will be different</span>
+
+
+<span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">(</span><span class="s1">&#39;/Users/mcadams/Documents/python/chromedriver&#39;</span><span class="p">)</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.rottentomatoes.com/browse/dvd-streaming-all&#39;</span><span class="p">);</span>
+
+<span class="c1"># click the button exactly 8 times</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+    <span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;.btn.btn-secondary-rt.mb-load-btn&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+    <span class="c1"># the button tag has class=&quot;btn btn-secondary-rt mb-load-btn&quot;</span>
+    <span class="c1"># ... we told it which button to click</span>
+    <span class="c1"># make a random wait time between 1 and 10 seconds to look less bot-like</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="c1"># sleep that number of seconds</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+<span class="n">page</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">page_source</span>
+
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+<span class="n">title_list</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;h3&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;movieTitle&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">title</span> <span class="ow">in</span> <span class="n">title_list</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">title</span><span class="o">.</span><span class="n">get_text</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There are &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">title_list</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; movies in the list.&quot;</span><span class="p">)</span>
+
+<span class="n">driver</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>The page being scraped shows only 32 movies until you click a button at the bottom. Each time you click the bottom button, more movies are visible on the original page. By having Selenium click the button eight times, we are able to scrape information for 275 movies instead of only 32.</p>
+<p>If you run the code above, be sure you have installed both BeautifulSoup and Selenium. The <code class="docutils literal notranslate"><span class="pre">time</span></code> and <code class="docutils literal notranslate"><span class="pre">random</span></code> modules are built-ins, so you do not need to install those beforehand.</p>
+<p>Other Selenium methods for locating HTML elements are listed <a class="reference external" href="https://selenium-python.readthedocs.io/locating-elements.html">here</a>.</p>
+</div>
+<div class="section" id="headless-selenium">
+<h3>Headless Selenium<a class="headerlink" href="#headless-selenium" title="Permalink to this headline">¶</a></h3>
+<p>It is possible to use <strong>headless mode</strong> instead of a physical browser with Selenium. This is NOT covered in the “Getting Started” doc, which assumes you will use Chrome and <strong>chromedriver.</strong></p>
+<p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/scraping/headless_selenium.py">Code for using Chrome in headless mode.</a></p>
+</div>
+<div class="section" id="more-advanced-selenium-techniques">
+<h3>More advanced Selenium techniques<a class="headerlink" href="#more-advanced-selenium-techniques" title="Permalink to this headline">¶</a></h3>
+<p>If you’re still having trouble scraping a page even after adding Selenium to your Python script, the culprit might be a timing issue. See the <a class="reference external" href="https://selenium-python.readthedocs.io/waits.html">Selenium documentation</a> for an explanation of an <em>implicit wait</em> and the use of <code class="docutils literal notranslate"><span class="pre">expected_conditions</span></code>, a Selenium module.</p>
+<p>Look at how the page behaves when you access it normally, yourself, to determine whether to add this kind of code to your script.</p>
+<p>Also see the next section below.</p>
+</div>
+</div>
+<div class="section" id="timing-matters">
+<h2>Timing matters<a class="headerlink" href="#timing-matters" title="Permalink to this headline">¶</a></h2>
+<p>This one line tells your Python script to pause for 3 seconds:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Before using <code class="docutils literal notranslate"><span class="pre">time.sleep()</span></code>, you must import Python’s <code class="docutils literal notranslate"><span class="pre">time</span></code> module. See <a class="reference external" href="https://docs.python.org/3/library/time.html#time.sleep">the Python docs</a>.</p>
+<p>You will need to think carefully about the best place to insert this line in your code. You are not likely to need it when you are <em>initially</em> testing your code, line by line, to write a scraper script, but once you are ready to run the completed script on <em>dozens</em> or <em>hundreds</em> of web pages, then you must add some sleep time.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It’s very bad to overload or overwork a website by making a scraper that runs too fast. It’s also likely that the server will block your IP address if you do this.</p>
+</div>
+</div>
+<div class="section" id="using-iter-tools">
+<h2>Using <code class="docutils literal notranslate"><span class="pre">iter_tools()</span></code><a class="headerlink" href="#using-iter-tools" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="using-a-different-parser">
+<h2>Using a different parser<a class="headerlink" href="#using-a-different-parser" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes you can’t get Tag objects out of a web page because the HTML is poorly formatted. In that case, it can help to use a different <strong>parser.</strong> Instead of:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You can write:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="s1">&#39;html5lib&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Before you can use the <code class="docutils literal notranslate"><span class="pre">html5lib</span></code> parser, however, you must install it with your <em>virtual environment</em> activated:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">html5lib</span>
+</pre></div>
+</div>
+<p>Another parser option is <code class="docutils literal notranslate"><span class="pre">lxml</span></code>. You can read about the differences among Python parsers:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/45494505/python-difference-between-lxml-and-html-parser-and-html5lib-with-beautifu">Stack Overflow post</a></p></li>
+<li><p>BeautifulSoup docs: <a class="reference external" href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/#differences-between-parsers">Differences between parsers</a></p></li>
+</ul>
+<p><strong>tl;dr</strong> — Sometimes one parser just works better than another. <strong>lxml</strong> is a much faster parser than <strong>html5lib</strong>, so if you are churning through a gazillion pages, that might make <strong>lxml</strong> a better choice. <strong>html5lib</strong> is better at reading badly formatted HTML, however.</p>
+</div>
+<div class="section" id="sending-http-headers-in-your-script">
+<h2>Sending HTTP headers in your script<a class="headerlink" href="#sending-http-headers-in-your-script" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes a website blocks your attempts to scrape because your code (without using Selenium) lacks the headers that a real web browser would send with an HTTP request.</p>
+<p>This doesn’t mean you have to use Selenium. Instead, you can send a proper set of headers as part of a regular script with BeautifulSoup and Requests.</p>
+<p>Use <a class="reference external" href="https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending">WhatIsMyBrowser.com</a> to find your web browser’s <strong>user agent.</strong></p>
+<p>The example code below comes from a time when I needed to use headers in a scraping script that downloaded messages from a large online forum. The site completely shut out my script until I added a full set of header data:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hdr</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="s1">&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;Accept&#39;</span><span class="p">:</span> <span class="s1">&#39;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;Accept-Charset&#39;</span><span class="p">:</span> <span class="s1">&#39;ISO-8859-1,utf-8;q=0.7,*;q=0.3&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;Accept-Encoding&#39;</span><span class="p">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;Accept-Language&#39;</span><span class="p">:</span> <span class="s1">&#39;en-US,en;q=0.8&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;Connection&#39;</span><span class="p">:</span> <span class="s1">&#39;keep-alive&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>After that, I used the variable <code class="docutils literal notranslate"><span class="pre">hdr</span></code> to create my <code class="docutils literal notranslate"><span class="pre">soup</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">hdr</span><span class="p">)</span>
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;html5lib&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Notice that I replaced the usual <code class="docutils literal notranslate"><span class="pre">'html.parser'</span></code> with <code class="docutils literal notranslate"><span class="pre">'html5lib'</span></code>. See  “Using a different parser,” above.</p>
+<p><strong>I did not need to use Selenium at all to scrape that forum site.</strong> The code above got me in, and everything after that was normal BeautifulSoup stuff.</p>
+<p>..tip:: You can see the actual headers <em>your</em> web browser is sending if you go to <a class="reference external" href="https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending">this page</a>. Do not copy my example as it is probably outdated now.</p>
+</div>
+<div class="section" id="when-all-else-fails">
+<h2>When all else fails<a class="headerlink" href="#when-all-else-fails" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes a website might block all your attempts to scrape it. Before you give up, I recommend you consult this book, especially chapter 14 and “The Human Checklist” at the end of that chapter:</p>
+<p><em>Web Scraping with Python: Collecting More Data from the Modern Web</em> (2nd edition), by Ryan Mitchell, 2018 (<a class="reference external" href="http://shop.oreilly.com/product/0636920078067.do">link</a>).</p>
+<p>It’s not particularly beginner-friendly, but at some point you’ll advance beyond the beginner level, and then you should invest in this resource.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020 Mindy McAdams
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
