@@ -7,3 +7,7 @@
 3. *loops_and_lists* contains examples of for-loops using Python lists, list methods such as `append()`, `remove()` and `sort()`, and tuples (similar to lists, but immutable).
 
 4. *working_with_files* covers the `pathlib` module and how to open, read, write to, and close plain-text files with Python.
+
+5. *scraping* contains examples using BeautifulSoup, Requests, and Selenium.
+
+.
