@@ -8,7 +8,10 @@ from bs4 import BeautifulSoup
 # yours will be different
 
 
+# load your driver
 driver = webdriver.Chrome('/Users/mcadams/Documents/python/chromedriver')
+
+# get the web page
 driver.get('https://www.rottentomatoes.com/browse/dvd-streaming-all');
 
 # click the button exactly 8 times

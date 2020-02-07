@@ -1,6 +1,4 @@
-import time
 from selenium import webdriver
-from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
 
@@ -8,14 +6,17 @@ from bs4 import BeautifulSoup
 # yours will be different
 
 
+# load your driver
 driver = webdriver.Chrome('/Users/mcadams/Documents/python/chromedriver')
+
+# get the web page
 driver.get('https://www.rottentomatoes.com/browse/dvd-streaming-all');
 
 # page_source is a variable created by Selenium - it holds all the HTML
-html = driver.page_source
+page = driver.page_source
 
-bsObj = BeautifulSoup(html, "html.parser")
-title_list = bsObj.findAll("h3", {"class":"movieTitle"})
+soup = BeautifulSoup(page, "html.parser")
+title_list = soup.find_all("h3", class_="movieTitle")
 for title in title_list:
     print(title.get_text())
 
