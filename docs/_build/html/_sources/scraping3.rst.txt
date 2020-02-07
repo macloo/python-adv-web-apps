@@ -73,6 +73,8 @@ You will need to think carefully about the best place to insert this line in you
 Using ``iter_tools()``
 ----------------------
 
+In chapter 12 of `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition), Sweigart provides a script to scrape the XKCD comics website (“Project: Downloading All XKCD Comics”). The code in step 4, which is part of a longer while-loop, gets the URL from an element on the page that links to the previous comic. In this way, the script **starts on the home page** of the site, downloads one comic, and then **moves to the previous day’s comic page** and downloads the comic there. The script repeats this, moving to the previous page each time, until all comics have been downloaded.
+
 Using a different parser
 ------------------------
 

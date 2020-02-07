@@ -231,7 +231,7 @@ A BeautifulSoup scraping example
 
 To demonstrate the process of thinking through a small scraping project, I made a `Jupyter Notebook <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/soup_practice.ipynb>`_ that shows how I broke down the problem step by step, and tested one thing at a time, to reach the solution I wanted. Open the notebook here on GitHub to follow along and see all the steps. (If that link doesn't work, `try this instead <https://nbviewer.jupyter.org/github/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/soup_practice.ipynb>`_.)
 
-The code in the *final cell* of the notebook produces `this 51-line CSV file <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/movies.csv>`_ by scraping 10 separate web pages.
+The code in the *final cell* of the notebook produces `this 51-line CSV file <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/movies.csv>`_ by scraping **10 separate web pages.**
 
 To *run* the notebook, you will need to have installed the `Requests <https://requests.readthedocs.io/en/master/>`_ module and also Jupyter Notebook. ::
 
