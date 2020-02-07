@@ -34,7 +34,8 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Web Scraping, Part 2" href="scraping2.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -79,13 +80,27 @@
             
             
               <p class="caption"><span class="caption-text">Contents</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="learn_python.html">Starting Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="functions.html">Functions in Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lists.html">Working with Lists</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_files.html">Reading and Writing Files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scraping.html">Web Scraping Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scraping2.html">Web Scraping, Part 2</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Web Scraping, Part 3</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#using-selenium">Using Selenium</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#selenium-commands">Selenium commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#headless-selenium">Headless Selenium</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#more-advanced-selenium-techniques">More advanced Selenium techniques</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#timing-matters">Timing matters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-iter-tools">Using <code class="docutils literal notranslate"><span class="pre">iter_tools()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-a-different-parser">Using a different parser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sending-http-headers-in-your-script">Sending HTTP headers in your script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#when-all-else-fails">When all else fails</a></li>
+</ul>
+</li>
 </ul>
 
             
@@ -157,7 +172,11 @@
 <p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/scraping">The code for this chapter is here.</a></p>
 <div class="section" id="using-selenium">
 <h2>Using Selenium<a class="headerlink" href="#using-selenium" title="Permalink to this headline">¶</a></h2>
-<p>We can use <a class="reference external" href="https://www.seleniumhq.org/">Selenium</a> together with BeautifulSoup when BeautifulSoup <em>alone</em> is unable to get the contents we want from a web page. <strong>Two situations where this comes up:</strong> (1) JavaScript is writing the contents into the page after it opens; and/or (2) contents are not available until you click a button, fill a form, open a menu, etc.</p>
+<p>We can use <a class="reference external" href="https://selenium.dev/">Selenium</a> together with BeautifulSoup when BeautifulSoup <em>alone</em> is unable to get the contents we want from a web page. <strong>Two common situations where this comes up:</strong></p>
+<ol class="arabic simple">
+<li><p>JavaScript is writing the contents into the page after it opens; and/or</p></li>
+<li><p>Contents are not available until you click a button, fill a form, open a menu, etc.</p></li>
+</ol>
 <p>The Selenium documentation is not easy to use, so <strong>follow this step-by-step guide</strong>:</p>
 <p><a class="reference external" href="http://bit.ly/selenium-intro">Getting started with Selenium</a></p>
 <p>You will need to install Selenium and also a <strong>driver</strong> for the web browser you want to use (Chrome or Firefox). This is all covered in the “Getting Started” doc. Make sure to do the Selenium install with your virtual environment activated.</p>
@@ -171,7 +190,7 @@
 </div>
 <div class="section" id="selenium-commands">
 <h3>Selenium commands<a class="headerlink" href="#selenium-commands" title="Permalink to this headline">¶</a></h3>
-<p>To manipulate elements on the page with Selenium, you <em>will</em> need to use Selenium commands such as <code class="docutils literal notranslate"><span class="pre">.find_element_by_css_selector()</span></code> — as seen in the example below.</p>
+<p><strong>To manipulate elements on the page</strong> with Selenium, you <em>will</em> need to use Selenium commands such as <code class="docutils literal notranslate"><span class="pre">.find_element_by_css_selector()</span></code> — as seen in the example below.</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">../python_code_examples/scraping/selenium_test3.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
@@ -184,7 +203,10 @@
 <span class="c1"># yours will be different</span>
 
 
+<span class="c1"># load your driver</span>
 <span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">(</span><span class="s1">&#39;/Users/mcadams/Documents/python/chromedriver&#39;</span><span class="p">)</span>
+
+<span class="c1"># get the web page</span>
 <span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.rottentomatoes.com/browse/dvd-streaming-all&#39;</span><span class="p">);</span>
 
 <span class="c1"># click the button exactly 8 times</span>
@@ -244,7 +266,7 @@
 </div>
 <div class="section" id="using-a-different-parser">
 <h2>Using a different parser<a class="headerlink" href="#using-a-different-parser" title="Permalink to this headline">¶</a></h2>
-<p>Sometimes you can’t get Tag objects out of a web page because the HTML is poorly formatted. In that case, it can help to use a different <strong>parser.</strong> Instead of:</p>
+<p>Sometimes you can’t get BeautifulSoup Tag objects out of a web page because the HTML is poorly formatted. In that case, it can help to use a different <strong>parser.</strong> Instead of:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="s1">&#39;html.parser&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -284,7 +306,10 @@
 </div>
 <p>Notice that I replaced the usual <code class="docutils literal notranslate"><span class="pre">'html.parser'</span></code> with <code class="docutils literal notranslate"><span class="pre">'html5lib'</span></code>. See  “Using a different parser,” above.</p>
 <p><strong>I did not need to use Selenium at all to scrape that forum site.</strong> The code above got me in, and everything after that was normal BeautifulSoup stuff.</p>
-<p>..tip:: You can see the actual headers <em>your</em> web browser is sending if you go to <a class="reference external" href="https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending">this page</a>. Do not copy my example as it is probably outdated now.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can see the actual headers <em>your</em> web browser is sending if you go to <a class="reference external" href="https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending">this page</a>. Do not copy my example, as it is probably outdated now.</p>
+</div>
 </div>
 <div class="section" id="when-all-else-fails">
 <h2>When all else fails<a class="headerlink" href="#when-all-else-fails" title="Permalink to this headline">¶</a></h2>
@@ -299,6 +324,13 @@
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="scraping2.html" class="btn btn-neutral float-left" title="Web Scraping, Part 2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

@@ -10,7 +10,10 @@ In this chapter, more advanced topics are covered.
 Using Selenium
 --------------
 
-We can use `Selenium <https://www.seleniumhq.org/>`_ together with BeautifulSoup when BeautifulSoup *alone* is unable to get the contents we want from a web page. **Two situations where this comes up:** (1) JavaScript is writing the contents into the page after it opens; and/or (2) contents are not available until you click a button, fill a form, open a menu, etc.
+We can use `Selenium <https://selenium.dev/>`_ together with BeautifulSoup when BeautifulSoup *alone* is unable to get the contents we want from a web page. **Two common situations where this comes up:**
+
+1. JavaScript is writing the contents into the page after it opens; and/or
+2. Contents are not available until you click a button, fill a form, open a menu, etc.
 
 The Selenium documentation is not easy to use, so **follow this step-by-step guide**:
 
@@ -27,7 +30,7 @@ When you examine the test scripts (linked in the “Getting Started” doc and a
 Selenium commands
 +++++++++++++++++
 
-To manipulate elements on the page with Selenium, you *will* need to use Selenium commands such as ``.find_element_by_css_selector()`` — as seen in the example below.
+**To manipulate elements on the page** with Selenium, you *will* need to use Selenium commands such as ``.find_element_by_css_selector()`` — as seen in the example below.
 
 .. literalinclude:: ../python_code_examples/scraping/selenium_test3.py
    :caption:
@@ -73,7 +76,7 @@ Using ``iter_tools()``
 Using a different parser
 ------------------------
 
-Sometimes you can’t get Tag objects out of a web page because the HTML is poorly formatted. In that case, it can help to use a different **parser.** Instead of: ::
+Sometimes you can’t get BeautifulSoup Tag objects out of a web page because the HTML is poorly formatted. In that case, it can help to use a different **parser.** Instead of: ::
 
     soup = BeautifulSoup(page, 'html.parser')
 
@@ -121,7 +124,7 @@ Notice that I replaced the usual ``'html.parser'`` with ``'html5lib'``. See  “
 
 **I did not need to use Selenium at all to scrape that forum site.** The code above got me in, and everything after that was normal BeautifulSoup stuff.
 
-..tip:: You can see the actual headers *your* web browser is sending if you go to `this page <https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending>`_. Do not copy my example as it is probably outdated now.
+.. tip:: You can see the actual headers *your* web browser is sending if you go to `this page <https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending>`_. Do not copy my example, as it is probably outdated now.
 
 
 When all else fails
