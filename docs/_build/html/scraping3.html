@@ -238,7 +238,7 @@
 </div>
 <div class="section" id="headless-selenium">
 <h3>Headless Selenium<a class="headerlink" href="#headless-selenium" title="Permalink to this headline">¶</a></h3>
-<p>It is possible to use <strong>headless mode</strong> instead of a physical browser with Selenium. This is NOT covered in the “Getting Started” doc, which assumes you will use Chrome and <strong>chromedriver.</strong></p>
+<p>It is possible to use <strong>headless mode</strong> instead of a physical browser with Selenium. This is NOT covered in the “Getting Started” doc.</p>
 <p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/scraping/headless_selenium.py">Code for using Chrome in headless mode.</a></p>
 </div>
 <div class="section" id="more-advanced-selenium-techniques">
@@ -285,8 +285,8 @@
 <div class="section" id="sending-http-headers-in-your-script">
 <h2>Sending HTTP headers in your script<a class="headerlink" href="#sending-http-headers-in-your-script" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes a website blocks your attempts to scrape because your code (without using Selenium) lacks the headers that a real web browser would send with an HTTP request.</p>
-<p>This doesn’t mean you have to use Selenium. Instead, you can send a proper set of headers as part of a regular script with BeautifulSoup and Requests.</p>
-<p>Use <a class="reference external" href="https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending">WhatIsMyBrowser.com</a> to find your web browser’s <strong>user agent.</strong></p>
+<p>This doesn’t (always) mean you have to use Selenium. Instead, you can send a proper set of headers as part of a regular script with BeautifulSoup and Requests.</p>
+<p>Use <a class="reference external" href="https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending">WhatIsMyBrowser.com</a> to find your web browser’s <strong>user agent</strong> and other values.</p>
 <p>The example code below comes from a time when I needed to use headers in a scraping script that downloaded messages from a large online forum. The site completely shut out my script until I added a full set of header data:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hdr</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="s1">&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36&#39;</span><span class="p">,</span>
        <span class="s1">&#39;Accept&#39;</span><span class="p">:</span> <span class="s1">&#39;text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#39;</span><span class="p">,</span>
