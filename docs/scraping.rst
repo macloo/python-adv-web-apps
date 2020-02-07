@@ -241,3 +241,10 @@ To *run* the notebook, you will need to have installed the `Requests <https://re
 See `these instructions <http://bit.ly/install-python3-jupyter>`_ for information about how to run Jupyter Notebooks.
 
 `View the code as a complete script outside the notebook. <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/box_office_scraper.py>`_
+
+Next steps
+----------
+
+`In the next chapter <scraping2.html>`_, we’ll look at how to handle common web scraping projects with BeautifulSoup, and Requests.
+
+.
