@@ -70,30 +70,6 @@ You will need to think carefully about the best place to insert this line in you
 
 .. note:: It’s very bad to overload or overwork a website by making a scraper that runs too fast. It’s also likely that the server will block your IP address if you do this! By inserting ``time.sleep()``, you can build in pauses that make your code less rude.
 
-Using chunks and ``iter_content()``
------------------------------------
-
-In chapter 12 of `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition), Sweigart provides a script to scrape the XKCD comics website (“Project: Downloading All XKCD Comics”). The code in step 4, which is part of a longer while-loop, uses the **Requests** method ``iter_content()``: ::
-
-    res = requests.get(comicUrl)
-    # ... other code
-    # imageFile was previously opened
-    for chunk in res.iter_content(100000):
-        imageFile.write(chunk)
-    imageFile.close()
-
-.. note:: The `Requests <https://requests.readthedocs.io/en/master/>`_ library is used here. To use ``iter_content()``, the ``requests`` module must be imported.
-
-The first thing to understand is **in what cases** chunking would be needed. Reading a regular web page into memory (for scraping with BeautifulSoup) *does not* call for chunking. We need chunking for **binary files** that we are **downloading.** Examples would be large image files, or — very common for journalists who are scraping — PDF files.
-
-In the code above, the variable ``comicUrl`` points to the location of one image file. It is assigned to a Response object with the variable name ``res``. You can only use ``iter_content()`` on a Response object.
-
-Downloading the binary data of the file in chunks that are *smaller than the complete file* is basically a way to make sure you actually get the files. You not only download it in chunks; you also *write it to your local hard drive* in chunks.
-
-The value in parentheses above — ``100000`` — means each chunk is 100,000 bytes at most.
-
-
-
 Using a different parser
 ------------------------
 
@@ -145,6 +121,42 @@ Notice that I replaced the usual ``'html.parser'`` with ``'html5lib'``. See  “
 **I did not need to use Selenium at all to scrape that forum site.** The headers got me in, and everything after that was normal BeautifulSoup stuff.
 
 .. tip:: You can see the actual headers *your* web browser is sending if you go to `this page <https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending>`_. Do not copy my example code, as it is probably outdated now.
+
+
+Using chunks and ``iter_content()``
+-----------------------------------
+
+In chapter 12 of `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition), Sweigart provides a script to scrape the XKCD comics website (“Project: Downloading All XKCD Comics”). The code in step 4, which is part of a longer while-loop, uses the **Requests** method ``iter_content()``: ::
+
+    res = requests.get(comicUrl)
+    # ... other code
+    # imageFile was previously opened
+    for chunk in res.iter_content(100000):
+        imageFile.write(chunk)
+    imageFile.close()
+
+.. note:: The `Requests <https://requests.readthedocs.io/en/master/>`_ library is used here. To use ``iter_content()``, the ``requests`` module must be imported.
+
+The first thing to understand is **in what cases** chunking would be needed. Reading a regular web page into memory (for scraping with BeautifulSoup) *does not* call for chunking. We need chunking for **binary files** that we are **saving to disk.** Examples would be large image files, or — very common for journalists who are scraping — **PDF files.**
+
+In the code above, the variable ``comicUrl`` points to the location of one image file. It is assigned to a Response object with the variable name ``res``. You can only use ``iter_content()`` on a Response object.
+
+Downloading the binary data of the file in chunks that are *smaller than the complete file* is basically a way to make sure you actually get the files without overloading your local memory. You not only download it in chunks; you also *write it to your local hard drive* in chunks.
+
+The value in parentheses above — ``100000`` — means each chunk is 100,000 bytes *or smaller.*
+
+From the `Requests documentation <https://requests.readthedocs.io/en/master/user/advanced/#chunk-encoded-requests>`_: “In an ideal situation you’ll have set ``stream=True`` on the request, in which case you can iterate chunk-by-chunk by calling ``iter_content`` with a ``chunk_size`` parameter of ``None``. If you want to set a maximum size of the chunk, you can set a ``chunk_size`` parameter to any integer.”
+
+Here is an generic example of chunking code from `a blog post <http://masnun.com/2016/09/18/python-using-the-requests-module-to-download-large-files-efficiently.html>`_: ::
+
+    response = requests.get(url, stream=True)
+    handle = open(target_path, 'wb')
+    for chunk in response.iter_content(chunk_size=512):
+        if chunk:   # filter out keep-alive new chunks
+            handle.write(chunk)
+    handle.close()
+
+Note that ``stream=True`` is used in the GET Request.
 
 
 When all else fails
