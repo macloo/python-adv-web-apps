@@ -60,7 +60,7 @@ Read how to set up Selenium first: [Getting started with Selenium](http://bit.ly
 
 **Script:** *selenium_test2.py*
 
-After you’ve gotten the first Selenium to work, try this one.
+After you’ve gotten the first Selenium script to work, try this one next.
 
 **Script:** *selenium_test3.py*
 
