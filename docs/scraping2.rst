@@ -141,7 +141,7 @@ Our set of nested boxes actually begins with the page. Inside the page are sever
 Moving from page to page while scraping
 ---------------------------------------
 
-In chapter 12 of `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition), Sweigart provides a script to scrape the XKCD comics website (“Project: Downloading All XKCD Comics”). The code in step 4, which is part of a longer while-loop, gets the URL from an element on the page that links to the previous comic. In this way, the script **starts on the home page** of the site, downloads one comic, and then **moves to the previous day’s comic page** and downloads the comic there. The script repeats this, moving to the previous page each time, until all comics have been downloaded.
+In chapter 12 of `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition), Sweigart provides a script to scrape the XKCD comics website (“Project: Downloading All XKCD Comics”). The code in steps 3 and 4, which are part of a longer while-loop, get the URL from an element on the page that links to the previous comic. In this way, the script **starts on the home page** of the site, downloads one comic, and then **moves to the previous day’s comic page** and downloads the comic there. The script repeats this, moving to the previous page each time, until all comics have been downloaded.
 
 .. note:: This method is often exactly what you need to scrape the data that you want.
 
