@@ -242,6 +242,8 @@ See `these instructions <http://bit.ly/install-python3-jupyter>`_ for informatio
 
 `View the code as a complete script outside the notebook. <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/box_office_scraper.py>`_
 
+.. attention:: After this introduction, you should NOT use ``from urllib.request import urlopen`` or the ``urlopen()`` function. Instead, you will use ``requests`` as demonstrated in the notebook linked above.
+
 Next steps
 ----------
 
