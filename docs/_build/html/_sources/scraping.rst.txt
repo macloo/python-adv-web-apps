@@ -7,6 +7,8 @@ This document assumes you have already installed Python 3, and you have used bot
 
 Sweigart briefly covers scraping in chapter 12 of `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition).
 
+This chapter here and the two following chapters provide additional context and examples for beginners.
+
 BeautifulSoup documentation:
 
 * `A nicely formatted PDF <https://media.readthedocs.org/pdf/beautiful-soup-4/latest/beautiful-soup-4.pdf>`_
@@ -132,9 +134,9 @@ It’s  important to understand that many of the BeautifulSoup commands work on 
 
 Many programming languages include objects as a data type. Python does, JavaScript does, etc. An *object* is an even more powerful and complex data type than an *array* (JavaScript) or a *list* (Python) and can contain many other data types in a structured format.
 
-When you extract information from an *object* with a BeautifulSoup command, sometimes you get a single **tag object,** and sometimes you get a Python *list* (similar to an *array* in JavaScript) of tag objects. The way you treat that extracted information will be **different** depending on whether it is *one* item or a list (usually, but not always, containing *more than one* item).
+When you extract information from an *object* with a BeautifulSoup command, sometimes you get a single **Tag object,** and sometimes you get a Python *list* (similar to an *array* in JavaScript) of Tag objects. The way you treat that extracted information will be **different** depending on whether it is *one* item or a list (usually, but not always, containing *more than one* item).
 
-That last paragraph is **REALLY IMPORTANT,** so read it again.
+That last paragraph is **REALLY IMPORTANT,** so read it again. For example, you cannot call ``.text`` on a list. You’ll see an error if you try it.
 
 How BeautifulSoup handles the object
 ++++++++++++++++++++++++++++++++++++
@@ -164,33 +166,36 @@ Let’s look at a few examples of what BeautifulSoup can do.
 Finding elements that have a particular class
 +++++++++++++++++++++++++++++++++++++++++++++
 
-Deciding the best way to extract what you want from a large HTML file requires you to dig around in the source before you write the Python/BeautifulSoup commands. In many cases, you’ll see that everything you want has the same **CSS class** on it. After creating a *BeautifulSoup object* (here, as before, it is ``soup``), this line will create a Python *list* containing all the ``<td>`` elements that have the class ``city``. ::
+Deciding the best way to extract what you want from a large HTML file requires you to dig around in the source, using Developer Tools, before you write the Python/BeautifulSoup commands. In many cases, you’ll see that everything you want has the same **CSS class** on it. After creating a *BeautifulSoup object* (here, as before, it is ``soup``), this line will create a Python *list* containing all the ``<td>`` elements that have the class ``city``. ::
 
     city_list = soup.find_all( "td", class_="city" )
 
-.. attention:: The word *class* is a **reserved word** in Python. Using *class* (alone) in the code above would give you a syntax error. So when we search by CSS class with BeautifulSoup, we use the keyword argument ``class_`` with an *underscore* added. Other HTML attributes DO NOT need the underscore.
+.. attention:: The word *class* is a **reserved word** in Python. Using *class* (alone) in the code above would give you a syntax error. So when we search by CSS class with BeautifulSoup, we use the keyword argument ``class_`` — note the added *underscore*. Other HTML attributes DO NOT need the underscore.
 
 Maybe there were 10 cities in ``<td>`` tags in that HTML file. Maybe there were 10,000. No matter how many, they are now in a *list* (assigned to the variable ``city_list``), and you can search them, print them, write them out to a database or a JSON file — whatever you like. Often you will want to perform the same actions on each item in the list, so you will use a normal Python *for-loop*: ::
 
     for city in city_list:
         print( city.get_text() )
 
-``get_text()`` is a handy BeautifulSoup method that will extract the text — and only the text — from the item. If instead you wrote just ``print(city)``, you’d get the ``<td>`` and any other tags inside that as well.
+``.get_text()`` is a handy BeautifulSoup method that will extract the text — and only the text — from the Tag object. If instead you wrote just ``print(city)``, you’d get the complete ``<td>`` — and any other tags inside that as well.
+
+.. note:: The BeautifulSoup methods ``.get_text()`` and ``.getText()`` are the same. The BeautifulSoup property ``.text`` is a shortcut to ``.get_text()`` and is acceptable unless you need to pass arguments to ``.get_text()``.
+
 
 Finding all vs. finding one
 +++++++++++++++++++++++++++
 
-The BeautifulSoup ``find_all()`` method you just saw always produces a *list*. (Note: ``findAll()`` will also work.) If you know there will be only one item of the kind you want in a file, you should use the ``find()`` method instead.
+The BeautifulSoup ``find_all()`` method you just saw always produces a *list*. (Note: ``findAll()`` will also work.) If you know there will be *only one* item of the kind you want in a file, you should use the ``find()`` method instead.
 
-For example, maybe you are scraping the address and phone number from every page in a large website. There is only one phone number on the page, and it is enclosed in a pair of tags with the attribute ``id="call"``. One line of your code gets the phone number from the current page: ::
+For example, maybe you are scraping the address and phone number from every page in a large website. In this case, there is only one phone number on the page, and it is enclosed in a pair of tags with the attribute ``id="call"``. One line of your code gets the phone number from the current page: ::
 
     phone_number = soup.find(id="call")
 
-Naturally, you don’t need to loop through that result — the variable ``phone_number`` will contain only a string, including any HTML tags. To test what the text alone will look like, just print it using ``get_text()`` to strip out the tags. ::
+You don’t need to loop through that result — the variable ``phone_number`` will contain only one Tag object, for whichever HTML tag had that ID. To test what the text alone will look like, just print it using ``get_text()`` to strip out the tags. ::
 
     print( phone_number.get_text() )
 
-Notice that you’re always using ``soup``. Review above if you’ve forgotten where that came from. (You may use another variable name instead, but ``soup`` is the usual choice.)
+Notice that you’re often using ``soup``. Review above if you’ve forgotten where that came from. (You may use another variable name instead, but ``soup`` is the usual choice.)
 
 Finding the contents of a particular attribute
 ++++++++++++++++++++++++++++++++++++++++++++++
@@ -203,7 +208,7 @@ Say you’ve made a BeautifulSoup object from a page that has dozens of images o
     for image in image_list:
         print(image.attrs['src'])
 
-1. First, you make a Python *list* containing all the ``img`` elements that exist in the object.
+1. First, you make a Python *list* containing all the ``img`` elements that exist in the ``soup`` object.
 
 2. Second, you loop through that list and print the contents of the ``src`` attribute from each ``img`` tag in the list.
 
