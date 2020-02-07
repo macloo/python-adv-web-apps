@@ -95,9 +95,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#timing-matters">Timing matters</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#using-iter-tools">Using <code class="docutils literal notranslate"><span class="pre">iter_tools()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#using-a-different-parser">Using a different parser</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#sending-http-headers-in-your-script">Sending HTTP headers in your script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-chunks-and-iter-content">Using chunks and <code class="docutils literal notranslate"><span class="pre">iter_content()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#when-all-else-fails">When all else fails</a></li>
 </ul>
 </li>
@@ -177,7 +177,7 @@
 <li><p>JavaScript is writing the contents into the page after it opens; and/or</p></li>
 <li><p>Contents are not available until you click a button, fill a form, open a menu, etc.</p></li>
 </ol>
-<p>The Selenium documentation is not easy to use, so <strong>follow this step-by-step guide</strong>:</p>
+<p>The documentation for setting up Selenium is not easy to use, so <strong>follow this step-by-step guide</strong>:</p>
 <p><a class="reference external" href="http://bit.ly/selenium-intro">Getting started with Selenium</a></p>
 <p>You will need to install Selenium and also a <strong>driver</strong> for the web browser you want to use (Chrome or Firefox). This is all covered in the “Getting Started” doc. Make sure to do the Selenium install with your virtual environment activated.</p>
 <p>When you examine the test scripts (linked in the “Getting Started” doc and also found in this repo), notice that after doing the <code class="docutils literal notranslate"><span class="pre">driver</span></code> stuff, <strong>this line</strong> creates a <code class="docutils literal notranslate"><span class="pre">page</span></code> variable just like we have been doing all along with our BeautifulSoup scrapers:</p>
@@ -258,12 +258,8 @@
 <p>You will need to think carefully about the best place to insert this line in your code. You are not likely to need it when you are <em>initially</em> testing your code, line by line, to write a scraper script, but once you are ready to run the completed script on <em>dozens</em> or <em>hundreds</em> of web pages, then you must add some sleep time.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>It’s very bad to overload or overwork a website by making a scraper that runs too fast. It’s also likely that the server will block your IP address if you do this.</p>
+<p>It’s very bad to overload or overwork a website by making a scraper that runs too fast. It’s also likely that the server will block your IP address if you do this! By inserting <code class="docutils literal notranslate"><span class="pre">time.sleep()</span></code>, you can build in pauses that make your code less rude.</p>
 </div>
-</div>
-<div class="section" id="using-iter-tools">
-<h2>Using <code class="docutils literal notranslate"><span class="pre">iter_tools()</span></code><a class="headerlink" href="#using-iter-tools" title="Permalink to this headline">¶</a></h2>
-<p>In chapter 12 of <a class="reference external" href="https://automatetheboringstuff.com/">Automate the Boring Stuff with Python</a> (second edition), Sweigart provides a script to scrape the XKCD comics website (“Project: Downloading All XKCD Comics”). The code in step 4, which is part of a longer while-loop, gets the URL from an element on the page that links to the previous comic. In this way, the script <strong>starts on the home page</strong> of the site, downloads one comic, and then <strong>moves to the previous day’s comic page</strong> and downloads the comic there. The script repeats this, moving to the previous page each time, until all comics have been downloaded.</p>
 </div>
 <div class="section" id="using-a-different-parser">
 <h2>Using a different parser<a class="headerlink" href="#using-a-different-parser" title="Permalink to this headline">¶</a></h2>
@@ -300,17 +296,48 @@
        <span class="s1">&#39;Connection&#39;</span><span class="p">:</span> <span class="s1">&#39;keep-alive&#39;</span><span class="p">}</span>
 </pre></div>
 </div>
-<p>After that, I used the variable <code class="docutils literal notranslate"><span class="pre">hdr</span></code> to create my <code class="docutils literal notranslate"><span class="pre">soup</span></code>:</p>
+<p>After that, I used the variable <code class="docutils literal notranslate"><span class="pre">hdr</span></code> to get the page and then create my <code class="docutils literal notranslate"><span class="pre">soup</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">page</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">hdr</span><span class="p">)</span>
 <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;html5lib&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Notice that I replaced the usual <code class="docutils literal notranslate"><span class="pre">'html.parser'</span></code> with <code class="docutils literal notranslate"><span class="pre">'html5lib'</span></code>. See  “Using a different parser,” above.</p>
-<p><strong>I did not need to use Selenium at all to scrape that forum site.</strong> The code above got me in, and everything after that was normal BeautifulSoup stuff.</p>
+<p><strong>I did not need to use Selenium at all to scrape that forum site.</strong> The headers got me in, and everything after that was normal BeautifulSoup stuff.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>You can see the actual headers <em>your</em> web browser is sending if you go to <a class="reference external" href="https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending">this page</a>. Do not copy my example, as it is probably outdated now.</p>
+<p>You can see the actual headers <em>your</em> web browser is sending if you go to <a class="reference external" href="https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending">this page</a>. Do not copy my example code, as it is probably outdated now.</p>
 </div>
+</div>
+<div class="section" id="using-chunks-and-iter-content">
+<h2>Using chunks and <code class="docutils literal notranslate"><span class="pre">iter_content()</span></code><a class="headerlink" href="#using-chunks-and-iter-content" title="Permalink to this headline">¶</a></h2>
+<p>In chapter 12 of <a class="reference external" href="https://automatetheboringstuff.com/">Automate the Boring Stuff with Python</a> (second edition), Sweigart provides a script to scrape the XKCD comics website (“Project: Downloading All XKCD Comics”). The code in step 4, which is part of a longer while-loop, uses the <strong>Requests</strong> method <code class="docutils literal notranslate"><span class="pre">iter_content()</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">comicUrl</span><span class="p">)</span>
+<span class="c1"># ... other code</span>
+<span class="c1"># imageFile was previously opened</span>
+<span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="mi">100000</span><span class="p">):</span>
+    <span class="n">imageFile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+<span class="n">imageFile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <a class="reference external" href="https://requests.readthedocs.io/en/master/">Requests</a> library is used here. To use <code class="docutils literal notranslate"><span class="pre">iter_content()</span></code>, the <code class="docutils literal notranslate"><span class="pre">requests</span></code> module must be imported.</p>
+</div>
+<p>The first thing to understand is <strong>in what cases</strong> chunking would be needed. Reading a regular web page into memory (for scraping with BeautifulSoup) <em>does not</em> call for chunking. We need chunking for <strong>binary files</strong> that we are <strong>saving to disk.</strong> Examples would be large image files, or — very common for journalists who are scraping — <strong>PDF files.</strong></p>
+<p>In the code above, the variable <code class="docutils literal notranslate"><span class="pre">comicUrl</span></code> points to the location of one image file. It is assigned to a Response object with the variable name <code class="docutils literal notranslate"><span class="pre">res</span></code>. You can only use <code class="docutils literal notranslate"><span class="pre">iter_content()</span></code> on a Response object.</p>
+<p>Downloading the binary data of the file in chunks that are <em>smaller than the complete file</em> is basically a way to make sure you actually get the files without overloading your local memory. You not only download it in chunks; you also <em>write it to your local hard drive</em> in chunks.</p>
+<p>The value in parentheses above — <code class="docutils literal notranslate"><span class="pre">100000</span></code> — means each chunk is 100,000 bytes <em>or smaller.</em></p>
+<p>From the <a class="reference external" href="https://requests.readthedocs.io/en/master/user/advanced/#chunk-encoded-requests">Requests documentation</a>: “In an ideal situation you’ll have set <code class="docutils literal notranslate"><span class="pre">stream=True</span></code> on the request, in which case you can iterate chunk-by-chunk by calling <code class="docutils literal notranslate"><span class="pre">iter_content</span></code> with a <code class="docutils literal notranslate"><span class="pre">chunk_size</span></code> parameter of <code class="docutils literal notranslate"><span class="pre">None</span></code>. If you want to set a maximum size of the chunk, you can set a <code class="docutils literal notranslate"><span class="pre">chunk_size</span></code> parameter to any integer.”</p>
+<p>Here is an generic example of chunking code from <a class="reference external" href="http://masnun.com/2016/09/18/python-using-the-requests-module-to-download-large-files-efficiently.html">a blog post</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">target_path</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="mi">512</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">chunk</span><span class="p">:</span>   <span class="c1"># filter out keep-alive new chunks</span>
+        <span class="n">handle</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+<span class="n">handle</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">stream=True</span></code> is used in the GET Request.</p>
 </div>
 <div class="section" id="when-all-else-fails">
 <h2>When all else fails<a class="headerlink" href="#when-all-else-fails" title="Permalink to this headline">¶</a></h2>

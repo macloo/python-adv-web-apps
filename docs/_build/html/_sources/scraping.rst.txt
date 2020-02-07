@@ -245,6 +245,6 @@ See `these instructions <http://bit.ly/install-python3-jupyter>`_ for informatio
 Next steps
 ----------
 
-`In the next chapter <scraping2.html>`_, we’ll look at how to handle common web scraping projects with BeautifulSoup, and Requests.
+`In the next chapter <scraping2.html>`_, we’ll look at how to handle common web scraping projects with BeautifulSoup and Requests.
 
 .
