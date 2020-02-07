@@ -15,7 +15,7 @@ We can use `Selenium <https://selenium.dev/>`_ together with BeautifulSoup when 
 1. JavaScript is writing the contents into the page after it opens; and/or
 2. Contents are not available until you click a button, fill a form, open a menu, etc.
 
-The Selenium documentation is not easy to use, so **follow this step-by-step guide**:
+The documentation for setting up Selenium is not easy to use, so **follow this step-by-step guide**:
 
 `Getting started with Selenium <http://bit.ly/selenium-intro>`_
 
@@ -68,10 +68,31 @@ Before using ``time.sleep()``, you must import Python’s ``time`` module. See `
 
 You will need to think carefully about the best place to insert this line in your code. You are not likely to need it when you are *initially* testing your code, line by line, to write a scraper script, but once you are ready to run the completed script on *dozens* or *hundreds* of web pages, then you must add some sleep time.
 
-.. note:: It’s very bad to overload or overwork a website by making a scraper that runs too fast. It’s also likely that the server will block your IP address if you do this.
+.. note:: It’s very bad to overload or overwork a website by making a scraper that runs too fast. It’s also likely that the server will block your IP address if you do this! By inserting ``time.sleep()``, you can build in pauses that make your code less rude.
 
-Using ``iter_tools()``
-----------------------
+Using chunks and ``iter_content()``
+-----------------------------------
+
+In chapter 12 of `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition), Sweigart provides a script to scrape the XKCD comics website (“Project: Downloading All XKCD Comics”). The code in step 4, which is part of a longer while-loop, uses the **Requests** method ``iter_content()``: ::
+
+    res = requests.get(comicUrl)
+    # ... other code
+    # imageFile was previously opened
+    for chunk in res.iter_content(100000):
+        imageFile.write(chunk)
+    imageFile.close()
+
+.. note:: The `Requests <https://requests.readthedocs.io/en/master/>`_ library is used here. To use ``iter_content()``, the ``requests`` module must be imported.
+
+The first thing to understand is **in what cases** chunking would be needed. Reading a regular web page into memory (for scraping with BeautifulSoup) *does not* call for chunking. We need chunking for **binary files** that we are **downloading.** Examples would be large image files, or — very common for journalists who are scraping — PDF files.
+
+In the code above, the variable ``comicUrl`` points to the location of one image file. It is assigned to a Response object with the variable name ``res``. You can only use ``iter_content()`` on a Response object.
+
+Downloading the binary data of the file in chunks that are *smaller than the complete file* is basically a way to make sure you actually get the files. You not only download it in chunks; you also *write it to your local hard drive* in chunks.
+
+The value in parentheses above — ``100000`` — means each chunk is 100,000 bytes at most.
+
+
 
 Using a different parser
 ------------------------
@@ -96,7 +117,6 @@ Another parser option is ``lxml``. You can read about the differences among Pyth
 
 **tl;dr** — Sometimes one parser just works better than another. **lxml** is a much faster parser than **html5lib**, so if you are churning through a gazillion pages, that might make **lxml** a better choice. **html5lib** is better at reading badly formatted HTML, however.
 
-
 Sending HTTP headers in your script
 -----------------------------------
 
@@ -115,16 +135,16 @@ The example code below comes from a time when I needed to use headers in a scrap
            'Accept-Language': 'en-US,en;q=0.8',
            'Connection': 'keep-alive'}
 
-After that, I used the variable ``hdr`` to create my ``soup``: ::
+After that, I used the variable ``hdr`` to get the page and then create my ``soup``: ::
 
     page = requests.get(url, headers=hdr)
     soup = BeautifulSoup(page.text, 'html5lib')
 
 Notice that I replaced the usual ``'html.parser'`` with ``'html5lib'``. See  “Using a different parser,” above.
 
-**I did not need to use Selenium at all to scrape that forum site.** The code above got me in, and everything after that was normal BeautifulSoup stuff.
+**I did not need to use Selenium at all to scrape that forum site.** The headers got me in, and everything after that was normal BeautifulSoup stuff.
 
-.. tip:: You can see the actual headers *your* web browser is sending if you go to `this page <https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending>`_. Do not copy my example, as it is probably outdated now.
+.. tip:: You can see the actual headers *your* web browser is sending if you go to `this page <https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending>`_. Do not copy my example code, as it is probably outdated now.
 
 
 When all else fails
