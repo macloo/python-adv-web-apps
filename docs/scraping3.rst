@@ -44,7 +44,7 @@ Other Selenium methods for locating HTML elements are listed `here <https://sele
 Headless Selenium
 +++++++++++++++++
 
-It is possible to use **headless mode** instead of a physical browser with Selenium. This is NOT covered in the “Getting Started” doc, which assumes you will use Chrome and **chromedriver.**
+It is possible to use **headless mode** instead of a physical browser with Selenium. This is NOT covered in the “Getting Started” doc.
 
 `Code for using Chrome in headless mode. <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/scraping/headless_selenium.py>`_
 
@@ -98,9 +98,9 @@ Sending HTTP headers in your script
 
 Sometimes a website blocks your attempts to scrape because your code (without using Selenium) lacks the headers that a real web browser would send with an HTTP request.
 
-This doesn’t mean you have to use Selenium. Instead, you can send a proper set of headers as part of a regular script with BeautifulSoup and Requests.
+This doesn’t (always) mean you have to use Selenium. Instead, you can send a proper set of headers as part of a regular script with BeautifulSoup and Requests.
 
-Use `WhatIsMyBrowser.com <https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending>`_ to find your web browser’s **user agent.**
+Use `WhatIsMyBrowser.com <https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending>`_ to find your web browser’s **user agent** and other values.
 
 The example code below comes from a time when I needed to use headers in a scraping script that downloaded messages from a large online forum. The site completely shut out my script until I added a full set of header data: ::
 
