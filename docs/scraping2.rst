@@ -21,7 +21,7 @@ In `the previous section <scraping.html>`_ we covered several commonly used comm
     soup.find_all("img")
     soup.find(id="call")
 
-In chapter 12 of `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition), the author covers another command, the ``select()`` method.
+In chapter 12 of `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition), the author covers another command, the ``select()`` method. More info: `Read the docs <https://www.crummy.com/software/BeautifulSoup/bs4/doc/#css-selectors>`_.
 
 This method might hold special appeal to people used to working with JavaScript, because the syntax for targeting HTML elements — inside the parentheses of ``select()`` — follows the same syntax as this commonly used JavaScript method: ::
 
@@ -38,7 +38,7 @@ Working with lists of Tag objects
 
 Both ``find_all()`` and ``select()`` always return a Python list. Each item in the list is a BeautifulSoup **Tag object.** You can access any list item using its index — just as you would with any normal Python list.
 
-Try this code in the Python interpreter: ::
+Try this code in the Python shell: ::
 
     from bs4 import BeautifulSoup
     import requests
@@ -48,7 +48,7 @@ Try this code in the Python interpreter: ::
     images = soup.select('img')
     print(images)
 
-You’ll see that you have a **list** of IMG elements.
+You’ll see that you have a Python **list** of IMG elements.
 
 You can call ``.get_text()`` or ``.text`` on a Tag object to get only the text inside the element. To get the text from *just one* Tag object in a list, use its **list index**: ::
 
@@ -66,12 +66,35 @@ If an element has **attributes,** you can get a Python **dictionary** containing
     images = soup.select('img')
     print( images[0].attrs )
 
+Example, running the commands above in the Python shell: ::
+
+    >>> print( images[0] )
+    <img alt="thumbnail" src="images/thumbnails/park_structures.jpg"/>
+    >>> print( images[0].attrs )
+    {'src': 'images/thumbnails/park_structures.jpg', 'alt': 'thumbnail'}
+
 To get a particular attribute for all the IMG elements, you need a for-loop: ::
 
     for image in images:
         print( image.attrs['src'] )
 
-Another way to get a particular attribute is with ``.get()``: ::
+Again, here’s how that would run in the Python shell: ::
+
+        >>> for image in images:
+        ...   print( image.attrs['src'] )
+        ...
+        images/thumbnails/park_structures.jpg
+        images/thumbnails/building.jpg
+        images/thumbnails/mosque.jpg
+        images/thumbnails/turrets.jpg
+        images/thumbnails/russia.jpg
+        >>>
+
+View the example web page to get a clear idea of where those attributes came from:
+
+https://weimergeeks.com/examples/scraping/example1.html
+
+Another way to get a particular attribute from a Tag object is with ``.get()``: ::
 
     for image in images:
         print( image.get('src') )
@@ -89,7 +112,7 @@ The methods ``find()``, ``find_all()``, and ``select()`` work on Tag objects as 
    :caption:
    :linenos:
 
-Once we’ve got ``table`` out of ``soup`` (line 9 above), we can go on to find elements inside the Tag object ``table``. First we get a list of all rows (line 12). Then we can loop over the list of row objects (starting on line 15) and make a list of all table cells in each row (line 17). From that list, we can extract the contents of one or more cells. By printing ``cells[1].text`` (line 19), we will see a list of all Scottish monarchs in the first table on the page.
+Once we’ve got ``table`` out of ``soup`` (line 9 above), we can go on to find elements inside the Tag object ``table``. First we get a list of all rows (line 12). Then we can loop over the list of row objects (starting on line 15) and make a list of all table cells in each row (line 17). From that list, we can extract the contents of one or more cells. In the for-loop, by printing ``cells[1].text`` (line 19), we will see a list of all Scottish monarchs in the first table on the page.
 
 It’s as if we are taking apart a set of nested boxes. We go inside the table to get the rows. We go inside a row to get its cells.
 
@@ -129,13 +152,15 @@ In the case of the XKCD site, this code works: ::
     prevLink = soup.select('a[rel="prev"]')[0]
     url = 'https://xkcd.com' + prevLink.get('href')
 
-The code ``select('a[rel="prev"]')`` gets all ``a`` elements on the page that contain the attribute ``rel`` with the value ``"prev"`` — that is, ``rel="prev"``. This code returns a **list,** so it’s necessary to use the list index ``[0]`` to get the first **list item.** If you inspect the HTML on any XKCD page with Developer Tools, you can find this A element.
+The code ``select('a[rel="prev"]')`` gets all ``a`` elements on the page that contain the attribute ``rel`` with the value ``"prev"`` — that is, ``rel="prev"``. This code returns a **list,** so it’s necessary to use the list index ``[0]`` to get the first **list item.**
+
+The next line extracts the *value* of the ``href`` attribute from that A element and concatenates it with the base URL, ``https://xkcd.com``.
+
+If you inspect the HTML on any XKCD page with Developer Tools, you can find this A element.
 
 .. figure:: _static/images/xkcd_prev_button.png
    :scale: 50 %
    :alt: Developer Tools and an XKCD web page screenshot
-
-The next line extracts the *value* of the ``href`` attribute from that A element and concatenates it with the base URL, ``https://xkcd.com``.
 
 To understand this code better, you can run it in the Python shell. Here I have started on the page at https://xkcd.com/2260/ — ::
 
@@ -167,7 +192,7 @@ This practice of **printing the value each time** is a way of testing your code 
 
 .. important:: You must understand that every website is different, so probably no other website in the world has the same HTML as the XKCD website. However, many websites do have Previous and Next buttons. It is necessary to **inspect** the HTML and determine how to extract the next- or previous-page URL (or partial URL) from the HTML on the button.
 
-**Some websites use JavaScript** to activate their Previous and Next buttons. In those cases, you will need to use the Selenium module to navigate while scraping. **Selenium** is covered in the next chapter.
+**Some websites use JavaScript** to activate their Previous and Next buttons. In those cases, you will need to use the Selenium module to navigate while scraping. **Selenium** is covered `in the next chapter <scraping3.html>`_.
 
 Harvesting multiple URLs from one page
 --------------------------------------
@@ -180,7 +205,7 @@ In some cases, you will want to get all the URLs from one page and save them in 
 
 It is likely that you do not want header and footer links from the page. You need to inspect the HTML and ascertain what element holds the main text. For a Wikipedia article, there’s an ``id`` attribute with the value ``'mw-content-text'``, so that’s what we start with in line 24.
 
-When we get all the ``a`` elements with ``links_list = article.find_all('a')`` (line 27), we are getting only the ``a`` elements that are inside the DIV element with ``id='mw-content-text'``.
+When we get all the ``a`` elements with ``links_list = article.find_all('a')`` (line 27), we are getting only the ``a`` elements that are inside the DIV element with ``id='mw-content-text'`` — because the variable ``article`` here is a Tag object containing that entire DIV.
 
 Then we use a loop (lines 30–33) to look at each item in ``links_list``. We check if an ``href`` attribute exists in the item with this line — ``if 'href' in link.attrs:`` — and if there *is* an HREF, then we write the value of that HREF into the file (line 33).
 
@@ -223,5 +248,9 @@ The key is to write a **function** that scrapes all the data you want from **one
 
 .. tip:: To create a Python list **from a file** such as `myfile2.txt <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/myfile2.txt>`_, use the ``readlines()`` method. See `Reading and Writing Files <working_with_files.html>`_ for details.
 
+Moving onward
+-------------
+
+`In the next chapter <scraping3.html>`_, we’ll look at how to handle more complex scraping situations with BeautifulSoup, Requests, and Selenium.
 
 .
