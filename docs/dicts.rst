@@ -20,7 +20,13 @@ Different from a **list**, a dictionary does not have indexes. You can’t depen
 
 Although Sweigart refers to the keys as *indexes,* you shouldn't think of them behaving exactly as indexes do in lists.
 
-The following ways to loop through a dictionary are demonstrated in the file `looping_keys_values.py <../python_code_examples/dictionaries/looping_keys_values.py>`_.
+To understand Python dictionaries better, run the file *simple_dict.py* found `here <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/dictionaries/>`_.
+
+
+How to loop over a dictionary
+-----------------------------
+
+The following ways to loop through a dictionary are demonstrated in the file `looping_keys_values.py <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/dictionaries/looping_keys_values.py>`_. Run it to see how it works.
 
 * ``for k in dict.keys():``
 * ``for v in dict.values():``
@@ -30,10 +36,15 @@ Naturally, your dictionary likely will not be named ``dict``.
 
 Sweigart does an excellent job of explaining dictionaries in chapter 5.
 
+
 Converting a CSV to a dictionary
 --------------------------------
 
-You can use Python's ``csv`` module and the ``DictReader()`` method to create a dictionary of dictionaries or a list of dictionaries from a CSV file. See *dictreader_example.py* in this folder.
+You can use Python’s ``csv`` module and the ``DictReader()`` method to create a list of dictionaries from a CSV file (also see *dictreader_example2.py* and *dictreader_example3.py* `here <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/dictionaries/>`_).
+
+.. literalinclude:: ../python_code_examples/dictionaries/dictreader_example.py
+   :caption:
+
 
 Writing a dictionary into a CSV file
 ------------------------------------
