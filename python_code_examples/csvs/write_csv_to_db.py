@@ -1,9 +1,11 @@
 """
-See https://www.sqlalchemy.org/ - SQLAlchemy must be installed in your virtualenv.
-I used a PostgreSQL db on Heroku.
-Your empty database table must already exist.
-Table fieldnames must be set.
-The environment variable "DATABASE_URL" must be set on the computer this runs on.
+    See https://www.sqlalchemy.org/ - SQLAlchemy must be installed in
+    your virtualenv.
+    I used a PostgreSQL db on Heroku.
+    Your empty database table must already exist.
+    Table fieldnames must be set.
+    The environment variable "DATABASE_URL" must be set on the computer
+    this runs on.
 """
 
 import csv
