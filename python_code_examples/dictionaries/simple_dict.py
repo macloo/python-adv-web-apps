@@ -1,3 +1,5 @@
+"""explore a simple Python dictionary"""
+
 import pprint
 pp = pprint.PrettyPrinter(indent=4)
 
