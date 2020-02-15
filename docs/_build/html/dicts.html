@@ -183,7 +183,7 @@
 <p>The <strong>values</strong> in that dictionary are <code class="docutils literal notranslate"><span class="pre">&quot;Harry</span> <span class="pre">Potter</span> <span class="pre">and</span> <span class="pre">the</span> <span class="pre">Goblet</span> <span class="pre">of</span> <span class="pre">Fire&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;J.</span> <span class="pre">K.</span> <span class="pre">Rowling&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">2001</span></code>.</p>
 <p>Different from a <strong>list</strong>, a dictionary does not have indexes. You can’t depend on the <em>order</em> of items in a dictionary to stay the same. You cannot insert a new item into a particular position in a dictionary because the items do not have positions, or places. Thus we refer to <strong>lists</strong> as <em>ordered</em> and to dictionaries as <em>unordered</em>.</p>
 <p>Although Sweigart refers to the keys as <em>indexes,</em> you shouldn’t think of them behaving exactly as indexes do in lists.</p>
-<p>The following ways to loop through a dictionary are demonstrated in the file <a class="reference external" href="../python_code_examples/dictionaries/looping_keys_values.py">looping_keys_values.py</a>.</p>
+<p>The following ways to loop through a dictionary are demonstrated in the file <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/dictionaries/looping_keys_values.py">looping_keys_values.py</a>. Run it to see how it works.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">k</span> <span class="pre">in</span> <span class="pre">dict.keys():</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">v</span> <span class="pre">in</span> <span class="pre">dict.values():</span></code></p></li>
@@ -194,7 +194,25 @@
 </div>
 <div class="section" id="converting-a-csv-to-a-dictionary">
 <h2>Converting a CSV to a dictionary<a class="headerlink" href="#converting-a-csv-to-a-dictionary" title="Permalink to this headline">¶</a></h2>
-<p>You can use Python’s <code class="docutils literal notranslate"><span class="pre">csv</span></code> module and the <code class="docutils literal notranslate"><span class="pre">DictReader()</span></code> method to create a dictionary of dictionaries or a list of dictionaries from a CSV file. See <em>dictreader_example.py</em> in this folder.</p>
+<p>You can use Python’s <code class="docutils literal notranslate"><span class="pre">csv</span></code> module and the <code class="docutils literal notranslate"><span class="pre">DictReader()</span></code> method to create a list of dictionaries from a CSV file (also see <em>dictreader_example2.py</em> and <em>dictreader_example3.py</em> <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/dictionaries/">here</a>).</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/dictionaries/dictreader_example.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">csv</span>
+
+<span class="c1"># open a CSV file</span>
+<span class="c1"># note - the CSV must have column headings in top row</span>
+<span class="n">datafile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;sample.csv&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="c1"># create a dictReader object</span>
+<span class="n">my_reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">datafile</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">my_reader</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Author&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Title&#39;</span><span class="p">])</span>
+
+<span class="n">datafile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="section" id="writing-a-dictionary-into-a-csv-file">
 <h2>Writing a dictionary into a CSV file<a class="headerlink" href="#writing-a-dictionary-into-a-csv-file" title="Permalink to this headline">¶</a></h2>
