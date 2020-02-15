@@ -20,7 +20,7 @@ Different from a **list**, a dictionary does not have indexes. You can’t depen
 
 Although Sweigart refers to the keys as *indexes,* you shouldn't think of them behaving exactly as indexes do in lists.
 
-The following ways to loop through a dictionary are demonstrated in the file `looping_keys_values.py <../python_code_examples/dictionaries/looping_keys_values.py>_`.
+The following ways to loop through a dictionary are demonstrated in the file `looping_keys_values.py <../python_code_examples/dictionaries/looping_keys_values.py>`_.
 
 * ``for k in dict.keys():``
 * ``for v in dict.values():``
@@ -62,7 +62,7 @@ All the dictionaries contain the same keys. ::
 A dictionary of dictionaries
 ++++++++++++++++++++++++++++
 
-All dictionaries contain an identifying **key** (in this case, the name of a president) and a **value** that is itself a dictionary, containing the same keys as all the others. Note where the curly braces are used.
+All dictionaries contain an identifying **key** (in this case, the name of a president) and a **value** that is itself a dictionary, containing the same keys as all the others. Note where the curly braces are used. ::
 
     presidents_dict = {
     { "George Washington": {"Presidency":1,"Wikipedia_entry":"http://en.wikipedia.org/wiki/George_Washington","Took_office":"4/30/1789","Left_office":"3/4/1797","Party":"Independent ","Home_state":"Virginia","Occupation":"Planter","College":"None","Age_when_took_office":57,"Birth_date":"2/22/1732","Birthplace":"Westmoreland County, Virginia","Death_date":"12/14/1799","Location_death":"Mount Vernon, Virginia"} },
