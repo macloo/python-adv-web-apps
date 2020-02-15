@@ -20,6 +20,12 @@ Different from a **list**, a dictionary does not have indexes. You can’t depen
 
 Although Sweigart refers to the keys as *indexes,* you shouldn't think of them behaving exactly as indexes do in lists.
 
+To understand Python dictionaries better, run the file *simple_dict.py* found `here <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/dictionaries/>`_.
+
+
+How to loop over a dictionary
+-----------------------------
+
 The following ways to loop through a dictionary are demonstrated in the file `looping_keys_values.py <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/dictionaries/looping_keys_values.py>`_. Run it to see how it works.
 
 * ``for k in dict.keys():``
@@ -29,6 +35,7 @@ The following ways to loop through a dictionary are demonstrated in the file `lo
 Naturally, your dictionary likely will not be named ``dict``.
 
 Sweigart does an excellent job of explaining dictionaries in chapter 5.
+
 
 Converting a CSV to a dictionary
 --------------------------------
