@@ -1,6 +1,5 @@
 """convert a csv file to dictionaries - each row is one dict
-    in a single Python list
-    in this example 2, we print each dict as a string
+    then transfer them all to a single Python list
     Python 3.6 and later
 """
 import csv
@@ -9,16 +8,25 @@ import csv
 # note - the CSV must have column headings in top row
 datafile = open("sample.csv", newline='')
 
-# create list of OrderedDicts - as of Python 3.6
+# create a dictReader object
 my_reader = csv.DictReader(datafile)
 
-# print all the dictionaries as text strings
-for row in my_reader:
-    # plug each value from the row into a string
-    print( row['Title'] + ', by ' + row['Author'] + ' (' + row['Year'] + ')' )
+# create new empty list
+my_list = []
 
-# blank line
-print()
+# loop over CSV row by row and write each row as a dictionary into the list
+for row in my_reader:
+    my_list.append( dict(row) )
+
+# print some examples from the new list
+print("Printing second item:")
+print(my_list[1])
+print("What is the data type of the item?")
+print(type(my_list[1]))
+print("Printing value of key \"Title\" for second item:")
+print(my_list[1]["Title"])
+print("Printing value of key \"Author\" for second item:")
+print(my_list[1]["Author"])
 
 # close original csv file
 datafile.close()

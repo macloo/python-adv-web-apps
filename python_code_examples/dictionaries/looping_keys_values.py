@@ -1,11 +1,14 @@
-# to extract data from a dictionary - use a for-loop!
+"""to extract data from a dictionary - use a for-loop!
+"""
 
-# below is a Python dictionary - note how it differs in structure from
-# a Python list - a dictionary stores key-value PAIRS
-cat = {'eyes': 'green', 'fur': 'brown', 'name': 'Furball', 'nose': 'pink', 'tail': 'short'}
+# below is a Python dictionary assigned to the variable `cat`
+cat = {'eyes': 'green',
+    'fur': 'brown',
+    'name': 'Furball',
+    'nose': 'pink',
+    'tail': 'short'}
 
-# we have 3 different ways to extract data from a dictionary
-# each one requires a for-loop
+# 3 different ways to extract data from a dictionary
 
 # 1. we extract only the dict keys
 print("The keys:")
@@ -21,3 +24,6 @@ for v in cat.values():
 print("\nThe items:")
 for k, v in cat.items():
   print(k + " is key, " + v + " is value")
+
+# blank line
+print()
