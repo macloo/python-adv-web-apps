@@ -29,6 +29,7 @@ See also the `official Python documentation <https://docs.python.org/3/>`_.
    functions
    lists
    working_with_files
+   dicts
    scraping
    scraping2
    scraping3

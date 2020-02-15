@@ -57,7 +57,7 @@ Liked one other theme more, but it had NPM/Node crap, so no.
 
 `python -m http.server` (or, not in env, Mac: `python3 -m http.server`)
 
-Then: `localhost:8000`
+Then: `http://localhost:8000/docs/_build/html/`
 
 ## Build
 
