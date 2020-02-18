@@ -173,7 +173,10 @@
   <div class="section" id="dictionaries">
 <h1>Dictionaries<a class="headerlink" href="#dictionaries" title="Permalink to this headline">¶</a></h1>
 <p>This section is based on chapter 5 in Sweigart’s <a class="reference external" href="https://automatetheboringstuff.com/">Automate the Boring Stuff with Python</a> (second edition).</p>
-<p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/dictionaries">Python scripts for this section</a></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/dictionaries">Python scripts for this section</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#mapping-types-dict">Python documentation for dictionaries</a></p></li>
+</ul>
 <div class="section" id="introduction-to-dictionaries">
 <h2>Introduction to dictionaries<a class="headerlink" href="#introduction-to-dictionaries" title="Permalink to this headline">¶</a></h2>
 <p>The crucial concept to understand is that a <strong>dictionary</strong> consists of <em>key-value pairs</em>.</p>
@@ -185,6 +188,19 @@
 <p>Different from a <strong>list</strong>, a dictionary does not have indexes. You can’t depend on the <em>order</em> of items in a dictionary to stay the same. You cannot insert a new item into a particular position in a dictionary because the items do not have positions, or places. Thus we refer to <strong>lists</strong> as <em>ordered</em> and to dictionaries as <em>unordered</em>.</p>
 <p>Although Sweigart refers to the keys as <em>indexes,</em> you shouldn’t think of them behaving exactly as indexes do in lists.</p>
 <p>To understand Python dictionaries better, run the file <em>simple_dict.py</em> found <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/dictionaries/">here</a>.</p>
+<p>Note that <strong>keys</strong> can be strings, integers or floats, and <strong>values</strong> can also be strings, integers or floats.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">new_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_dict</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Mahatma Gandhi&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_dict</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;India&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_dict</span><span class="p">[</span><span class="mf">3.14</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;chakras&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_dict</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">108</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_dict</span><span class="p">[</span><span class="s1">&#39;one&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">new_dict</span><span class="p">)</span>
+<span class="go">{&#39;name&#39;: &#39;Mahatma Gandhi&#39;, 2: &#39;India&#39;, 3.14: &#39;chakras&#39;, &#39;number&#39;: 108, &#39;one&#39;: 1}</span>
+<span class="go">&gt;&gt;&gt;</span>
+</pre></div>
+</div>
+<p>Other data types can also be used as dictionary values, as you’ll see below.</p>
 </div>
 <div class="section" id="how-to-loop-over-a-dictionary">
 <h2>How to loop over a dictionary<a class="headerlink" href="#how-to-loop-over-a-dictionary" title="Permalink to this headline">¶</a></h2>
@@ -196,10 +212,18 @@
 </ul>
 <p>Naturally, your dictionary likely will not be named <code class="docutils literal notranslate"><span class="pre">dict</span></code>.</p>
 <p>Sweigart does an excellent job of explaining dictionaries in chapter 5.</p>
+<p>You can get a Python <strong>list</strong> of all the keys in a dictionary:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">keys_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>Similarly, you can get a Python <strong>list</strong> of all the values:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">values_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">dict</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="converting-a-csv-to-a-dictionary">
 <h2>Converting a CSV to a dictionary<a class="headerlink" href="#converting-a-csv-to-a-dictionary" title="Permalink to this headline">¶</a></h2>
-<p>You can use Python’s <code class="docutils literal notranslate"><span class="pre">csv</span></code> module and the <code class="docutils literal notranslate"><span class="pre">DictReader()</span></code> method to create a list of dictionaries from a CSV file (also see <em>dictreader_example2.py</em> and <em>dictreader_example3.py</em> <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/dictionaries/">here</a>).</p>
+<p>You can use Python’s <code class="docutils literal notranslate"><span class="pre">csv</span></code> module and the <code class="docutils literal notranslate"><span class="pre">DictReader()</span></code> method to create a list of dictionaries from a CSV file (also see <em>dictreader_example2.py</em> <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/dictionaries/">here</a>).</p>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">../python_code_examples/dictionaries/dictreader_example.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">csv</span>
@@ -218,16 +242,28 @@
 </pre></div>
 </div>
 </div>
+<p>Note that if you try to treat a DictReader object like a normal list, it will not work:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">my_reader</span><span class="p">)</span>
+<span class="go">&lt;csv.DictReader object at 0x1047c5400&gt;</span>
+</pre></div>
+</div>
+<p>But you can <em>convert</em> the DictReader object into a normal list if needed:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">new_list_version</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">my_reader</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="nb">print</span><span class="p">(</span><span class="n">new_list_version</span><span class="p">)</span>
+<span class="p">[{</span><span class="s1">&#39;Title&#39;</span><span class="p">:</span> <span class="s1">&#39;The Calculating Stars&#39;</span><span class="p">,</span> <span class="s1">&#39;Author&#39;</span><span class="p">:</span> <span class="s1">&#39;Mary Robinette Kowal&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">:</span> <span class="s1">&#39;2019&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;Title&#39;</span><span class="p">:</span> <span class="s1">&#39;The Stone Sky&#39;</span><span class="p">,</span> <span class="s1">&#39;Author&#39;</span><span class="p">:</span> <span class="s1">&#39;N. K. Jemisin&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">:</span> <span class="s1">&#39;2018&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;Title&#39;</span><span class="p">:</span> <span class="s1">&#39;The Obelisk Gate&#39;</span><span class="p">,</span> <span class="s1">&#39;Author&#39;</span><span class="p">:</span> <span class="s1">&#39;N. K. Jemisin&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">:</span> <span class="s1">&#39;2017&#39;</span><span class="p">},</span> <span class="p">{</span><span class="s1">&#39;Title&#39;</span> <span class="o">...</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="writing-a-dictionary-into-a-csv-file">
 <h2>Writing a dictionary into a CSV file<a class="headerlink" href="#writing-a-dictionary-into-a-csv-file" title="Permalink to this headline">¶</a></h2>
-<p>xyz</p>
+<p>This is covered in <a class="reference external" href="http://localhost:8000/docs/_build/html/csv.html">the CSV chapter</a>.</p>
 </div>
 <div class="section" id="examples-of-complex-dictionaries">
 <h2>Examples of complex dictionaries<a class="headerlink" href="#examples-of-complex-dictionaries" title="Permalink to this headline">¶</a></h2>
+<p>This is a bit like the nesting Matryoshka dolls from Russia — you can combine multiple dictionaries in a list, and you can even nest dictionaries inside other dictionaries.</p>
 <div class="section" id="a-list-of-dictionaries">
 <h3>A list of dictionaries<a class="headerlink" href="#a-list-of-dictionaries" title="Permalink to this headline">¶</a></h3>
-<p>In this data structure, several or many dictionaries are items in a Python list.</p>
+<p>In this data structure, one Python list contains many dictionaries. Each dictionary is a list item.</p>
 <p>All the dictionaries contain the same keys.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">presidents_list</span> <span class="o">=</span> <span class="p">[</span>
 <span class="p">{</span><span class="s2">&quot;Presidency&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;President&quot;</span><span class="p">:</span><span class="s2">&quot;George Washington&quot;</span><span class="p">,</span><span class="s2">&quot;Wikipedia_entry&quot;</span><span class="p">:</span><span class="s2">&quot;http://en.wikipedia.org/wiki/George_Washington&quot;</span><span class="p">,</span><span class="s2">&quot;Took_office&quot;</span><span class="p">:</span><span class="s2">&quot;4/30/1789&quot;</span><span class="p">,</span><span class="s2">&quot;Left_office&quot;</span><span class="p">:</span><span class="s2">&quot;3/4/1797&quot;</span><span class="p">,</span><span class="s2">&quot;Party&quot;</span><span class="p">:</span><span class="s2">&quot;Independent &quot;</span><span class="p">,</span><span class="s2">&quot;Home_state&quot;</span><span class="p">:</span><span class="s2">&quot;Virginia&quot;</span><span class="p">,</span><span class="s2">&quot;Occupation&quot;</span><span class="p">:</span><span class="s2">&quot;Planter&quot;</span><span class="p">,</span><span class="s2">&quot;College&quot;</span><span class="p">:</span><span class="s2">&quot;None&quot;</span><span class="p">,</span><span class="s2">&quot;Age_when_took_office&quot;</span><span class="p">:</span><span class="mi">57</span><span class="p">,</span><span class="s2">&quot;Birth_date&quot;</span><span class="p">:</span><span class="s2">&quot;2/22/1732&quot;</span><span class="p">,</span><span class="s2">&quot;Birthplace&quot;</span><span class="p">:</span><span class="s2">&quot;Westmoreland County, Virginia&quot;</span><span class="p">,</span><span class="s2">&quot;Death_date&quot;</span><span class="p">:</span><span class="s2">&quot;12/14/1799&quot;</span><span class="p">,</span><span class="s2">&quot;Location_death&quot;</span><span class="p">:</span><span class="s2">&quot;Mount Vernon, Virginia&quot;</span><span class="p">},</span>
@@ -241,7 +277,7 @@
 </div>
 <div class="section" id="a-dictionary-of-dictionaries">
 <h3>A dictionary of dictionaries<a class="headerlink" href="#a-dictionary-of-dictionaries" title="Permalink to this headline">¶</a></h3>
-<p>In this data structure, one dictionary contains key-value pairs in which the value for each key is a dictionary.</p>
+<p>In this data structure, one dictionary contains key-value pairs in which the value <em>for each key</em> is a dictionary.</p>
 <p>Here the <strong>key</strong> is the name of a U.S. president and its <strong>value</strong> is a dictionary containing facts about that president. Note where the curly braces are used.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">presidents_dict</span> <span class="o">=</span> <span class="p">{</span>
 <span class="s2">&quot;George Washington&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;Presidency&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;Wikipedia_entry&quot;</span><span class="p">:</span><span class="s2">&quot;http://en.wikipedia.org/wiki/George_Washington&quot;</span><span class="p">,</span><span class="s2">&quot;Took_office&quot;</span><span class="p">:</span><span class="s2">&quot;4/30/1789&quot;</span><span class="p">,</span><span class="s2">&quot;Left_office&quot;</span><span class="p">:</span><span class="s2">&quot;3/4/1797&quot;</span><span class="p">,</span><span class="s2">&quot;Party&quot;</span><span class="p">:</span><span class="s2">&quot;Independent &quot;</span><span class="p">,</span><span class="s2">&quot;Home_state&quot;</span><span class="p">:</span><span class="s2">&quot;Virginia&quot;</span><span class="p">,</span><span class="s2">&quot;Occupation&quot;</span><span class="p">:</span><span class="s2">&quot;Planter&quot;</span><span class="p">,</span><span class="s2">&quot;College&quot;</span><span class="p">:</span><span class="s2">&quot;None&quot;</span><span class="p">,</span><span class="s2">&quot;Age_when_took_office&quot;</span><span class="p">:</span><span class="mi">57</span><span class="p">,</span><span class="s2">&quot;Birth_date&quot;</span><span class="p">:</span><span class="s2">&quot;2/22/1732&quot;</span><span class="p">,</span><span class="s2">&quot;Birthplace&quot;</span><span class="p">:</span><span class="s2">&quot;Westmoreland County, Virginia&quot;</span><span class="p">,</span><span class="s2">&quot;Death_date&quot;</span><span class="p">:</span><span class="s2">&quot;12/14/1799&quot;</span><span class="p">,</span><span class="s2">&quot;Location_death&quot;</span><span class="p">:</span><span class="s2">&quot;Mount Vernon, Virginia&quot;</span><span class="p">},</span>
@@ -264,11 +300,11 @@
 <li><p>How to loop through keys, values, or both at once</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">list(</span> <span class="pre">dict.keys()</span> <span class="pre">)</span></code> to get a list of all keys in a dictionary</p></li>
 <li><p>Check for presence of a key or a value with <code class="docutils literal notranslate"><span class="pre">in</span></code> or <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">in</span></code></p></li>
-<li><p>Provide a default value (here, 0) in case a key is not present: <code class="docutils literal notranslate"><span class="pre">dict.get(key,</span> <span class="pre">0)</span></code></p></li>
+<li><p>Provide a default value in case a key is not present: <code class="docutils literal notranslate"><span class="pre">dict.get(key,</span> <span class="pre">value)</span></code></p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">dict.setdefault(key,</span> <span class="pre">value)</span></code> to set a new key but prevent overwriting an existing value if the key is already present</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">pprint</span></code> if you need to print out a large dictionary’s contents in the Terminal</p></li>
 </ol>
-<p>We stop on page 112, “Using Data Structures to Model Real-World Things.” On page 117, Sweigart starts to discuss “dictionaries and lists that contain other dictionaries and lists,” also known as <strong>nested dictionaries</strong>. It’s a rather brief discussion and not tremendously helpful.</p>
+<p>In the section “Using Data Structures to Model Real-World Things,” Sweigart discusses nested dictionaries and lists. This is illustrated above with the example shown under the subheading “A dictionary of dictionaries.”</p>
 </div>
 <div class="section" id="slides-chapters-5-and-16">
 <h3>Slides: chapters 5 and 16<a class="headerlink" href="#slides-chapters-5-and-16" title="Permalink to this headline">¶</a></h3>
