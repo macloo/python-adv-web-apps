@@ -23,23 +23,32 @@ print(cat)
 
 print() # blank line
 
-# we imported pprint (not normally needed for dictionaries)
-# just so we could see this difference in printing in Terminal
+# we imported pprint just so we could see this difference
+# in printing in Terminal --
 pp.pprint(cat)
 
 print() # blank line
 
+# how we use a key to get a value
 print('Print the value of "nose":')
 print(cat['nose'])
 
 print() # blank line
 
+# how we use a key to get a value, again
 print('Print the value of "name":')
 print(cat['name'])
 
 print() # blank line
 
+# using the keys, values in a concatenated string
 print("The cat's name is " + cat['name'] + " and the cat's nose is " + cat['nose'] + ".")
+
+# using the keys, values with string formatters
+print(f"The cat's name is {cat['name']} and the cat's nose is {cat['nose']}.")
+
+# sting formatters explained:
+# https://realpython.com/python-f-strings/
 
 print() # blank line
 
@@ -48,5 +57,10 @@ new_name = input("Give the cat a new name: ")
 cat.update( {'name':new_name} )
 
 print("The cat's name is now " + cat['name'] + ".")
+
+print() # blank line
+
+# using the keys, values in a concatenated string
+print("The cat's name is " + cat['name'] + " and the cat's nose is " + cat['nose'] + ".")
 
 print() # blank line

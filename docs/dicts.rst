@@ -3,7 +3,9 @@ Dictionaries
 
 This section is based on chapter 5 in Sweigart’s `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition).
 
-`Python scripts for this section <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/dictionaries>`_
+- `Python scripts for this section <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/dictionaries>`_
+
+- `Python documentation for dictionaries <https://docs.python.org/3/library/stdtypes.html#mapping-types-dict>`_
 
 Introduction to dictionaries
 ----------------------------
@@ -22,6 +24,20 @@ Although Sweigart refers to the keys as *indexes,* you shouldn't think of them b
 
 To understand Python dictionaries better, run the file *simple_dict.py* found `here <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/dictionaries/>`_.
 
+Note that **keys** can be strings, integers or floats, and **values** can also be strings, integers or floats. ::
+
+    >>> new_dict = {}
+    >>> new_dict['name'] = 'Mahatma Gandhi'
+    >>> new_dict[2] = 'India'
+    >>> new_dict[3.14] = 'chakras'
+    >>> new_dict['number'] = 108
+    >>> new_dict['one'] = 1
+    >>> print(new_dict)
+    {'name': 'Mahatma Gandhi', 2: 'India', 3.14: 'chakras', 'number': 108, 'one': 1}
+    >>>
+
+Other data types can also be used as dictionary values, as you’ll see below.
+
 
 How to loop over a dictionary
 -----------------------------
@@ -36,28 +52,48 @@ Naturally, your dictionary likely will not be named ``dict``.
 
 Sweigart does an excellent job of explaining dictionaries in chapter 5.
 
+You can get a Python **list** of all the keys in a dictionary: ::
+
+    keys_list = list(dict.keys())
+
+Similarly, you can get a Python **list** of all the values: ::
+
+    values_list = list(dict.values())
 
 Converting a CSV to a dictionary
 --------------------------------
 
-You can use Python’s ``csv`` module and the ``DictReader()`` method to create a list of dictionaries from a CSV file (also see *dictreader_example2.py* and *dictreader_example3.py* `here <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/dictionaries/>`_).
+You can use Python’s ``csv`` module and the ``DictReader()`` method to create a list of dictionaries from a CSV file (also see *dictreader_example2.py* `here <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/dictionaries/>`_).
 
 .. literalinclude:: ../python_code_examples/dictionaries/dictreader_example.py
    :caption:
 
+Note that if you try to treat a DictReader object like a normal list, it will not work: ::
+
+    >>> print(my_reader)
+    <csv.DictReader object at 0x1047c5400>
+
+But you can *convert* the DictReader object into a normal list if needed: ::
+
+    new_list_version = list(my_reader)
+    >>> print(new_list_version)
+    [{'Title': 'The Calculating Stars', 'Author': 'Mary Robinette Kowal', 'Year': '2019'}, {'Title': 'The Stone Sky', 'Author': 'N. K. Jemisin', 'Year': '2018'}, {'Title': 'The Obelisk Gate', 'Author': 'N. K. Jemisin', 'Year': '2017'}, {'Title' ...
 
 Writing a dictionary into a CSV file
 ------------------------------------
 
-xyz
+This is covered in `the CSV chapter <http://localhost:8000/docs/_build/html/csv.html>`_.
+
 
 Examples of complex dictionaries
 --------------------------------
 
+This is a bit like the nesting Matryoshka dolls from Russia — you can combine multiple dictionaries in a list, and you can even nest dictionaries inside other dictionaries.
+
 A list of dictionaries
 ++++++++++++++++++++++
 
-In this data structure, several or many dictionaries are items in a Python list.
+In this data structure, one Python list contains many dictionaries. Each dictionary is a list item.
 
 All the dictionaries contain the same keys. ::
 
@@ -73,7 +109,7 @@ All the dictionaries contain the same keys. ::
 A dictionary of dictionaries
 ++++++++++++++++++++++++++++
 
-In this data structure, one dictionary contains key-value pairs in which the value for each key is a dictionary.
+In this data structure, one dictionary contains key-value pairs in which the value *for each key* is a dictionary.
 
 Here the **key** is the name of a U.S. president and its **value** is a dictionary containing facts about that president. Note where the curly braces are used. ::
 
@@ -96,11 +132,12 @@ Key points
 3. How to loop through keys, values, or both at once
 4. Use ``list( dict.keys() )`` to get a list of all keys in a dictionary
 5. Check for presence of a key or a value with ``in`` or ``not in``
-6. Provide a default value (here, 0) in case a key is not present: ``dict.get(key, 0)``
+6. Provide a default value in case a key is not present: ``dict.get(key, value)``
 7. Use ``dict.setdefault(key, value)`` to set a new key but prevent overwriting an existing value if the key is already present
-8. Use ``import pprint`` if you need to print out a large dictionary's contents in the Terminal
+8. Use ``import pprint`` if you need to print out a large dictionary’s contents in the Terminal
 
-We stop on page 112, “Using Data Structures to Model Real-World Things.” On page 117, Sweigart starts to discuss “dictionaries and lists that contain other dictionaries and lists,” also known as **nested dictionaries**. It's a rather brief discussion and not tremendously helpful.
+In the section “Using Data Structures to Model Real-World Things,” Sweigart discusses nested dictionaries and lists. This is illustrated above with the example shown under the subheading “A dictionary of dictionaries.”
+
 
 Slides: chapters 5 and 16
 +++++++++++++++++++++++++
