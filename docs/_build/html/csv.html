@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CSV Files &mdash; Python Beginners  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Web Scraping Intro" href="scraping.html" />
+    <link rel="prev" title="Dictionaries" href="dicts.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Python Beginners
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="learn_python.html">Starting Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lists.html">Working with Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_files.html">Reading and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dicts.html">Dictionaries</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">CSV Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction-to-csv-files">Introduction to CSV files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#the-csv-module-in-python">The csv module in Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#writing-to-a-csv">Writing to a CSV</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="scraping.html">Web Scraping Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scraping2.html">Web Scraping, Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scraping3.html">Web Scraping, Part 3</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Beginners</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>CSV Files</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/csv.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="csv-files">
+<h1>CSV Files<a class="headerlink" href="#csv-files" title="Permalink to this headline">¶</a></h1>
+<p>This section is based in part on chapter 16 in Sweigart’s <a class="reference external" href="https://automatetheboringstuff.com/">Automate the Boring Stuff with Python</a> (second edition).</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/csvs">Python scripts for this section</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/csv.html">Python documentation for dictionaries</a></p></li>
+</ul>
+<div class="section" id="introduction-to-csv-files">
+<h2>Introduction to CSV files<a class="headerlink" href="#introduction-to-csv-files" title="Permalink to this headline">¶</a></h2>
+<p>CSV stands for comma-separated values. A CSV file can be opened in Google Sheets or Excel and will be formatted as a spreadsheet. However, a CSV file is actually a plain-text file. It can also be opened with a text editor program such as Atom.</p>
+<p>CSVs give us a good, simple way to organize data without using a database program. It’s easy to read from and write to CSV files with Python.</p>
+</div>
+<div class="section" id="the-csv-module-in-python">
+<h2>The csv module in Python<a class="headerlink" href="#the-csv-module-in-python" title="Permalink to this headline">¶</a></h2>
+<p>This is a built-in module, so you do not need to install it, However, you must import it in any script that uses it.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">csv</span>
+</pre></div>
+</div>
+<p>After the import, you can use the methods that are part of the module:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">()</span>
+<span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">()</span>
+<span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">()</span>
+<span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Note that using methods from the <code class="docutils literal notranslate"><span class="pre">csv</span></code> module will also involve use of Python’s file handling functions, such as <code class="docutils literal notranslate"><span class="pre">.open()</span></code>. These are covered in <a class="reference external" href="working_with_files.html">Reading and Writing Files</a> here.</p>
+</div>
+<div class="section" id="writing-to-a-csv">
+<h2>Writing to a CSV<a class="headerlink" href="#writing-to-a-csv" title="Permalink to this headline">¶</a></h2>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/csvs/write_csv.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;template script for writing to a csv file&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+
+<span class="c1"># open new file for writing - will erase file if it already exists -</span>
+<span class="n">csvfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;example.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+
+<span class="c1"># make a new variable - c - for Python&#39;s CSV writer object -</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">csvfile</span><span class="p">)</span>
+
+<span class="c1"># write a column headings row - do this only once -</span>
+<span class="n">c</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;address&#39;</span><span class="p">,</span><span class="s1">&#39;job&#39;</span><span class="p">]</span> <span class="p">)</span>
+
+<span class="c1"># call some function that returns a list --</span>
+<span class="c1"># for purposes of the template, here is a list of lists -</span>
+<span class="n">the_list</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s1">&#39;Alice&#39;</span><span class="p">,</span> <span class="s1">&#39;Gainesville, Florida&#39;</span><span class="p">,</span> <span class="s1">&#39;chef&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;Bob&#39;</span><span class="p">,</span> <span class="s1">&#39;Chicago, Illinois&#39;</span><span class="p">,</span> <span class="s1">&#39;writer&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;Ted&#39;</span><span class="p">,</span> <span class="s1">&#39;Miami, Florida&#39;</span><span class="p">,</span> <span class="s1">&#39;driver&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;Carol&#39;</span><span class="p">,</span> <span class="s1">&#39;Portland, Oregon&#39;</span><span class="p">,</span> <span class="s1">&#39;executive&#39;</span><span class="p">]</span>
+<span class="p">]</span>
+
+<span class="c1"># use a for-loop to write each row into the CSV file</span>
+<span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">the_list</span><span class="p">:</span>
+    <span class="c1"># write one row to csv — item MUST BE a LIST</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+<span class="c1"># save and close the file</span>
+<span class="n">csvfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Note that lines 13–25 above would normally be replaced by a for-loop that incorporates a function that creates one row to be written to the CSV.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="scraping.html" class="btn btn-neutral float-right" title="Web Scraping Intro" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="dicts.html" class="btn btn-neutral float-left" title="Dictionaries" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020 Mindy McAdams
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
