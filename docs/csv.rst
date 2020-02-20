@@ -33,6 +33,8 @@ Note that using methods from the ``csv`` module will also involve use of Python'
 Writing to a CSV
 ----------------
 
+This creates a new CSV file and fills it, row by row.
+
 .. literalinclude:: ../python_code_examples/csvs/write_csv.py
    :caption:
    :linenos:
@@ -56,6 +58,8 @@ Reading from a CSV
 
 The following example script uses a CSV file named *presidents.csv.* It contains 46 rows: one row for each U.S. president, plus a header row at the top.
 
+The script opens the CSV and then can get all rows from it.
+
 .. figure:: _static/images/pres_csv_screenshot.png
    :scale: 50 %
    :alt: CSV file in Excel screenshot
@@ -66,9 +70,9 @@ The following example script uses a CSV file named *presidents.csv.* It contains
    :caption:
    :linenos:
 
-Note that in line 13 above, ``row`` is a Python list, and so we can use list indexes to get only the second item — ``row[1]`` and the sixth item — ``row[5]``. When we use ``csv.reader()``, *each row* from the CSV file is a Python **list** of **strings.**
+Note that in line 13 above, ``row`` is a Python list, and so we can use list indexes to get only the second item — ``row[1]`` — and the sixth item — ``row[5]``. When we use ``csv.reader()``, *each row* from the CSV file is a Python **list** of **strings.**
 
-The code above will produce 46 lines, starting like this:
+The code above will print 46 lines, starting like this:
 
 .. figure:: _static/images/pres_csv_print.png
   :scale: 50 %
@@ -81,3 +85,24 @@ Note the steps required:
 3. Create a CSV reader object and assign it to a new variable.
 4. Use a for-loop to read from all rows in the CSV.
 5. Close the file.
+
+Writing into a dictionary
+-------------------------
+
+The ``csv.DictWriter()`` method
+
+
+Reading into a dictionary
+-------------------------
+
+Typically the ``csv.DictReader()`` method is used to convert a CSV file to a Python dictionary. You *read from* an existing CSV and create a Python dictionary from it.
+
+.. literalinclude:: ../python_code_examples/csvs/dictreader_ex.py
+   :caption:
+   :linenos:
+
+You can read generally about Python dictionaries here: `Dictionaries <dicts.html>`_
+
+See also: `Converting a CSV to a dictionary <dicts.html#converting-a-csv-to-a-dictionary>`_
+
+.
