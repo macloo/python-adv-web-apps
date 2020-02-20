@@ -5,7 +5,7 @@ This section is based in part on chapter 16 in Sweigart’s `Automate the Boring
 
 - `Python scripts for this section <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/csvs>`_
 
-- `Python documentation for dictionaries <https://docs.python.org/3/library/csv.html>`_
+- `Python documentation for CSVs <https://docs.python.org/3/library/csv.html>`_
 
 Introduction to CSV files
 -------------------------
@@ -21,7 +21,7 @@ This is a built-in module, so you do not need to install it, However, you must i
 
     import csv
 
-After the import, you can use the methods that are part of the module: ::
+After the import, you can use any of the methods that are part of the module: ::
 
     csv.reader()
     csv.writer()
@@ -37,4 +37,33 @@ Writing to a CSV
    :caption:
    :linenos:
 
-Note that lines 13–25 above would normally be replaced by a for-loop that incorporates a function that creates one row to be written to the CSV.
+Note that lines 13–25 above would normally be replaced by a for-loop that incorporates a **function** that creates one row to be written to the CSV.
+
+That function might be scraping hundreds of web pages one at a time, for example. In that case, what is scraped from one page is written as one row in the CSV.
+
+Note the steps required:
+
+1. Import the module.
+2. Open a file for writing.
+3. Create a CSV writer object and assign it to a new variable.
+4. Write the header row into the CSV.
+5. Write all the other rows into the CSV. Normally this will involve a for-loop.
+6. Close the file.
+
+
+Reading from a CSV
+------------------
+
+The following example script uses a CSV file named *presidents.csv.*
+
+.. literalinclude:: ../python_code_examples/csvs/read_csv.py
+   :caption:
+   :linenos:
+
+Note the steps required:
+
+1. Import the module.
+2. Open a file for reading.
+3. Create a CSV reader object and assign it to a new variable.
+4. Use a for-loop to read from all rows in the CSV.
+5. Close the file.
