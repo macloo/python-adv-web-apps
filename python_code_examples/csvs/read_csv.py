@@ -2,7 +2,7 @@
 import csv
 
 # open an existing file for reading -
-csvfile = open('presidents.csv')
+csvfile = open('presidents.csv', newline='')
 
 # make a new variable - c - for Python's CSV reader object -
 c = csv.reader(csvfile)
