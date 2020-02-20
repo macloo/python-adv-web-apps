@@ -32,3 +32,9 @@ Note that using methods from the ``csv`` module will also involve use of Python'
 
 Writing to a CSV
 ----------------
+
+.. literalinclude:: ../python_code_examples/csvs/write_csv.py
+   :caption:
+   :linenos:
+
+Note that lines 13–25 above would normally be replaced by a for-loop that incorporates a function that creates one row to be written to the CSV.
