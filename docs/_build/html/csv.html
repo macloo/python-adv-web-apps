@@ -91,6 +91,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#introduction-to-csv-files">Introduction to CSV files</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#the-csv-module-in-python">The csv module in Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#writing-to-a-csv">Writing to a CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reading-from-a-csv">Reading from a CSV</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="scraping.html">Web Scraping Intro</a></li>
@@ -165,7 +166,7 @@
 <p>This section is based in part on chapter 16 in Sweigart’s <a class="reference external" href="https://automatetheboringstuff.com/">Automate the Boring Stuff with Python</a> (second edition).</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/csvs">Python scripts for this section</a></p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/csv.html">Python documentation for dictionaries</a></p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/csv.html">Python documentation for CSVs</a></p></li>
 </ul>
 <div class="section" id="introduction-to-csv-files">
 <h2>Introduction to CSV files<a class="headerlink" href="#introduction-to-csv-files" title="Permalink to this headline">¶</a></h2>
@@ -178,7 +179,7 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">csv</span>
 </pre></div>
 </div>
-<p>After the import, you can use the methods that are part of the module:</p>
+<p>After the import, you can use any of the methods that are part of the module:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">()</span>
 <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">()</span>
 <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">()</span>
@@ -249,7 +250,65 @@
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Note that lines 13–25 above would normally be replaced by a for-loop that incorporates a function that creates one row to be written to the CSV.</p>
+<p>Note that lines 13–25 above would normally be replaced by a for-loop that incorporates a <strong>function</strong> that creates one row to be written to the CSV.</p>
+<p>That function might be scraping hundreds of web pages one at a time, for example. In that case, what is scraped from one page is written as one row in the CSV.</p>
+<p>Note the steps required:</p>
+<ol class="arabic simple">
+<li><p>Import the module.</p></li>
+<li><p>Open a file for writing.</p></li>
+<li><p>Create a CSV writer object and assign it to a new variable.</p></li>
+<li><p>Write the header row into the CSV.</p></li>
+<li><p>Write all the other rows into the CSV. Normally this will involve a for-loop.</p></li>
+<li><p>Close the file.</p></li>
+</ol>
+</div>
+<div class="section" id="reading-from-a-csv">
+<h2>Reading from a CSV<a class="headerlink" href="#reading-from-a-csv" title="Permalink to this headline">¶</a></h2>
+<p>The following example script uses a CSV file named <em>presidents.csv.</em></p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/csvs/read_csv.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;template script for reading from a csv file&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+
+<span class="c1"># open an existing file for reading -</span>
+<span class="n">csvfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;presidents.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># make a new variable - c - for Python&#39;s CSV reader object -</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">)</span>
+
+<span class="c1"># read whatever you want from the reader object</span>
+<span class="c1"># print it or use it any way you like</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+
+<span class="c1"># save and close the file</span>
+<span class="n">csvfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Note the steps required:</p>
+<ol class="arabic simple">
+<li><p>Import the module.</p></li>
+<li><p>Open a file for reading.</p></li>
+<li><p>Create a CSV reader object and assign it to a new variable.</p></li>
+<li><p>Use a for-loop to read from all rows in the CSV.</p></li>
+<li><p>Close the file.</p></li>
+</ol>
 </div>
 </div>
 
