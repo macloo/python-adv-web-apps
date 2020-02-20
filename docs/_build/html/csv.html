@@ -92,6 +92,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#the-csv-module-in-python">The csv module in Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#writing-to-a-csv">Writing to a CSV</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#reading-from-a-csv">Reading from a CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#writing-into-a-dictionary">Writing into a dictionary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reading-into-a-dictionary">Reading into a dictionary</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="scraping.html">Web Scraping Intro</a></li>
@@ -190,6 +192,7 @@
 </div>
 <div class="section" id="writing-to-a-csv">
 <h2>Writing to a CSV<a class="headerlink" href="#writing-to-a-csv" title="Permalink to this headline">¶</a></h2>
+<p>This creates a new CSV file and fills it, row by row.</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">../python_code_examples/csvs/write_csv.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -265,6 +268,7 @@
 <div class="section" id="reading-from-a-csv">
 <h2>Reading from a CSV<a class="headerlink" href="#reading-from-a-csv" title="Permalink to this headline">¶</a></h2>
 <p>The following example script uses a CSV file named <em>presidents.csv.</em> It contains 46 rows: one row for each U.S. president, plus a header row at the top.</p>
+<p>The script opens the CSV and then can get all rows from it.</p>
 <div class="figure align-default">
 <a class="reference internal image-reference" href="_images/pres_csv_screenshot.png"><img alt="CSV file in Excel screenshot" src="_images/pres_csv_screenshot.png" style="width: 700.0px; height: 140.5px;" /></a>
 </div>
@@ -305,8 +309,8 @@
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Note that in line 13 above, <code class="docutils literal notranslate"><span class="pre">row</span></code> is a Python list, and so we can use list indexes to get only the second item — <code class="docutils literal notranslate"><span class="pre">row[1]</span></code> and the sixth item — <code class="docutils literal notranslate"><span class="pre">row[5]</span></code>. When we use <code class="docutils literal notranslate"><span class="pre">csv.reader()</span></code>, <em>each row</em> from the CSV file is a Python <strong>list</strong> of <strong>strings.</strong></p>
-<p>The code above will produce 46 lines, starting like this:</p>
+<p>Note that in line 13 above, <code class="docutils literal notranslate"><span class="pre">row</span></code> is a Python list, and so we can use list indexes to get only the second item — <code class="docutils literal notranslate"><span class="pre">row[1]</span></code> — and the sixth item — <code class="docutils literal notranslate"><span class="pre">row[5]</span></code>. When we use <code class="docutils literal notranslate"><span class="pre">csv.reader()</span></code>, <em>each row</em> from the CSV file is a Python <strong>list</strong> of <strong>strings.</strong></p>
+<p>The code above will print 46 lines, starting like this:</p>
 <div class="figure align-default">
 <a class="reference internal image-reference" href="_images/pres_csv_print.png"><img alt="result of code screenshot" src="_images/pres_csv_print.png" style="width: 688.0px; height: 255.0px;" /></a>
 </div>
@@ -318,6 +322,53 @@
 <li><p>Use a for-loop to read from all rows in the CSV.</p></li>
 <li><p>Close the file.</p></li>
 </ol>
+</div>
+<div class="section" id="writing-into-a-dictionary">
+<h2>Writing into a dictionary<a class="headerlink" href="#writing-into-a-dictionary" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">csv.DictWriter()</span></code> method</p>
+</div>
+<div class="section" id="reading-into-a-dictionary">
+<h2>Reading into a dictionary<a class="headerlink" href="#reading-into-a-dictionary" title="Permalink to this headline">¶</a></h2>
+<p>Typically the <code class="docutils literal notranslate"><span class="pre">csv.DictReader()</span></code> method is used to convert a CSV file to a Python dictionary. You <em>read from</em> an existing CSV and create a Python dictionary from it.</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/csvs/dictreader_ex.py</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;template script for creating a dict from a csv file&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+
+<span class="c1"># open an existing file for reading -</span>
+<span class="n">csvfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;presidents.csv&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="c1"># make a new variable - c - for Python&#39;s DictReader object -</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">)</span>
+
+<span class="c1"># read whatever you want from the DictReader object</span>
+<span class="c1"># using the column headings from the CSV as the dict keys</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;President&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; ... &quot;</span> <span class="o">+</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Party&#39;</span><span class="p">])</span>
+
+<span class="c1"># save and close the file</span>
+<span class="n">csvfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>You can read generally about Python dictionaries here: <a class="reference external" href="dicts.html">Dictionaries</a></p>
+<p>See also: <a class="reference external" href="dicts.html#converting-a-csv-to-a-dictionary">Converting a CSV to a dictionary</a></p>
+<p>.</p>
 </div>
 </div>
 
