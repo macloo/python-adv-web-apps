@@ -264,7 +264,11 @@
 </div>
 <div class="section" id="reading-from-a-csv">
 <h2>Reading from a CSV<a class="headerlink" href="#reading-from-a-csv" title="Permalink to this headline">¶</a></h2>
-<p>The following example script uses a CSV file named <em>presidents.csv.</em></p>
+<p>The following example script uses a CSV file named <em>presidents.csv.</em> It contains 46 rows: one row for each U.S. president, plus a header row at the top.</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/pres_csv_screenshot.png"><img alt="CSV file in Excel screenshot" src="_images/pres_csv_screenshot.png" style="width: 700.0px; height: 140.5px;" /></a>
+</div>
+<p><em>Above, the top rows of the CSV file as seen in Excel.</em></p>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">../python_code_examples/csvs/read_csv.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -286,7 +290,7 @@
 <span class="kn">import</span> <span class="nn">csv</span>
 
 <span class="c1"># open an existing file for reading -</span>
-<span class="n">csvfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;presidents.csv&#39;</span><span class="p">)</span>
+<span class="n">csvfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;presidents.csv&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 
 <span class="c1"># make a new variable - c - for Python&#39;s CSV reader object -</span>
 <span class="n">c</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">)</span>
@@ -300,6 +304,11 @@
 <span class="n">csvfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </td></tr></table></div>
+</div>
+<p>Note that in line 13 above, <code class="docutils literal notranslate"><span class="pre">row</span></code> is a Python list, and so we can use list indexes to get only the second item — <code class="docutils literal notranslate"><span class="pre">row[1]</span></code> and the sixth item — <code class="docutils literal notranslate"><span class="pre">row[5]</span></code>. When we use <code class="docutils literal notranslate"><span class="pre">csv.reader()</span></code>, <em>each row</em> from the CSV file is a Python <strong>list</strong> of <strong>strings.</strong></p>
+<p>The code above will produce 46 lines, starting like this:</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/pres_csv_print.png"><img alt="result of code screenshot" src="_images/pres_csv_print.png" style="width: 688.0px; height: 255.0px;" /></a>
 </div>
 <p>Note the steps required:</p>
 <ol class="arabic simple">
