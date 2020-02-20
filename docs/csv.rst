@@ -56,6 +56,12 @@ Reading from a CSV
 
 The following example script uses a CSV file named *presidents.csv.*
 
+.. figure:: _static/images/pres_csv_screenshot.png
+   :scale: 50 %
+   :alt: CSV file in Excel screenshot
+
+*Above, the top rows of the CSV file as seen in Excel.*
+
 .. literalinclude:: ../python_code_examples/csvs/read_csv.py
    :caption:
    :linenos:
