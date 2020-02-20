@@ -206,6 +206,7 @@ Key points
    - ``remove()``
    - ``sort()``
    - ``pop()`` *not in Sweigart; see above*
+   
 11. The differences between a Python list and a tuple
 12. You can’t simply make a copy of a list in the way you might expect (know how to look up the *correct way* to make a copy if you need to do so)
 
