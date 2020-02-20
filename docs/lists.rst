@@ -197,16 +197,17 @@ Key points
 5. Use ``len()`` to get the number of items in a list
 6. Use ``del()`` to delete an item from a list using its index
 7. Loop through a list in different ways
-8. Increment a value using ``+=``
-9. Use the following *methods* correctly:
+8. Use of ``in`` and ``not in`` with lists
+9. Increment a value using ``+=``
+10. Use the following *methods* correctly:
 
    - ``index()``
    - ``append()``
    - ``remove()``
    - ``sort()``
    - ``pop()`` *not in Sweigart; see above*
-10. The differences between a Python list and a tuple
-11. You can’t simply make a copy of a list in the way you might expect (know how to look up the *correct way* to make a copy if you need to do so)
+11. The differences between a Python list and a tuple
+12. You can’t simply make a copy of a list in the way you might expect (know how to look up the *correct way* to make a copy if you need to do so)
 
 Slides: chapters 9 and 4
 ++++++++++++++++++++++++
