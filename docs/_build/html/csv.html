@@ -92,8 +92,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#the-csv-module-in-python">The csv module in Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#writing-to-a-csv">Writing to a CSV</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#reading-from-a-csv">Reading from a CSV</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#writing-into-a-dictionary">Writing into a dictionary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#reading-into-a-dictionary">Reading into a dictionary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#writing-from-a-dictionary">Writing from a dictionary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#json-formatted-data">JSON formatted data</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="scraping.html">Web Scraping Intro</a></li>
@@ -193,8 +194,8 @@
 <div class="section" id="writing-to-a-csv">
 <h2>Writing to a CSV<a class="headerlink" href="#writing-to-a-csv" title="Permalink to this headline">¶</a></h2>
 <p>This creates a new CSV file and fills it, row by row.</p>
-<div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/csvs/write_csv.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/csvs/write_csv.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -273,8 +274,8 @@
 <a class="reference internal image-reference" href="_images/pres_csv_screenshot.png"><img alt="CSV file in Excel screenshot" src="_images/pres_csv_screenshot.png" style="width: 700.0px; height: 140.5px;" /></a>
 </div>
 <p><em>Above, the top rows of the CSV file as seen in Excel.</em></p>
-<div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/csvs/read_csv.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/csvs/read_csv.py</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -323,15 +324,11 @@
 <li><p>Close the file.</p></li>
 </ol>
 </div>
-<div class="section" id="writing-into-a-dictionary">
-<h2>Writing into a dictionary<a class="headerlink" href="#writing-into-a-dictionary" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">csv.DictWriter()</span></code> method</p>
-</div>
 <div class="section" id="reading-into-a-dictionary">
 <h2>Reading into a dictionary<a class="headerlink" href="#reading-into-a-dictionary" title="Permalink to this headline">¶</a></h2>
-<p>Typically the <code class="docutils literal notranslate"><span class="pre">csv.DictReader()</span></code> method is used to convert a CSV file to a Python dictionary. You <em>read from</em> an existing CSV and create a Python dictionary from it.</p>
-<div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/csvs/dictreader_ex.py</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<p>Typically the <code class="docutils literal notranslate"><span class="pre">csv.DictReader()</span></code> method is used to convert a CSV file to a Python dictionary. You <em>read from</em> an existing CSV and create a Python dictionary from it. Note, the CSV file is <em>unchanged,</em> and the dictionary does not exist as a separate file.</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/csvs/dictreader_ex.py</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -366,8 +363,97 @@
 </pre></div>
 </td></tr></table></div>
 </div>
+<p>The key difference between this and the previous script here is in line 13: You can access data from the CSV using dictionary keys <em>instead of</em> list indexes. For working with a CSV with a lot of columns, this is really nice!</p>
 <p>You can read generally about Python dictionaries here: <a class="reference external" href="dicts.html">Dictionaries</a></p>
 <p>See also: <a class="reference external" href="dicts.html#converting-a-csv-to-a-dictionary">Converting a CSV to a dictionary</a></p>
+</div>
+<div class="section" id="writing-from-a-dictionary">
+<h2>Writing from a dictionary<a class="headerlink" href="#writing-from-a-dictionary" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">csv.DictWriter()</span></code> method will write to a CSV file using rows of data that are <em>already</em> formatted as dictionaries.</p>
+<p>If your data is already a list of dictionaries, as in the following example, you can use <code class="docutils literal notranslate"><span class="pre">csv.DictWriter()</span></code> to write to a normal CSV.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/csvs/dictwriter_ex.py</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;template script for creating a csv file from a dictionary&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+
+<span class="c1"># sample of a list of dictionaries</span>
+<span class="c1"># normally this would be in a separate file, or</span>
+<span class="c1"># constructed from data in a separate file</span>
+<span class="n">presidents_list</span> <span class="o">=</span> <span class="p">[</span>
+<span class="p">{</span><span class="s2">&quot;Presidency&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;President&quot;</span><span class="p">:</span><span class="s2">&quot;George Washington&quot;</span><span class="p">,</span><span class="s2">&quot;Wikipedia_entry&quot;</span><span class="p">:</span><span class="s2">&quot;http://en.wikipedia.org/wiki/George_Washington&quot;</span><span class="p">,</span><span class="s2">&quot;Took_office&quot;</span><span class="p">:</span><span class="s2">&quot;4/30/1789&quot;</span><span class="p">,</span><span class="s2">&quot;Left_office&quot;</span><span class="p">:</span><span class="s2">&quot;3/4/1797&quot;</span><span class="p">,</span><span class="s2">&quot;Party&quot;</span><span class="p">:</span><span class="s2">&quot;Independent &quot;</span><span class="p">,</span><span class="s2">&quot;Home_state&quot;</span><span class="p">:</span><span class="s2">&quot;Virginia&quot;</span><span class="p">,</span><span class="s2">&quot;Occupation&quot;</span><span class="p">:</span><span class="s2">&quot;Planter&quot;</span><span class="p">,</span><span class="s2">&quot;College&quot;</span><span class="p">:</span><span class="s2">&quot;None&quot;</span><span class="p">,</span><span class="s2">&quot;Age_when_took_office&quot;</span><span class="p">:</span><span class="mi">57</span><span class="p">,</span><span class="s2">&quot;Birth_date&quot;</span><span class="p">:</span><span class="s2">&quot;2/22/1732&quot;</span><span class="p">,</span><span class="s2">&quot;Birthplace&quot;</span><span class="p">:</span><span class="s2">&quot;Westmoreland County, Virginia&quot;</span><span class="p">,</span><span class="s2">&quot;Death_date&quot;</span><span class="p">:</span><span class="s2">&quot;12/14/1799&quot;</span><span class="p">,</span><span class="s2">&quot;Location_death&quot;</span><span class="p">:</span><span class="s2">&quot;Mount Vernon, Virginia&quot;</span><span class="p">},</span>
+<span class="p">{</span><span class="s2">&quot;Presidency&quot;</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="s2">&quot;President&quot;</span><span class="p">:</span><span class="s2">&quot;John Adams&quot;</span><span class="p">,</span><span class="s2">&quot;Wikipedia_entry&quot;</span><span class="p">:</span><span class="s2">&quot;http://en.wikipedia.org/wiki/John_Adams&quot;</span><span class="p">,</span><span class="s2">&quot;Took_office&quot;</span><span class="p">:</span><span class="s2">&quot;3/4/1797&quot;</span><span class="p">,</span><span class="s2">&quot;Left_office&quot;</span><span class="p">:</span><span class="s2">&quot;3/4/1801&quot;</span><span class="p">,</span><span class="s2">&quot;Party&quot;</span><span class="p">:</span><span class="s2">&quot;Federalist &quot;</span><span class="p">,</span><span class="s2">&quot;Home_state&quot;</span><span class="p">:</span><span class="s2">&quot;Massachusetts&quot;</span><span class="p">,</span><span class="s2">&quot;Occupation&quot;</span><span class="p">:</span><span class="s2">&quot;Lawyer&quot;</span><span class="p">,</span><span class="s2">&quot;College&quot;</span><span class="p">:</span><span class="s2">&quot;Harvard&quot;</span><span class="p">,</span><span class="s2">&quot;Age_when_took_office&quot;</span><span class="p">:</span><span class="mi">61</span><span class="p">,</span><span class="s2">&quot;Birth_date&quot;</span><span class="p">:</span><span class="s2">&quot;10/30/1735&quot;</span><span class="p">,</span><span class="s2">&quot;Birthplace&quot;</span><span class="p">:</span><span class="s2">&quot;Quincy, Massachusetts&quot;</span><span class="p">,</span><span class="s2">&quot;Death_date&quot;</span><span class="p">:</span><span class="s2">&quot;7/4/1826&quot;</span><span class="p">,</span><span class="s2">&quot;Location_death&quot;</span><span class="p">:</span><span class="s2">&quot;Quincy, Massachusetts&quot;</span><span class="p">},</span>
+<span class="p">{</span><span class="s2">&quot;Presidency&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="s2">&quot;President&quot;</span><span class="p">:</span><span class="s2">&quot;Thomas Jefferson&quot;</span><span class="p">,</span><span class="s2">&quot;Wikipedia_entry&quot;</span><span class="p">:</span><span class="s2">&quot;http://en.wikipedia.org/wiki/Thomas_Jefferson&quot;</span><span class="p">,</span><span class="s2">&quot;Took_office&quot;</span><span class="p">:</span><span class="s2">&quot;3/4/1801&quot;</span><span class="p">,</span><span class="s2">&quot;Left_office&quot;</span><span class="p">:</span><span class="s2">&quot;3/4/1809&quot;</span><span class="p">,</span><span class="s2">&quot;Party&quot;</span><span class="p">:</span><span class="s2">&quot;Democratic-Republican &quot;</span><span class="p">,</span><span class="s2">&quot;Home_state&quot;</span><span class="p">:</span><span class="s2">&quot;Virginia&quot;</span><span class="p">,</span><span class="s2">&quot;Occupation&quot;</span><span class="p">:</span><span class="s2">&quot;Planter, Lawyer&quot;</span><span class="p">,</span><span class="s2">&quot;College&quot;</span><span class="p">:</span><span class="s2">&quot;William and Mary&quot;</span><span class="p">,</span><span class="s2">&quot;Age_when_took_office&quot;</span><span class="p">:</span><span class="mi">57</span><span class="p">,</span><span class="s2">&quot;Birth_date&quot;</span><span class="p">:</span><span class="s2">&quot;4/13/1743&quot;</span><span class="p">,</span><span class="s2">&quot;Birthplace&quot;</span><span class="p">:</span><span class="s2">&quot;Albemarle County, Virginia&quot;</span><span class="p">,</span><span class="s2">&quot;Death_date&quot;</span><span class="p">:</span><span class="s2">&quot;7/4/1826&quot;</span><span class="p">,</span><span class="s2">&quot;Location_death&quot;</span><span class="p">:</span><span class="s2">&quot;Albemarle County, Virginia&quot;</span><span class="p">},</span>
+<span class="p">{</span><span class="s2">&quot;Presidency&quot;</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span><span class="s2">&quot;President&quot;</span><span class="p">:</span><span class="s2">&quot;James Madison&quot;</span><span class="p">,</span><span class="s2">&quot;Wikipedia_entry&quot;</span><span class="p">:</span><span class="s2">&quot;http://en.wikipedia.org/wiki/James_Madison&quot;</span><span class="p">,</span><span class="s2">&quot;Took_office&quot;</span><span class="p">:</span><span class="s2">&quot;3/4/1809&quot;</span><span class="p">,</span><span class="s2">&quot;Left_office&quot;</span><span class="p">:</span><span class="s2">&quot;3/4/1817&quot;</span><span class="p">,</span><span class="s2">&quot;Party&quot;</span><span class="p">:</span><span class="s2">&quot;Democratic-Republican &quot;</span><span class="p">,</span><span class="s2">&quot;Home_state&quot;</span><span class="p">:</span><span class="s2">&quot;Virginia&quot;</span><span class="p">,</span><span class="s2">&quot;Occupation&quot;</span><span class="p">:</span><span class="s2">&quot;Lawyer&quot;</span><span class="p">,</span><span class="s2">&quot;College&quot;</span><span class="p">:</span><span class="s2">&quot;Princeton&quot;</span><span class="p">,</span><span class="s2">&quot;Age_when_took_office&quot;</span><span class="p">:</span><span class="mi">57</span><span class="p">,</span><span class="s2">&quot;Birth_date&quot;</span><span class="p">:</span><span class="s2">&quot;3/16/1751&quot;</span><span class="p">,</span><span class="s2">&quot;Birthplace&quot;</span><span class="p">:</span><span class="s2">&quot;Port Conway, Virginia&quot;</span><span class="p">,</span><span class="s2">&quot;Death_date&quot;</span><span class="p">:</span><span class="s2">&quot;6/28/1836&quot;</span><span class="p">,</span><span class="s2">&quot;Location_death&quot;</span><span class="p">:</span><span class="s2">&quot;Orange County, Virginia&quot;</span><span class="p">},</span>
+<span class="p">{</span><span class="s2">&quot;Presidency&quot;</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="s2">&quot;President&quot;</span><span class="p">:</span><span class="s2">&quot;James Monroe&quot;</span><span class="p">,</span><span class="s2">&quot;Wikipedia_entry&quot;</span><span class="p">:</span><span class="s2">&quot;http://en.wikipedia.org/wiki/James_Monroe&quot;</span><span class="p">,</span><span class="s2">&quot;Took_office&quot;</span><span class="p">:</span><span class="s2">&quot;3/4/1817&quot;</span><span class="p">,</span><span class="s2">&quot;Left_office&quot;</span><span class="p">:</span><span class="s2">&quot;3/4/1825&quot;</span><span class="p">,</span><span class="s2">&quot;Party&quot;</span><span class="p">:</span><span class="s2">&quot;Democratic-Republican &quot;</span><span class="p">,</span><span class="s2">&quot;Home_state&quot;</span><span class="p">:</span><span class="s2">&quot;Virginia&quot;</span><span class="p">,</span><span class="s2">&quot;Occupation&quot;</span><span class="p">:</span><span class="s2">&quot;Lawyer&quot;</span><span class="p">,</span><span class="s2">&quot;College&quot;</span><span class="p">:</span><span class="s2">&quot;William and Mary&quot;</span><span class="p">,</span><span class="s2">&quot;Age_when_took_office&quot;</span><span class="p">:</span><span class="mi">58</span><span class="p">,</span><span class="s2">&quot;Birth_date&quot;</span><span class="p">:</span><span class="s2">&quot;4/28/1758&quot;</span><span class="p">,</span><span class="s2">&quot;Birthplace&quot;</span><span class="p">:</span><span class="s2">&quot;Westmoreland County, Virginia&quot;</span><span class="p">,</span><span class="s2">&quot;Death_date&quot;</span><span class="p">:</span><span class="s2">&quot;7/4/1831&quot;</span><span class="p">,</span><span class="s2">&quot;Location_death&quot;</span><span class="p">:</span><span class="s2">&quot;New York, New York&quot;</span><span class="p">}</span>
+<span class="p">]</span>
+
+<span class="c1"># open a new file for writing - if file exists, contents will be erased</span>
+<span class="n">csvfile</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;new_file.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+
+<span class="c1"># set the headers</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Presidency&#39;</span><span class="p">,</span> <span class="s1">&#39;President&#39;</span><span class="p">,</span> <span class="s1">&#39;Wikipedia_entry&#39;</span><span class="p">,</span> <span class="s1">&#39;Took_office&#39;</span><span class="p">,</span> <span class="s1">&#39;Left_office&#39;</span><span class="p">,</span> <span class="s1">&#39;Party&#39;</span><span class="p">,</span> <span class="s1">&#39;Home_state&#39;</span><span class="p">,</span> <span class="s1">&#39;Occupation&#39;</span><span class="p">,</span> <span class="s1">&#39;College&#39;</span><span class="p">,</span> <span class="s1">&#39;Age_when_took_office&#39;</span><span class="p">,</span> <span class="s1">&#39;Birth_date&#39;</span><span class="p">,</span> <span class="s1">&#39;Birthplace&#39;</span><span class="p">,</span> <span class="s1">&#39;Death_date&#39;</span><span class="p">,</span> <span class="s1">&#39;Location_death&#39;</span><span class="p">]</span>
+
+<span class="c1"># make a new variable - c - for Python&#39;s DictWriter object -</span>
+<span class="c1"># note that fieldnames is required</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictWriter</span><span class="p">(</span><span class="n">csvfile</span><span class="p">,</span> <span class="n">fieldnames</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+<span class="c1"># optional - write a header row</span>
+<span class="n">c</span><span class="o">.</span><span class="n">writeheader</span><span class="p">()</span>
+
+<span class="c1"># write all rows from list to file</span>
+<span class="n">c</span><span class="o">.</span><span class="n">writerows</span><span class="p">(</span><span class="n">presidents_list</span><span class="p">)</span>
+
+<span class="c1"># save and close file</span>
+<span class="n">csvfile</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+</div>
+<div class="section" id="json-formatted-data">
+<h2>JSON formatted data<a class="headerlink" href="#json-formatted-data" title="Permalink to this headline">¶</a></h2>
+<p>Sweigart covers this in chapter 16 in <a class="reference external" href="https://automatetheboringstuff.com/">Automate the Boring Stuff with Python</a> (second edition).</p>
+<p>Python has a separate built-in module for handling JSON data.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+</pre></div>
+</div>
+<p>After the import, you can use any of the methods that are part of the module:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">new_dict</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json_string</span><span class="p">)</span>
+<span class="n">new_json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">python_data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Using <code class="docutils literal notranslate"><span class="pre">json.loads()</span></code> converts a <em>string</em> of JSON data into a Python dictionary. In the example above, <code class="docutils literal notranslate"><span class="pre">new_dict</span></code> would be that new Python dictionary.</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">json.dumps()</span></code> converts a Python value into a string of JSON data. In the example above, <code class="docutils literal notranslate"><span class="pre">new_json</span></code> would be that new string.</p>
 <p>.</p>
 </div>
 </div>
