@@ -84,6 +84,10 @@ Writing a dictionary into a CSV file
 
 This is covered in `the CSV chapter <http://localhost:8000/docs/_build/html/csv.html>`_.
 
+Converting JSON to a dictionary or vice versa
+---------------------------------------------
+
+This is covered in the `CSV Files chapter <csv.html#json-formatted-data>`_.
 
 Examples of complex dictionaries
 --------------------------------
