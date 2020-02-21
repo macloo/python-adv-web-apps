@@ -86,23 +86,39 @@ Note the steps required:
 4. Use a for-loop to read from all rows in the CSV.
 5. Close the file.
 
-Writing into a dictionary
--------------------------
-
-The ``csv.DictWriter()`` method
-
 
 Reading into a dictionary
 -------------------------
 
-Typically the ``csv.DictReader()`` method is used to convert a CSV file to a Python dictionary. You *read from* an existing CSV and create a Python dictionary from it.
+Typically the ``csv.DictReader()`` method is used to convert a CSV file to a Python dictionary. You *read from* an existing CSV and create a Python dictionary from it. Note, the CSV file is *unchanged,* and the dictionary does not exist as a separate file.
 
 .. literalinclude:: ../python_code_examples/csvs/dictreader_ex.py
    :caption:
    :linenos:
 
+The key difference between this and the previous script here is in line 13: You can access data from the CSV using dictionary keys *instead of* list indexes. For working with a CSV with a lot of columns, this is really nice!
+
 You can read generally about Python dictionaries here: `Dictionaries <dicts.html>`_
 
 See also: `Converting a CSV to a dictionary <dicts.html#converting-a-csv-to-a-dictionary>`_
+
+
+Writing from a dictionary
+-------------------------
+
+The ``csv.DictWriter()`` method will write to a CSV file using rows of data that are *already* formatted as dictionaries.
+
+If your data is already a list of dictionaries, as in the following example, you can use ``csv.DictWriter()`` to write to a normal CSV.
+
+.. literalinclude:: ../python_code_examples/csvs/dictwriter_ex.py
+   :caption:
+   :linenos:
+
+
+JSON formatted data
+-------------------
+
+Sweigart covers this in chapter 16 in `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition).
+
 
 .
