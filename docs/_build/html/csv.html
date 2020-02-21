@@ -95,6 +95,11 @@
 <li class="toctree-l2"><a class="reference internal" href="#reading-into-a-dictionary">Reading into a dictionary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#writing-from-a-dictionary">Writing from a dictionary</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#json-formatted-data">JSON formatted data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#chapter-review-chapter-16">Chapter review: chapter 16</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#key-points">Key points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#slides-chapters-5-and-16">Slides: chapters 5 and 16</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="scraping.html">Web Scraping Intro</a></li>
@@ -326,7 +331,7 @@
 </div>
 <div class="section" id="reading-into-a-dictionary">
 <h2>Reading into a dictionary<a class="headerlink" href="#reading-into-a-dictionary" title="Permalink to this headline">¶</a></h2>
-<p>Typically the <code class="docutils literal notranslate"><span class="pre">csv.DictReader()</span></code> method is used to convert a CSV file to a Python dictionary. You <em>read from</em> an existing CSV and create a Python dictionary from it. Note, the CSV file is <em>unchanged,</em> and the dictionary does not exist as a separate file.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">csv.DictReader()</span></code> method is used to convert a CSV file to a Python dictionary. You <em>read from</em> an existing CSV and create a Python dictionary from it. Note, the CSV file is <em>unchanged,</em> and the dictionary does not exist as a separate file.</p>
 <div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">../python_code_examples/csvs/dictreader_ex.py</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -454,7 +459,40 @@
 </div>
 <p>Using <code class="docutils literal notranslate"><span class="pre">json.loads()</span></code> converts a <em>string</em> of JSON data into a Python dictionary. In the example above, <code class="docutils literal notranslate"><span class="pre">new_dict</span></code> would be that new Python dictionary.</p>
 <p>Using <code class="docutils literal notranslate"><span class="pre">json.dumps()</span></code> converts a Python value into a string of JSON data. In the example above, <code class="docutils literal notranslate"><span class="pre">new_json</span></code> would be that new string.</p>
+</div>
+<div class="section" id="chapter-review-chapter-16">
+<h2>Chapter review: chapter 16<a class="headerlink" href="#chapter-review-chapter-16" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="key-points">
+<h3>Key points<a class="headerlink" href="#key-points" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p>Call the <code class="docutils literal notranslate"><span class="pre">open()</span></code> function to return a File object for reading or for writing</p></li>
+<li><p>When and where to add parameters such as <code class="docutils literal notranslate"><span class="pre">'w',</span> <span class="pre">newline='',</span> <span class="pre">encoding='utf-8'</span></code></p></li>
+<li><p>When to use each one of these (all have different purposes):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">csv.reader()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">csv.writer()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">csv.DictReader()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">csv.DictWriter()</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>How to use:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.writerow()</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.writerows()</span></code></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>The purpose of the built-in <code class="docutils literal notranslate"><span class="pre">json</span></code> module</p></li>
+</ol>
+</div>
+<div class="section" id="slides-chapters-5-and-16">
+<h3>Slides: chapters 5 and 16<a class="headerlink" href="#slides-chapters-5-and-16" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://bit.ly/pythonrev4">Python Review 4</a></p>
 <p>.</p>
+</div>
 </div>
 </div>
 

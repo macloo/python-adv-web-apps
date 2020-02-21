@@ -124,7 +124,7 @@ When your program throws an error, your script stops. In most cases you want to 
 
 The code above requires the user to type a whole number. A string or a decimal (float) will trigger the exception.
 
-.. hint:: To find out what kind of error would be thrown, experiment at the Python command line (error types are case sensitive). Also, there is a list of `built-in exceptions <https://docs.python.org/3/library/exceptions.html>`_.
+.. hint:: To find out what kind of error would be thrown, experiment at the Python command line (error types are case sensitive). Also, there is a list of `built-in exceptions <https://docs.python.org/3/library/exceptions.html>`_. ``AttributeError`` and ``ValueError`` are common, but there are many others!
 
 Chapter review: chapter 3
 -------------------------

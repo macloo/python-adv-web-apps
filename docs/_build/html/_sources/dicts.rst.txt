@@ -132,13 +132,14 @@ Key points
 ++++++++++
 
 1. Differences between lists and dictionaries
-2. Take care with use of quotes when both keys and values are strings
-3. How to loop through keys, values, or both at once
-4. Use ``list( dict.keys() )`` to get a list of all keys in a dictionary
-5. Check for presence of a key or a value with ``in`` or ``not in``
-6. Provide a default value in case a key is not present: ``dict.get(key, value)``
-7. Use ``dict.setdefault(key, value)`` to set a new key but prevent overwriting an existing value if the key is already present
-8. Use ``import pprint`` if you need to print out a large dictionary’s contents in the Terminal
+2. How to format a dictionary correctly
+3. Take care with use of quotes when both keys and values are strings
+4. How to loop through keys, values, or both at once
+5. Use ``list( dict.keys() )`` to get a list of all keys in a dictionary
+6. Check for presence of a key or a value with ``in`` or ``not in``
+7. Provide a default value in case a key is not present: ``dict.get(key, value)``
+8. Use ``dict.setdefault(key, value)`` to set a new key but prevent overwriting an existing value if the key is already present
+9. Use ``import pprint`` if you need to print out a large dictionary’s contents in the Terminal
 
 In the section “Using Data Structures to Model Real-World Things,” Sweigart discusses nested dictionaries and lists. This is illustrated above with the example shown under the subheading “A dictionary of dictionaries.”
 

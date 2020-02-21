@@ -95,7 +95,7 @@ The same technique works with ``-``, ``*``, ``\``, and ``%`` (modulus).
 Methods, and finding things in lists
 ------------------------------------
 
-In web scraping, we use a BeautifulSoup *method* on tag objects: ``object.get_text()``
+In web scraping, we use a BeautifulSoup *method* on Tag objects: ``object.get_text()``
 
 A *method* is a function (e.g. ``get_text()``), but it must be *called on* a *value*. In the ``object.get_text()`` example, ``object`` contains one or more HTML elements and (probably) text. Calling ``get_text()`` on ``object`` returns the text alone, without any HTML tags.
 
@@ -111,7 +111,7 @@ Other list methods include ``append()`` and ``insert()``. ::
     ['cat', 'bat', 'rat', 'elephant', 'rhino']
     >>>
 
-The ``append()`` method is used often in web scraping.
+.. note:: The ``append()`` method is used often in web scraping.
 
 Earlier in the chapter, we saw ``del spam[2]`` — this deletes the item with **index** 2 from the list ``spam``. Note how that is different from the ``remove()`` method: ::
 
@@ -206,7 +206,7 @@ Key points
    - ``remove()``
    - ``sort()``
    - ``pop()`` *not in Sweigart; see above*
-   
+
 11. The differences between a Python list and a tuple
 12. You can’t simply make a copy of a list in the way you might expect (know how to look up the *correct way* to make a copy if you need to do so)
 

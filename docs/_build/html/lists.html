@@ -258,7 +258,7 @@
 </div>
 <div class="section" id="methods-and-finding-things-in-lists">
 <h2>Methods, and finding things in lists<a class="headerlink" href="#methods-and-finding-things-in-lists" title="Permalink to this headline">¶</a></h2>
-<p>In web scraping, we use a BeautifulSoup <em>method</em> on tag objects: <code class="docutils literal notranslate"><span class="pre">object.get_text()</span></code></p>
+<p>In web scraping, we use a BeautifulSoup <em>method</em> on Tag objects: <code class="docutils literal notranslate"><span class="pre">object.get_text()</span></code></p>
 <p>A <em>method</em> is a function (e.g. <code class="docutils literal notranslate"><span class="pre">get_text()</span></code>), but it must be <em>called on</em> a <em>value</em>. In the <code class="docutils literal notranslate"><span class="pre">object.get_text()</span></code> example, <code class="docutils literal notranslate"><span class="pre">object</span></code> contains one or more HTML elements and (probably) text. Calling <code class="docutils literal notranslate"><span class="pre">get_text()</span></code> on <code class="docutils literal notranslate"><span class="pre">object</span></code> returns the text alone, without any HTML tags.</p>
 <p>For use with Python lists, Sweigart shows us the <em>method</em> <code class="docutils literal notranslate"><span class="pre">index()</span></code>: If <code class="docutils literal notranslate"><span class="pre">spam</span></code> is a Python list and that list contains an item with the value <code class="docutils literal notranslate"><span class="pre">&quot;hello&quot;</span></code>, then <code class="docutils literal notranslate"><span class="pre">spam.index('hello')</span></code> will return the <strong>index number</strong> of that item.</p>
 <p>It’s useful to know that if the list <em>does not</em> contain that value, then the <em>method</em> <code class="docutils literal notranslate"><span class="pre">index()</span></code> will return a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code>. This is useful because (like any error) <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> could be used in a <code class="docutils literal notranslate"><span class="pre">try</span></code>/<code class="docutils literal notranslate"><span class="pre">except</span></code> combo. When you are scraping, that can be very useful indeed.</p>
@@ -270,7 +270,10 @@
 <span class="go">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">append()</span></code> method is used often in web scraping.</p>
+</div>
 <p>Earlier in the chapter, we saw <code class="docutils literal notranslate"><span class="pre">del</span> <span class="pre">spam[2]</span></code> — this deletes the item with <strong>index</strong> 2 from the list <code class="docutils literal notranslate"><span class="pre">spam</span></code>. Note how that is different from the <code class="docutils literal notranslate"><span class="pre">remove()</span></code> method:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cat&#39;</span><span class="p">,</span> <span class="s1">&#39;bat&#39;</span><span class="p">,</span> <span class="s1">&#39;rat&#39;</span><span class="p">,</span> <span class="s1">&#39;elephant&#39;</span><span class="p">,</span> <span class="s1">&#39;rhino&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">my_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;bat&#39;</span><span class="p">)</span>
