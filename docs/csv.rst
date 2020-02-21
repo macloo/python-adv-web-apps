@@ -90,7 +90,7 @@ Note the steps required:
 Reading into a dictionary
 -------------------------
 
-Typically the ``csv.DictReader()`` method is used to convert a CSV file to a Python dictionary. You *read from* an existing CSV and create a Python dictionary from it. Note, the CSV file is *unchanged,* and the dictionary does not exist as a separate file.
+The ``csv.DictReader()`` method is used to convert a CSV file to a Python dictionary. You *read from* an existing CSV and create a Python dictionary from it. Note, the CSV file is *unchanged,* and the dictionary does not exist as a separate file.
 
 .. literalinclude:: ../python_code_examples/csvs/dictreader_ex.py
    :caption:
