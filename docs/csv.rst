@@ -120,5 +120,17 @@ JSON formatted data
 
 Sweigart covers this in chapter 16 in `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition).
 
+Python has a separate built-in module for handling JSON data. ::
+
+    import json
+
+After the import, you can use any of the methods that are part of the module: ::
+
+    new_dict = json.loads(json_string)
+    new_json = json.dumps(python_data)
+
+Using ``json.loads()`` converts a *string* of JSON data into a Python dictionary. In the example above, ``new_dict`` would be that new Python dictionary.
+
+Using ``json.dumps()`` converts a Python value into a string of JSON data. In the example above, ``new_json`` would be that new string.
 
 .
