@@ -87,7 +87,7 @@ This is covered in the `CSV Files chapter <csv.html#writing-from-a-dictionary>`_
 Converting JSON to a dictionary or vice versa
 ---------------------------------------------
 
-This is covered in the `CSV Files chapter <csv.html#json-formatted-data>`_.
+This is covered in the `CSV chapter <csv.html#json-formatted-data>`_.
 
 Examples of complex dictionaries
 --------------------------------
