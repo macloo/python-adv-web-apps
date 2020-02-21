@@ -133,4 +133,33 @@ Using ``json.loads()`` converts a *string* of JSON data into a Python dictionary
 
 Using ``json.dumps()`` converts a Python value into a string of JSON data. In the example above, ``new_json`` would be that new string.
 
+
+Chapter review: chapter 16
+--------------------------
+
+Key points
+++++++++++
+
+1. Call the ``open()`` function to return a File object for reading or for writing
+2. When and where to add parameters such as ``'w', newline='', encoding='utf-8'``
+3. When to use each one of these (all have different purposes):
+
+    - ``csv.reader()``
+    - ``csv.writer()``
+    - ``csv.DictReader()``
+    - ``csv.DictWriter()``
+
+4. How to use:
+
+    - ``.writerow()``
+    - ``.writerows()``
+
+5. The purpose of the built-in ``json`` module
+
+
+Slides: chapters 5 and 16
++++++++++++++++++++++++++
+
+`Python Review 4 <http://bit.ly/pythonrev4>`_
+
 .
