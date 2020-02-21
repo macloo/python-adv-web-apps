@@ -82,7 +82,7 @@ But you can *convert* the DictReader object into a normal list if needed: ::
 Writing a dictionary into a CSV file
 ------------------------------------
 
-This is covered in `the CSV chapter <http://localhost:8000/docs/_build/html/csv.html>`_.
+This is covered in the `CSV Files chapter <csv.html#writing-from-a-dictionary>`_.
 
 Converting JSON to a dictionary or vice versa
 ---------------------------------------------
