@@ -290,6 +290,10 @@
 <h2>Sending HTTP headers in your script<a class="headerlink" href="#sending-http-headers-in-your-script" title="Permalink to this headline">¶</a></h2>
 <p>Sometimes a website blocks your attempts to scrape because your code (without using Selenium) lacks the headers that a real web browser would send with an HTTP request.</p>
 <p>This doesn’t (always) mean you have to use Selenium. Instead, you can send a proper set of headers as part of a regular script with BeautifulSoup and Requests.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You need to install the Requests library before you can use it.</p>
+</div>
 <p>Use <a class="reference external" href="https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending">WhatIsMyBrowser.com</a> to find your web browser’s <strong>user agent</strong> and other values.</p>
 <p>The example code below comes from a time when I needed to use headers in a scraping script that downloaded messages from a large online forum. The site completely shut out my script until I added a full set of header data:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hdr</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="s1">&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36&#39;</span><span class="p">,</span>
