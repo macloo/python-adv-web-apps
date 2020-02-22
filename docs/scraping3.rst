@@ -104,6 +104,8 @@ Sometimes a website blocks your attempts to scrape because your code (without us
 
 This doesn’t (always) mean you have to use Selenium. Instead, you can send a proper set of headers as part of a regular script with BeautifulSoup and Requests.
 
+.. note:: You need to install the Requests library before you can use it.
+
 Use `WhatIsMyBrowser.com <https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending>`_ to find your web browser’s **user agent** and other values.
 
 The example code below comes from a time when I needed to use headers in a scraping script that downloaded messages from a large online forum. The site completely shut out my script until I added a full set of header data: ::
