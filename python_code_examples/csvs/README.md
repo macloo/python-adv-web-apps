@@ -30,6 +30,6 @@ It is recommended that you **run the files** in the Terminal. Run them multiple 
 
 **Script:** *write_csv_to_db.py*
 
-- Demo, use of SQLAlchemy to write a CSV file to a database.
+- Demo, use of SQLAlchemy to write a CSV file to a database. Requires files not included in this repo.
 
 .
