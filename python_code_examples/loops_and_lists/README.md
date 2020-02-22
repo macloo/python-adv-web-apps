@@ -6,16 +6,18 @@ It is recommended that you **run the files** in the Terminal. Run them multiple 
 
 **Script:** *list_methods.py*
 
-Demonstration of several commonly used methods: `append()`, `insert()`, `remove()`, `reverse()` and `sort()`.
+- Demonstration of several commonly used methods: `append()`, `insert()`, `remove()`, `reverse()` and `sort()`.
 
 **Script:** *list_pop.py*
 
-Demonstration of `pop()` to remove the last item from a list. This is not in Sweigart's chapter.
+- Demonstration of `pop()` to remove the last item from a list. This is not in Sweigart's chapter.
 
 **Script:** *loops_and_lists.py*
 
-Three different ways to loop over a list.
+- Three different ways to loop over a list.
 
 **Script:** *tuples_demo.py*
 
-Demonstration of how tuples are different from lists.
+- Demonstration of how tuples are different from lists.
+
+.

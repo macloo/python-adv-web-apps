@@ -35,19 +35,19 @@ Note that the **order** of the statements matters.
 
 **Script:** *c_while_loop.py*
 
-Students often struggle to understand while-loops. This one asks you to `Type the word spam`. You should run it and type a word *other than* "spam," and also run it and type "spam." Study the code until you understand why `Spam spam spam spam` prints and also why `No more spam 😥` prints.
+- Students often struggle to understand while-loops. This one asks you to `Type the word spam`. You should run it and type a word *other than* "spam," and also run it and type "spam." Study the code until you understand why `Spam spam spam spam` prints and also why `No more spam 😥` prints.
 
 **Script:** *d_while_break_continue.py*
 
-A while-loop may contain a `break` statement, a `continue` statement, or both, or neither. This example from [Automate the Boring Stuff with Python](https://automatetheboringstuff.com/) is very clear in demonstrating how these two statements work, but you'll need to run it multiple times and type "Joe" and other names, as well as "swordfish" and other passwords, to understand it.
+- A while-loop may contain a `break` statement, a `continue` statement, or both, or neither. This example from [Automate the Boring Stuff with Python](https://automatetheboringstuff.com/) is very clear in demonstrating how these two statements work, but you'll need to run it multiple times and type "Joe" and other names, as well as "swordfish" and other passwords, to understand it.
 
 **Script:** *e_for_loops.py*
 
-This script demonstrates four different for-loops that all use `range()`. This is not the only pattern for using a for-loop in Python, but it's the only pattern that's covered in chapter 2.
+- This script demonstrates four different for-loops that all use `range()`. This is not the only pattern for using a for-loop in Python, but it's the only pattern that's covered in chapter 2.
 
-It would be good for you to practice some of these for-loops in the interactive Python shell. Experiment with using one, two, or three **arguments** inside the parentheses.
+- It would be good for you to practice some of these for-loops in the interactive Python shell. Experiment with using one, two, or three **arguments** inside the parentheses.
 
-Notice how **starting with 0** or **starting with 1** affects the final number shown in the first and fourth for-loops here.
+- Notice how **starting with 0** or **starting with 1** affects the final number shown in the first and fourth for-loops here.
 
 **Script:** *f_random.py*
 
