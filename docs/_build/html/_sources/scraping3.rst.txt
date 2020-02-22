@@ -44,7 +44,9 @@ Other Selenium methods for locating HTML elements are listed `here <https://sele
 Headless Selenium
 +++++++++++++++++
 
-It is possible to use **headless mode** instead of a physical browser with Selenium. This is NOT covered in the “Getting Started” doc.
+In normal use, Selenium launches a web browser, and you can see it on your screen. You will see the page scrolling and so on as if an invisible person were controlling the browser.
+
+Alternatively, it is possible to use **headless mode** instead of a physical browser with Selenium. This is NOT covered in the “Getting Started” doc.
 
 `Code for using Chrome in headless mode. <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/scraping/headless_selenium.py>`_
 
