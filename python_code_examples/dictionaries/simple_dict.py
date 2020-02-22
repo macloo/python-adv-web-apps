@@ -45,7 +45,7 @@ print() # blank line
 print("The cat's name is " + cat['name'] + " and the cat's nose is " + cat['nose'] + ".")
 
 # using the keys, values with string formatters
-print(f"The cat's name is {cat['name']} and the cat's nose is {cat['nose']}.")
+print( f"The cat's name is {cat['name']} and the cat's nose is {cat['nose']}." )
 
 # sting formatters explained:
 # https://realpython.com/python-f-strings/
