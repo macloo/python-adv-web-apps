@@ -174,12 +174,13 @@
 <p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/scraping">The code for this chapter is here.</a></p>
 <div class="section" id="using-selenium">
 <h2>Using Selenium<a class="headerlink" href="#using-selenium" title="Permalink to this headline">¶</a></h2>
-<p>We can use <a class="reference external" href="https://selenium.dev/">Selenium</a> together with BeautifulSoup when BeautifulSoup <em>alone</em> is unable to get the contents we want from a web page. <strong>Two common situations where this comes up:</strong></p>
+<p>We can use <a class="reference external" href="https://selenium.dev/">Selenium</a> together with BeautifulSoup when BeautifulSoup <em>alone</em> is unable to get the contents we want from a web page. Selenium is a Python package or framework that automates a web browser.</p>
+<p><strong>Two common situations where Selenium is necessary:</strong></p>
 <ol class="arabic simple">
 <li><p>JavaScript is writing the contents into the page after it opens; and/or</p></li>
 <li><p>Contents are not available until you click a button, fill a form, open a menu, etc.</p></li>
 </ol>
-<p>The documentation for setting up Selenium is not easy to use, so <strong>follow this step-by-step guide</strong>:</p>
+<p>The documentation for setting up Selenium might be confusing, so <strong>follow this step-by-step guide</strong>:</p>
 <p><a class="reference external" href="http://bit.ly/selenium-intro">Getting started with Selenium</a></p>
 <p>You will need to install Selenium and also a <strong>driver</strong> for the web browser you want to use (Chrome or Firefox). This is all covered in the “Getting Started” doc. Make sure to do the Selenium install with your virtual environment activated.</p>
 <p>When you examine the test scripts (linked in the “Getting Started” doc and also found in this repo), notice that after doing the <code class="docutils literal notranslate"><span class="pre">driver</span></code> stuff, <strong>this line</strong> creates a <code class="docutils literal notranslate"><span class="pre">page</span></code> variable just like we have been doing all along with our BeautifulSoup scrapers:</p>
@@ -241,8 +242,8 @@
 <div class="section" id="headless-selenium">
 <h3>Headless Selenium<a class="headerlink" href="#headless-selenium" title="Permalink to this headline">¶</a></h3>
 <p>In normal use, Selenium launches a web browser, and you can see it on your screen. You will see the page scrolling and so on as if an invisible person were controlling the browser.</p>
-<p>Alternatively, it is possible to use <strong>headless mode</strong> instead of a physical browser with Selenium. This is NOT covered in the “Getting Started” doc.</p>
-<p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/scraping/headless_selenium.py">Code for using Chrome in headless mode.</a></p>
+<p>Alternatively, it is possible to use <strong>headless mode</strong> instead of a physical browser with Selenium. This means you wouldn’t see the browser onscreen while Selenium is running.</p>
+<p>This is NOT covered in the “Getting Started” doc. See this <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/scraping/headless_selenium.py">code for using Chrome in headless mode</a>.</p>
 </div>
 <div class="section" id="more-advanced-selenium-techniques">
 <h3>More advanced Selenium techniques<a class="headerlink" href="#more-advanced-selenium-techniques" title="Permalink to this headline">¶</a></h3>
