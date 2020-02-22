@@ -10,12 +10,14 @@ In this chapter, more advanced topics are covered.
 Using Selenium
 --------------
 
-We can use `Selenium <https://selenium.dev/>`_ together with BeautifulSoup when BeautifulSoup *alone* is unable to get the contents we want from a web page. **Two common situations where this comes up:**
+We can use `Selenium <https://selenium.dev/>`_ together with BeautifulSoup when BeautifulSoup *alone* is unable to get the contents we want from a web page. Selenium is a Python package or framework that automates a web browser.
+
+**Two common situations where Selenium is necessary:**
 
 1. JavaScript is writing the contents into the page after it opens; and/or
 2. Contents are not available until you click a button, fill a form, open a menu, etc.
 
-The documentation for setting up Selenium is not easy to use, so **follow this step-by-step guide**:
+The documentation for setting up Selenium might be confusing, so **follow this step-by-step guide**:
 
 `Getting started with Selenium <http://bit.ly/selenium-intro>`_
 
@@ -46,9 +48,9 @@ Headless Selenium
 
 In normal use, Selenium launches a web browser, and you can see it on your screen. You will see the page scrolling and so on as if an invisible person were controlling the browser.
 
-Alternatively, it is possible to use **headless mode** instead of a physical browser with Selenium. This is NOT covered in the “Getting Started” doc.
+Alternatively, it is possible to use **headless mode** instead of a physical browser with Selenium. This means you wouldn’t see the browser onscreen while Selenium is running.
 
-`Code for using Chrome in headless mode. <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/scraping/headless_selenium.py>`_
+This is NOT covered in the “Getting Started” doc. See this `code for using Chrome in headless mode <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/scraping/headless_selenium.py>`_.
 
 More advanced Selenium techniques
 +++++++++++++++++++++++++++++++++
