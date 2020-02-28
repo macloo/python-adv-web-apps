@@ -34,3 +34,5 @@ See also the `official Python documentation <https://docs.python.org/3/>`_.
    scraping
    scraping2
    scraping3
+   flask
+   flask2
