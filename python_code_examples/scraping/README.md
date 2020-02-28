@@ -52,6 +52,14 @@ It is recommended that you **run the files** in the Terminal.
 
 - A modified, shorter version of Sweigart’s script from chapter 12 for downloading comics from XKCD.
 
+**Script:** *mls_pages.py*
+
+- Example of scraping multiple URLs from multiple pages &mdash; getting the next page that has a list of more URLs, until you have scraped all the URLs from all the pages.
+
+**Script:** *mls_pages_v2.py*
+
+- This example is similar to *mls_pages.py*, but with an important difference. Sometimes you can just construct the URLs of all the list pages using a simple for-loop with `range()`.
+
 ## Intermediate (level 3)
 
 - These files are explained in [Web Scraping, Part 3](https://python-adv-web-apps.readthedocs.io/en/latest/scraping3.html).
