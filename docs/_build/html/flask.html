@@ -1,0 +1,424 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Introduction to Flask &mdash; Python Beginners  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Flask, Part 2" href="flask2.html" />
+    <link rel="prev" title="Web Scraping, Part 3" href="scraping3.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Python Beginners
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="learn_python.html">Starting Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lists.html">Working with Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_files.html">Reading and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dicts.html">Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="csv.html">CSV Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scraping.html">Web Scraping Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scraping2.html">Web Scraping, Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scraping3.html">Web Scraping, Part 3</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction to Flask</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setup-for-flask">Setup for Flask</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-directory-and-change-into-it">Create a directory and change into it</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-new-virtual-environment-in-that-directory-and-activate-it">Create a new virtual environment in that directory and activate it</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#install-flask">Install Flask</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#test-flask">Test Flask</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flask-intro-video">Flask intro video</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#deconstruct-the-code-in-a-small-flask-app">Deconstruct the code in a small Flask app</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#import-flask-and-create-an-application-object">Import Flask and create an application object</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-a-route-and-some-action">Add a route and some action</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modify-hello-py-add-a-new-route">Modify hello.py: Add a new route</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#what-you-know-now-about-flask">What you know now about Flask</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="flask2.html">Flask, Part 2</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Beginners</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Introduction to Flask</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/flask.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="introduction-to-flask">
+<h1>Introduction to Flask<a class="headerlink" href="#introduction-to-flask" title="Permalink to this headline">¶</a></h1>
+<p>Flask is a Python framework for building web apps. It’s small, light and simple compared with the other widely used Python framework, <a class="reference external" href="https://www.djangoproject.com/">Django</a>.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.palletsprojects.com/p/flask/">This site is the home of Flask.</a></p></li>
+<li><p><a class="reference external" href="https://flask.palletsprojects.com/">The documentation for Flask is here.</a></p></li>
+</ul>
+<p>We will install Flask in a new Python3 virtual environment. Students already have Python3 and <code class="docutils literal notranslate"><span class="pre">venv</span></code>. If you are lacking one or both, read this:</p>
+<p><a class="reference external" href="http://bit.ly/install-python3-jupyter">Install virtualenv and Jupyter</a></p>
+<div class="section" id="setup-for-flask">
+<h2>Setup for Flask<a class="headerlink" href="#setup-for-flask" title="Permalink to this headline">¶</a></h2>
+<p>We will create a new folder with <strong>a new virtual environment</strong> for Flask work projects. Various new modules will be installed here.</p>
+<div class="section" id="create-a-directory-and-change-into-it">
+<h3>Create a directory and change into it<a class="headerlink" href="#create-a-directory-and-change-into-it" title="Permalink to this headline">¶</a></h3>
+<p>The first step is to create a new folder (directory) for all your Flask projects. Mine is here:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Documents</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">flask</span>
+</pre></div>
+</div>
+<p><strong>Change into that directory.</strong> For me, the command would be:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">Documents</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">flask</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-a-new-virtual-environment-in-that-directory-and-activate-it">
+<h3>Create a new virtual environment in that directory and activate it<a class="headerlink" href="#create-a-new-virtual-environment-in-that-directory-and-activate-it" title="Permalink to this headline">¶</a></h3>
+<p>At the command prompt (NOT the Python prompt), create a new virtual environment. <strong>This is done only once.</strong> Make sure you are not already in an activated environment when you do this!</p>
+<p><strong>Mac OS</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python3</span> <span class="o">-</span><span class="n">m</span> <span class="n">venv</span> <span class="n">env</span>
+</pre></div>
+</div>
+<p><strong>Windows</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">venv</span> <span class="n">env</span>
+</pre></div>
+</div>
+<p>Activate the virtual environment:</p>
+<p><strong>Mac OS</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">env</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+</pre></div>
+</div>
+<p><strong>Windows</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">env</span>\<span class="n">Scripts</span>\<span class="n">activate</span><span class="o">.</span><span class="n">bat</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>You should now see <code class="docutils literal notranslate"><span class="pre">(env)</span></code> at the far left side of your prompt. This indicates that the <strong>virtual environment</strong> is <strong>active.</strong></p>
+</div>
+<p>For example, on my Mac I would see this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>(env) mcadams flask $
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-flask">
+<h3>Install Flask<a class="headerlink" href="#install-flask" title="Permalink to this headline">¶</a></h3>
+<p>In Mac OS or Windows, at the command prompt, with your virtual environment already activated, type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">Flask</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Uppercase <em>F</em> required.</p>
+</div>
+<p>This is how you install <em>any</em> Python library that exists in the <a class="reference external" href="https://pypi.org/">Python Package Index</a>. Pretty handy. <strong>pip</strong> is a tool for installing Python packages, which is what you just did.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>You installed Flask in the Python3 virtual environment that is <em>currently active.</em> When that virtual environment is <em>not</em> active, Flask will not be available to you. This is ideal, because you will create different virtual environments for different Python projects, and you won’t need to worry about updated libraries in the future breaking your (past) code.</p>
+</div>
+</div>
+<div class="section" id="test-flask">
+<h3>Test Flask<a class="headerlink" href="#test-flask" title="Permalink to this headline">¶</a></h3>
+<p>Using Atom, create a file in your <em>flask</em> folder, copy/paste the code into it, and save it with the filename <em>hello.py</em>.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/hello.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;test Flask with this&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;Hello World!&#39;</span>
+</pre></div>
+</div>
+</div>
+<p>At the command prompt, type this (two lines):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">FLASK_APP</span><span class="o">=</span><span class="n">hello</span><span class="o">.</span><span class="n">py</span>
+<span class="n">flask</span> <span class="n">run</span>
+</pre></div>
+</div>
+<p>(Windows users: Refer to <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/quickstart/#a-minimal-application">this</a> if that does not work.)</p>
+<p>You’ll see this:</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/start_flask.png"><img alt="Results of starting Flask screenshot" src="_images/start_flask.png" style="width: 700.0px; height: 166.0px;" /></a>
+</div>
+<p>Open a new tab in your web browser and, in the address bar, type: <code class="docutils literal notranslate"><span class="pre">localhost:5000</span></code></p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/flask_browser.png"><img alt="Results of starting Flask in browser screenshot" src="_images/flask_browser.png" style="width: 378.0px; height: 133.0px;" /></a>
+</div>
+<p>Flask includes a built-in web server, for development use.</p>
+<p>What you’ve done is:</p>
+<ol class="arabic simple">
+<li><p>With the <code class="docutils literal notranslate"><span class="pre">hello.py</span></code> file, you have written a small (and essentially useless) web app in Flask.</p></li>
+<li><p>With the two commands ending with <code class="docutils literal notranslate"><span class="pre">flask</span> <span class="pre">run</span></code>, you started the server and ran the app on it.</p></li>
+<li><p>The app caused the string <em>Hello World!</em> to be written into the browser window when the home location of the server was requested (that was you typing <code class="docutils literal notranslate"><span class="pre">localhost:5000</span></code> into the address bar).</p></li>
+</ol>
+<p><strong>To shut down the server,</strong> press Control-C in Terminal. (Mac users: That is <em>Control,</em> not Command.)</p>
+</div>
+<div class="section" id="flask-intro-video">
+<h3>Flask intro video<a class="headerlink" href="#flask-intro-video" title="Permalink to this headline">¶</a></h3>
+<p>Here is an excellent video from a Harvard EdX course. Starting at 00:40:25, the instructor explains Flask pretty much as I have done in this README and in the parts to follow. It is exceptionally clear and well organized.</p>
+<p>If you would prefer a video, I highly recommend this:</p>
+<p><a class="reference external" href="https://youtu.be/j5wysXqaIV8?t=2347">Flask - Lecture 2 - CS50’s Web Programming with Python and JavaScript</a></p>
+</div>
+</div>
+<div class="section" id="deconstruct-the-code-in-a-small-flask-app">
+<h2>Deconstruct the code in a small Flask app<a class="headerlink" href="#deconstruct-the-code-in-a-small-flask-app" title="Permalink to this headline">¶</a></h2>
+<p>Now we will look at the app from above, line by line.</p>
+<div class="section" id="import-flask-and-create-an-application-object">
+<h3>Import Flask and create an application object<a class="headerlink" href="#import-flask-and-create-an-application-object" title="Permalink to this headline">¶</a></h3>
+<p>We begin here, with two lines you will see in every Flask app:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>The first line</strong> is a typical Python import statement. Lowercase <em>flask</em> is a Python library, which you have installed. Uppercase <em>Flask</em> is a <strong>class</strong> from that library, and it must be imported. As always, <em>case matters,</em> so note the lowercase <em>f</em> and the uppercase <em>F</em>.</p>
+<p><strong>The second line,</strong> which is new to you, begins with a new variable, <code class="docutils literal notranslate"><span class="pre">app</span></code>, which will be used in every Flask app. The value of that new variable, <code class="docutils literal notranslate"><span class="pre">Flask(__name__)</span></code>, is a new <em>object</em> that inherits from the class <em>Flask</em> — meaning it gets all the attributes and methods built into that class, which we have imported.</p>
+<p><code class="docutils literal notranslate"><span class="pre">__name__</span></code> is a built-in variable in Python. Python has many double-underscore entities, and they always have this pattern: two underscores, a word, and two underscores. These double-underscore entities are referred to with the slang <em>dunder.</em> For <code class="docutils literal notranslate"><span class="pre">__name__</span></code>, we can say “dunder name.”</p>
+<p>What does <code class="docutils literal notranslate"><span class="pre">__name__</span></code> do? Every Python module has a <em>name,</em> and <code class="docutils literal notranslate"><span class="pre">__name__</span></code> used <em>in a module</em> contains the name of <em>that</em> module. The value of <code class="docutils literal notranslate"><span class="pre">__name__</span></code> is not always the filename, as demonstrated in a common Python statement:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+</pre></div>
+</div>
+<p>When that statement returns <code class="docutils literal notranslate"><span class="pre">True</span></code>, it means the program (the file) is being <em>run by itself,</em> and was not imported. (We are NOT using that statement in our <em>hello.py</em> code, but this seems like a good time to explain it.)</p>
+<p><code class="docutils literal notranslate"><span class="pre">app</span> <span class="pre">=</span> <span class="pre">Flask(__name__)</span></code> creates a <strong>Flask application object</strong> — <code class="docutils literal notranslate"><span class="pre">app</span></code> — in the current Python module. A Python <em>module</em> is just a Python file, <em>filename.py.</em> An object (in Python and in other programming languages) is a data type that can include a ton of functions, methods, and attributes. Our variable <code class="docutils literal notranslate"><span class="pre">app</span></code> now has all of those from Flask. To be specific, <code class="docutils literal notranslate"><span class="pre">app</span></code> is an <em>instance</em> of a Python class named Flask, which we imported at the top of the file.</p>
+<p>Basically, we have brought into this file — this app — <em>all the capabilities</em> of Flask.</p>
+</div>
+<div class="section" id="add-a-route-and-some-action">
+<h3>Add a route and some action<a class="headerlink" href="#add-a-route-and-some-action" title="Permalink to this headline">¶</a></h3>
+<p>This next part of your first Flask app is what does the work.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;Hello World!&#39;</span>
+</pre></div>
+</div>
+<p>It consists of two parts: the decorator and the function that is “decorated.”</p>
+<p>A <strong>decorator</strong> begins with <code class="docutils literal notranslate"><span class="pre">&#64;</span></code> and is a unique feature of the Python language. It <em>modifies the function that follows it.</em> Let that sink in.</p>
+<p><code class="docutils literal notranslate"><span class="pre">&#64;app.route('/')</span></code> is a decorator.</p>
+<ol class="arabic simple">
+<li><p>Remember that <code class="docutils literal notranslate"><span class="pre">app</span></code> is a Flask application object. It has all the methods and attributes of the <em>Flask</em> class, and one of those is <code class="docutils literal notranslate"><span class="pre">route()</span></code>, which expects to be used in exactly this way — in a decorator.</p></li>
+<li><p>The contents of the parentheses are a <em>path</em> — a partial URL.</p></li>
+<li><p>Your Flask application will perform different actions depending on which URL is sent to it. <code class="docutils literal notranslate"><span class="pre">'/'</span></code> is the root of the website, the top, the home page. <code class="docutils literal notranslate"><span class="pre">&#64;app.route('/index')</span></code> indicates a URL such as <code class="docutils literal notranslate"><span class="pre">localhost:5000/index</span></code> or (on a live server) <code class="docutils literal notranslate"><span class="pre">https://mydomain.com/index</span></code>. Note that there is no file there — no <code class="docutils literal notranslate"><span class="pre">.html</span></code>.</p></li>
+<li><p>The action that will be performed at that URL depends on what is written in the <em>function</em> that immediately follows the <em>decorator.</em></p></li>
+</ol>
+<p>The function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;Hello World!&#39;</span>
+</pre></div>
+</div>
+<p>All this function does is return a simple string: <code class="docutils literal notranslate"><span class="pre">'Hello</span> <span class="pre">World!'</span></code> Our Flask app performs this action when the server is running, the app is running, and we open <code class="docutils literal notranslate"><span class="pre">localhost:5000</span></code> in the browser. (Naturally, a Flask app can run on a live web server.)</p>
+<p>Note that there does not need to be any relationship between the decorator and the function except proximity:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;Hello World!&#39;</span>
+</pre></div>
+</div>
+<p>Often people writing a Flask app use the same word for the route and the function, like so:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/foobar&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">foobar</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;Hi there, foobar!&#39;</span>
+</pre></div>
+</div>
+<p>There’s nothing wrong with this, but it’s not necessary. Use it if you like it.</p>
+</div>
+<div class="section" id="modify-hello-py-add-a-new-route">
+<h3>Modify hello.py: Add a new route<a class="headerlink" href="#modify-hello-py-add-a-new-route" title="Permalink to this headline">¶</a></h3>
+<p>Add these three lines to your <em>hello.py</em> file and save it.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/foobar&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">foobar</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s1">&#39;&lt;h1&gt;Hi there, foobar!&lt;/h1&gt;&#39;</span>
+</pre></div>
+</div>
+<p>Repeat the steps from above to run the file and open <code class="docutils literal notranslate"><span class="pre">localhost:5000</span></code>.</p>
+<p>After you see <em>Hello World!</em> in the browser, type <code class="docutils literal notranslate"><span class="pre">localhost:5000/foobar</span></code> into the address bar and press Enter or Return. That is what the new, added <em>route</em> made possible.</p>
+</div>
+</div>
+<div class="section" id="what-you-know-now-about-flask">
+<h2>What you know now about Flask<a class="headerlink" href="#what-you-know-now-about-flask" title="Permalink to this headline">¶</a></h2>
+<p>Think about each item below in the context of the code you have just run.</p>
+<ol class="arabic simple">
+<li><p>Flask enables us to create an app that runs on a web server.</p></li>
+<li><p>Entering a URL in a web browser is made operable by a <strong>route</strong> in a Python decorator.</p></li>
+<li><p>The <em>value</em> passed into <code class="docutils literal notranslate"><span class="pre">route()</span></code> appears in the URL.</p></li>
+<li><p>What happens <em>as a result of an HTTP request</em> to that URL is determined by instructions in the <strong>function</strong> that is “decorated.”</p></li>
+<li><p>A value <em>returned by</em> a function in Flask can be written into a web browser window.</p></li>
+</ol>
+<p>You’re ready to move on to <a class="reference external" href="flask2.html">Flask, Part 2</a>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="flask2.html" class="btn btn-neutral float-right" title="Flask, Part 2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="scraping3.html" class="btn btn-neutral float-left" title="Web Scraping, Part 3" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020 Mindy McAdams
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
