@@ -98,6 +98,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#the-openweather-api">The OpenWeather API</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-flask-to-get-a-response">Using Flask to get a response</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#the-weather-script">The weather script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary-of-the-flask-weather-app">Summary of the Flask weather app</a></li>
 </ul>
 </li>
 </ul>
@@ -401,9 +402,67 @@
 </pre></div>
 </td></tr></table></div>
 </div>
-<p><em>Line 5:</em> We import the <code class="docutils literal notranslate"><span class="pre">requests</span></code> module so that we can use <code class="docutils literal notranslate"><span class="pre">request.get()</span></code> to submit the API request (on line 20).</p>
+<p><em>Line 6:</em> We import the <code class="docutils literal notranslate"><span class="pre">requests</span></code> module so that we can use <code class="docutils literal notranslate"><span class="pre">requests.get()</span></code> to submit the API request (on line 20).</p>
 <p><em>Line 11:</em> Provide <strong>the API key</strong> that will be used in code below this line. (Uppercase letters are used for the variable name to denote a constant; see <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#constants">PEP 8</a>).</p>
 <p><em>Line 14:</em> The API call — the URL for the request. Note how <strong>curly braces</strong> are used at two locations in this string: <code class="docutils literal notranslate"><span class="pre">zip={},us</span></code> and <code class="docutils literal notranslate"><span class="pre">appid={}</span></code>. The curly braces allow a variable or a value to be inserted (on line 20).</p>
+<p><em>Line 16:</em> The start of a function that <em>is not</em> a Flask route function. This just provides a simple way to make the API request and return the response — <em>separately</em> from the route. The zip code will be supplied when this function is called.</p>
+<p><em>Line 20:</em> Using the variables <code class="docutils literal notranslate"><span class="pre">API_URL</span></code> and <code class="docutils literal notranslate"><span class="pre">API_KEY</span></code> (from lines 14 and 11), as well as the submitted zip code (covered below), the API request is constructed — <code class="docutils literal notranslate"><span class="pre">API_URL.format(zip,</span> <span class="pre">API_KEY)</span></code> — and passed into <code class="docutils literal notranslate"><span class="pre">requests.get()</span></code>. Tacking <code class="docutils literal notranslate"><span class="pre">.json()</span></code> on the end will raise an exception if JSON decoding fails (<a class="reference external" href="https://2.python-requests.org/en/master/user/quickstart/#json-response-content">details</a>).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">API_URL</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">zip</span><span class="p">,</span> <span class="n">API_KEY</span><span class="p">))</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>For details on this use of <code class="docutils literal notranslate"><span class="pre">.format()</span></code> to plug values into the curly braces in <code class="docutils literal notranslate"><span class="pre">API_URL</span></code>, <a class="reference external" href="https://www.geeksforgeeks.org/python-format-function/">see this post</a>.</p>
+<p><em>Line 26:</em> The Flask route begins here. This script has only ONE route. When the app is running, the server accepts a URL like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5000</span><span class="o">/</span><span class="n">weather</span><span class="o">/</span><span class="mi">86023</span>
+</pre></div>
+</div>
+<p>If the zip code is valid, a response will be returned by the API.</p>
+<p><em>Line 29:</em> The function <code class="docutils literal notranslate"><span class="pre">query_api()</span></code> is called here, with the value of <code class="docutils literal notranslate"><span class="pre">zip</span></code> from the URL passed to it. Review that function to see that it makes the request to the API and accepts the response from the API. The result is returned and here, in the route function, is assigned to the variable <code class="docutils literal notranslate"><span class="pre">resp</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">resp</span> <span class="o">=</span> <span class="n">query_api</span><span class="p">(</span><span class="nb">zip</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>Line 33:</em> Python reads the contents of <code class="docutils literal notranslate"><span class="pre">resp</span></code> as a <strong>dictionary.</strong> There are three values we want to extract:</p>
+<ul>
+<li><p>the <em>name</em> (location name),</p></li>
+<li><p>the <em>temp</em> (current temperature, in Fahrenheit), and</p></li>
+<li><p>the <em>description</em> (e.g., “clear sky”).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; temperature is &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;main&quot;</span><span class="p">][</span><span class="s2">&quot;temp&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; degrees Fahrenheit with &quot;</span> <span class="o">+</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;weather&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;description&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>We access those values using <strong>keys</strong> from the dictionary returned by the OpenWeather API:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">[&quot;name&quot;]</span></code> is a key in the primary dictionary.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[&quot;temp&quot;]</span></code> is a key inside a dictionary that is the <em>value</em> of the key <code class="docutils literal notranslate"><span class="pre">[&quot;main&quot;]</span></code> in the primary dictionary. We need to convert it to a <em>string</em> because the number is a <em>float,</em> and we cannot concatenate a float into a string unless we convert it to a string with <code class="docutils literal notranslate"><span class="pre">str()</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[&quot;description&quot;]</span></code> is a key in the first list item inside the list that is the <em>value</em> of the key <code class="docutils literal notranslate"><span class="pre">[&quot;weather&quot;]</span></code> in the primary dictionary.</p></li>
+</ul>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/weatherresp2.png"><img alt="Response from weather API in a browser screenshot" src="_images/weatherresp2.png" style="width: 700.0px; height: 283.5px;" /></a>
+</div>
+<p>Above is what <em>the API</em> returns to the browser (not using the Flask app).</p>
+<p>If you need some help to understand Python dictionaries, see <a class="reference external" href="dicts.html">Dictionaries</a>.</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/zip4.png"><img alt="Response from weather API in a browser screenshot" src="_images/zip4.png" style="width: 505.0px; height: 114.0px;" /></a>
+</div>
+<p>Above is what <em>the Flask app</em> returns, as a string, to the browser.</p>
+</div>
+<div class="section" id="summary-of-the-flask-weather-app">
+<h3>Summary of the Flask weather app<a class="headerlink" href="#summary-of-the-flask-weather-app" title="Permalink to this headline">¶</a></h3>
+<p>The API and its request/response details might seem overwhelming if you have not worked with APIs before now.</p>
+<p>The most important takeaways at this stage are:</p>
+<ol class="arabic">
+<li><p>The Flask app runs on a server.</p></li>
+<li><p>When an <strong>HTTP request</strong> is made to a specific route <em>in that Flask app,</em> the request (delivered via a URL in the browser) is handled by the decorated function <em>in the app script.</em></p></li>
+<li><p>A value can be part of the URL if the Flask route is written to accept a value, e.g.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/weather/&lt;zip&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>By default, if the app <em>returns</em> text, that text will appear in the browser window. What the route function returns is the <strong>HTTP response.</strong></p></li>
+<li><p>A Flask app can have one, or more than one, route.</p></li>
+<li><p>A route function can call other functions.</p></li>
+<li><p>A Flask app can use an external API. This is optional, not required.</p></li>
+</ol>
 <p>.</p>
 </div>
 </div>
