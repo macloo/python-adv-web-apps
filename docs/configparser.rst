@@ -32,13 +32,11 @@ Let’s say all your Python work and project folders are inside a folder named `
     api_key = ubfWMR8WYucrzeaQdrqkm6SrhYTMVQSsxZWpNbtUCMX5u
 
 
-These are not real keys. Do not use them.
+These are not real keys. Do not try to use them.
 
-Note, there are no quotation marks in the file.
-
-The name of the vendor or source is in brackets.
-
-Use linespaces between items exactly as shown.
+* Note, there are no quotation marks in the file.
+* The name of the vendor or source is in brackets.
+* Use linespaces between items exactly as shown.
 
 
 Accessing the config file
@@ -57,5 +55,10 @@ For an example, let’s say you’re accessing the `OpenWeather <https://openwea
 Note, you will need to ensure that the **path** on the third line above matches your system.
 
 You will use ``config.get()`` separately for each key or token.
+
+`Read more about configparser <https://docs.python.org/3/library/configparser.html>`_ in the Python docs.
+
+You might find it necessary to use Python’s ``pathlib`` module for writing relative paths. `Learn more here. <https://realpython.com/python-pathlib/>`_
+
 
 .
