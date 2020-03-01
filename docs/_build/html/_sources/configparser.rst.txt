@@ -56,6 +56,9 @@ Note, you will need to ensure that the **path** on the third line above matches 
 
 You will use ``config.get()`` separately for each key or token.
 
+More info
+---------
+
 `Read more about configparser <https://docs.python.org/3/library/configparser.html>`_ in the Python docs.
 
 You might find it necessary to use Python’s ``pathlib`` module for writing relative paths. `Learn more here. <https://realpython.com/python-pathlib/>`_
