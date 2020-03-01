@@ -36,3 +36,4 @@ See also the `official Python documentation <https://docs.python.org/3/>`_.
    scraping3
    flask
    flask2
+   configparser

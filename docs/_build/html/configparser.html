@@ -1,0 +1,264 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>configparser &mdash; Python Beginners  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Flask, Part 2" href="flask2.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Python Beginners
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="learn_python.html">Starting Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lists.html">Working with Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_files.html">Reading and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dicts.html">Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="csv.html">CSV Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scraping.html">Web Scraping Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scraping2.html">Web Scraping, Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scraping3.html">Web Scraping, Part 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask.html">Flask Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask2.html">Flask, Part 2</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">configparser</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#set-up-your-config-file">Set up your config file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#accessing-the-config-file">Accessing the config file</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Beginners</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>configparser</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/configparser.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="configparser">
+<h1>configparser<a class="headerlink" href="#configparser" title="Permalink to this headline">¶</a></h1>
+<p>Python’s build-in module <code class="docutils literal notranslate"><span class="pre">configparser</span></code> provides a handy way to manage API keys that you always want to keep out of any public code in GitHub repos, gists, etc.</p>
+<p>This chapter shows a quick, easy way for beginners to use a <code class="docutils literal notranslate"><span class="pre">.cfg</span></code> file to keep secret keys and tokens in one place.</p>
+<div class="section" id="set-up-your-config-file">
+<h2>Set up your config file<a class="headerlink" href="#set-up-your-config-file" title="Permalink to this headline">¶</a></h2>
+<p>Let’s say all your Python work and project folders are inside a folder named <code class="docutils literal notranslate"><span class="pre">python</span></code> on your computer. We are looking at files you run locally, not on a server.</p>
+<ol class="arabic">
+<li><p>To make your config file easy to access, but not likely to be deleted (by you) by accident, <strong>create</strong> a new folder in that top-level folder — which I will assume is named <code class="docutils literal notranslate"><span class="pre">python</span></code> — on your computer.</p></li>
+<li><p>Name the new folder <code class="docutils literal notranslate"><span class="pre">config</span></code>.</p></li>
+<li><p>Inside the <code class="docutils literal notranslate"><span class="pre">config</span></code> folder, <strong>create</strong> a new file named <code class="docutils literal notranslate"><span class="pre">keys_config.cfg</span></code>. This is a plain-text file. You can create it in Atom or any code editor.</p></li>
+<li><p>Write at least one key — or set of keys and tokens — into the file in the exact pattern shown below. Then save the file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">openweather</span><span class="p">]</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="n">mt732wbt5kh5ea4bkw7qytbb9gdkaew4</span>
+
+<span class="p">[</span><span class="n">twitter</span><span class="p">]</span>
+<span class="n">consumer_key</span> <span class="o">=</span> <span class="n">d53Qe4uf5LMWuQeQFFG66n6BN</span>
+<span class="n">consumer_secret</span> <span class="o">=</span> <span class="n">Yxf5n2BwnRELRrkkVjWgpTu48sz5KwGD52324PuwkFWdmVGP4m</span>
+<span class="n">access_token</span> <span class="o">=</span> <span class="mi">9922431</span><span class="o">-</span><span class="n">d53Qe4uf5LMWuQeQFFG66n6BN</span>
+<span class="n">access_token_secret</span> <span class="o">=</span> <span class="n">ubfWMR8WYucrzeaQdrqkm6SrhYTMVQSsxZWpNbtUCMX5u</span>
+
+<span class="p">[</span><span class="n">google</span><span class="p">]</span>
+<span class="n">api_key</span> <span class="o">=</span> <span class="n">ubfWMR8WYucrzeaQdrqkm6SrhYTMVQSsxZWpNbtUCMX5u</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>These are not real keys. Do not try to use them.</p>
+<ul class="simple">
+<li><p>Note, there are no quotation marks in the file.</p></li>
+<li><p>The name of the vendor or source is in brackets.</p></li>
+<li><p>Use linespaces between items exactly as shown.</p></li>
+</ul>
+</div>
+<div class="section" id="accessing-the-config-file">
+<h2>Accessing the config file<a class="headerlink" href="#accessing-the-config-file" title="Permalink to this headline">¶</a></h2>
+<p>Your config file can contain keys and tokens for many different APIs. When you are writing a Python script to access a particular API, you will want to get the keys only for that <em>one</em> API.</p>
+<p>For an example, let’s say you’re accessing the <a class="reference external" href="https://openweathermap.org/">OpenWeather</a> API in a new Python script. Your script is in a folder named <code class="docutils literal notranslate"><span class="pre">weather</span></code>, and that folder is inside the <code class="docutils literal notranslate"><span class="pre">python</span></code> folder referred to above. In that case, the code in your script is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">configparser</span> <span class="kn">import</span> <span class="n">ConfigParser</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="p">()</span>
+<span class="n">config</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;../config/keys_config.cfg&#39;</span><span class="p">)</span>
+
+<span class="n">API_KEY</span> <span class="o">=</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;openweather&#39;</span><span class="p">,</span> <span class="s1">&#39;api_key&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note, you will need to ensure that the <strong>path</strong> on the third line above matches your system.</p>
+<p>You will use <code class="docutils literal notranslate"><span class="pre">config.get()</span></code> separately for each key or token.</p>
+<p><a class="reference external" href="https://docs.python.org/3/library/configparser.html">Read more about configparser</a> in the Python docs.</p>
+<p>You might find it necessary to use Python’s <code class="docutils literal notranslate"><span class="pre">pathlib</span></code> module for writing relative paths. <a class="reference external" href="https://realpython.com/python-pathlib/">Learn more here.</a></p>
+<p>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="flask2.html" class="btn btn-neutral float-left" title="Flask, Part 2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020 Mindy McAdams
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
