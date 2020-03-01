@@ -5,6 +5,7 @@ Python’s build-in module ``configparser`` provides a handy way to manage API k
 
 This chapter shows a quick, easy way for beginners to use a ``.cfg`` file to keep secret keys and tokens in one place.
 
+
 Set up your config file
 -----------------------
 
@@ -30,6 +31,7 @@ Let’s say all your Python work and project folders are inside a folder named `
     [google]
     api_key = ubfWMR8WYucrzeaQdrqkm6SrhYTMVQSsxZWpNbtUCMX5u
 
+
 These are not real keys. Do not use them.
 
 Note, there are no quotation marks in the file.
@@ -38,9 +40,22 @@ The name of the vendor or source is in brackets.
 
 Use linespaces between items exactly as shown.
 
+
 Accessing the config file
 -------------------------
 
+Your config file can contain keys and tokens for many different APIs. When you are writing a Python script to access a particular API, you will want to get the keys only for that *one* API.
 
+For an example, let’s say you’re accessing the `OpenWeather <https://openweathermap.org/>`_ API in a new Python script. Your script is in a folder named ``weather``, and that folder is inside the ``python`` folder referred to above. In that case, the code in your script is: ::
+
+    from configparser import ConfigParser
+    config = ConfigParser()
+    config.read('../config/keys_config.cfg')
+
+    API_KEY = config.get('openweather', 'api_key')
+
+Note, you will need to ensure that the **path** on the third line above matches your system.
+
+You will use ``config.get()`` separately for each key or token.
 
 .
