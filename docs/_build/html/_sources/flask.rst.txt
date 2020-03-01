@@ -1,14 +1,12 @@
-Introduction to Flask
-=====================
+Flask Intro
+===========
 
 Flask is a Python framework for building web apps. It’s small, light and simple compared with the other widely used Python framework, `Django <https://www.djangoproject.com/>`_.
 
 * `This site is the home of Flask. <https://www.palletsprojects.com/p/flask/>`_
 * `The documentation for Flask is here. <https://flask.palletsprojects.com/>`_
 
-We will install Flask in a new Python3 virtual environment. Students already have Python3 and ``venv``. If you are lacking one or both, read this:
-
-`Install virtualenv and Jupyter <http://bit.ly/install-python3-jupyter>`_
+We will install Flask in a new Python3 virtual environment. Students already have Python3 and ``venv``.
 
 
 Setup for Flask
@@ -58,6 +56,9 @@ For example, on my Mac I would see this: ::
     (env) mcadams flask $
 
 
+.. tip:: If your Mac OS prompt is long and unsightly — unlike the sleek, svelte prompt seen above — you might want to `change it <https://osxdaily.com/2006/12/11/how-to-customize-your-terminal-prompt/>`_.
+
+
 Install Flask
 +++++++++++++
 
@@ -79,7 +80,7 @@ Using Atom, create a file in your *flask* folder, copy/paste the code into it, a
 .. literalinclude:: ../python_code_examples/flask/hello.py
    :caption:
 
-At the command prompt, type this (two lines): ::
+To run that test script, at the command prompt, type this (two lines): ::
 
     export FLASK_APP=hello.py
     flask run
@@ -106,17 +107,22 @@ What you’ve done is:
 2. With the two commands ending with ``flask run``, you started the server and ran the app on it.
 3. The app caused the string *Hello World!* to be written into the browser window when the home location of the server was requested (that was you typing ``localhost:5000`` into the address bar).
 
+   - That is, the app *received a request* sent via the browser software to the server.
+   - Then, the app determined what *response to send* back to the browser.
+
 **To shut down the server,** press Control-C in Terminal. (Mac users: That is *Control,* not Command.)
 
 
 Flask intro video
 +++++++++++++++++
 
-Here is an excellent video from a Harvard EdX course. Starting at 00:40:25, the instructor explains Flask pretty much as I have done in this README and in the parts to follow. It is exceptionally clear and well organized.
+Here is an excellent video from a Harvard EdX course. Starting at 40:25, the instructor explains Flask pretty much as I have done in this chapter and in the parts to follow. It is exceptionally clear and well organized.
 
 If you would prefer a video, I highly recommend this:
 
 `Flask - Lecture 2 - CS50's Web Programming with Python and JavaScript <https://youtu.be/j5wysXqaIV8?t=2347>`_
+
+The lecturer begins with a quick review of how HTTP works and then walks through the same test script shown above. Watch until around 48:00.
 
 
 Deconstruct the code in a small Flask app
@@ -164,7 +170,9 @@ It consists of two parts: the decorator and the function that is “decorated.�
 
 A **decorator** begins with ``@`` and is a unique feature of the Python language. It *modifies the function that follows it.* Let that sink in.
 
-``@app.route('/')`` is a decorator.
+The decorator: ::
+
+    @app.route('/')
 
 1. Remember that ``app`` is a Flask application object. It has all the methods and attributes of the *Flask* class, and one of those is ``route()``, which expects to be used in exactly this way — in a decorator.
 2. The contents of the parentheses are a *path* — a partial URL.
@@ -205,7 +213,14 @@ Add these three lines to your *hello.py* file and save it. ::
 
 Repeat the steps from above to run the file and open ``localhost:5000``.
 
-After you see *Hello World!* in the browser, type ``localhost:5000/foobar`` into the address bar and press Enter or Return. That is what the new, added *route* made possible.
+After you see *Hello World!* in the browser (the same as before), type ``localhost:5000/foobar`` into the address bar and press Enter or Return. That is what the new, added *route* made possible.
+
+.. figure:: _static/images/flask_foobar.png
+   :scale: 50 %
+   :alt: Example of a new Flask route screenshot
+
+It is possible to have **many different routes** in one Flask app, and each route can do an entirely different thing.
+
 
 What you know now about Flask
 -----------------------------

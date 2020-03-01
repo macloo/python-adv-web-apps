@@ -35,6 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Introduction to Flask" href="flask.html" />
     <link rel="prev" title="Web Scraping, Part 2" href="scraping2.html" /> 
 </head>
 
@@ -103,6 +104,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#when-all-else-fails">When all else fails</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="flask.html">Introduction to Flask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask2.html">Flask, Part 2</a></li>
 </ul>
 
             
@@ -194,47 +197,6 @@
 <div class="section" id="selenium-commands">
 <h3>Selenium commands<a class="headerlink" href="#selenium-commands" title="Permalink to this headline">¶</a></h3>
 <p><strong>To manipulate elements on the page</strong> with Selenium, you <em>will</em> need to use Selenium commands such as <code class="docutils literal notranslate"><span class="pre">.find_element_by_css_selector()</span></code> — as seen in the example below.</p>
-<div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/scraping/selenium_test3.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
-<span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
-<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
-<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
-
-
-<span class="c1"># my path is &#39;/Users/mcadams/Documents/python/&#39;</span>
-<span class="c1"># yours will be different</span>
-
-
-<span class="c1"># load your driver</span>
-<span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">(</span><span class="s1">&#39;/Users/mcadams/Documents/python/chromedriver&#39;</span><span class="p">)</span>
-
-<span class="c1"># get the web page</span>
-<span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.rottentomatoes.com/browse/dvd-streaming-all&#39;</span><span class="p">);</span>
-
-<span class="c1"># click the button exactly 8 times</span>
-<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
-    <span class="n">driver</span><span class="o">.</span><span class="n">find_element_by_css_selector</span><span class="p">(</span><span class="s1">&#39;.btn.btn-secondary-rt.mb-load-btn&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
-    <span class="c1"># the button tag has class=&quot;btn btn-secondary-rt mb-load-btn&quot;</span>
-    <span class="c1"># ... we told it which button to click</span>
-    <span class="c1"># make a random wait time between 1 and 10 seconds to look less bot-like</span>
-    <span class="n">s</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-    <span class="c1"># sleep that number of seconds</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-
-<span class="n">page</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">page_source</span>
-
-<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
-<span class="n">title_list</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;h3&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;movieTitle&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">title</span> <span class="ow">in</span> <span class="n">title_list</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">title</span><span class="o">.</span><span class="n">get_text</span><span class="p">())</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There are &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">title_list</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; movies in the list.&quot;</span><span class="p">)</span>
-
-<span class="n">driver</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
 <p>The page being scraped shows only 32 movies until you click a button at the bottom. Each time you click the bottom button, more movies are visible on the original page. By having Selenium click the button eight times, we are able to scrape information for 275 movies instead of only 32.</p>
 <p>If you run the code above, be sure you have installed both BeautifulSoup and Selenium. The <code class="docutils literal notranslate"><span class="pre">time</span></code> and <code class="docutils literal notranslate"><span class="pre">random</span></code> modules are built-ins, so you do not need to install those beforehand.</p>
 <p>Other Selenium methods for locating HTML elements are listed <a class="reference external" href="https://selenium-python.readthedocs.io/locating-elements.html">here</a>.</p>
@@ -362,6 +324,8 @@
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="flask.html" class="btn btn-neutral float-right" title="Introduction to Flask" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="scraping2.html" class="btn btn-neutral float-left" title="Web Scraping, Part 2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
