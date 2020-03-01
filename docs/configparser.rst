@@ -52,9 +52,14 @@ For an example, let’s say you’re accessing the `OpenWeather <https://openwea
 
     API_KEY = config.get('openweather', 'api_key')
 
-Note, you will need to ensure that the **path** on the third line above matches your system.
+Note, you will need to ensure that the **path** on the third line above matches your system. The image below shows the relationship represented in the code above.
 
 You will use ``config.get()`` separately for each key or token.
+
+.. figure:: _static/images/config_file.png
+   :scale: 50 %
+   :alt: Example of local file structure screenshot
+
 
 More info
 ---------
