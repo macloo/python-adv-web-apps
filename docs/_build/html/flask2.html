@@ -35,7 +35,8 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Introduction to Flask" href="flask.html" /> 
+    <link rel="next" title="configparser" href="configparser.html" />
+    <link rel="prev" title="Flask Intro" href="flask.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -90,8 +91,18 @@
 <li class="toctree-l1"><a class="reference internal" href="scraping.html">Web Scraping Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scraping2.html">Web Scraping, Part 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scraping3.html">Web Scraping, Part 3</a></li>
-<li class="toctree-l1"><a class="reference internal" href="flask.html">Introduction to Flask</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Flask, Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask.html">Flask Intro</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Flask, Part 2</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#your-second-flask-app">Your second Flask app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#putting-this-to-work-with-an-api">Putting this to work with an API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#the-openweather-api">The OpenWeather API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-flask-to-get-a-response">Using Flask to get a response</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-weather-script">The weather script</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
 </ul>
 
             
@@ -158,7 +169,244 @@
             
   <div class="section" id="flask-part-2">
 <h1>Flask, Part 2<a class="headerlink" href="#flask-part-2" title="Permalink to this headline">¶</a></h1>
-<p>…</p>
+<p>In the <a class="reference external" href="flask.html">Flask intro</a>, you saw a very simple Flask app in action. Let’s step it up a little.</p>
+<p>Code for this chapter is <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask">here</a>.</p>
+<div class="section" id="your-second-flask-app">
+<h2>Your second Flask app<a class="headerlink" href="#your-second-flask-app" title="Permalink to this headline">¶</a></h2>
+<p>The following script demonstrates the use of a <em>variable</em> in a Flask <strong>route.</strong> The function can employ the <em>value</em> of this variable in many ways. Here, the value will simply appear in the browser window as part of a string.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/hello3.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;basic Flask app - demo of using a variable in a route&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
+    <span class="n">greet</span> <span class="o">=</span> <span class="s1">&#39;&lt;h1&gt;Hello, Gators!&lt;/h1&gt;&#39;</span>
+    <span class="n">link</span> <span class="o">=</span> <span class="s1">&#39;&lt;p&gt;&lt;a href=&quot;user/Albert&quot;&gt;Click me!&lt;/a&gt;&lt;/p&gt;&#39;</span>
+    <span class="k">return</span> <span class="n">greet</span> <span class="o">+</span> <span class="n">link</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/user/&lt;name&gt;&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">user</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="n">personal</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&lt;h1&gt;Hello, </span><span class="si">{name}</span><span class="s1">!&lt;/h1&gt;&#39;</span>
+    <span class="c1"># above - the curly braces {} hold a variable; when this runs,</span>
+    <span class="c1"># the value will replace the braces and the variable name</span>
+    <span class="n">instruc</span> <span class="o">=</span> <span class="s1">&#39;&lt;p&gt;Change the name in the &lt;em&gt;browser address bar&lt;/em&gt; </span><span class="se">\</span>
+<span class="s1">        and reload the page.&lt;/p&gt;&#39;</span>
+    <span class="k">return</span> <span class="n">personal</span> <span class="o">+</span> <span class="n">instruc</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>We have <strong>two routes</strong> in the script. The first route, for <code class="docutils literal notranslate"><span class="pre">'/'</span></code>, is not very different from our first Flask app. The second route, for <code class="docutils literal notranslate"><span class="pre">'/user/&lt;name&gt;'</span></code>, is doing something new.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Because of the final two lines in this script, you will run this file in exactly the same way you’ve run every other <code class="docutils literal notranslate"><span class="pre">.py</span></code> file in a virtual environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">hello3</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>Do not use <code class="docutils literal notranslate"><span class="pre">flask</span> <span class="pre">run</span></code> to run this script. That is not necessary, thanks to lines 20 and 21.</p>
+</div>
+<p>When we go to <code class="docutils literal notranslate"><span class="pre">localhost:5000</span></code> in the browser, the following code from the Python script creates a functional link in the browser window:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;p&gt;&lt;a href=&quot;user/Albert&quot;&gt;Click me!&lt;/a&gt;&lt;/p&gt;
+</pre></div>
+</div>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/hello3_a.png"><img alt="The first route in a browser screenshot" src="_images/hello3_a.png" style="width: 382.0px; height: 172.0px;" /></a>
+</div>
+<p>When you click the link, the second route in <em>hello3.py</em> is called. That is, the relative URL <em>user/Albert</em> is sent to the server as an HTTP request. But note — and this is a <em>key point</em> — the relative URL in the HTML is <code class="docutils literal notranslate"><span class="pre">href=&quot;user/Albert&quot;</span></code> and yet the Flask route says:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/user/&lt;name&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/hello3_b.png"><img alt="The second route in a browser screenshot" src="_images/hello3_b.png" style="width: 434.0px; height: 175.0px;" /></a>
+</div>
+<p>What you should understand about Flask <em>right now</em> is that we are able to pass in <strong>changeable values</strong> using the URL.</p>
+<p>To test this, <strong>change the text</strong> that comes after <code class="docutils literal notranslate"><span class="pre">/user/</span></code> in the browser address bar, and press Enter or Return.</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/hello3_c.png"><img alt="A variation on the second route in a browser screenshot" src="_images/hello3_c.png" style="width: 441.0px; height: 170.0px;" /></a>
+</div>
+<p>Look at the URL in the browser address bar, and look at the text in the browser window.</p>
+<p>If you enter the URL <em>without</em> a value for <code class="docutils literal notranslate"><span class="pre">name</span></code> — e.g. <code class="docutils literal notranslate"><span class="pre">localhost:5000/user/</span></code> — you’ll get an HTTP error: “The requested URL was not found on the server.”</p>
+<p>Review the route function that makes it happen:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/user/&lt;name&gt;&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">user</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="n">personal</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&lt;h1&gt;Hello, </span><span class="si">{name}</span><span class="s1">!&lt;/h1&gt;&#39;</span>
+    <span class="c1"># above - the curly braces {} hold a variable; when this runs,</span>
+    <span class="c1"># the value will replace the braces and the variable name</span>
+    <span class="n">instruc</span> <span class="o">=</span> <span class="s1">&#39;&lt;p&gt;Change the name in the &lt;em&gt;browser address bar&lt;/em&gt; </span><span class="se">\</span>
+<span class="s1">        and reload the page.&lt;/p&gt;&#39;</span>
+    <span class="k">return</span> <span class="n">personal</span> <span class="o">+</span> <span class="n">instruc</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Possibly the use of string formatters above is new to you. They are similar to template literals in JavaScript.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">personal</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&lt;h1&gt;Hello, </span><span class="si">{name}</span><span class="s1">!&lt;/h1&gt;&#39;</span>
+</pre></div>
+</div>
+<p>The result of that line is equivalent to this string concatenation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">personal</span> <span class="o">=</span> <span class="s1">&#39;&lt;h1&gt;Hello, &#39;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;!&lt;/h1&gt;&#39;</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://realpython.com/python-f-strings/">Learn about Python format strings here.</a></p>
+</div>
+</div>
+<div class="section" id="putting-this-to-work-with-an-api">
+<h2>Putting this to work with an API<a class="headerlink" href="#putting-this-to-work-with-an-api" title="Permalink to this headline">¶</a></h2>
+<p>The next script will demonstrate how Flask can be used to send an API request, and then use the response in a formatted string. This is more useful than the previous example script — but <strong>the same idea</strong> of the <strong>variable</strong> in the <strong>route</strong> is used.</p>
+<p>In the previous script, we used <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;</span></code> in the route and <code class="docutils literal notranslate"><span class="pre">name</span></code> in the function to write <em>Albert</em> and then <em>Mindy.</em> In the <strong>next</strong> script, we will use <code class="docutils literal notranslate"><span class="pre">&lt;zip&gt;</span></code> in the route and <code class="docutils literal notranslate"><span class="pre">zip</span></code> in the function to submit a U.S. zip code to the OpenWeather API (the <strong>request</strong>). The <strong>response</strong> (in the browser) will tell us the current weather at that location.</p>
+<div class="section" id="the-openweather-api">
+<h3>The OpenWeather API<a class="headerlink" href="#the-openweather-api" title="Permalink to this headline">¶</a></h3>
+<p>To use this script for yourself, you will need to get an API key at <a class="reference external" href="https://openweathermap.org/">OpenWeather</a> (it’s free). Do not allow your API key to be seen by others. I am not sharing my real API key here.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See the <a class="reference external" href="configparser.html">configparser chapter</a> for details about using a <code class="docutils literal notranslate"><span class="pre">.cfg</span></code> file to store all your API keys. You don’t need to do this to make the script below work, but make sure you do not <em>publish</em> that version with your actual API key in the code, e.g. on GitHub.</p>
+</div>
+<p><a class="reference external" href="https://openweathermap.org/current">Here is everything you need to know about the OpenWeather API.</a></p>
+<p>We will use the OpenWeather zip code query. A request to an API can be submitted in a web browser. This is the request, or query (not using a real API key):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>http://api.openweathermap.org/data/2.5/weather?zip=32611,us&amp;mode=json&amp;units=imperial&amp;appid=12345abcXYZ
+</pre></div>
+</div>
+<p>In the URL above, you can see I submitted the zip code 32611, JSON as the mode (for the response), and imperial (for temperature in Fahrenheit). The pattern of the URL is shown on the OpenWeather API page.</p>
+<p>This is the response from the OpenWeather API, in a browser:</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/weatherres.png"><img alt="Response from weather API in a browser screenshot" src="_images/weatherres.png" style="width: 697.0px; height: 239.0px;" /></a>
+</div>
+<p>Like most APIs, the OpenWeather API returns a response in a <strong>JSON-formatted string.</strong> (You can opt to get it in other formats.) In the respnse, you can find the <em>name</em> (Gainesville), the <em>temp</em> (70.05), and the <em>description</em> (clear sky). Those <strong>keys</strong> and <strong>values</strong> will be used in the Python script <em>weather.py</em> below.</p>
+</div>
+<div class="section" id="using-flask-to-get-a-response">
+<h3>Using Flask to get a response<a class="headerlink" href="#using-flask-to-get-a-response" title="Permalink to this headline">¶</a></h3>
+<p>After creating a Flask script (<em>weather.py</em>) to query the OpenWeather API and write a more readable string into the browser, I ran the script on a February day:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">weather</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>In the browser, I typed three different URLs as shown below.</p>
+<p>The zip code 32611 is for Gainesville, Florida.</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/zip1.png"><img alt="Response from weather API in a browser screenshot" src="_images/zip1.png" style="width: 449.0px; height: 129.0px;" /></a>
+</div>
+<p>The zip code 10118 is for New York City.</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/zip2.png"><img alt="Response from weather API in a browser screenshot" src="_images/zip2.png" style="width: 449.0px; height: 129.0px;" /></a>
+</div>
+<p>The zip code 99508 is for Anchorage, Alaska.</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/zip3.png"><img alt="Response from weather API in a browser screenshot" src="_images/zip3.png" style="width: 449.0px; height: 129.0px;" /></a>
+</div>
+</div>
+<div class="section" id="the-weather-script">
+<h3>The weather script<a class="headerlink" href="#the-weather-script" title="Permalink to this headline">¶</a></h3>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/weather.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;a demo Flask app to access an API</span>
+<span class="sd">   the idea for this example came from:</span>
+<span class="sd">   https://medium.com/free-code-camp/how-to-build-a-web-app-using-pythons-flask-and-google-app-engine-52b1bb82b221</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># this is not a real key</span>
+<span class="n">API_KEY</span> <span class="o">=</span> <span class="s1">&#39;12345abcXYZ&#39;</span>
+
+<span class="c1"># get weather by U.S. zip code</span>
+<span class="n">API_URL</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;http://api.openweathermap.org/data/2.5/weather?zip=</span><span class="si">{}</span><span class="s1">,us&amp;mode=json&amp;units=imperial&amp;appid=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">query_api</span><span class="p">(</span><span class="nb">zip</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;submit the API query using variables for zip and API_KEY&quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="c1"># print(API_URL.format(zip, API_KEY))</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">API_URL</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">zip</span><span class="p">,</span> <span class="n">API_KEY</span><span class="p">))</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/weather/&lt;zip&gt;&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">result</span><span class="p">(</span><span class="nb">zip</span><span class="p">):</span>
+    <span class="c1"># get the json file from the OpenWeather API</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">query_api</span><span class="p">(</span><span class="nb">zip</span><span class="p">)</span>
+    <span class="c1"># construct a string using the json data items for temp and</span>
+    <span class="c1"># description</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; temperature is &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;main&quot;</span><span class="p">][</span><span class="s2">&quot;temp&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; degrees Fahrenheit with &quot;</span> <span class="o">+</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;weather&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;description&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;There was an error.&lt;br&gt;Did you include a valid zip code in the URL?&quot;</span>
+    <span class="k">return</span> <span class="n">text</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p><em>Line 5:</em> We import the <code class="docutils literal notranslate"><span class="pre">requests</span></code> module so that we can use <code class="docutils literal notranslate"><span class="pre">request.get()</span></code> to submit the API request (on line 20).</p>
+<p><em>Line 11:</em> Provide <strong>the API key</strong> that will be used in code below this line. (Uppercase letters are used for the variable name to denote a constant; see <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#constants">PEP 8</a>).</p>
+<p><em>Line 14:</em> The API call — the URL for the request. Note how <strong>curly braces</strong> are used at two locations in this string: <code class="docutils literal notranslate"><span class="pre">zip={},us</span></code> and <code class="docutils literal notranslate"><span class="pre">appid={}</span></code>. The curly braces allow a variable or a value to be inserted (on line 20).</p>
+<p>.</p>
+</div>
+</div>
 </div>
 
 
@@ -169,8 +417,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="configparser.html" class="btn btn-neutral float-right" title="configparser" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-        <a href="flask.html" class="btn btn-neutral float-left" title="Introduction to Flask" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+        <a href="flask.html" class="btn btn-neutral float-left" title="Flask Intro" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
