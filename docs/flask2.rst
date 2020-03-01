@@ -128,14 +128,14 @@ The zip code 32611 is for Gainesville, Florida.
 The zip code 10118 is for New York City.
 
 .. figure:: _static/images/zip2.png
-  :scale: 50 %
-  :alt: Response from weather API in a browser screenshot
+   :scale: 50 %
+   :alt: Response from weather API in a browser screenshot
 
 The zip code 99508 is for Anchorage, Alaska.
 
 .. figure:: _static/images/zip3.png
- :scale: 50 %
- :alt: Response from weather API in a browser screenshot
+   :scale: 50 %
+   :alt: Response from weather API in a browser screenshot
 
 
 The weather script
@@ -145,15 +145,75 @@ The weather script
    :caption:
    :linenos:
 
-*Line 5:* We import the ``requests`` module so that we can use ``request.get()`` to submit the API request (on line 20).
+*Line 6:* We import the ``requests`` module so that we can use ``requests.get()`` to submit the API request (on line 20).
 
 *Line 11:* Provide **the API key** that will be used in code below this line. (Uppercase letters are used for the variable name to denote a constant; see `PEP 8 <https://www.python.org/dev/peps/pep-0008/#constants>`_).
 
 *Line 14:* The API call — the URL for the request. Note how **curly braces** are used at two locations in this string: ``zip={},us`` and ``appid={}``. The curly braces allow a variable or a value to be inserted (on line 20).
 
+*Line 16:* The start of a function that *is not* a Flask route function. This just provides a simple way to make the API request and return the response — *separately* from the route. The zip code will be supplied when this function is called.
+
+*Line 20:* Using the variables ``API_URL`` and ``API_KEY`` (from lines 14 and 11), as well as the submitted zip code (covered below), the API request is constructed — ``API_URL.format(zip, API_KEY)`` — and passed into ``requests.get()``. Tacking ``.json()`` on the end will raise an exception if JSON decoding fails (`details <https://2.python-requests.org/en/master/user/quickstart/#json-response-content>`_). ::
+
+    data = requests.get(API_URL.format(zip, API_KEY)).json()
+
+For details on this use of ``.format()`` to plug values into the curly braces in ``API_URL``, `see this post <https://www.geeksforgeeks.org/python-format-function/>`_.
+
+*Line 26:* The Flask route begins here. This script has only ONE route. When the app is running, the server accepts a URL like this: ::
+
+    http://localhost:5000/weather/86023
+
+If the zip code is valid, a response will be returned by the API.
+
+*Line 29:* The function ``query_api()`` is called here, with the value of ``zip`` from the URL passed to it. Review that function to see that it makes the request to the API and accepts the response from the API. The result is returned and here, in the route function, is assigned to the variable ``resp``: ::
+
+    resp = query_api(zip)
+
+*Line 33:* Python reads the contents of ``resp`` as a **dictionary.** There are three values we want to extract:
+
+* the *name* (location name),
+* the *temp* (current temperature, in Fahrenheit), and
+* the *description* (e.g., “clear sky”). ::
 
 
+    text = resp["name"] + " temperature is " + str(resp["main"]["temp"]) + " degrees Fahrenheit with " + resp["weather"][0]["description"] + "."
 
+We access those values using **keys** from the dictionary returned by the OpenWeather API:
 
+* ``["name"]`` is a key in the primary dictionary.
+* ``["temp"]`` is a key inside a dictionary that is the *value* of the key ``["main"]`` in the primary dictionary. We need to convert it to a *string* because the number is a *float,* and we cannot concatenate a float into a string unless we convert it to a string with ``str()``.
+* ``["description"]`` is a key in the first list item inside the list that is the *value* of the key ``["weather"]`` in the primary dictionary.
+
+.. figure:: _static/images/weatherresp2.png
+   :scale: 50 %
+   :alt: Response from weather API in a browser screenshot
+
+Above is what *the API* returns to the browser (not using the Flask app).
+
+If you need some help to understand Python dictionaries, see `Dictionaries <dicts.html>`_.
+
+.. figure:: _static/images/zip4.png
+   :scale: 50 %
+   :alt: Response from weather API in a browser screenshot
+
+Above is what *the Flask app* returns, as a string, to the browser.
+
+Summary of the Flask weather app
+++++++++++++++++++++++++++++++++
+
+The API and its request/response details might seem overwhelming if you have not worked with APIs before now.
+
+The most important takeaways at this stage are:
+
+1. The Flask app runs on a server.
+2. When an **HTTP request** is made to a specific route *in that Flask app,* the request (delivered via a URL in the browser) is handled by the decorated function *in the app script.*
+3. A value can be part of the URL if the Flask route is written to accept a value, e.g. ::
+
+    @app.route('/weather/<zip>')
+
+4. By default, if the app *returns* text, that text will appear in the browser window. What the route function returns is the **HTTP response.**
+5. A Flask app can have one, or more than one, route.
+6. A route function can call other functions.
+7. A Flask app can use an external API. This is optional, not required.
 
 .
