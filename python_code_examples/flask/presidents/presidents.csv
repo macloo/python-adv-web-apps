@@ -1,0 +1,46 @@
+Presidency,President,Wikipedia-entry,Took-office,Left-office,Party,Home-state,Occupation,College,Age-when-took-office,Birth-date,Birthplace,Death-date,Location-death,Image
+1,George Washington,http://en.wikipedia.org/wiki/George_Washington,4/30/1789,3/4/1797,Independent,Virginia,Planter,None,57,2/22/1732,"Westmoreland County, Virginia",12/14/1799,"Mount Vernon, Virginia",pr01.jpg
+2,John Adams,http://en.wikipedia.org/wiki/John_Adams,3/4/1797,3/4/1801,Federalist,Massachusetts,Lawyer,Harvard,61,10/30/1735,"Quincy, Massachusetts",7/4/1826,"Quincy, Massachusetts",pr02.jpg
+3,Thomas Jefferson,http://en.wikipedia.org/wiki/Thomas_Jefferson,3/4/1801,3/4/1809,Democratic-Republican,Virginia,"Planter, Lawyer",William and Mary,57,4/13/1743,"Albemarle County, Virginia",7/4/1826,"Albemarle County, Virginia",pr03.jpg
+4,James Madison,http://en.wikipedia.org/wiki/James_Madison,3/4/1809,3/4/1817,Democratic-Republican,Virginia,Lawyer,Princeton,57,3/16/1751,"Port Conway, Virginia",6/28/1836,"Orange County, Virginia",pr04.jpg
+5,James Monroe,http://en.wikipedia.org/wiki/James_Monroe,3/4/1817,3/4/1825,Democratic-Republican,Virginia,Lawyer,William and Mary,58,4/28/1758,"Westmoreland County, Virginia",7/4/1831,"New York, New York",pr05.jpg
+6,John Quincy Adams,http://en.wikipedia.org/wiki/John_Quincy_Adams,3/4/1825,3/4/1829,Democratic-Republican/National Republican,Massachusetts,Lawyer,Harvard,57,7/11/1767,"Quincy, Massachusetts",2/23/1848,"Washington, D.C.",pr06.jpg
+7,Andrew Jackson,http://en.wikipedia.org/wiki/Andrew_Jackson,3/4/1829,3/4/1837,Democratic,Tennessee,Lawyer,None,61,3/15/1767,"Waxhaws, North Carolina",6/8/1845,"Nashville, Tennessee",pr07.jpg
+8,Martin Van Buren,http://en.wikipedia.org/wiki/Martin_Van_Buren,3/4/1837,3/4/1841,Democratic,New York,Lawyer,None,54,12/5/1782,"Kinderhook, New York",7/24/1862,"Kinderhook, New York",pr08.jpg
+9,William Henry Harrison,http://en.wikipedia.org/wiki/William_Henry_Harrison,3/4/1841,4/4/1841,Whig,Ohio,Soldier,Hampden-Sydney,68,2/9/1773,"Charles City County, Virginia",4/4/1841,"Washington, D.C.",pr09.jpg
+10,John Tyler,http://en.wikipedia.org/wiki/John_Tyler,4/4/1841,3/4/1845,Whig,Virginia,Lawyer,William and Mary,51,3/29/1790,"Charles City County, Virginia",1/18/1862,"Richmond, Virginia",pr10.jpg
+11,James K. Polk,http://en.wikipedia.org/wiki/James_K._Polk,3/4/1845,3/4/1849,Democratic,Tennessee,Lawyer,University of North Carolina,49,11/2/1795,"Mecklenburg County, North Carolina",6/15/1849,"Nashville, Tennessee",pr11.jpg
+12,Zachary Taylor,http://en.wikipedia.org/wiki/Zachary_Taylor,3/4/1849,7/9/1850,Whig,Louisiana,Soldier,None,64,11/24/1784,"Orange County, Virginia",7/9/1850,"Washington, D.C",pr12.jpg
+13,Millard Fillmore,http://en.wikipedia.org/wiki/Millard_Fillmore,7/9/1850,3/4/1853,Whig,New York,Lawyer,None,50,1/7/1800,"Cayuga County, New York",3/8/1874,"Buffalo, New York",pr13.jpg
+14,Franklin Pierce,http://en.wikipedia.org/wiki/Franklin_Pierce,3/4/1853,3/4/1857,Democratic,New Hampshire,Lawyer,Bowdoin,48,11/23/1804,"Hillsborough, New Hampshire",10/8/1869,"Concord, New Hamp.",pr14.jpg
+15,James Buchanan,http://en.wikipedia.org/wiki/James_Buchanan,3/4/1857,3/4/1861,Democratic,Pennsylvania,Lawyer,Dickinson,65,4/23/1791,"Cove Gap, Pennsylvania",6/1/1868,"Lancaster, Pennsylvania",pr15.jpg
+16,Abraham Lincoln,http://en.wikipedia.org/wiki/Abraham_Lincoln,3/4/1861,4/15/1865,Republican/National Union,Illinois,Lawyer,None,52,2/12/1809,"LaRue County, Kentucky",4/15/1865,"Washington, D.C.",pr16.jpg
+17,Andrew Johnson,http://en.wikipedia.org/wiki/Andrew_Johnson,4/15/1865,3/4/1869,Democratic/National Union,Tennessee,Tailor,None,56,12/29/1808,"Raleigh, North Carolina",7/31/1875,"Elizabethton, Tenn.",pr17.jpg
+18,Ulysses S. Grant,http://en.wikipedia.org/wiki/Ulysses_S._Grant,3/4/1869,3/4/1877,Republican,Ohio,Soldier,US Military Academy,46,4/27/1822,"Point Pleasant, Ohio",7/23/1885,"Wilton, New York",pr18.jpg
+19,Rutherford B. Hayes,http://en.wikipedia.org/wiki/Rutherford_B._Hayes,3/4/1877,3/4/1881,Republican,Ohio,Lawyer,Kenyon,54,10/4/1822,"Delaware, Ohio",1/17/1893,"Fremont, Ohio",pr19.jpg
+20,James A. Garfield,http://en.wikipedia.org/wiki/James_A._Garfield,3/4/1881,9/19/1881,Republican,Ohio,Lawyer,Williams,49,11/19/1831,"Cuyahoga County, Ohio",9/19/1881,"Elberon, New Jersey",pr20.jpg
+21,Chester A. Arthur,http://en.wikipedia.org/wiki/Chester_A._Arthur,9/19/1881,3/4/1885,Republican,New York,Lawyer,Union,51,10/5/1829,"Fairfield, Vermont",11/18/1886,"New York, New York",pr21.jpg
+22,Grover Cleveland,http://en.wikipedia.org/wiki/Grover_Cleveland,3/4/1885,3/4/1889,Democratic,New York,Lawyer,None,47,3/18/1837,"Caldwell, New Jersey",6/24/1908,"Princeton, New Jersey",pr22.jpg
+23,Benjamin Harrison,http://en.wikipedia.org/wiki/Benjamin_Harrison,3/4/1889,3/4/1893,Republican,Indiana,Lawyer,Miami of Ohio,55,8/20/1833,"North Bend, Ohio",3/13/1901,"Indianapolis, Indiana",pr23.jpg
+24,Grover Cleveland,http://en.wikipedia.org/wiki/Grover_Cleveland,3/4/1893,3/4/1897,Democratic,New York,Lawyer,None,55,3/18/1837,"Caldwell, New Jersey",6/24/1908,"Princeton, New Jersey",pr24.jpg
+25,William McKinley,http://en.wikipedia.org/wiki/William_McKinley,3/4/1897,9/14/1901,Republican,Ohio,Lawyer,Allegheny College,54,1/29/1843,"Niles, Ohio",9/14/1901,"Buffalo, New York",pr25.jpg
+26,Theodore Roosevelt,http://en.wikipedia.org/wiki/Theodore_Roosevelt,9/14/1901,3/4/1909,Republican,New York,Author,Harvard,42,10/27/1858,"New York, New York",1/6/1919,"Oyster Bay, New York",pr26.jpg
+27,William Howard Taft,http://en.wikipedia.org/wiki/William_Howard_Taft,3/4/1909,3/4/1913,Republican,Ohio,Lawyer,Yale,51,9/15/1857,"Cincinnati, Ohio",3/8/1930,"Washington, D.C.",pr27.jpg
+28,Woodrow Wilson,http://en.wikipedia.org/wiki/Woodrow_Wilson,3/4/1913,3/4/1921,Democratic,New Jersey,Educator,Princeton,56,12/28/1856,"Staunton, Virginia",2/3/1924,"Washington, D.C.",pr28.jpg
+29,Warren G. Harding,http://en.wikipedia.org/wiki/Warren_G._Harding,3/4/1921,8/2/1923,Republican,Ohio,Editor,None,55,11/2/1865,"Morrow County, Ohio",8/2/1923,"San Francisco, California",pr29.jpg
+30,Calvin Coolidge,http://en.wikipedia.org/wiki/Calvin_Coolidge,8/2/1923,3/4/1929,Republican,Massachusetts,Lawyer,Amherst,51,7/4/1872,"Plymouth, Vermont",1/5/1933,"Northampton, Massachusetts",pr30.jpg
+31,Herbert Hoover,http://en.wikipedia.org/wiki/Herbert_Hoover,3/4/1929,3/4/1933,Republican,Iowa,Engineer,Stanford,54,8/10/1874,"West Branch, Iowa",10/20/1964,"New York, New York",pr31.jpg
+32,Franklin D. Roosevelt,http://en.wikipedia.org/wiki/Franklin_D._Roosevelt,3/4/1933,4/12/1945,Democratic,New York,Lawyer,Harvard,51,1/30/1882,"Hyde Park, New York",4/12/1945,"Warm Springs, Georgia",pr32.jpg
+33,Harry S. Truman,http://en.wikipedia.org/wiki/Harry_S._Truman,4/12/1945,1/20/1953,Democratic,Missouri,Businessman,None,60,5/8/1884,"Lamar, Missouri",12/26/1972,"Kansas City, Missouri",pr33.jpg
+34,Dwight D. Eisenhower,http://en.wikipedia.org/wiki/Dwight_D._Eisenhower,1/20/1953,1/20/1961,Republican,Texas,Soldier,US Military Academy,62,10/14/1890,"Denison, Texas",3/28/1969,"Washington, D.C.",pr34.jpg
+35,John F. Kennedy,http://en.wikipedia.org/wiki/John_F._Kennedy,1/20/1961,11/22/1963,Democratic,Massachusetts,Author,Harvard,43,5/29/1917,"Brookline, Massachusetts",11/22/1963,"Dallas, Texas",pr35.jpg
+36,Lyndon B. Johnson,http://en.wikipedia.org/wiki/Lyndon_B._Johnson,11/22/1963,1/20/1969,Democratic,Texas,Teacher,Southwest Texas State,55,8/27/1908,"Gillespie County, Texas",1/22/1973,"Gillespie County, Texas",pr36.jpg
+37,Richard Nixon,http://en.wikipedia.org/wiki/Richard_Nixon,1/20/1969,8/9/1974,Republican,California,Lawyer,Whittier,56,1/9/1913,"Yorba Linda, California",4/22/1994,"New York, New York",pr37.jpg
+38,Gerald Ford,http://en.wikipedia.org/wiki/Gerald_Ford,8/9/1974,1/20/1977,Republican,Michigan,Lawyer,Michigan,61,7/14/1913,"Omaha, Nebraska",12/26/2006,"Rancho Mirage, California",pr38.jpg
+39,Jimmy Carter,http://en.wikipedia.org/wiki/Jimmy_Carter,1/20/1977,1/20/1981,Democratic,Georgia,Businessman,US Naval Academy,52,10/1/1924,"Plains, Georgia",Living,NA,pr39.jpg
+40,Ronald Reagan,http://en.wikipedia.org/wiki/Ronald_Reagan,1/20/1981,1/20/1989,Republican,California,Actor,Eureka College,69,2/6/1911,"Tampico, Illinois",6/5/2004,"Los Angeles, California",pr40.jpg
+41,George H. W. Bush,http://en.wikipedia.org/wiki/George_H._W._Bush,1/20/1989,1/20/1993,Republican,Texas,Businessman,Yale,64,6/12/1924,"Milton, Massachusetts",11/30/2018,"Houston, Texas",pr41.jpg
+42,Bill Clinton,http://en.wikipedia.org/wiki/Bill_Clinton,1/20/1993,1/20/2001,Democratic,Arkansas,Lawyer,Georgetown,46,8/19/1946,"Hope, Arkansas",Living,NA,pr42.jpg
+43,George W. Bush,http://en.wikipedia.org/wiki/George_W._Bush,1/20/2001,1/20/2009,Republican,Texas,Businessman,Yale,54,7/6/1946,"New Haven, Conn.",Living,NA,pr43.jpg
+44,Barack Obama,http://en.wikipedia.org/wiki/Barack_Obama,1/20/2009,1/20/2017,Democratic,Illinois,Lawyer,Columbia University,47,8/4/1961,"Honolulu, Hawaii",Living,NA,pr44.jpg
+45,Donald Trump,https://en.wikipedia.org/wiki/Donald_Trump,1/20/2017,Incumbent,Republican,New York,Businessman,Penn,70,6/14/1946,"New York, New York",Living,NA,pr45.jpg

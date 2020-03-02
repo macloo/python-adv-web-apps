@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+	<!-- the full dict for a president is sent here as pres by the route -->
+
+	<h1>{{ pres['President'] }}</h1>
+
+	<!-- NOTE the pattern for pointing to a file inside the static folder -->
+	<img class="right" src="{{ url_for('static', filename="images/"+pres['Image']) }}" alt="President portrait">
+
+	<p>{{ pres['President'] }}, the {{ ord }} president of the United States, was born on {{ pres['Birth-date'] }}, in {{ pres['Birthplace'] }}. He was {{ pres['Age-when-took-office'] }} when he took office on {{ pres['Took-office'] }}. Member: {{ pres['Party'] }} Party.
+
+	{% if pres['Death-date'] == pres['Left-office'] %}
+		He died in office on {{ pres['Death-date'] }}.
+	{% elif pres['Left-office'] != 'Incumbent'%}
+		He left office on {{ pres['Left-office'] }}.
+	{% endif %}
+
+		His occupation before the presidency: {{ pres['Occupation'] }}.
+		His college: {{ pres['College'] }}.
+
+	{% if pres['Location-death'] != "NA" %}
+		He died in {{ pres['Location-death'] }}, on {{ pres['Death-date'] }}.
+	{% endif %}
+	</p>
+
+	<p><a href="{{ pres['Wikipedia-entry'] }}">View Wikipedia entry for {{ pres['President'] }}.</a></p>
+
+	<!-- NOTE the way to link to a route: Use the function name -->
+	<p><a href="{{ url_for('index') }}">Return to the list</a> to select a different president.</p>
+
+{% endblock %}
