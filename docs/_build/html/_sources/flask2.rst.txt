@@ -108,7 +108,7 @@ We will use the OpenWeather zip code query.
    :alt: The zip code query at OpenWeather screenshot
 
 
-A request to an API can be submitted in a web browser. This is the request, or query (not using a real API key): ::
+A request to an API can be submitted in a web browser. Below is the request, or query (not using a real API key): ::
 
     http://api.openweathermap.org/data/2.5/weather?zip=32611,us&mode=json&units=imperial&appid=12345abcXYZ
 
@@ -160,6 +160,8 @@ The weather script
 
 *Line 6:* We import the ``requests`` module so that we can use ``requests.get()`` to submit the API request (on line 20).
 
+*Lines 7–8:* These were covered in the `Flask intro <flask.html>`_.
+
 *Line 11:* Provide **the API key** that will be used in code below this line. (Uppercase letters are used for the variable name to denote a constant; see `PEP 8 <https://www.python.org/dev/peps/pep-0008/#constants>`_).
 
 *Line 14:* The API call — the URL for the request. Note how **curly braces** are used at two locations in this string: ``zip={},us`` and ``appid={}``. The curly braces allow a variable or a value to be inserted (on line 20).
@@ -170,13 +172,13 @@ The weather script
 
     data = requests.get(API_URL.format(zip, API_KEY)).json()
 
-For details on this use of ``.format()`` to plug values into the curly braces in ``API_URL``, `see this post <https://www.geeksforgeeks.org/python-format-function/>`_.
+For details on this use of ``.format()`` to plug values into the curly braces in ``API_URL``, `see this post <https://www.geeksforgeeks.org/python-format-function/>`_. The values inside the parentheses — ``zip, API_KEY`` — are inserted into the curly braces embedded in the string assigned to ``API_URL``, in order. So ``zip`` goes into the first pair of curly braces, and ``API_KEY`` goes into the second pair.
 
 *Line 26:* The Flask route begins here. This script has only ONE route. When the app is running, the server accepts a URL like this: ::
 
     http://localhost:5000/weather/86023
 
-If the zip code is valid, a response will be returned by the API.
+A response will be returned by the API if any value appears after ``weather/``.
 
 *Line 29:* The function ``query_api()`` is called here, with the value of ``zip`` from the URL passed to it. Review that function to see that it makes the request to the API and accepts the response from the API. The result is returned and here, in the route function, is assigned to the variable ``resp``: ::
 
@@ -192,7 +194,7 @@ If the zip code is valid, a response will be returned by the API.
     text = resp["name"] + " temperature is " + str(resp["main"]["temp"]) + " degrees Fahrenheit with " + resp["weather"][0]["description"] + "."
 
 
-We access those values using **keys** from the dictionary returned by the OpenWeather API:
+We access those values using **keys** from the JSON data returned by the OpenWeather API:
 
 * ``["name"]`` is a key in the primary dictionary.
 * ``["temp"]`` is a key inside a dictionary that is the *value* of the key ``["main"]`` in the primary dictionary. We need to convert it to a *string* because the number is a *float,* and we cannot concatenate a float into a string unless we convert it to a string with ``str()``.
@@ -210,7 +212,7 @@ If you need some help to understand Python dictionaries, see `Dictionaries <dict
    :scale: 50 %
    :alt: Response from weather API in a browser screenshot
 
-Above is what *the Flask app* returns, as a string, to the browser. Below it the code that writes it. ::
+Above is what *the Flask app* returns, as a string, to the browser. Below is the code that writes it. ::
 
     text = resp["name"] + " temperature is " + str(resp["main"]["temp"]) + " degrees Fahrenheit with " + resp["weather"][0]["description"] + "."
 
@@ -228,19 +230,23 @@ Summary of the Flask weather app
 
 The API and its request/response details might seem overwhelming if you have not worked with APIs before now.
 
+A good tutorial for learning how to use APIs is `the MediaWiki tutorial <https://www.mediawiki.org/wiki/API:Tutorial>`_, which teaches how to query Wikipedia.
+
 The most important takeaways at this stage are:
 
 1. The Flask app runs on a server.
-2. When an **HTTP request** is made to a specific route *in that Flask app,* the request (delivered via a URL in the browser) is handled by the decorated function *in the app script.*
-3. A value can be part of the URL if the Flask route is written to accept a value, e.g. ::
+2. A Flask route defines a partial URL.
+3. A URL entered into a web browser sends an **HTTP request** to a server.
+4. When the URL defined in a Flask route is delivered *to that Flask app* on the server, a Python function runs. Which function? The function associated with that URL *in the app script.*
+5. A value can be part of the URL if the Flask route is written to accept a value, e.g. ::
 
     @app.route('/weather/<zip>')
 
-4. That is NOT the only way to write a route. The route does not need to accept a value; it is optional.
-5. By default, if the app *returns* text, that text will appear in the browser window. What the route function returns is the **HTTP response.**
-6. A Flask app can have one, or more than one, route.
-7. A route function can call other functions.
-8. A Flask app can use an external API. This is optional, not required.
+6. That is NOT the only way to write a route. The route does not need to accept a value; it is optional.
+7. By default, if the app *returns* text, that text will appear in the browser window. What the route function returns is the **HTTP response.** (It can be something *other than* text.)
+8. A Flask app can include one, or more than one, route.
+9. A route function can call other functions. This is demonstrated in the weather app above.
+10. A Flask app can use an external API. This is optional, not required.
 
 
 Conclusion
