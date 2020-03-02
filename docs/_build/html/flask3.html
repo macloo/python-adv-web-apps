@@ -1,0 +1,273 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Flask Templates &mdash; Python Beginners  documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="configparser" href="configparser.html" />
+    <link rel="prev" title="Flask, Part 2" href="flask2.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Python Beginners
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="learn_python.html">Starting Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="functions.html">Functions in Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lists.html">Working with Lists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="working_with_files.html">Reading and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dicts.html">Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="csv.html">CSV Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scraping.html">Web Scraping Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scraping2.html">Web Scraping, Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="scraping3.html">Web Scraping, Part 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask.html">Flask Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask2.html">Flask, Part 2</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Flask Templates</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#folder-structure-for-a-flask-app">Folder structure for a Flask app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-started-with-templates">Get started with templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resources">Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Python Beginners</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Flask Templates</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/flask3.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="flask-templates">
+<h1>Flask Templates<a class="headerlink" href="#flask-templates" title="Permalink to this headline">¶</a></h1>
+<p>Previous:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="flask.html">Flask intro</a>: A very simple Flask app</p></li>
+<li><p><a class="reference external" href="flask2.html">Flask, part 2</a>: Values in routes; using an API</p></li>
+</ol>
+<p>Code for this chapter is <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask">here</a>.</p>
+<p>In the previous Flask chapters, we wrote some HTML directly into the Flask app script. This is very awkward. Naturally, Flask provides a better way to store the HTML (and CSS) you will want your Flask functions to generate.</p>
+<div class="section" id="folder-structure-for-a-flask-app">
+<h2>Folder structure for a Flask app<a class="headerlink" href="#folder-structure-for-a-flask-app" title="Permalink to this headline">¶</a></h2>
+<p>A proper Flask app is going to use multiple files — some of which will be template files. The organization of these files has to follow rules so the app will work. Here is a diagram of the typical structure:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>my-flask-app
+├── static/
+│   └── css/
+│       └── main.css
+├── templates/
+│   ├── index.html
+│   └── student.html
+├── data.py
+└── students.py
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Everything the app needs is in one folder, here named <em>my-flask-app</em>.</p></li>
+<li><p>That folder contains two folders, specifically named <em>static</em> and <em>templates</em>.</p>
+<ul class="simple">
+<li><p>The <em>static</em> folder contains <strong>assets</strong> used by the templates, including CSS files, JavaScript files, and images. In the example, we have only one asset file, <em>main.css</em>. Note that it’s inside a <em>css</em> folder that’s inside the <em>static</em> folder.</p></li>
+<li><p>The <em>templates</em> folder contains only templates. These have an <code class="docutils literal notranslate"><span class="pre">.html</span></code> extension. As we will see, they contain more than just regular HTML.</p></li>
+</ul>
+</li>
+<li><p>In addition to the <em>static</em> and <em>templates</em> folders, this app also contains <code class="docutils literal notranslate"><span class="pre">.py</span></code> files. Note that these must be <em>outside</em> the two folders named <em>static</em> and <em>templates</em>.</p></li>
+</ol>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>The templates will not work if this folder structure is not exactly as described above. Your app folder can be named anything (not only <em>my-flask-app</em>), but the <em>static</em> and <em>templates</em> folders must be named and organized as shown above.</p>
+</div>
+</div>
+<div class="section" id="get-started-with-templates">
+<h2>Get started with templates<a class="headerlink" href="#get-started-with-templates" title="Permalink to this headline">¶</a></h2>
+<p>Let’s first imagine a situation where we are going to need a lot of pages that all have the same layout.</p>
+<p>For example, we might want to build an app that includes all the U.S. presidents. Each president will have their own page, like this:</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/prespage.png"><img alt="President page screenshot" src="_images/prespage.png" style="width: 600.0px; height: 674.0px;" /></a>
+</div>
+<p>We do not want to build 45 pages by hand. We happen to have all the presidential data <a class="reference external" href="https://github.com/macloo/flask-pres-forms-exercise/blob/master/final_app/presidents.csv">in a spreadsheet</a>. Can we make <em>one HTML template</em> and be done?</p>
+<p>Yes!</p>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://jinja.palletsprojects.com/en/2.11.x/templates/">Jinja documentation</a> — All the commands for the Jinja template syntax are here.</p></li>
+</ul>
+<p>.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="configparser.html" class="btn btn-neutral float-right" title="configparser" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="flask2.html" class="btn btn-neutral float-left" title="Flask, Part 2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020 Mindy McAdams
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
