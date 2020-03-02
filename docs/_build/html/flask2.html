@@ -94,13 +94,14 @@
 <li class="toctree-l1"><a class="reference internal" href="flask.html">Flask Intro</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Flask, Part 2</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#your-second-flask-app">Your second Flask app</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#putting-this-to-work-with-an-api">Putting this to work with an API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#putting-flask-to-work-with-an-api">Putting Flask to work with an API</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#the-openweather-api">The OpenWeather API</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#using-flask-to-get-a-response">Using Flask to get a response</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#the-weather-script">The weather script</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#summary-of-the-flask-weather-app">Summary of the Flask weather app</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#conclusion">Conclusion</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
@@ -275,8 +276,8 @@
 <p><a class="reference external" href="https://realpython.com/python-f-strings/">Learn about Python format strings here.</a></p>
 </div>
 </div>
-<div class="section" id="putting-this-to-work-with-an-api">
-<h2>Putting this to work with an API<a class="headerlink" href="#putting-this-to-work-with-an-api" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="putting-flask-to-work-with-an-api">
+<h2>Putting Flask to work with an API<a class="headerlink" href="#putting-flask-to-work-with-an-api" title="Permalink to this headline">¶</a></h2>
 <p>The next script will demonstrate how Flask can be used to send an API request, and then use the response in a formatted string. This is more useful than the previous example script — but <strong>the same idea</strong> of the <strong>variable</strong> in the <strong>route</strong> is used.</p>
 <p>In the previous script, we used <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;</span></code> in the route and <code class="docutils literal notranslate"><span class="pre">name</span></code> in the function to write <em>Albert</em> and then <em>Mindy.</em> In the <strong>next</strong> script, we will use <code class="docutils literal notranslate"><span class="pre">&lt;zip&gt;</span></code> in the route and <code class="docutils literal notranslate"><span class="pre">zip</span></code> in the function to submit a U.S. zip code to the OpenWeather API (the <strong>request</strong>). The <strong>response</strong> (in the browser) will tell us the current weather at that location.</p>
 <div class="section" id="the-openweather-api">
@@ -471,8 +472,14 @@
 <li><p>A route function can call other functions.</p></li>
 <li><p>A Flask app can use an external API. This is optional, not required.</p></li>
 </ol>
-<p>.</p>
 </div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>You should be starting to glimpse the potential of using Flask to create dynamic web apps.</p>
+<p>Maybe you are wondering how to combine Flask with attractive, responsive web pages in the browser, instead of ugly plaintext.</p>
+<p>That’s the topic of the next chapter!</p>
+<p>.</p>
 </div>
 </div>
 

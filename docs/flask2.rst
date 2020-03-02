@@ -78,8 +78,8 @@ Review the route function that makes it happen: ::
 
 
 
-Putting this to work with an API
---------------------------------
+Putting Flask to work with an API
+---------------------------------
 
 The next script will demonstrate how Flask can be used to send an API request, and then use the response in a formatted string. This is more useful than the previous example script — but **the same idea** of the **variable** in the **route** is used.
 
@@ -228,5 +228,15 @@ The most important takeaways at this stage are:
 6. A Flask app can have one, or more than one, route.
 7. A route function can call other functions.
 8. A Flask app can use an external API. This is optional, not required.
+
+
+Conclusion
+----------
+
+You should be starting to glimpse the potential of using Flask to create dynamic web apps.
+
+Maybe you are wondering how to combine Flask with attractive, responsive web pages in the browser, instead of ugly plaintext.
+
+That’s the topic of the next chapter!
 
 .
