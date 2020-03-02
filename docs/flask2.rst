@@ -23,7 +23,7 @@ We have **two routes** in the script. The first route, for ``'/'``, is not very 
 
     Do not use ``flask run`` to run this script. That is not necessary, thanks to lines 20 and 21.
 
-When we go to ``localhost:5000`` in the browser, the following code from the Python script creates a functional link in the browser window: ::
+When we go to ``localhost:5000`` in the browser, the following code from the Python script (in line 8 above) creates a functional link in the browser window: ::
 
     <p><a href="user/Albert">Click me!</a></p>
 
@@ -65,6 +65,11 @@ Review the route function that makes it happen: ::
             and reload the page.</p>'
         return personal + instruc
 
+This route *requires* some value after ``user/``. Whatever that value might be, it becomes the value of ``name`` in the function. Here, ``name`` appears only once within the function, but it could be used multiple times.
+
+Only a string is returned by this function, so that string will appear in the browser window.
+
+The string that is *returned* by this function is the **HTTP response** from the server. Keep in mind that the Python script runs on the server.
 
 .. note:: Possibly the use of string formatters above is new to you. They are similar to template literals in JavaScript. ::
 
@@ -107,7 +112,7 @@ This is the response from the OpenWeather API, in a browser:
    :scale: 50 %
    :alt: Response from weather API in a browser screenshot
 
-Like most APIs, the OpenWeather API returns a response in a **JSON-formatted string.** (You can opt to get it in other formats.) In the respnse, you can find the *name* (Gainesville), the *temp* (70.05), and the *description* (clear sky). Those **keys** and **values** will be used in the Python script *weather.py* below.
+Like most APIs, the OpenWeather API returns a response in a **JSON-formatted string.** (You can opt to get it in other formats.) In the response, you can find the *name* (Gainesville), the *temp* (70.05), and the *description* (clear sky). Those **keys** and **values** will be used in the Python script *weather.py* below.
 
 
 Using Flask to get a response
