@@ -448,6 +448,10 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; temperature is &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;main&quot;</span><span class="p">][</span><span class="s2">&quot;temp&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; degrees Fahrenheit with &quot;</span> <span class="o">+</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;weather&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;description&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span>
 </pre></div>
 </div>
+<p><em>Lines 34–35:</em> If for any reason the previous code throws an error, the <code class="docutils literal notranslate"><span class="pre">except</span></code> clause will be executed and the response in the browser will be:</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/zip5.png"><img alt="Response from weather API in a browser screenshot" src="_images/zip5.png" style="width: 380.0px; height: 130.0px;" /></a>
+</div>
 </div>
 <div class="section" id="summary-of-the-flask-weather-app">
 <h3>Summary of the Flask weather app<a class="headerlink" href="#summary-of-the-flask-weather-app" title="Permalink to this headline">¶</a></h3>

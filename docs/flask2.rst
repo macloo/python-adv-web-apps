@@ -201,6 +201,14 @@ Above is what *the Flask app* returns, as a string, to the browser. Below it the
 
     text = resp["name"] + " temperature is " + str(resp["main"]["temp"]) + " degrees Fahrenheit with " + resp["weather"][0]["description"] + "."
 
+*Lines 34–35:* If for any reason the previous code throws an error, the ``except`` clause will be executed and the response in the browser will be:
+
+
+.. figure:: _static/images/zip5.png
+   :scale: 50 %
+   :alt: Response from weather API in a browser screenshot
+
+
 
 Summary of the Flask weather app
 ++++++++++++++++++++++++++++++++
