@@ -50,7 +50,7 @@ To test this, **change the text** that comes after ``/user/`` in the browser add
    :scale: 50 %
    :alt: A variation on the second route in a browser screenshot
 
-Look at the URL in the browser address bar, and look at the text in the browser window.
+Look at the URL in the browser **address bar,** and look at the text in the browser **window.**
 
 If you enter the URL *without* a value for ``name`` — e.g. ``localhost:5000/user/`` — you’ll get an HTTP error: “The requested URL was not found on the server.”
 
@@ -100,7 +100,13 @@ To use this script for yourself, you will need to get an API key at `OpenWeather
 
 `Here is everything you need to know about the OpenWeather API. <https://openweathermap.org/current>`_
 
-We will use the OpenWeather zip code query. A request to an API can be submitted in a web browser. This is the request, or query (not using a real API key): ::
+We will use the OpenWeather zip code query.
+
+.. figure:: _static/images/openwezip.png
+   :scale: 50 %
+   :alt: The zip code query at OpenWeather screenshot
+
+A request to an API can be submitted in a web browser. This is the request, or query (not using a real API key): ::
 
     http://api.openweathermap.org/data/2.5/weather?zip=32611,us&mode=json&units=imperial&appid=12345abcXYZ
 
