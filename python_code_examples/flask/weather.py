@@ -32,7 +32,7 @@ def result(zip):
     try:
         text = resp["name"] + " temperature is " + str(resp["main"]["temp"]) + " degrees Fahrenheit with " + resp["weather"][0]["description"] + "."
     except:
-        text = "There was an error.<br>Did you include a valid zip code in the URL?"
+        text = "There was an error.<br>Did you include a valid U.S. zip code in the URL?"
     return text
 
 if __name__ == '__main__':

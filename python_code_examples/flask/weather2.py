@@ -8,6 +8,7 @@ from flask import Flask
 app = Flask(__name__)
 
 # using a file outside this folder to store my private data
+# see https://python-adv-web-apps.readthedocs.io/en/latest/configparser.html
 from configparser import ConfigParser
 config = ConfigParser()
 config.read('../config/keys_config.cfg')
@@ -36,7 +37,7 @@ def result(zip):
     try:
         text = resp["name"] + " temperature is " + str(resp["main"]["temp"]) + " degrees Fahrenheit with " + resp["weather"][0]["description"] + "."
     except:
-        text = "There was an error.<br>Did you include a valid zip code in the URL?"
+        text = "There was an error.<br>Did you include a valid U.S. zip code in the URL?"
     return text
 
 if __name__ == '__main__':
