@@ -178,6 +178,7 @@ If the zip code is valid, a response will be returned by the API.
 
     text = resp["name"] + " temperature is " + str(resp["main"]["temp"]) + " degrees Fahrenheit with " + resp["weather"][0]["description"] + "."
 
+
 We access those values using **keys** from the dictionary returned by the OpenWeather API:
 
 * ``["name"]`` is a key in the primary dictionary.
@@ -196,7 +197,10 @@ If you need some help to understand Python dictionaries, see `Dictionaries <dict
    :scale: 50 %
    :alt: Response from weather API in a browser screenshot
 
-Above is what *the Flask app* returns, as a string, to the browser.
+Above is what *the Flask app* returns, as a string, to the browser. Below it the code that writes it. ::
+
+    text = resp["name"] + " temperature is " + str(resp["main"]["temp"]) + " degrees Fahrenheit with " + resp["weather"][0]["description"] + "."
+
 
 Summary of the Flask weather app
 ++++++++++++++++++++++++++++++++
@@ -211,9 +215,10 @@ The most important takeaways at this stage are:
 
     @app.route('/weather/<zip>')
 
-4. By default, if the app *returns* text, that text will appear in the browser window. What the route function returns is the **HTTP response.**
-5. A Flask app can have one, or more than one, route.
-6. A route function can call other functions.
-7. A Flask app can use an external API. This is optional, not required.
+4. That is NOT the only way to write a route. The route does not need to accept a value; it is optional.
+5. By default, if the app *returns* text, that text will appear in the browser window. What the route function returns is the **HTTP response.**
+6. A Flask app can have one, or more than one, route.
+7. A route function can call other functions.
+8. A Flask app can use an external API. This is optional, not required.
 
 .

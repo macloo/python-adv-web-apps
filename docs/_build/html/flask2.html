@@ -444,7 +444,10 @@
 <div class="figure align-default">
 <a class="reference internal image-reference" href="_images/zip4.png"><img alt="Response from weather API in a browser screenshot" src="_images/zip4.png" style="width: 505.0px; height: 114.0px;" /></a>
 </div>
-<p>Above is what <em>the Flask app</em> returns, as a string, to the browser.</p>
+<p>Above is what <em>the Flask app</em> returns, as a string, to the browser. Below it the code that writes it.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; temperature is &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;main&quot;</span><span class="p">][</span><span class="s2">&quot;temp&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; degrees Fahrenheit with &quot;</span> <span class="o">+</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;weather&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;description&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="summary-of-the-flask-weather-app">
 <h3>Summary of the Flask weather app<a class="headerlink" href="#summary-of-the-flask-weather-app" title="Permalink to this headline">¶</a></h3>
@@ -458,6 +461,7 @@
 </pre></div>
 </div>
 </li>
+<li><p>That is NOT the only way to write a route. The route does not need to accept a value; it is optional.</p></li>
 <li><p>By default, if the app <em>returns</em> text, that text will appear in the browser window. What the route function returns is the <strong>HTTP response.</strong></p></li>
 <li><p>A Flask app can have one, or more than one, route.</p></li>
 <li><p>A route function can call other functions.</p></li>
