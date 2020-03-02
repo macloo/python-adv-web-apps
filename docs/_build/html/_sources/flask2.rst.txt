@@ -23,7 +23,7 @@ We have **two routes** in the script. The first route, for ``'/'``, is not very 
 
     Do not use ``flask run`` to run this script. That is not necessary, thanks to lines 20 and 21.
 
-When we go to ``localhost:5000`` in the browser, the following code from the Python script creates a functional link in the browser window: ::
+When we go to ``localhost:5000`` in the browser, the following code from the Python script (in line 8 above) creates a functional link in the browser window: ::
 
     <p><a href="user/Albert">Click me!</a></p>
 
@@ -50,7 +50,7 @@ To test this, **change the text** that comes after ``/user/`` in the browser add
    :scale: 50 %
    :alt: A variation on the second route in a browser screenshot
 
-Look at the URL in the browser address bar, and look at the text in the browser window.
+Look at the URL in the browser **address bar,** and look at the text in the browser **window.**
 
 If you enter the URL *without* a value for ``name`` — e.g. ``localhost:5000/user/`` — you’ll get an HTTP error: “The requested URL was not found on the server.”
 
@@ -65,6 +65,11 @@ Review the route function that makes it happen: ::
             and reload the page.</p>'
         return personal + instruc
 
+This route *requires* some value after ``user/``. Whatever that value might be, it becomes the value of ``name`` in the function. Here, ``name`` appears only once within the function, but it could be used multiple times.
+
+Only a string is returned by this function, so that string will appear in the browser window.
+
+The string that is *returned* by this function is the **HTTP response** from the server. Keep in mind that the Python script runs on the server.
 
 .. note:: Possibly the use of string formatters above is new to you. They are similar to template literals in JavaScript. ::
 
@@ -95,7 +100,15 @@ To use this script for yourself, you will need to get an API key at `OpenWeather
 
 `Here is everything you need to know about the OpenWeather API. <https://openweathermap.org/current>`_
 
-We will use the OpenWeather zip code query. A request to an API can be submitted in a web browser. This is the request, or query (not using a real API key): ::
+We will use the OpenWeather zip code query.
+
+
+.. figure:: _static/images/openwezip.png
+   :scale: 50 %
+   :alt: The zip code query at OpenWeather screenshot
+
+
+A request to an API can be submitted in a web browser. This is the request, or query (not using a real API key): ::
 
     http://api.openweathermap.org/data/2.5/weather?zip=32611,us&mode=json&units=imperial&appid=12345abcXYZ
 
@@ -107,7 +120,7 @@ This is the response from the OpenWeather API, in a browser:
    :scale: 50 %
    :alt: Response from weather API in a browser screenshot
 
-Like most APIs, the OpenWeather API returns a response in a **JSON-formatted string.** (You can opt to get it in other formats.) In the respnse, you can find the *name* (Gainesville), the *temp* (70.05), and the *description* (clear sky). Those **keys** and **values** will be used in the Python script *weather.py* below.
+Like most APIs, the OpenWeather API returns a response in a **JSON-formatted string.** (You can opt to get it in other formats.) In the response, you can find the *name* (Gainesville), the *temp* (70.05), and the *description* (clear sky). Those **keys** and **values** will be used in the Python script *weather.py* below.
 
 
 Using Flask to get a response

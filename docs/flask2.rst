@@ -102,9 +102,11 @@ To use this script for yourself, you will need to get an API key at `OpenWeather
 
 We will use the OpenWeather zip code query.
 
+
 .. figure:: _static/images/openwezip.png
    :scale: 50 %
    :alt: The zip code query at OpenWeather screenshot
+
 
 A request to an API can be submitted in a web browser. This is the request, or query (not using a real API key): ::
 

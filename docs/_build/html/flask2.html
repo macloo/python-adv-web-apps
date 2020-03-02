@@ -231,7 +231,7 @@
 </div>
 <p>Do not use <code class="docutils literal notranslate"><span class="pre">flask</span> <span class="pre">run</span></code> to run this script. That is not necessary, thanks to lines 20 and 21.</p>
 </div>
-<p>When we go to <code class="docutils literal notranslate"><span class="pre">localhost:5000</span></code> in the browser, the following code from the Python script creates a functional link in the browser window:</p>
+<p>When we go to <code class="docutils literal notranslate"><span class="pre">localhost:5000</span></code> in the browser, the following code from the Python script (in line 8 above) creates a functional link in the browser window:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;p&gt;&lt;a href=&quot;user/Albert&quot;&gt;Click me!&lt;/a&gt;&lt;/p&gt;
 </pre></div>
 </div>
@@ -250,7 +250,7 @@
 <div class="figure align-default">
 <a class="reference internal image-reference" href="_images/hello3_c.png"><img alt="A variation on the second route in a browser screenshot" src="_images/hello3_c.png" style="width: 441.0px; height: 170.0px;" /></a>
 </div>
-<p>Look at the URL in the browser address bar, and look at the text in the browser window.</p>
+<p>Look at the URL in the browser <strong>address bar,</strong> and look at the text in the browser <strong>window.</strong></p>
 <p>If you enter the URL <em>without</em> a value for <code class="docutils literal notranslate"><span class="pre">name</span></code> — e.g. <code class="docutils literal notranslate"><span class="pre">localhost:5000/user/</span></code> — you’ll get an HTTP error: “The requested URL was not found on the server.”</p>
 <p>Review the route function that makes it happen:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/user/&lt;name&gt;&#39;</span><span class="p">)</span>
@@ -263,6 +263,9 @@
     <span class="k">return</span> <span class="n">personal</span> <span class="o">+</span> <span class="n">instruc</span>
 </pre></div>
 </div>
+<p>This route <em>requires</em> some value after <code class="docutils literal notranslate"><span class="pre">user/</span></code>. Whatever that value might be, it becomes the value of <code class="docutils literal notranslate"><span class="pre">name</span></code> in the function. Here, <code class="docutils literal notranslate"><span class="pre">name</span></code> appears only once within the function, but it could be used multiple times.</p>
+<p>Only a string is returned by this function, so that string will appear in the browser window.</p>
+<p>The string that is <em>returned</em> by this function is the <strong>HTTP response</strong> from the server. Keep in mind that the Python script runs on the server.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Possibly the use of string formatters above is new to you. They are similar to template literals in JavaScript.</p>
@@ -288,7 +291,11 @@
 <p>See the <a class="reference external" href="configparser.html">configparser chapter</a> for details about using a <code class="docutils literal notranslate"><span class="pre">.cfg</span></code> file to store all your API keys. You don’t need to do this to make the script below work, but make sure you do not <em>publish</em> that version with your actual API key in the code, e.g. on GitHub.</p>
 </div>
 <p><a class="reference external" href="https://openweathermap.org/current">Here is everything you need to know about the OpenWeather API.</a></p>
-<p>We will use the OpenWeather zip code query. A request to an API can be submitted in a web browser. This is the request, or query (not using a real API key):</p>
+<p>We will use the OpenWeather zip code query.</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_static/images/openwezip.png"><img alt="The zip code query at OpenWeather screenshot" src="_static/images/openwezip.png" /></a>
+</div>
+<p>A request to an API can be submitted in a web browser. This is the request, or query (not using a real API key):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>http://api.openweathermap.org/data/2.5/weather?zip=32611,us&amp;mode=json&amp;units=imperial&amp;appid=12345abcXYZ
 </pre></div>
 </div>
@@ -297,7 +304,7 @@
 <div class="figure align-default">
 <a class="reference internal image-reference" href="_images/weatherres.png"><img alt="Response from weather API in a browser screenshot" src="_images/weatherres.png" style="width: 697.0px; height: 239.0px;" /></a>
 </div>
-<p>Like most APIs, the OpenWeather API returns a response in a <strong>JSON-formatted string.</strong> (You can opt to get it in other formats.) In the respnse, you can find the <em>name</em> (Gainesville), the <em>temp</em> (70.05), and the <em>description</em> (clear sky). Those <strong>keys</strong> and <strong>values</strong> will be used in the Python script <em>weather.py</em> below.</p>
+<p>Like most APIs, the OpenWeather API returns a response in a <strong>JSON-formatted string.</strong> (You can opt to get it in other formats.) In the response, you can find the <em>name</em> (Gainesville), the <em>temp</em> (70.05), and the <em>description</em> (clear sky). Those <strong>keys</strong> and <strong>values</strong> will be used in the Python script <em>weather.py</em> below.</p>
 </div>
 <div class="section" id="using-flask-to-get-a-response">
 <h3>Using Flask to get a response<a class="headerlink" href="#using-flask-to-get-a-response" title="Permalink to this headline">¶</a></h3>
