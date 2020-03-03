@@ -95,7 +95,11 @@
 <li class="toctree-l1"><a class="reference internal" href="flask2.html">Flask, Part 2</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Flask Templates</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#folder-structure-for-a-flask-app">Folder structure for a Flask app</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#get-started-with-templates">Get started with templates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-started-with-templates">Get started with templates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#how-does-a-flask-app-use-a-template">How does a Flask app use a template?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-are-variables-passed-from-app-to-template">How are variables passed from app to template?</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#resources">Resources</a></li>
 </ul>
 </li>
@@ -177,14 +181,14 @@
 <h2>Folder structure for a Flask app<a class="headerlink" href="#folder-structure-for-a-flask-app" title="Permalink to this headline">¶</a></h2>
 <p>A proper Flask app is going to use multiple files — some of which will be template files. The organization of these files has to follow rules so the app will work. Here is a diagram of the typical structure:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>my-flask-app
-├── static/
-│   └── css/
-│       └── main.css
-├── templates/
-│   ├── index.html
-│   └── student.html
-├── data.py
-└── students.py
+   ├── static/
+   │   └── css/
+   │       └── main.css
+   ├── templates/
+   │   ├── index.html
+   │   └── student.html
+   ├── data.py
+   └── students.py
 </pre></div>
 </div>
 <ol class="arabic simple">
@@ -209,8 +213,99 @@
 <div class="figure align-default">
 <a class="reference internal image-reference" href="_images/prespage.png"><img alt="President page screenshot" src="_images/prespage.png" style="width: 600.0px; height: 674.0px;" /></a>
 </div>
-<p>We do not want to build 45 pages by hand. We happen to have all the presidential data <a class="reference external" href="https://github.com/macloo/flask-pres-forms-exercise/blob/master/final_app/presidents.csv">in a spreadsheet</a>. Can we make <em>one HTML template</em> and be done?</p>
+<p>We do not want to build 45 pages by hand. We happen to have all the presidential data <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/presidents/presidents.csv">in a spreadsheet</a>. Can we make <em>one HTML template</em> and be done?</p>
 <p>Yes!</p>
+<p>Here is an excerpt from that template:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">h1</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">pres</span><span class="p">[</span><span class="s1">&#39;President&#39;</span><span class="p">]</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">pres</span><span class="p">[</span><span class="s1">&#39;President&#39;</span><span class="p">]</span> <span class="p">}},</span> <span class="n">the</span> <span class="p">{{</span> <span class="nb">ord</span> <span class="p">}}</span> <span class="n">president</span> <span class="n">of</span> <span class="n">the</span>
+   <span class="n">United</span> <span class="n">States</span><span class="p">,</span> <span class="n">was</span> <span class="n">born</span> <span class="n">on</span> <span class="p">{{</span> <span class="n">pres</span><span class="p">[</span><span class="s1">&#39;Birth-date&#39;</span><span class="p">]</span> <span class="p">}},</span> <span class="ow">in</span>
+   <span class="p">{{</span> <span class="n">pres</span><span class="p">[</span><span class="s1">&#39;Birthplace&#39;</span><span class="p">]</span> <span class="p">}}</span><span class="o">.</span> <span class="n">He</span> <span class="n">was</span> <span class="p">{{</span> <span class="n">pres</span><span class="p">[</span><span class="s1">&#39;Age-when-took-office&#39;</span><span class="p">]</span> <span class="p">}}</span>
+   <span class="n">when</span> <span class="n">he</span> <span class="n">took</span> <span class="n">office</span> <span class="n">on</span> <span class="p">{{</span> <span class="n">pres</span><span class="p">[</span><span class="s1">&#39;Took-office&#39;</span><span class="p">]</span> <span class="p">}}</span><span class="o">.</span> <span class="n">Member</span><span class="p">:</span>
+   <span class="p">{{</span> <span class="n">pres</span><span class="p">[</span><span class="s1">&#39;Party&#39;</span><span class="p">]</span> <span class="p">}}</span> <span class="n">Party</span><span class="o">.&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>That might look slightly intimidating, but notice that inside each double-pair of curly braces is a <strong>key</strong> (in square brackets) that tells you exactly which information item will appear there. So, for Lincoln:</p>
+<blockquote>
+<div><p><em>Abraham Lincoln, the 16th president of the United States, was born on 2/12/1809, in LaRue County, Kentucky. He was 52 when he took office on 3/4/1861. Member: Republican/National Union Party.</em></p>
+</div></blockquote>
+<div class="section" id="how-does-a-flask-app-use-a-template">
+<h3>How does a Flask app use a template?<a class="headerlink" href="#how-does-a-flask-app-use-a-template" title="Permalink to this headline">¶</a></h3>
+<p>In the previous chapter, <a class="reference external" href="flask2.html">Flask, part 2</a>, you saw this route function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/user/&lt;name&gt;&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">user</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="n">personal</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&lt;h1&gt;Hello, </span><span class="si">{name}</span><span class="s1">!&lt;/h1&gt;&#39;</span>
+    <span class="n">instruc</span> <span class="o">=</span> <span class="s1">&#39;&lt;p&gt;Change the name in the &lt;em&gt;browser address bar&lt;/em&gt; </span><span class="se">\</span>
+<span class="s1">        and reload the page.&lt;/p&gt;&#39;</span>
+    <span class="k">return</span> <span class="n">personal</span> <span class="o">+</span> <span class="n">instruc</span>
+</pre></div>
+</div>
+<p>Let’s transform that so it uses a template.</p>
+<ol class="arabic">
+<li><p>Put the HTML into a template:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;h1&gt;Hello, {{ name }}!&lt;/h1&gt;
+
+&lt;p&gt;Change the name in the &lt;em&gt;browser address bar&lt;/em&gt;
+    and reload the page.&lt;/p&gt;
+</pre></div>
+</div>
+</li>
+<li><p>Save the template file as <em>hello.html</em> in the <em>templates</em> folder.</p></li>
+<li><p>Edit the route function. Remove the HTML. Change the return statement — call the <code class="docutils literal notranslate"><span class="pre">render_template</span></code> function. That is how we get the template!</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/user/&lt;name&gt;&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">user</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;hello.html&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>We must import the <code class="docutils literal notranslate"><span class="pre">render_template</span></code> module, so add it to the line at the top of the Flask app script:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The template needs to be a complete HTML file, with all the usual elements such as HTML, HEAD, and BODY. See the complete example below.</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/first_template_ex/templates/hello.html</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>Hello HTML Templates<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;static&#39;, filename=&#39;main.css&#39;) }}&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Hello, {{ name }}!<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Change the name in the <span class="p">&lt;</span><span class="nt">em</span><span class="p">&gt;</span>browser address bar<span class="p">&lt;/</span><span class="nt">em</span><span class="p">&gt;</span>
+        and reload the page.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>In the HEAD above, in the LINK element, note the syntax for linking to a file in the <em>static</em> folder. The CSS file is just a normal CSS file, but it must be in the <em>static</em> folder for the Flask app.</p>
+</div>
+<p><a class="reference external" href="https://first-baby-flask-app.herokuapp.com/">View the live app here.</a></p>
+</div>
+<div class="section" id="how-are-variables-passed-from-app-to-template">
+<h3>How are variables passed from app to template?<a class="headerlink" href="#how-are-variables-passed-from-app-to-template" title="Permalink to this headline">¶</a></h3>
+<p>name in hello app</p>
+<p>pres[‘President’] in presidents app</p>
+<p>dictionary</p>
+</div>
 </div>
 <div class="section" id="resources">
 <h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
