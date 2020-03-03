@@ -113,7 +113,11 @@ Let’s transform that so it uses a template.
 
 .. attention:: In the HEAD above, in the LINK element, note the syntax for linking to a file in the *static* folder. The CSS file is just a normal CSS file, but it must be in the *static* folder for the Flask app.
 
-`View the live app here. <https://first-baby-flask-app.herokuapp.com/>`_
+
+`View the live “hello” app here. <https://first-baby-flask-app.herokuapp.com/>`_
+
+`All the “hello” app’s files are here. <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/first_template_ex>`_
+
 
 
 How are variables passed from app to template?
