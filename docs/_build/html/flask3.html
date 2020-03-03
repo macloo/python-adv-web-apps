@@ -100,6 +100,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#how-are-variables-passed-from-app-to-template">How are variables passed from app to template?</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#walkthrough-of-the-presidents-app">Walkthrough of the presidents app</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#resources">Resources</a></li>
 </ul>
 </li>
@@ -203,7 +204,7 @@
 </ol>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
-<p>The templates will not work if this folder structure is not exactly as described above. Your app folder can be named anything (not only <em>my-flask-app</em>), but the <em>static</em> and <em>templates</em> folders must be named and organized as shown above.</p>
+<p>The templates will not work if this folder structure is not exactly as described above. Your app folder can be named anything (not only <em>my-flask-app</em>), but the <em>static</em> and <em>templates</em> folders must be named and organized as shown above. The <em>static</em> folder can contain multiple folders and files.</p>
 </div>
 </div>
 <div class="section" id="get-started-with-templates">
@@ -298,19 +299,70 @@
 <p class="admonition-title">Attention</p>
 <p>In the HEAD above, in the LINK element, note the syntax for linking to a file in the <em>static</em> folder. The CSS file is just a normal CSS file, but it must be in the <em>static</em> folder for the Flask app.</p>
 </div>
-<p><a class="reference external" href="https://first-baby-flask-app.herokuapp.com/">View the live app here.</a></p>
+<p>Syntax for a path to a file in the <em>static</em> folder:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">href</span><span class="o">=</span><span class="s2">&quot;{{ url_for(&#39;static&#39;, filename=&#39;main.css&#39;) }}&quot;</span>
+</pre></div>
+</div>
+<p>Syntax for a path to a file inside a folder in the <em>static</em> folder:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scr</span><span class="o">=</span><span class="s2">&quot;{{ url_for(&#39;static&#39;, filename=&#39;images/foo.jpg&#39;) }}&quot;</span>
+</pre></div>
+</div>
+<p>☞ <a class="reference external" href="https://first-baby-flask-app.herokuapp.com/">View the live “hello” app here.</a></p>
+<p>☞ <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/first_template_ex">All the “hello” app’s files are here.</a></p>
 </div>
 <div class="section" id="how-are-variables-passed-from-app-to-template">
 <h3>How are variables passed from app to template?<a class="headerlink" href="#how-are-variables-passed-from-app-to-template" title="Permalink to this headline">¶</a></h3>
-<p>name in hello app</p>
-<p>pres[‘President’] in presidents app</p>
-<p>dictionary</p>
+<p>The templates in Flask are handled by the Jinja template engine, which comes with Flask when you first install it.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">render_template()</span></code> function both selects the template file to be used and passes to it any values or variable it needs.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;example.html&#39;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">phone</span><span class="o">=</span><span class="n">phone_number</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="s1">&#39;FL&#39;</span><span class="p">)</span>
+</pre></div>
 </div>
+<p>We can pass as many variables as necessary to the template. In the example above, the <strong>template</strong> must contain variables for <em>name, phone,</em> and <em>state.</em> That is, these expressions must be somewhere in the template named <em>example.html</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">name</span> <span class="p">}}</span>
+<span class="p">{{</span> <span class="n">phone</span> <span class="p">}}</span>
+<span class="p">{{</span> <span class="n">state</span> <span class="p">}}</span>
+</pre></div>
+</div>
+<p>The <em>value</em> (on the right side of the equals sign) must come from the code in the Flask app file. In the example above, both <em>name</em> and <em>phone_number</em> must already have a value before the <code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">render_template()</span></code> line. Note that <code class="docutils literal notranslate"><span class="pre">'FL'</span></code> is a string — we can pass in a string, integer, float, or Boolean.</p>
+<p>It’s also possible to pass lists or dictionaries as <em>values</em> to a template. Here’s a line from <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/presidents">the presidents app</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;president.html&#39;</span><span class="p">,</span>
+    <span class="n">pres</span><span class="o">=</span><span class="n">pres_dict</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="nb">ord</span><span class="p">,</span> <span class="n">the_title</span><span class="o">=</span><span class="n">pres_dict</span><span class="p">[</span><span class="s1">&#39;President&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The template file is named <em>president.html,</em> and the values depend on a Python dictionary, <code class="docutils literal notranslate"><span class="pre">pres_dict</span></code>, that was defined earlier in the Flask app script. We can see the following expressions in the template’s HTML:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="nb">ord</span> <span class="p">}}</span>
+<span class="p">{{</span> <span class="n">pres</span><span class="p">[</span><span class="s1">&#39;President&#39;</span><span class="p">]</span> <span class="p">}}</span>
+<span class="p">{{</span> <span class="n">pres</span><span class="p">[</span><span class="s1">&#39;Birth-date&#39;</span><span class="p">]</span> <span class="p">}}</span>
+<span class="p">{{</span> <span class="n">pres</span><span class="p">[</span><span class="s1">&#39;Birthplace&#39;</span><span class="p">]</span> <span class="p">}}</span>
+</pre></div>
+</div>
+<p>Why <code class="docutils literal notranslate"><span class="pre">pres</span></code> and not <code class="docutils literal notranslate"><span class="pre">pres_dict</span></code>? Because <code class="docutils literal notranslate"><span class="pre">pres=pres_dict</span></code>. In the <code class="docutils literal notranslate"><span class="pre">render_template()</span></code> function call, the dictionary <code class="docutils literal notranslate"><span class="pre">pres_dict</span></code> is assigned to the template’s variable <code class="docutils literal notranslate"><span class="pre">pres</span></code>.</p>
+<p>If you need help understanding Python dictionaries, see the <a class="reference external" href="dicts.html">Dictionaries chapter</a>.</p>
+<p>In another template, <em>base.html,</em> we can see this expression in the HEAD element:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">title</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">the_title</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">title</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Because <code class="docutils literal notranslate"><span class="pre">the_title=pres_dict['President']</span></code>, the HTML TITLE element will be filled in with the value of the dictionary item that has the <strong>key</strong> <code class="docutils literal notranslate"><span class="pre">'President'</span></code>.</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/prestitle.png"><img alt="President title screenshot" src="_images/prestitle.png" style="width: 613.0px; height: 338.0px;" /></a>
+</div>
+<p>Recall that the HTML TITLE is visible in the browser tab, as seen above.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>If a template uses a lot of variables, it’s <em>much</em> shorter and easier to pass a dictionary to the template than to specify all the individual variables in the <code class="docutils literal notranslate"><span class="pre">render_template()</span></code> function.</p>
+</div>
+</div>
+</div>
+<div class="section" id="walkthrough-of-the-presidents-app">
+<h2>Walkthrough of the presidents app<a class="headerlink" href="#walkthrough-of-the-presidents-app" title="Permalink to this headline">¶</a></h2>
+<p>foo</p>
 </div>
 <div class="section" id="resources">
 <h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://jinja.palletsprojects.com/en/2.11.x/templates/">Jinja documentation</a> — All the commands for the Jinja template syntax are here.</p></li>
+<li><p><a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/quickstart/#rendering-templates">Flask documentation</a> for <code class="docutils literal notranslate"><span class="pre">render_template()</span></code>.</p></li>
 </ul>
 <p>.</p>
 </div>

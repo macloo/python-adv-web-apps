@@ -38,7 +38,7 @@ A proper Flask app is going to use multiple files — some of which will be temp
 
 3. In addition to the *static* and *templates* folders, this app also contains ``.py`` files. Note that these must be *outside* the two folders named *static* and *templates*.
 
-.. attention:: The templates will not work if this folder structure is not exactly as described above. Your app folder can be named anything (not only *my-flask-app*), but the *static* and *templates* folders must be named and organized as shown above.
+.. attention:: The templates will not work if this folder structure is not exactly as described above. Your app folder can be named anything (not only *my-flask-app*), but the *static* and *templates* folders must be named and organized as shown above. The *static* folder can contain multiple folders and files.
 
 Get started with templates
 --------------------------
@@ -113,18 +113,73 @@ Let’s transform that so it uses a template.
 
 .. attention:: In the HEAD above, in the LINK element, note the syntax for linking to a file in the *static* folder. The CSS file is just a normal CSS file, but it must be in the *static* folder for the Flask app.
 
-`View the live app here. <https://first-baby-flask-app.herokuapp.com/>`_
+Syntax for a path to a file in the *static* folder: ::
+
+    href="{{ url_for('static', filename='main.css') }}"
+
+Syntax for a path to a file inside a folder in the *static* folder: ::
+
+    scr="{{ url_for('static', filename='images/foo.jpg') }}"
+
+
+☞ `View the live “hello” app here. <https://first-baby-flask-app.herokuapp.com/>`_
+
+☞ `All the “hello” app’s files are here. <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/first_template_ex>`_
+
 
 
 How are variables passed from app to template?
 ++++++++++++++++++++++++++++++++++++++++++++++
 
-name in hello app
+The templates in Flask are handled by the Jinja template engine, which comes with Flask when you first install it.
 
-pres['President'] in presidents app
+The ``render_template()`` function both selects the template file to be used and passes to it any values or variable it needs. ::
 
-dictionary
+    return render_template('example.html',
+        name=name, phone=phone_number, state='FL')
 
+We can pass as many variables as necessary to the template. In the example above, the **template** must contain variables for *name, phone,* and *state.* That is, these expressions must be somewhere in the template named *example.html*: ::
+
+    {{ name }}
+    {{ phone }}
+    {{ state }}
+
+The *value* (on the right side of the equals sign) must come from the code in the Flask app file. In the example above, both *name* and *phone_number* must already have a value before the ``return render_template()`` line. Note that ``'FL'`` is a string — we can pass in a string, integer, float, or Boolean.
+
+It’s also possible to pass lists or dictionaries as *values* to a template. Here’s a line from `the presidents app <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/presidents>`_: ::
+
+    return render_template('president.html',
+        pres=pres_dict, ord=ord, the_title=pres_dict['President'])
+
+The template file is named *president.html,* and the values depend on a Python dictionary, ``pres_dict``, that was defined earlier in the Flask app script. We can see the following expressions in the template’s HTML: ::
+
+    {{ ord }}
+    {{ pres['President'] }}
+    {{ pres['Birth-date'] }}
+    {{ pres['Birthplace'] }}
+
+Why ``pres`` and not ``pres_dict``? Because ``pres=pres_dict``. In the ``render_template()`` function call, the dictionary ``pres_dict`` is assigned to the template’s variable ``pres``.
+
+If you need help understanding Python dictionaries, see the `Dictionaries chapter <dicts.html>`_.
+
+In another template, *base.html,* we can see this expression in the HEAD element: ::
+
+    <title>{{ the_title }}</title>
+
+Because ``the_title=pres_dict['President']``, the HTML TITLE element will be filled in with the value of the dictionary item that has the **key** ``'President'``.
+
+.. figure:: _static/images/prestitle.png
+   :scale: 50 %
+   :alt: President title screenshot
+
+Recall that the HTML TITLE is visible in the browser tab, as seen above.
+
+.. attention:: If a template uses a lot of variables, it’s *much* shorter and easier to pass a dictionary to the template than to specify all the individual variables in the ``render_template()`` function.
+
+Walkthrough of the presidents app
+---------------------------------
+
+foo
 
 
 Resources
@@ -132,5 +187,6 @@ Resources
 
 * `Jinja documentation <https://jinja.palletsprojects.com/en/2.11.x/templates/>`_ — All the commands for the Jinja template syntax are here.
 
+* `Flask documentation <https://flask.palletsprojects.com/en/1.1.x/quickstart/#rendering-templates>`_ for ``render_template()``.
 
 .
