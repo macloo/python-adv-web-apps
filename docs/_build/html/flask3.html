@@ -100,7 +100,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#how-are-variables-passed-from-app-to-template">How are variables passed from app to template?</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#walkthrough-of-the-presidents-app">Walkthrough of the presidents app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#walkthrough-of-the-presidents-app">Walkthrough of the presidents app</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#converting-a-csv-to-a-list-of-dictionaries">Converting a CSV to a list of dictionaries</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#resources">Resources</a></li>
 </ul>
 </li>
@@ -356,7 +359,43 @@
 </div>
 <div class="section" id="walkthrough-of-the-presidents-app">
 <h2>Walkthrough of the presidents app<a class="headerlink" href="#walkthrough-of-the-presidents-app" title="Permalink to this headline">¶</a></h2>
-<p>foo</p>
+<p>Now we will examine this app so you can build one like it yourself.</p>
+<p>☞ <a class="reference external" href="https://weimergeeks.com/flask_pres/">View the live presents app here.</a></p>
+<p>☞ <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/presidents">View the code for the presidents app.</a></p>
+<div class="section" id="converting-a-csv-to-a-list-of-dictionaries">
+<h3>Converting a CSV to a list of dictionaries<a class="headerlink" href="#converting-a-csv-to-a-list-of-dictionaries" title="Permalink to this headline">¶</a></h3>
+<p>This is covered in <a class="reference external" href="csv.html#reading-into-a-dictionary">the CSVs chapter</a>. All the data we need about the U.S. presidents is in this <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/presidents/presidents.csv">CSV file</a>.</p>
+<p>Early in the Flask app in <em>presidents.py,</em> we create a <strong>list</strong> of dictionaries named <code class="docutils literal notranslate"><span class="pre">presidents_list</span></code>. Each <strong>item</strong> in the list is a dictionary. Each dictionary contains all the data about ONE president. That is, each dictionary is equivalent to one row from the original CSV.</p>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">presidents_list</span></code> to:</p>
+<ol class="arabic">
+<li><p>Populate a template with all the data about a selected president.</p></li>
+<li><p>Use a unique ID number — in the <strong>key</strong> <code class="docutils literal notranslate"><span class="pre">'Presidency'</span></code> — to determine which president has been selected. This will be used in the Flask <strong>route</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/president/&lt;num&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p>Create a list of pairs in which each pair consists of the unique ID and the name of the president it belongs to. This will be used to create an HTML list of all the presidents’ names, which are links to the Flask route.</p></li>
+</ol>
+<p>Here is the top of the <em>presidents.py</em> script:</p>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
+<span class="kn">from</span> <span class="nn">modules</span> <span class="kn">import</span> <span class="n">convert_to_dict</span><span class="p">,</span> <span class="n">make_ordinal</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">application</span> <span class="o">=</span> <span class="n">app</span>
+
+<span class="c1"># create a list of dicts</span>
+<span class="n">presidents_list</span> <span class="o">=</span> <span class="n">convert_to_dict</span><span class="p">(</span><span class="s2">&quot;presidents.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+<p>The list is created on line 8, using a function in an external file named <em>modules.py</em>. The function <code class="docutils literal notranslate"><span class="pre">convert_to_dict()</span></code> was imported from that file on line 2.</p>
+</div>
 </div>
 <div class="section" id="resources">
 <h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>

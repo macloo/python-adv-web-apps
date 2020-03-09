@@ -176,10 +176,45 @@ Recall that the HTML TITLE is visible in the browser tab, as seen above.
 
 .. attention:: If a template uses a lot of variables, it’s *much* shorter and easier to pass a dictionary to the template than to specify all the individual variables in the ``render_template()`` function.
 
+
+
 Walkthrough of the presidents app
 ---------------------------------
 
-foo
+Now we will examine this app so you can build one like it yourself.
+
+☞ `View the live presents app here. <https://weimergeeks.com/flask_pres/>`_
+
+☞ `View the code for the presidents app. <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/presidents>`_
+
+Converting a CSV to a list of dictionaries
+++++++++++++++++++++++++++++++++++++++++++
+
+This is covered in `the CSVs chapter <csv.html#reading-into-a-dictionary>`_. All the data we need about the U.S. presidents is in this `CSV file <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/presidents/presidents.csv>`_.
+
+Early in the Flask app in *presidents.py,* we create a **list** of dictionaries named ``presidents_list``. Each **item** in the list is a dictionary. Each dictionary contains all the data about ONE president. That is, each dictionary is equivalent to one row from the original CSV.
+
+We can use ``presidents_list`` to:
+
+1. Populate a template with all the data about a selected president.
+2. Use a unique ID number — in the **key** ``'Presidency'`` — to determine which president has been selected. This will be used in the Flask **route**: ::
+
+    @app.route('/president/<num>')
+
+3. Create a list of pairs in which each pair consists of the unique ID and the name of the president it belongs to. This will be used to create an HTML list of all the presidents’ names, which are links to the Flask route.
+
+Here is the top of the *presidents.py* script:
+
+.. literalinclude:: ../python_code_examples/flask/presidents/presidents.py
+   :lines: 1-8
+   :linenos:
+
+The list is created on line 8, using a function in an external file named *modules.py*. The function ``convert_to_dict()`` was imported from that file on line 2.
+
+
+
+
+
 
 
 Resources
