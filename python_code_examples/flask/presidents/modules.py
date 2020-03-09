@@ -1,5 +1,5 @@
 """
-Functions we can import
+functions to be imported into the presidents Flask app
 """
 
 import csv
