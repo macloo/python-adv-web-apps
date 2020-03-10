@@ -110,6 +110,8 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="flask2.html">Flask, Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask3.html">Flask Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
 </ul>
 
             
@@ -261,13 +263,18 @@
 </pre></div>
 </div>
 </div>
-<p>To run that test script, at the command prompt, type this (two lines):</p>
+<p>To run that test script, at the command prompt, type this (two lines).</p>
+<p><strong>Mac OS</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">FLASK_APP</span><span class="o">=</span><span class="n">hello</span><span class="o">.</span><span class="n">py</span>
 <span class="n">flask</span> <span class="n">run</span>
 </pre></div>
 </div>
-<p>(Windows users: Refer to <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/quickstart/#a-minimal-application">this</a> if that does not work.)</p>
-<p>You’ll see this:</p>
+<p><strong>Windows</strong></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">set</span> <span class="n">FLASK_APP</span><span class="o">=</span><span class="n">hello</span><span class="o">.</span><span class="n">py</span>
+<span class="n">flask</span> <span class="n">run</span>
+</pre></div>
+</div>
+<p>You’ll see something like this (Mac screen shown; Windows is slightly different):</p>
 <div class="figure align-default">
 <a class="reference internal image-reference" href="_images/start_flask.png"><img alt="Results of starting Flask screenshot" src="_images/start_flask.png" style="width: 700.0px; height: 166.0px;" /></a>
 </div>
