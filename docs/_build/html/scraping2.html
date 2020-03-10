@@ -86,18 +86,25 @@
 <li class="toctree-l1"><a class="reference internal" href="functions.html">Functions in Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lists.html">Working with Lists</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_files.html">Reading and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dicts.html">Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="csv.html">CSV Files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scraping.html">Web Scraping Intro</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Web Scraping, Part 2</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#using-select-instead-of-find-or-find-all">Using <code class="docutils literal notranslate"><span class="pre">select()</span></code> instead of <code class="docutils literal notranslate"><span class="pre">find()</span></code> or <code class="docutils literal notranslate"><span class="pre">find_all()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#working-with-lists-of-tag-objects">Working with lists of Tag objects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#finding-inside-a-tag-object">Finding inside a Tag object</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#moving-from-page-to-page-while-scraping">Moving from page to page while scraping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#moving-from-page-to-page-while-scraping-part-2">Moving from page to page while scraping, PART 2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#harvesting-multiple-urls-from-one-page">Harvesting multiple URLs from one page</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#scrape-multiple-pages-with-one-script">Scrape multiple pages with one script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#moving-onward">Moving onward</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="scraping3.html">Web Scraping, Part 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask.html">Flask Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask2.html">Flask, Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask3.html">Flask Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
 </ul>
 
             
@@ -381,6 +388,23 @@
 <p>You must understand that every website is different, so probably no other website in the world has the same HTML as the XKCD website. However, many websites do have Previous and Next buttons. It is necessary to <strong>inspect</strong> the HTML and determine how to extract the next- or previous-page URL (or partial URL) from the HTML on the button.</p>
 </div>
 <p><strong>Some websites use JavaScript</strong> to activate their Previous and Next buttons. In those cases, you will need to use the Selenium module to navigate while scraping. <strong>Selenium</strong> is covered <a class="reference external" href="scraping3.html">in the next chapter</a>.</p>
+</div>
+<div class="section" id="moving-from-page-to-page-while-scraping-part-2">
+<h2>Moving from page to page while scraping, PART 2<a class="headerlink" href="#moving-from-page-to-page-while-scraping-part-2" title="Permalink to this headline">¶</a></h2>
+<p>I have posted two example scripts to help you with sites where moving from page to page involves something like this:</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/paginated.png"><img alt="Paginated site links screenshot" src="_images/paginated.png" style="width: 598.0px; height: 82.0px;" /></a>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><em>Usually</em> you do NOT need Selenium for these links. They are a lot like the XKCD example discussed above.</p>
+</div>
+<p>The two scripts are:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/mls_pages.py">mls_pages.py</a></p></li>
+<li><p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/mls_pages_v2.py">mls_pages_v2</a></p></li>
+</ul>
+<p>Note that the two scripts do <em>the same thing</em> on one particular website, the <a class="reference external" href="https://www.mlssoccer.com/players">Players section</a> of the Major League Soccer site.</p>
 </div>
 <div class="section" id="harvesting-multiple-urls-from-one-page">
 <h2>Harvesting multiple URLs from one page<a class="headerlink" href="#harvesting-multiple-urls-from-one-page" title="Permalink to this headline">¶</a></h2>

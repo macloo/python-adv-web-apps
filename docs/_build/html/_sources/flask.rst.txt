@@ -80,7 +80,7 @@ Using Atom, create a file in your *flask* folder, copy/paste the code into it, a
 .. literalinclude:: ../python_code_examples/flask/hello.py
    :caption:
 
-To run that test script, at the command prompt, type this (two lines).
+To run that test script, at the command prompt, type this (two lines):
 
 **Mac OS** ::
 

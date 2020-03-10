@@ -194,6 +194,27 @@ This practice of **printing the value each time** is a way of testing your code 
 
 **Some websites use JavaScript** to activate their Previous and Next buttons. In those cases, you will need to use the Selenium module to navigate while scraping. **Selenium** is covered `in the next chapter <scraping3.html>`_.
 
+Moving from page to page while scraping, PART 2
+-----------------------------------------------
+
+I have posted two example scripts to help you with sites where moving from page to page involves something like this:
+
+.. figure:: _static/images/paginated.png
+   :scale: 50 %
+   :alt: Paginated site links screenshot
+
+
+.. note:: *Usually* you do NOT need Selenium for these links. They are a lot like the XKCD example discussed above.
+
+
+The two scripts are:
+
+* `mls_pages.py <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/mls_pages.py>`_
+* `mls_pages_v2 <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/mls_pages_v2.py>`_
+
+Note that the two scripts do *the same thing* on one particular website, the `Players section <https://www.mlssoccer.com/players>`_ of the Major League Soccer site.
+
+
 Harvesting multiple URLs from one page
 --------------------------------------
 
