@@ -401,10 +401,14 @@
 </div>
 <p>The two scripts are:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/mls_pages.py">mls_pages.py</a></p></li>
-<li><p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/mls_pages_v2.py">mls_pages_v2</a></p></li>
+<li><p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/mls_pages.py">mls_pages.py</a> — This one uses the “Go to next page” link until there is no next page.</p></li>
+<li><p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/mls_pages_v2.py">mls_pages_v2</a> — This one uses <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">in</span> <span class="pre">range()</span></code>, for use if you know how many pages there are.</p></li>
 </ul>
-<p>Note that the two scripts do <em>the same thing</em> on one particular website, the <a class="reference external" href="https://www.mlssoccer.com/players">Players section</a> of the Major League Soccer site.</p>
+<p>Note that the two scripts do <em>the same thing</em> on one particular website, the <a class="reference external" href="https://www.mlssoccer.com/players">Players section</a> of the Major League Soccer site. The difference is in the way each script gets the link <em>to the next page.</em></p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Remember that every website is different, so probably no other website in the world has the same HTML as the MLS website. However, many websites use a similar set of links to pages.</p>
+</div>
 </div>
 <div class="section" id="harvesting-multiple-urls-from-one-page">
 <h2>Harvesting multiple URLs from one page<a class="headerlink" href="#harvesting-multiple-urls-from-one-page" title="Permalink to this headline">¶</a></h2>

@@ -209,10 +209,12 @@ I have posted two example scripts to help you with sites where moving from page 
 
 The two scripts are:
 
-* `mls_pages.py <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/mls_pages.py>`_
-* `mls_pages_v2 <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/mls_pages_v2.py>`_
+* `mls_pages.py <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/mls_pages.py>`_ — This one uses the “Go to next page” link until there is no next page.
+* `mls_pages_v2 <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/mls_pages_v2.py>`_ — This one uses ``for i in range()``, for use if you know how many pages there are.
 
-Note that the two scripts do *the same thing* on one particular website, the `Players section <https://www.mlssoccer.com/players>`_ of the Major League Soccer site.
+Note that the two scripts do *the same thing* on one particular website, the `Players section <https://www.mlssoccer.com/players>`_ of the Major League Soccer site. The difference is in the way each script gets the link *to the next page.*
+
+.. important:: Remember that every website is different, so probably no other website in the world has the same HTML as the MLS website. However, many websites use a similar set of links to pages.
 
 
 Harvesting multiple URLs from one page
