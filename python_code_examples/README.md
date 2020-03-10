@@ -16,4 +16,7 @@ Companion text: [Python Beginners](https://python-adv-web-apps.readthedocs.io/en
 
 7. *scraping* contains examples using BeautifulSoup, Requests, and Selenium.
 
+8. *flask* covers the uses of the Flask web application framework.
+
+
 .
