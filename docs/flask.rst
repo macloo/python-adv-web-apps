@@ -80,14 +80,19 @@ Using Atom, create a file in your *flask* folder, copy/paste the code into it, a
 .. literalinclude:: ../python_code_examples/flask/hello.py
    :caption:
 
-To run that test script, at the command prompt, type this (two lines): ::
+To run that test script, at the command prompt, type this (two lines).
+
+**Mac OS** ::
 
     export FLASK_APP=hello.py
     flask run
 
-(Windows users: Refer to `this <https://flask.palletsprojects.com/en/1.1.x/quickstart/#a-minimal-application>`_ if that does not work.)
+**Windows** ::
 
-You’ll see this:
+    set FLASK_APP=hello.py
+    flask run
+
+You’ll see something like this (Mac screen shown; Windows is slightly different):
 
 .. figure:: _static/images/start_flask.png
    :scale: 50 %
