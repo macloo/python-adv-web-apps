@@ -4,6 +4,7 @@ Flask Templates
 Previous:
 
 1. `Flask intro <flask.html>`_: A very simple Flask app
+
 2. `Flask, part 2 <flask2.html>`_: Values in routes; using an API
 
 Code for this chapter is `here <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask>`_.
@@ -83,7 +84,7 @@ In the previous chapter, `Flask, part 2 <flask2.html>`_, you saw this route func
 
 Let’s transform that so it uses a template.
 
-1. Put the HTML into a template: ::
+1. Put the HTML into a template (note the double curly braces ``{{ }}`` around *name*): ::
 
     <h1>Hello, {{ name }}!</h1>
 
@@ -103,6 +104,8 @@ Let’s transform that so it uses a template.
     from flask import Flask, render_template
 
 
+When you import more than one module from *flask,* you can put them on one line, separated by commas.
+
 .. note:: The template needs to be a complete HTML file, with all the usual elements such as HTML, HEAD, and BODY. See the complete example below.
 
 
@@ -113,14 +116,18 @@ Let’s transform that so it uses a template.
 
 .. attention:: In the HEAD above, in the LINK element, note the syntax for linking to a file in the *static* folder. The CSS file is just a normal CSS file, but it must be in the *static* folder for the Flask app.
 
-Syntax for a path to a file in the *static* folder: ::
+Syntax for a path to **a file** in the *static* folder: ::
 
     href="{{ url_for('static', filename='main.css') }}"
 
-Syntax for a path to a file inside a folder in the *static* folder: ::
+Syntax for a path to **a file inside a folder** in the *static* folder: ::
 
     scr="{{ url_for('static', filename='images/foo.jpg') }}"
 
+
+
+Example: hello4.py
+++++++++++++++++++
 
 ☞ `View the live “hello” app here. <https://first-baby-flask-app.herokuapp.com/>`_
 
@@ -133,7 +140,7 @@ How are variables passed from app to template?
 
 The templates in Flask are handled by the Jinja template engine, which comes with Flask when you first install it.
 
-The ``render_template()`` function both selects the template file to be used and passes to it any values or variable it needs. ::
+The ``render_template()`` function both selects the template file to be used and passes to it any values or variables it needs. ::
 
     return render_template('example.html',
         name=name, phone=phone_number, state='FL')
@@ -158,15 +165,15 @@ The template file is named *president.html,* and the values depend on a Python d
     {{ pres['Birth-date'] }}
     {{ pres['Birthplace'] }}
 
-Why ``pres`` and not ``pres_dict``? Because ``pres=pres_dict``. In the ``render_template()`` function call, the dictionary ``pres_dict`` is assigned to the template’s variable ``pres``.
+Why ``pres`` and not ``pres_dict``? Because ``pres=pres_dict``. In the ``render_template()`` function call, the dictionary ``pres_dict`` is assigned to the template’s variable ``pres``. It is shorter and simpler for use in the template file.
 
-If you need help understanding Python dictionaries, see the `Dictionaries chapter <dicts.html>`_.
+If you need help understanding Python dictionaries, see the `Dictionaries chapter <dicts.html>`_. Dictionaries are incredibly useful for Flask templates!
 
-In another template, *base.html,* we can see this expression in the HEAD element: ::
+In another template in `the presidents app <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/presidents>`_, *base.html,* we can see this expression in the HEAD element: ::
 
     <title>{{ the_title }}</title>
 
-Because ``the_title=pres_dict['President']``, the HTML TITLE element will be filled in with the value of the dictionary item that has the **key** ``'President'``.
+Because of ``the_title=pres_dict['President']``, the HTML TITLE element will be filled in with the value of the dictionary item that has the **key** ``'President'``.
 
 .. figure:: _static/images/prestitle.png
    :scale: 50 %
@@ -187,16 +194,18 @@ Now we will examine this app so you can build one like it yourself.
 
 ☞ `View the code for the presidents app. <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/presidents>`_
 
+
 Converting a CSV to a list of dictionaries
 ++++++++++++++++++++++++++++++++++++++++++
 
-This is covered in `the CSVs chapter <csv.html#reading-into-a-dictionary>`_. All the data we need about the U.S. presidents is in this `CSV file <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/presidents/presidents.csv>`_.
+All the data we need about the U.S. presidents is in `this CSV file <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/presidents/presidents.csv>`_.
 
-Early in the Flask app in *presidents.py,* we create a **list** of dictionaries named ``presidents_list``. Each **item** in the list is a dictionary. Each dictionary contains all the data about ONE president. That is, each dictionary is equivalent to one row from the original CSV.
+Early in the Flask app in *presidents.py,* we create a **list** of dictionaries named ``presidents_list`` from that CSV. Each **item** in the list is a dictionary. Each dictionary contains all the data about ONE president. That is, **each dictionary** is equivalent to **one row** from the original CSV. (This is covered in `the CSVs chapter <csv.html#reading-into-a-dictionary>`_.)
 
 We can use ``presidents_list`` to:
 
 1. Populate a template with all the data about a selected president.
+
 2. Use a unique ID number — in the **key** ``'Presidency'`` — to determine which president has been selected. This will be used in the Flask **route**: ::
 
     @app.route('/president/<num>')
@@ -211,7 +220,16 @@ Here is the top of the *presidents.py* script:
 
 The list is created on line 8, using a function in an external file named *modules.py*. The function ``convert_to_dict()`` was imported from that file on line 2.
 
+.. tip:: To store non-Flask functions in a separate *.py* file, you will import them by name from that file, as seen on line 2 in *presidents.py*. One more thing is required: In the folder that contains both *presidents.py* and *modules.py* there must also be a file named *__init__.py*. That file can be **empty** — but the name must be exactly as shown. `More details here. <https://docs.python.org/3/tutorial/modules.html>`_
 
+The route to one selected president
++++++++++++++++++++++++++++++++++++
+
+We will skip to the second route in the app and come back to the first one later.
+
+.. literalinclude:: ../python_code_examples/flask/presidents/presidents.py
+   :lines: 30-38
+   :linenos:
 
 
 
