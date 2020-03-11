@@ -6,22 +6,20 @@ import csv
 
 def convert_to_dict(filename):
     """
-    Convert a CSV file to a list of Python dictionaries.
+    Convert a CSV file to a list of Python dictionaries
     """
     # open a CSV file - note - must have column headings in top row
     datafile = open(filename, newline='')
 
-    # create list of OrderedDicts as of Python 3.6
+    # create DictReader object
     my_reader = csv.DictReader(datafile)
 
-    # write it all out to a new list
-    list_of_dicts = []
-    for row in my_reader:
-        # we convert each row to a string and add a newline
-        list_of_dicts.append( dict(row) )
+    # create a regular Python list containing dicts
+    list_of_dicts = list(my_reader)
 
     # close original csv file
     datafile.close()
+
     # return the list
     return list_of_dicts
 
@@ -41,7 +39,7 @@ def make_ordinal(num):
         ext = "rd"
     return str(num) + ext
 
-# tests
+# tryouts
 def test_make_ordinal():
     for i in range(1,46):
         print(make_ordinal(i))
@@ -53,7 +51,7 @@ def search_the_list(list):
     for k in list[0].keys():
         print(k)
 
-# run tests
+# run tryouts
 if __name__ == '__main__':
     test_make_ordinal()
     presidents_list = convert_to_dict("presidents.csv")
