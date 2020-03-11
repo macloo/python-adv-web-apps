@@ -97,14 +97,24 @@
 <li class="toctree-l2"><a class="reference internal" href="#folder-structure-for-a-flask-app">Folder structure for a Flask app</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#get-started-with-templates">Get started with templates</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#how-does-a-flask-app-use-a-template">How does a Flask app use a template?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-hello4-py">Example: hello4.py</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#how-are-variables-passed-from-app-to-template">How are variables passed from app to template?</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#walkthrough-of-the-presidents-app">Walkthrough of the presidents app</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#converting-a-csv-to-a-list-of-dictionaries">Converting a CSV to a list of dictionaries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-route-to-one-selected-president">The route to one selected president</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-route-to-an-index-of-presidents">The route to an index of presidents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#the-presidents-templates">The presidents templates</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#base-html">base.html</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#index-html">index.html</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#president-html">president.html</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#resources">Resources</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
@@ -246,7 +256,7 @@
 </div>
 <p>Let’s transform that so it uses a template.</p>
 <ol class="arabic">
-<li><p>Put the HTML into a template:</p>
+<li><p>Put the HTML into a template (note the double curly braces <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">}}</span></code> around <em>name</em>):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;h1&gt;Hello, {{ name }}!&lt;/h1&gt;
 
 &lt;p&gt;Change the name in the &lt;em&gt;browser address bar&lt;/em&gt;
@@ -268,12 +278,13 @@
 </div>
 </li>
 </ol>
+<p>When you import more than one module from <em>flask,</em> you can put them on one line, separated by commas.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The template needs to be a complete HTML file, with all the usual elements such as HTML, HEAD, and BODY. See the complete example below.</p>
 </div>
-<div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/first_template_ex/templates/hello.html</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/first_template_ex/templates/hello.html</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
 <div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="p">&lt;</span><span class="nt">html</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
@@ -302,21 +313,24 @@
 <p class="admonition-title">Attention</p>
 <p>In the HEAD above, in the LINK element, note the syntax for linking to a file in the <em>static</em> folder. The CSS file is just a normal CSS file, but it must be in the <em>static</em> folder for the Flask app.</p>
 </div>
-<p>Syntax for a path to a file in the <em>static</em> folder:</p>
+<p>Syntax for a path to <strong>a file</strong> in the <em>static</em> folder:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">href</span><span class="o">=</span><span class="s2">&quot;{{ url_for(&#39;static&#39;, filename=&#39;main.css&#39;) }}&quot;</span>
 </pre></div>
 </div>
-<p>Syntax for a path to a file inside a folder in the <em>static</em> folder:</p>
+<p>Syntax for a path to <strong>a file inside a folder</strong> in the <em>static</em> folder:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scr</span><span class="o">=</span><span class="s2">&quot;{{ url_for(&#39;static&#39;, filename=&#39;images/foo.jpg&#39;) }}&quot;</span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="example-hello4-py">
+<h3>Example: hello4.py<a class="headerlink" href="#example-hello4-py" title="Permalink to this headline">¶</a></h3>
 <p>☞ <a class="reference external" href="https://first-baby-flask-app.herokuapp.com/">View the live “hello” app here.</a></p>
 <p>☞ <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/first_template_ex">All the “hello” app’s files are here.</a></p>
 </div>
 <div class="section" id="how-are-variables-passed-from-app-to-template">
 <h3>How are variables passed from app to template?<a class="headerlink" href="#how-are-variables-passed-from-app-to-template" title="Permalink to this headline">¶</a></h3>
 <p>The templates in Flask are handled by the Jinja template engine, which comes with Flask when you first install it.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">render_template()</span></code> function both selects the template file to be used and passes to it any values or variable it needs.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">render_template()</span></code> function both selects the template file to be used and passes to it any values or variables it needs.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;example.html&#39;</span><span class="p">,</span>
     <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">phone</span><span class="o">=</span><span class="n">phone_number</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="s1">&#39;FL&#39;</span><span class="p">)</span>
 </pre></div>
@@ -340,13 +354,13 @@
 <span class="p">{{</span> <span class="n">pres</span><span class="p">[</span><span class="s1">&#39;Birthplace&#39;</span><span class="p">]</span> <span class="p">}}</span>
 </pre></div>
 </div>
-<p>Why <code class="docutils literal notranslate"><span class="pre">pres</span></code> and not <code class="docutils literal notranslate"><span class="pre">pres_dict</span></code>? Because <code class="docutils literal notranslate"><span class="pre">pres=pres_dict</span></code>. In the <code class="docutils literal notranslate"><span class="pre">render_template()</span></code> function call, the dictionary <code class="docutils literal notranslate"><span class="pre">pres_dict</span></code> is assigned to the template’s variable <code class="docutils literal notranslate"><span class="pre">pres</span></code>.</p>
-<p>If you need help understanding Python dictionaries, see the <a class="reference external" href="dicts.html">Dictionaries chapter</a>.</p>
-<p>In another template, <em>base.html,</em> we can see this expression in the HEAD element:</p>
+<p>Why <code class="docutils literal notranslate"><span class="pre">pres</span></code> and not <code class="docutils literal notranslate"><span class="pre">pres_dict</span></code>? Because <code class="docutils literal notranslate"><span class="pre">pres=pres_dict</span></code>. In the <code class="docutils literal notranslate"><span class="pre">render_template()</span></code> function call, the dictionary <code class="docutils literal notranslate"><span class="pre">pres_dict</span></code> is assigned to the template’s variable <code class="docutils literal notranslate"><span class="pre">pres</span></code>. It is shorter and simpler for use in the template file.</p>
+<p>If you need help understanding Python dictionaries, see the <a class="reference external" href="dicts.html">Dictionaries chapter</a>. Dictionaries are incredibly useful for Flask templates!</p>
+<p>In another template in <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/presidents">the presidents app</a>, <em>base.html,</em> we can see this expression in the HEAD element:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">title</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">the_title</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">title</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-<p>Because <code class="docutils literal notranslate"><span class="pre">the_title=pres_dict['President']</span></code>, the HTML TITLE element will be filled in with the value of the dictionary item that has the <strong>key</strong> <code class="docutils literal notranslate"><span class="pre">'President'</span></code>.</p>
+<p>Because of <code class="docutils literal notranslate"><span class="pre">the_title=pres_dict['President']</span></code>, the HTML TITLE element will be filled in with the value of the dictionary item that has the <strong>key</strong> <code class="docutils literal notranslate"><span class="pre">'President'</span></code>.</p>
 <div class="figure align-default">
 <a class="reference internal image-reference" href="_images/prestitle.png"><img alt="President title screenshot" src="_images/prestitle.png" style="width: 613.0px; height: 338.0px;" /></a>
 </div>
@@ -364,8 +378,8 @@
 <p>☞ <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/presidents">View the code for the presidents app.</a></p>
 <div class="section" id="converting-a-csv-to-a-list-of-dictionaries">
 <h3>Converting a CSV to a list of dictionaries<a class="headerlink" href="#converting-a-csv-to-a-list-of-dictionaries" title="Permalink to this headline">¶</a></h3>
-<p>This is covered in <a class="reference external" href="csv.html#reading-into-a-dictionary">the CSVs chapter</a>. All the data we need about the U.S. presidents is in this <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/presidents/presidents.csv">CSV file</a>.</p>
-<p>Early in the Flask app in <em>presidents.py,</em> we create a <strong>list</strong> of dictionaries named <code class="docutils literal notranslate"><span class="pre">presidents_list</span></code>. Each <strong>item</strong> in the list is a dictionary. Each dictionary contains all the data about ONE president. That is, each dictionary is equivalent to one row from the original CSV.</p>
+<p>All the data we need about the U.S. presidents is in <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/presidents/presidents.csv">this CSV file</a>.</p>
+<p>Early in the Flask app in <em>presidents.py,</em> we create a <strong>list</strong> of dictionaries named <code class="docutils literal notranslate"><span class="pre">presidents_list</span></code> from that CSV. Each <strong>item</strong> in the list is a dictionary. Each dictionary contains all the data about ONE president. That is, <strong>each dictionary</strong> is equivalent to <strong>one row</strong> from the original CSV. (This is covered in <a class="reference external" href="csv.html#reading-into-a-dictionary">the CSVs chapter</a>.)</p>
 <p>We can use <code class="docutils literal notranslate"><span class="pre">presidents_list</span></code> to:</p>
 <ol class="arabic">
 <li><p>Populate a template with all the data about a selected president.</p></li>
@@ -377,6 +391,8 @@
 <li><p>Create a list of pairs in which each pair consists of the unique ID and the name of the president it belongs to. This will be used to create an HTML list of all the presidents’ names, which are links to the Flask route.</p></li>
 </ol>
 <p>Here is the top of the <em>presidents.py</em> script:</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/presidents/presidents.py</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
@@ -390,19 +406,368 @@
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 <span class="n">application</span> <span class="o">=</span> <span class="n">app</span>
 
-<span class="c1"># create a list of dicts</span>
+<span class="c1"># create a list of dicts from a CSV</span>
 <span class="n">presidents_list</span> <span class="o">=</span> <span class="n">convert_to_dict</span><span class="p">(</span><span class="s2">&quot;presidents.csv&quot;</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
+</div>
 <p>The list is created on line 8, using a function in an external file named <em>modules.py</em>. The function <code class="docutils literal notranslate"><span class="pre">convert_to_dict()</span></code> was imported from that file on line 2.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>To store non-Flask functions in a separate <em>.py</em> file, you will import them by name from that file, as seen on line 2 in <em>presidents.py</em>. One more thing is required: In the folder that contains both <em>presidents.py</em> and <em>modules.py</em> there must also be a file named <em>__init__.py</em>. That file can be <strong>empty</strong> — but the name must be exactly as shown. <a class="reference external" href="https://docs.python.org/3/tutorial/modules.html">More details here.</a></p>
+</div>
+</div>
+<div class="section" id="the-route-to-one-selected-president">
+<h3>The route to one selected president<a class="headerlink" href="#the-route-to-one-selected-president" title="Permalink to this headline">¶</a></h3>
+<p>We will skip to the second route in the app and come back to the first one later.</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/presidents/presidents.py</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>24
+25
+26
+27
+28
+29
+30
+31
+32</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/president/&lt;num&gt;&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">detail</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">pres_dict</span> <span class="o">=</span> <span class="n">presidents_list</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;h1&gt;Invalid value for Presidency: </span><span class="si">{num}</span><span class="s2">&lt;/h1&gt;&quot;</span>
+    <span class="c1"># a little bonus function, imported on line 2 above</span>
+    <span class="nb">ord</span> <span class="o">=</span> <span class="n">make_ordinal</span><span class="p">(</span> <span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;president.html&#39;</span><span class="p">,</span> <span class="n">pres</span><span class="o">=</span><span class="n">pres_dict</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="nb">ord</span><span class="p">,</span> <span class="n">the_title</span><span class="o">=</span><span class="n">pres_dict</span><span class="p">[</span><span class="s1">&#39;President&#39;</span><span class="p">])</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Notice that the variable <code class="docutils literal notranslate"><span class="pre">num</span></code> is passed in the route. This was explained in <a class="reference external" href="flask2.html">Flask, part 2</a>. The value of <code class="docutils literal notranslate"><span class="pre">num</span></code> determines <em>which president</em> we will see.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/president/&lt;num&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Earlier, we saw that a URL for Abraham Lincoln ends with <em>/president/16</em>.</p>
+<p>Recall that each president’s details are in a <strong>dictionary,</strong> and all the dictionaries are in a <strong>list.</strong> Recall that any list <strong>item</strong> can be accessed by its <strong>index</strong> (see <a class="reference external" href="lists.html">Working with Lists</a>).</p>
+<p>However, the first index in a list is always 0.</p>
+<p>To get George Washington, the first U.S. president, we need <code class="docutils literal notranslate"><span class="pre">presidents_list[0]</span></code>. But the route URL will end with <em>/president/1</em> — because his Presidency (<a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/presidents/presidents.csv">in the CSV</a>) is 1. Therefore:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pres_dict</span> <span class="o">=</span> <span class="n">presidents_list</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>That line (line 27) assigns the dictionary for the one selected president to the variable <code class="docutils literal notranslate"><span class="pre">pres_dict</span></code>. For the list index, <code class="docutils literal notranslate"><span class="pre">int(num)</span> <span class="pre">-</span> <span class="pre">1</span></code> changes <code class="docutils literal notranslate"><span class="pre">num</span></code> from a string to an integer and subtracts 1, so that the dictionary for George Washington, first president, comes from list item 0. (And the dictionary for Abraham Lincoln, 16th president, comes from list item 15, etc..)</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>This would not work for every possible list of dictionaries. In some cases you would need to search for a dictionary key to match the value passed to the function from the route URL.</p>
+</div>
+<p>Line 27 is in a <code class="docutils literal notranslate"><span class="pre">try</span></code> clause because it’s possible someone would manually change the URL to something invalid, such as <em>/president/100</em>. In that case, the <code class="docutils literal notranslate"><span class="pre">except</span></code> clause would run, and the screen would show the text “Invalid value for Presidency: 100” styled as an H1 heading.</p>
+<p>Line 31 is a bonus because it takes the value of <code class="docutils literal notranslate"><span class="pre">num</span></code> (e.g. 1 for Washington or 16 for Lincoln) and converts it to an ordinal (e.g. 1st for Washington or 16th for Lincoln). The function <code class="docutils literal notranslate"><span class="pre">make_ordinal()</span></code> is in <em>modules.py.</em></p>
+<p>Finally, line 32 is the <code class="docutils literal notranslate"><span class="pre">render_template()</span></code> function we’ve seen before. The Flask template here is <em>president.html.</em> We know that <code class="docutils literal notranslate"><span class="pre">pres_dict</span></code> is the single dictionary for the selected president, and we pass it to the template as the variable <code class="docutils literal notranslate"><span class="pre">pres</span></code> because that’s shorter and simpler. We pass <code class="docutils literal notranslate"><span class="pre">ord</span></code> to the template as <code class="docutils literal notranslate"><span class="pre">ord</span></code>. For the HTML TITLE, we pass the value of <code class="docutils literal notranslate"><span class="pre">pres_dict['President']</span></code> to the template as <code class="docutils literal notranslate"><span class="pre">the_title</span></code>.</p>
+<p><strong>Summary:</strong> The route tells Flask, “When this URL is received, run the following function.” Then everything up to the final <code class="docutils literal notranslate"><span class="pre">return</span></code> in the function is preparing the data that will be in the <code class="docutils literal notranslate"><span class="pre">render_template()</span></code> function. We also have an <code class="docutils literal notranslate"><span class="pre">except</span></code> clause, in case the route’s variable value is unusable.</p>
+</div>
+<div class="section" id="the-route-to-an-index-of-presidents">
+<h3>The route to an index of presidents<a class="headerlink" href="#the-route-to-an-index-of-presidents" title="Permalink to this headline">¶</a></h3>
+<p>Now we turn to the first route. This is the equivalent of an index, where the user selects a president. Then a request is sent to the server, and the page for that single president appears in the browser.</p>
+<p>The web page needs to provide a list of links, one for each president.</p>
+<ul class="simple">
+<li><p>To work, the partial URL for a president must contain the Presidency number. This was covered in the previous section — the URL for Abraham Lincoln, for example, ends with <em>/president/16</em>.</p></li>
+<li><p>The link text is the president’s name. In the CSV, it is in the column named President.</p></li>
+</ul>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/presidents/presidents.py</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">pairs_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">presidents_list</span><span class="p">:</span>
+    <span class="n">pairs_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s1">&#39;Presidency&#39;</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="s1">&#39;President&#39;</span><span class="p">])</span> <span class="p">)</span>
+
+<span class="c1"># first route</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="n">pairs</span><span class="o">=</span><span class="n">pairs_list</span><span class="p">,</span> <span class="n">the_title</span><span class="o">=</span><span class="s2">&quot;Presidents Index&quot;</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>A list of pairs (number, name) is created before the route function. It’s <em>outside</em> the route function because it only needs to run <em>once</em> and create the <code class="docutils literal notranslate"><span class="pre">pairs_list</span></code> list for the route function to use.</p>
+<p>This is a simple route for the top page of the app:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Because <code class="docutils literal notranslate"><span class="pre">pairs_list</span></code> already exists, the function has only one instruction: to return <code class="docutils literal notranslate"><span class="pre">render_template()</span></code>. The <code class="docutils literal notranslate"><span class="pre">render_template()</span></code> function specifies the template named <code class="docutils literal notranslate"><span class="pre">index.html</span></code> (this is always the <em>first thing</em> inside the parentheses) and passes to it the <code class="docutils literal notranslate"><span class="pre">pairs_list</span></code> (assigned to <code class="docutils literal notranslate"><span class="pre">pairs</span></code>) and the string <em>“Presidents Index”</em> (assigned to <code class="docutils literal notranslate"><span class="pre">the_title</span></code>).</p>
+<p><a class="reference external" href="https://weimergeeks.com/flask_pres/">You can see the result here:</a></p>
+</div>
+</div>
+<div class="section" id="the-presidents-templates">
+<h2>The presidents templates<a class="headerlink" href="#the-presidents-templates" title="Permalink to this headline">¶</a></h2>
+<p>There are three templates in this app:</p>
+<ol class="arabic simple">
+<li><p><em>index.html</em></p></li>
+<li><p><em>president.html</em></p></li>
+<li><p><em>base.html</em></p></li>
+</ol>
+<div class="section" id="base-html">
+<h3>base.html<a class="headerlink" href="#base-html" title="Permalink to this headline">¶</a></h3>
+<p>We begin with <em>base.html</em> because it is used by both of the other templates.</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/presidents/templates/base.html</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+	<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;utf-8&quot;</span><span class="p">&gt;</span>
+	<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;viewport&quot;</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;width=device-width, initial-scale=1&quot;</span><span class="p">&gt;</span>
+
+<span class="hll">	<span class="p">&lt;</span><span class="nt">title</span><span class="p">&gt;</span>{{ the_title }}<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;</span>
+</span>
+	<span class="c">&lt;!-- note the special href for files in the Flask &quot;static&quot; folder --&gt;</span>
+<span class="hll">	<span class="p">&lt;</span><span class="nt">link</span> <span class="na">rel</span><span class="o">=</span><span class="s">&quot;stylesheet&quot;</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;static&#39;, filename=&#39;css/main.css&#39;) }}&quot;</span><span class="p">&gt;</span>
+</span>
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">body</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
+
+  <span class="c">&lt;!-- Jinja2 directives: page contents will go between them --&gt;</span>
+<span class="hll">  {% block content %}
+</span><span class="hll">  {% endblock %}
+</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+
+<span class="p">&lt;/</span><span class="nt">body</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">html</span><span class="p">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>We already covered the code in lines 7 and 10 (earlier in this chapter):</p>
+<ul class="simple">
+<li><p>Line 7: The value for the template variable <code class="docutils literal notranslate"><span class="pre">the_title</span></code> comes from the <code class="docutils literal notranslate"><span class="pre">render_template()</span></code> function.</p></li>
+<li><p>Line 10: The value inside quotes following <code class="docutils literal notranslate"><span class="pre">href=</span></code> is necessary for a functioning path to files inside the <em>static</em> folder.</p></li>
+</ul>
+<p>What’s new: The <strong>Jinja directives</strong> on lines 18 and 19. These two commands, specific to the Jinja template language, designate the <em>start</em> and <em>end</em> of a <strong>block.</strong> The block in this case is named <em>content.</em> This same block name will be used in the other two templates in the presidents app.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The block can be named something else (other than <em>content</em>). Up to you. Also, you can use more than one block in a template — but each block in a template must have its own unique name.</p>
+</div>
+<p><strong>What is a block for?</strong> It is a place to insert other content.</p>
+<p>Read on …</p>
+</div>
+<div class="section" id="index-html">
+<h3>index.html<a class="headerlink" href="#index-html" title="Permalink to this headline">¶</a></h3>
+<p>Right away, look at lines 3 and 20 below. Those are the same <strong>Jinja directives</strong> used in <em>base.html</em> — but here, they enclose <em>the block to be inserted</em> into <em>base.html.</em></p>
+<p>It works because of line 1 below:</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/presidents/templates/index.html</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span>{% extends &#39;base.html&#39; %}
+
+<span class="hll">{% block content %}
+</span>
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>A presidential Flask example<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Click any president&#39;s name.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+<span class="c">&lt;!-- pairs is a list that must be sent here by a route function</span>
+
+<span class="c">     The list will contain 45 pairs: a presidency number, and a</span>
+<span class="c">     president&#39;s name --&gt;</span>
+
+    <span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="hll">    {% for pair in pairs %}
+</span>        <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for( &#39;detail&#39;, num=pair[0] ) }}&quot;</span><span class="p">&gt;</span>{{ pair[1] }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="hll">    {% endfor %}
+</span>    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+
+<span class="hll">{% endblock %}
+</span></pre></div>
+</td></tr></table></div>
+</div>
+<p>Because of line 1, when the <code class="docutils literal notranslate"><span class="pre">render_template()</span></code> function calls the template <em>index.html,</em> the first thing that happens is: line 1 fetches <em>base.html</em> and constructs a complete page from the two templates.</p>
+<p>You’ll see the same thing in the <em>president.html</em> template, again using <em>base.html.</em></p>
+<p>The other Jinja code in <em>index.html</em> is used to build a list of links. This was described under <a class="reference external" href="#the-route-to-an-index-of-presidents">The route to an index of presidents</a> above.</p>
+<p>First, the two <strong>Jinja directives</strong> on lines 15 and 17 designate the start and end of a for-loop. It is a Python for-loop, as you might realize when you see that it begins with <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">pair</span> <span class="pre">in</span> <span class="pre">pairs</span></code> — but note, there is <em>no colon.</em></p>
+<p>Second, what is happening <em>inside</em> the for-loop? The list named <code class="docutils literal notranslate"><span class="pre">pairs</span></code> contains a <em>tuple</em> for each president. In each tuple are two values, a number and a name. Values in a tuple can be used with indexes, like values in a list. So <code class="docutils literal notranslate"><span class="pre">pair[0]</span></code> is the <em>first</em> value in the current tuple (a number), and <code class="docutils literal notranslate"><span class="pre">pair[1]</span></code> is the <em>second</em> value (a president’s name).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;{{ url_for( &#39;detail&#39;, num=pair[0] ) }}&quot;</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic">
+<li><p>The for-loop writes a new LI element each time the loop runs.</p></li>
+<li><p>The LI contains one A element.</p></li>
+<li><p>The value of the HREF attribute is this string:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;{{ url_for( &#39;detail&#39;, num=pair[0] ) }}&quot;</span>
+</pre></div>
+</div>
+</li>
+<li><p>The value inside <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">}}</span></code> writes, for example: <code class="docutils literal notranslate"><span class="pre">/president/16</span></code>.</p></li>
+<li><p>Because <code class="docutils literal notranslate"><span class="pre">pair[1]</span></code> holds a president’s name, that name is the link text.</p></li>
+<li><p>The result of the loop looks like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;/president/1&quot;</span><span class="o">&gt;</span><span class="n">George</span> <span class="n">Washington</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;/president/2&quot;</span><span class="o">&gt;</span><span class="n">John</span> <span class="n">Adams</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;/president/3&quot;</span><span class="o">&gt;</span><span class="n">Thomas</span> <span class="n">Jefferson</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;/president/4&quot;</span><span class="o">&gt;</span><span class="n">James</span> <span class="n">Madison</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+<span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;/president/5&quot;</span><span class="o">&gt;</span><span class="n">James</span> <span class="n">Monroe</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>You might have wondered why the second route in <em>presidents.py</em> starts like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/president/&lt;num&gt;&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">detail</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>I wanted to demonstrate that the value of the HREF attribute <em>must</em> call the <em>function,</em> which here is <code class="docutils literal notranslate"><span class="pre">detail()</span></code> and <strong>not</strong> <code class="docutils literal notranslate"><span class="pre">president()</span></code>.</p>
+<p>When the <strong>HTTP request</strong> is <em>http://localhost:5000/president/16,</em> the function <code class="docutils literal notranslate"><span class="pre">detail()</span></code> receives the string value <em>16</em> as <code class="docutils literal notranslate"><span class="pre">num</span></code>.</p>
+<p>The value of <code class="docutils literal notranslate"><span class="pre">num</span></code> retrieves the matching dictionary and returns it — with the template — as the <strong>HTTP response,</strong> and the browser displays the selected president’s page.</p>
+</div>
+<div class="section" id="president-html">
+<h3>president.html<a class="headerlink" href="#president-html" title="Permalink to this headline">¶</a></h3>
+<p>The detail page contains the most Jinja templating code, because it is writing all the values from one president’s dictionary (<code class="docutils literal notranslate"><span class="pre">pres</span></code>) into the HTML:</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/presidents/templates/president.html</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33</pre></div></td><td class="code"><div class="highlight"><pre><span></span>{% extends &#39;base.html&#39; %}
+
+<span class="hll">{% block content %}
+</span>
+	&lt;!-- the full dict for a president is sent here as pres by the route --&gt;
+
+	&lt;h1&gt;{{ pres[&#39;President&#39;] }}&lt;/h1&gt;
+
+	&lt;!-- NOTE the pattern for pointing to a file inside the static folder --&gt;
+	&lt;img class=&quot;right&quot; src=&quot;{{ url_for(&#39;static&#39;, filename=&quot;images/&quot;+pres[&#39;Image&#39;]) }}&quot; alt=&quot;President portrait&quot;&gt;
+
+	&lt;p&gt;{{ pres[&#39;President&#39;] }}, the {{ ord }} president of the United States, was born on {{ pres[&#39;Birth-date&#39;] }}, in {{ pres[&#39;Birthplace&#39;] }}. He was {{ pres[&#39;Age-when-took-office&#39;] }} when he took office on {{ pres[&#39;Took-office&#39;] }}. Member: {{ pres[&#39;Party&#39;] }} Party.
+
+<span class="hll">	{% if pres[&#39;Death-date&#39;] == pres[&#39;Left-office&#39;] %}
+</span>		He died in office on {{ pres[&#39;Death-date&#39;] }}.
+<span class="hll">	{% elif pres[&#39;Left-office&#39;] != &#39;Incumbent&#39;%}
+</span>		He left office on {{ pres[&#39;Left-office&#39;] }}.
+<span class="hll">	{% endif %}
+</span>
+		His occupation before the presidency: {{ pres[&#39;Occupation&#39;] }}.
+		His college: {{ pres[&#39;College&#39;] }}.
+
+<span class="hll">	{% if pres[&#39;Location-death&#39;] != &quot;NA&quot; %}
+</span>		He died in {{ pres[&#39;Location-death&#39;] }}, on {{ pres[&#39;Death-date&#39;] }}.
+<span class="hll">	{% endif %}
+</span>	&lt;/p&gt;
+
+	&lt;p&gt;&lt;a href=&quot;{{ pres[&#39;Wikipedia-entry&#39;] }}&quot;&gt;View Wikipedia entry for {{ pres[&#39;President&#39;] }}.&lt;/a&gt;&lt;/p&gt;
+
+	&lt;!-- NOTE the way to link to a route: Use the function name --&gt;
+	&lt;p&gt;&lt;a href=&quot;{{ url_for(&#39;index&#39;) }}&quot;&gt;Return to the list&lt;/a&gt; to select a different president.&lt;/p&gt;
+
+<span class="hll">{% endblock %}
+</span></pre></div>
+</td></tr></table></div>
+</div>
+<p>This template inserts itself into <em>base.html</em> because of lines 1, 3 and 33. Those are <strong>Jinja block directives,</strong> already discussed above.</p>
+<p>In <em>index.html</em> you saw a Python for-loop in Jinja. Here you can see conditional statements — <em>if</em> and <em>elif.</em> This is especially powerful because we can read the values from the dictionary <code class="docutils literal notranslate"><span class="pre">pres</span></code> and change what is written into the HTML depending on (for example) whether the president has died or is still living.</p>
+<p>Line 14 checks whether the value of <code class="docutils literal notranslate"><span class="pre">Death-date</span></code> is the same as the value of <code class="docutils literal notranslate"><span class="pre">Left-office</span></code>. If so, this president died in office.</p>
+<p>Line 16 checks whether the value of <code class="docutils literal notranslate"><span class="pre">Left-office</span></code> is <em>Incumbent.</em> If not, then this president has left office, and a sentence will be inserted. If so, then no sentence will be inserted.</p>
+<p>Line 18 ends the if-else sequence. This is required.</p>
+<p>Line 23 checks the value of <code class="docutils literal notranslate"><span class="pre">Location-death</span></code>. If the value is not <em>NA,</em> then this president has died, and a sentence will be written. Otherwise, no sentence is written here.</p>
+<p>Line 25 ends the if-else sequence. This is required.</p>
 </div>
 </div>
 <div class="section" id="resources">
 <h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<p>For answers to any questions about writing templates or using the Jinja template language:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://jinja.palletsprojects.com/en/2.11.x/templates/">Jinja documentation</a> — All the commands for the Jinja template syntax are here.</p></li>
 <li><p><a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/quickstart/#rendering-templates">Flask documentation</a> for <code class="docutils literal notranslate"><span class="pre">render_template()</span></code>.</p></li>
 </ul>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Using Flask to ingest a URL and return a templated web page requires us to consider the data source (a CSV in the presidents app), the layout of the page, and the variables we need to send to the page.</p></li>
+<li><p>A Flask route function can be long or short, and if it returns <code class="docutils literal notranslate"><span class="pre">render_template()</span></code> it needs to send not only the name of the template but also the variables required by that template.</p></li>
+<li><p>In templates, partial URLs are written in very particular ways to work with the Jinja template engine. These include all URLs that lead to assets inside the static folder, such as images, CSS files, and JavaScript files.</p></li>
+<li><p>Any <strong>link</strong> that corresponds to <em>a route that includes a variable</em> requires particular Jinja syntax, as seen in <em>index.html.</em></p></li>
+<li><p>Jinja directives can be used to insert Python commands into a template. These include for-loops and conditionals (<em>if, elif, else</em>).</p></li>
+<li><p>Templates can be modular. In the presidents app, <em>base.html</em> contains HTML for the top and bottom segments of two different pages. The middle segment is inserted by either <em>index.html</em> or <em>president.html.</em></p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Data sources other than CSV files — including databases — can be used with Flask.</p>
+</div>
 <p>.</p>
 </div>
 </div>
