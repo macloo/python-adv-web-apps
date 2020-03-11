@@ -229,6 +229,7 @@ The route to one selected president
 We will skip to the second route in the app and come back to the first one later.
 
 .. literalinclude:: ../python_code_examples/flask/presidents/presidents.py
+   :language: html
    :lines: 24-32
    :linenos:
    :lineno-start: 24
@@ -286,7 +287,7 @@ This is a simple route for the top page of the app: ::
 
 Because ``pairs_list`` already exists, the function has only one instruction: to return ``render_template()``. The ``render_template()`` function specifies the template named ``index.html`` (this is always the *first thing* inside the parentheses) and passes to it the ``pairs_list`` (assigned to ``pairs``) and the string *"Presidents Index"* (assigned to ``the_title``).
 
-`You can see the result here: <https://weimergeeks.com/flask_pres/>`_
+`You can see the result here. <https://weimergeeks.com/flask_pres/>`_
 
 
 The presidents templates

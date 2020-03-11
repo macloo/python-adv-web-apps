@@ -422,7 +422,7 @@
 <p>We will skip to the second route in the app and come back to the first one later.</p>
 <div class="literal-block-wrapper docutils container" id="id7">
 <div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/presidents/presidents.py</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>24
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>24
 25
 26
 27
@@ -430,15 +430,15 @@
 29
 30
 31
-32</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/president/&lt;num&gt;&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">detail</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">pres_dict</span> <span class="o">=</span> <span class="n">presidents_list</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
-    <span class="k">except</span><span class="p">:</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;h1&gt;Invalid value for Presidency: </span><span class="si">{num}</span><span class="s2">&lt;/h1&gt;&quot;</span>
-    <span class="c1"># a little bonus function, imported on line 2 above</span>
-    <span class="nb">ord</span> <span class="o">=</span> <span class="n">make_ordinal</span><span class="p">(</span> <span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="p">)</span>
-    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;president.html&#39;</span><span class="p">,</span> <span class="n">pres</span><span class="o">=</span><span class="n">pres_dict</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="nb">ord</span><span class="p">,</span> <span class="n">the_title</span><span class="o">=</span><span class="n">pres_dict</span><span class="p">[</span><span class="s1">&#39;President&#39;</span><span class="p">])</span>
+32</pre></div></td><td class="code"><div class="highlight"><pre><span></span>@app.route(&#39;/president/<span class="p">&lt;</span><span class="nt">num</span><span class="p">&gt;</span>&#39;)
+def detail(num):
+    try:
+        pres_dict = presidents_list[int(num) - 1]
+    except:
+        return f&quot;<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Invalid value for Presidency: {num}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>&quot;
+    # a little bonus function, imported on line 2 above
+    ord = make_ordinal( int(num) )
+    return render_template(&#39;president.html&#39;, pres=pres_dict, ord=ord, the_title=pres_dict[&#39;President&#39;])
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -499,7 +499,7 @@
 </pre></div>
 </div>
 <p>Because <code class="docutils literal notranslate"><span class="pre">pairs_list</span></code> already exists, the function has only one instruction: to return <code class="docutils literal notranslate"><span class="pre">render_template()</span></code>. The <code class="docutils literal notranslate"><span class="pre">render_template()</span></code> function specifies the template named <code class="docutils literal notranslate"><span class="pre">index.html</span></code> (this is always the <em>first thing</em> inside the parentheses) and passes to it the <code class="docutils literal notranslate"><span class="pre">pairs_list</span></code> (assigned to <code class="docutils literal notranslate"><span class="pre">pairs</span></code>) and the string <em>“Presidents Index”</em> (assigned to <code class="docutils literal notranslate"><span class="pre">the_title</span></code>).</p>
-<p><a class="reference external" href="https://weimergeeks.com/flask_pres/">You can see the result here:</a></p>
+<p><a class="reference external" href="https://weimergeeks.com/flask_pres/">You can see the result here.</a></p>
 </div>
 </div>
 <div class="section" id="the-presidents-templates">
@@ -554,7 +554,7 @@
 
 <span class="p">&lt;</span><span class="nt">div</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;container&quot;</span><span class="p">&gt;</span>
 
-  <span class="c">&lt;!-- Jinja2 directives: page contents will go between them --&gt;</span>
+  <span class="c">&lt;!-- Jinja directives: page contents will go between them --&gt;</span>
 <span class="hll">  {% block content %}
 </span><span class="hll">  {% endblock %}
 </span>
@@ -609,7 +609,7 @@
 </span>
 <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>A presidential Flask example<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
 
-<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Click any president&#39;s name.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>Click any president’s name.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 
 <span class="c">&lt;!-- pairs is a list that must be sent here by a route function</span>
 
