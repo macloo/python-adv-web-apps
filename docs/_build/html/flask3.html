@@ -243,6 +243,15 @@
 <blockquote>
 <div><p><em>Abraham Lincoln, the 16th president of the United States, was born on 2/12/1809, in LaRue County, Kentucky. He was 52 when he took office on 3/4/1861. Member: Republican/National Union Party.</em></p>
 </div></blockquote>
+<p>The spreadsheet was converted to a list of Python dictionaries. The dictionary for Lincoln looks like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;Presidency&#39;</span><span class="p">:</span> <span class="s1">&#39;16&#39;</span><span class="p">,</span> <span class="s1">&#39;President&#39;</span><span class="p">:</span> <span class="s1">&#39;Abraham Lincoln&#39;</span><span class="p">,</span> <span class="s1">&#39;Wikipedia-entry&#39;</span><span class="p">:</span>
+   <span class="s1">&#39;http://en.wikipedia.org/wiki/Abraham_Lincoln&#39;</span><span class="p">,</span> <span class="s1">&#39;Took-office&#39;</span><span class="p">:</span> <span class="s1">&#39;3/4/1861&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;Left-office&#39;</span><span class="p">:</span> <span class="s1">&#39;4/15/1865&#39;</span><span class="p">,</span> <span class="s1">&#39;Party&#39;</span><span class="p">:</span> <span class="s1">&#39;Republican/National Union&#39;</span><span class="p">,</span> <span class="s1">&#39;Home-state&#39;</span><span class="p">:</span>
+   <span class="s1">&#39;Illinois&#39;</span><span class="p">,</span> <span class="s1">&#39;Occupation&#39;</span><span class="p">:</span> <span class="s1">&#39;Lawyer&#39;</span><span class="p">,</span> <span class="s1">&#39;College&#39;</span><span class="p">:</span> <span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="s1">&#39;Age-when-took-office&#39;</span><span class="p">:</span>
+   <span class="s1">&#39;52&#39;</span><span class="p">,</span> <span class="s1">&#39;Birth-date&#39;</span><span class="p">:</span> <span class="s1">&#39;2/12/1809&#39;</span><span class="p">,</span> <span class="s1">&#39;Birthplace&#39;</span><span class="p">:</span> <span class="s1">&#39;LaRue County, Kentucky&#39;</span><span class="p">,</span>
+   <span class="s1">&#39;Death-date&#39;</span><span class="p">:</span> <span class="s1">&#39;4/15/1865&#39;</span><span class="p">,</span> <span class="s1">&#39;Location-death&#39;</span><span class="p">:</span> <span class="s1">&#39;Washington, D.C.&#39;</span><span class="p">,</span> <span class="s1">&#39;Image&#39;</span><span class="p">:</span> <span class="s1">&#39;pr16.jpg&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
 <div class="section" id="how-does-a-flask-app-use-a-template">
 <h3>How does a Flask app use a template?<a class="headerlink" href="#how-does-a-flask-app-use-a-template" title="Permalink to this headline">¶</a></h3>
 <p>In the previous chapter, <a class="reference external" href="flask2.html">Flask, part 2</a>, you saw this route function:</p>
@@ -272,7 +281,7 @@
 </pre></div>
 </div>
 </li>
-<li><p>We must import the <code class="docutils literal notranslate"><span class="pre">render_template</span></code> module, so add it to the line at the top of the Flask app script:</p>
+<li><p>We must <strong>import</strong> the <code class="docutils literal notranslate"><span class="pre">render_template</span></code> module, so add it to the line at the top of the Flask app script:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span>
 </pre></div>
 </div>
@@ -422,7 +431,7 @@
 <p>We will skip to the second route in the app and come back to the first one later.</p>
 <div class="literal-block-wrapper docutils container" id="id7">
 <div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/presidents/presidents.py</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
-<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>24
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>24
 25
 26
 27
@@ -430,15 +439,15 @@
 29
 30
 31
-32</pre></div></td><td class="code"><div class="highlight"><pre><span></span>@app.route(&#39;/president/<span class="p">&lt;</span><span class="nt">num</span><span class="p">&gt;</span>&#39;)
-def detail(num):
-    try:
-        pres_dict = presidents_list[int(num) - 1]
-    except:
-        return f&quot;<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>Invalid value for Presidency: {num}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>&quot;
-    # a little bonus function, imported on line 2 above
-    ord = make_ordinal( int(num) )
-    return render_template(&#39;president.html&#39;, pres=pres_dict, ord=ord, the_title=pres_dict[&#39;President&#39;])
+32</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/president/&lt;num&gt;&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">detail</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">pres_dict</span> <span class="o">=</span> <span class="n">presidents_list</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;&lt;h1&gt;Invalid value for Presidency: </span><span class="si">{num}</span><span class="s2">&lt;/h1&gt;&quot;</span>
+    <span class="c1"># a little bonus function, imported on line 2 above</span>
+    <span class="nb">ord</span> <span class="o">=</span> <span class="n">make_ordinal</span><span class="p">(</span> <span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;president.html&#39;</span><span class="p">,</span> <span class="n">pres</span><span class="o">=</span><span class="n">pres_dict</span><span class="p">,</span> <span class="nb">ord</span><span class="o">=</span><span class="nb">ord</span><span class="p">,</span> <span class="n">the_title</span><span class="o">=</span><span class="n">pres_dict</span><span class="p">[</span><span class="s1">&#39;President&#39;</span><span class="p">])</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -669,7 +678,7 @@ def detail(num):
 <p>The detail page contains the most Jinja templating code, because it is writing all the values from one president’s dictionary (<code class="docutils literal notranslate"><span class="pre">pres</span></code>) into the HTML:</p>
 <div class="literal-block-wrapper docutils container" id="id11">
 <div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/presidents/templates/president.html</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+<div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
  4
@@ -705,14 +714,14 @@ def detail(num):
 
 <span class="hll">{% block content %}
 </span>
-	&lt;!-- the full dict for a president is sent here as pres by the route --&gt;
+<span class="c">&lt;!-- the full dict for a president is sent here as pres by the route --&gt;</span>
 
-	&lt;h1&gt;{{ pres[&#39;President&#39;] }}&lt;/h1&gt;
+<span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span>{{ pres[&#39;President&#39;] }}<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
 
-	&lt;!-- NOTE the pattern for pointing to a file inside the static folder --&gt;
-	&lt;img class=&quot;right&quot; src=&quot;{{ url_for(&#39;static&#39;, filename=&quot;images/&quot;+pres[&#39;Image&#39;]) }}&quot; alt=&quot;President portrait&quot;&gt;
+<span class="c">&lt;!-- NOTE the pattern for pointing to a file inside the static folder --&gt;</span>
+<span class="p">&lt;</span><span class="nt">img</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;right&quot;</span> <span class="na">src</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;static&#39;, filename=&#39;images/&#39; + pres[&#39;Image&#39;]) }}&quot;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&quot;President portrait&quot;</span><span class="p">&gt;</span>
 
-	&lt;p&gt;{{ pres[&#39;President&#39;] }}, the {{ ord }} president of the United States, was born on {{ pres[&#39;Birth-date&#39;] }}, in {{ pres[&#39;Birthplace&#39;] }}. He was {{ pres[&#39;Age-when-took-office&#39;] }} when he took office on {{ pres[&#39;Took-office&#39;] }}. Member: {{ pres[&#39;Party&#39;] }} Party.
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>{{ pres[&#39;President&#39;] }}, the {{ ord }} president of the United States, was born on {{ pres[&#39;Birth-date&#39;] }}, in {{ pres[&#39;Birthplace&#39;] }}. He was {{ pres[&#39;Age-when-took-office&#39;] }} when he took office on {{ pres[&#39;Took-office&#39;] }}. Member: {{ pres[&#39;Party&#39;] }} Party.
 
 <span class="hll">	{% if pres[&#39;Death-date&#39;] == pres[&#39;Left-office&#39;] %}
 </span>		He died in office on {{ pres[&#39;Death-date&#39;] }}.
@@ -720,18 +729,18 @@ def detail(num):
 </span>		He left office on {{ pres[&#39;Left-office&#39;] }}.
 <span class="hll">	{% endif %}
 </span>
-		His occupation before the presidency: {{ pres[&#39;Occupation&#39;] }}.
-		His college: {{ pres[&#39;College&#39;] }}.
+	His occupation before the presidency: {{ pres[&#39;Occupation&#39;] }}.
+	His college: {{ pres[&#39;College&#39;] }}.
 
 <span class="hll">	{% if pres[&#39;Location-death&#39;] != &quot;NA&quot; %}
 </span>		He died in {{ pres[&#39;Location-death&#39;] }}, on {{ pres[&#39;Death-date&#39;] }}.
 <span class="hll">	{% endif %}
-</span>	&lt;/p&gt;
+</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 
-	&lt;p&gt;&lt;a href=&quot;{{ pres[&#39;Wikipedia-entry&#39;] }}&quot;&gt;View Wikipedia entry for {{ pres[&#39;President&#39;] }}.&lt;/a&gt;&lt;/p&gt;
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ pres[&#39;Wikipedia-entry&#39;] }}&quot;</span><span class="p">&gt;</span>View Wikipedia entry for {{ pres[&#39;President&#39;] }}.<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 
-	&lt;!-- NOTE the way to link to a route: Use the function name --&gt;
-	&lt;p&gt;&lt;a href=&quot;{{ url_for(&#39;index&#39;) }}&quot;&gt;Return to the list&lt;/a&gt; to select a different president.&lt;/p&gt;
+<span class="c">&lt;!-- NOTE the way to link to a route: Use the function name --&gt;</span>
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;index&#39;) }}&quot;</span><span class="p">&gt;</span>Return to the list<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span> to select a different president.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 
 <span class="hll">{% endblock %}
 </span></pre></div>

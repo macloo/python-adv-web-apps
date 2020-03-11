@@ -70,6 +70,16 @@ That might look slightly intimidating, but notice that inside each double-pair o
 
    *Abraham Lincoln, the 16th president of the United States, was born on 2/12/1809, in LaRue County, Kentucky. He was 52 when he took office on 3/4/1861. Member: Republican/National Union Party.*
 
+The spreadsheet was converted to a list of Python dictionaries. The dictionary for Lincoln looks like this: ::
+
+    {'Presidency': '16', 'President': 'Abraham Lincoln', 'Wikipedia-entry':
+       'http://en.wikipedia.org/wiki/Abraham_Lincoln', 'Took-office': '3/4/1861',
+       'Left-office': '4/15/1865', 'Party': 'Republican/National Union', 'Home-state':
+       'Illinois', 'Occupation': 'Lawyer', 'College': 'None', 'Age-when-took-office':
+       '52', 'Birth-date': '2/12/1809', 'Birthplace': 'LaRue County, Kentucky',
+       'Death-date': '4/15/1865', 'Location-death': 'Washington, D.C.', 'Image': 'pr16.jpg'} 
+
+
 How does a Flask app use a template?
 ++++++++++++++++++++++++++++++++++++
 
@@ -99,7 +109,7 @@ Let’s transform that so it uses a template.
     def user(name):
         return render_template('hello.html', name=name)
 
-4. We must import the ``render_template`` module, so add it to the line at the top of the Flask app script: ::
+4. We must **import** the ``render_template`` module, so add it to the line at the top of the Flask app script: ::
 
     from flask import Flask, render_template
 
@@ -229,7 +239,6 @@ The route to one selected president
 We will skip to the second route in the app and come back to the first one later.
 
 .. literalinclude:: ../python_code_examples/flask/presidents/presidents.py
-   :language: html
    :lines: 24-32
    :linenos:
    :lineno-start: 24
@@ -385,6 +394,7 @@ president.html
 The detail page contains the most Jinja templating code, because it is writing all the values from one president’s dictionary (``pres``) into the HTML:
 
 .. literalinclude:: ../python_code_examples/flask/presidents/templates/president.html
+   :language: html
    :linenos:
    :emphasize-lines: 3,14,16,18,23,25,33
    :caption:
