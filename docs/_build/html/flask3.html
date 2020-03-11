@@ -768,9 +768,9 @@
 <ul class="simple">
 <li><p>Using Flask to ingest a URL and return a templated web page requires us to consider the data source (a CSV in the presidents app), the layout of the page, and the variables we need to send to the page.</p></li>
 <li><p>A Flask route function can be long or short, and if it returns <code class="docutils literal notranslate"><span class="pre">render_template()</span></code> it needs to send not only the name of the template but also the variables required by that template.</p></li>
-<li><p>In templates, partial URLs are written in very particular ways to work with the Jinja template engine. These include all URLs that lead to assets inside the static folder, such as images, CSS files, and JavaScript files.</p></li>
+<li><p>In templates, partial URLs are written in very particular ways to work with the Jinja template engine. These include all URLs that lead to assets inside the <em>static</em> folder, such as images, CSS files, and JavaScript files.</p></li>
 <li><p>Any <strong>link</strong> that corresponds to <em>a route that includes a variable</em> requires particular Jinja syntax, as seen in <em>index.html.</em></p></li>
-<li><p>Jinja directives can be used to insert Python commands into a template. These include for-loops and conditionals (<em>if, elif, else</em>).</p></li>
+<li><p>Jinja directives can be used to insert Python commands into a template. These include for-loops and conditionals (<em>if, elif, else</em>). You might notice this resembles PHP syntax.</p></li>
 <li><p>Templates can be modular. In the presidents app, <em>base.html</em> contains HTML for the top and bottom segments of two different pages. The middle segment is inserted by either <em>index.html</em> or <em>president.html.</em></p></li>
 </ul>
 <div class="admonition note">

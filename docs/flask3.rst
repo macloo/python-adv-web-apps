@@ -77,7 +77,7 @@ The spreadsheet was converted to a list of Python dictionaries. The dictionary f
        'Left-office': '4/15/1865', 'Party': 'Republican/National Union', 'Home-state':
        'Illinois', 'Occupation': 'Lawyer', 'College': 'None', 'Age-when-took-office':
        '52', 'Birth-date': '2/12/1809', 'Birthplace': 'LaRue County, Kentucky',
-       'Death-date': '4/15/1865', 'Location-death': 'Washington, D.C.', 'Image': 'pr16.jpg'} 
+       'Death-date': '4/15/1865', 'Location-death': 'Washington, D.C.', 'Image': 'pr16.jpg'}
 
 
 How does a Flask app use a template?
@@ -431,11 +431,11 @@ Summary
 
 * A Flask route function can be long or short, and if it returns ``render_template()`` it needs to send not only the name of the template but also the variables required by that template.
 
-* In templates, partial URLs are written in very particular ways to work with the Jinja template engine. These include all URLs that lead to assets inside the static folder, such as images, CSS files, and JavaScript files.
+* In templates, partial URLs are written in very particular ways to work with the Jinja template engine. These include all URLs that lead to assets inside the *static* folder, such as images, CSS files, and JavaScript files.
 
 * Any **link** that corresponds to *a route that includes a variable* requires particular Jinja syntax, as seen in *index.html.*
 
-* Jinja directives can be used to insert Python commands into a template. These include for-loops and conditionals (*if, elif, else*).
+* Jinja directives can be used to insert Python commands into a template. These include for-loops and conditionals (*if, elif, else*). You might notice this resembles PHP syntax.
 
 * Templates can be modular. In the presidents app, *base.html* contains HTML for the top and bottom segments of two different pages. The middle segment is inserted by either *index.html* or *president.html.*
 
