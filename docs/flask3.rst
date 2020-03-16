@@ -39,7 +39,7 @@ A proper Flask app is going to use multiple files — some of which will be temp
 
 3. In addition to the *static* and *templates* folders, this app also contains ``.py`` files. Note that these must be *outside* the two folders named *static* and *templates*.
 
-.. attention:: The templates will not work if this folder structure is not exactly as described above. Your app folder can be named anything (not only *my-flask-app*), but the *static* and *templates* folders must be named and organized as shown above. The *static* folder can contain multiple folders and files.
+.. attention:: The templates will not work if this folder structure is not exactly as described above. Your app folder can be named anything (not only *my-flask-app*), but the **static** and **templates** folders must be named and organized as shown above. The *static* folder can contain multiple folders and files. The names of files are up to you.
 
 Get started with templates
 --------------------------
@@ -70,7 +70,7 @@ That might look slightly intimidating, but notice that inside each double-pair o
 
    *Abraham Lincoln, the 16th president of the United States, was born on 2/12/1809, in LaRue County, Kentucky. He was 52 when he took office on 3/4/1861. Member: Republican/National Union Party.*
 
-The spreadsheet was converted to a list of Python dictionaries. The dictionary for Lincoln looks like this: ::
+The spreadsheet was converted to a list of Python dictionaries — one dictionary per president. The dictionary for Lincoln looks like this: ::
 
     {'Presidency': '16', 'President': 'Abraham Lincoln', 'Wikipedia-entry':
        'http://en.wikipedia.org/wiki/Abraham_Lincoln', 'Took-office': '3/4/1861',
