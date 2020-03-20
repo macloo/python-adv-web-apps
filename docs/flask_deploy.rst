@@ -149,7 +149,7 @@ Before proceeding with command-line ``git``, your Flask app should be ready to d
 
 2. Create or update *requirements.txt*: `Instructions are here. <http://bit.ly/python-reqs>`_ Even if you created a *requirements.txt* file earlier, you must re-create it to add **Gunicorn** to the list. **This is absolutely necessary.**
 
-3. Make sure there is a *.gitignore* file in your repo and it excludes your *env/* or *venv/* folder. **You must NOT commit virtual environment files** — the *requirements.txt* file lists all the contents of your virtualenv so that it can be **re-created** on Heroku.
+3. Make sure there is a *.gitignore* file in your repo and it excludes your *env/* or *venv/* folder. **You must NOT commit virtual environment files** — the *requirements.txt* file lists all the contents of your virtualenv so that it can be **re-created** on Heroku. `You can copy this file. <https://github.com/macloo/python-adv-web-apps/blob/master/.gitignore>`_
 
 4. Create *Procfile*: This is a plain-text file that must be named exactly `Procfile` (uppercase P, and no file extension). Its contents declare which commands are run by the application’s dynos on Heroku. `Read more about *Procfile* here. <https://devcenter.heroku.com/articles/procfile>`_
 
