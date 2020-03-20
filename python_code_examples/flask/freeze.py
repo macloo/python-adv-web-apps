@@ -2,7 +2,7 @@
 
 from flask_frozen import Freezer
 
-# instead of "filename,"" below, use the name of the file that
+# instead of "filename," below, use the name of the file that
 # runs YOUR Flask app
 from filename import app
 
