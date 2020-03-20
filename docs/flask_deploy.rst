@@ -11,7 +11,7 @@ Previous:
 
 Code for this chapter is `here <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask>`_.
 
-In the Flask Templates chapter, we built a functioning Flask app. In this chapter, we’ll explore several ways to pt that Flask app online.
+In the Flask Templates chapter, we built a functioning Flask app. In this chapter, we’ll explore several ways to put that Flask app online.
 
 Introduction
 ------------
@@ -22,14 +22,14 @@ One thing to understand, though, is that often they do not deploy a Python execu
 
 In this document, we’ll learn how to do that. Then we will also learn how to install a Flask app (one that has not been “baked out”) on:
 
-* A typical web hosting service such as Reclaim Hosting `<https://reclaimhosting.com/>`_, using a simple **cPanel** service there.
+* A typical web hosting service such as `Reclaim Hosting <https://reclaimhosting.com/>`_, using a simple **cPanel** service there.
 
 * Heroku, via ``git`` commands, and using the Gunicorn server.
 
 “Baking it out” with Frozen-Flask
 ---------------------------------
 
-**Frozen-Flask** is a Flask extension, so we’ll need to install it. In Terminal, change into your Flask projects folder and **activate your virtual environment** there. Then install at the command prompt — ``$`` or ``C:\Users\yourname>`` — ::
+**Frozen-Flask** is a Flask extension, so we’ll need to install it. In Terminal, change into your Flask projects folder and **activate your virtual environment** there. Then install at the command prompt — wjere you see ``$`` (Mac) or ``C:\Users\yourname>`` (Windows )— ::
 
     pip install Frozen-Flask
 
@@ -151,7 +151,7 @@ Before proceeding with command-line ``git``, your Flask app should be ready to d
 
 3. Make sure there is a *.gitignore* file in your repo and it excludes your *env/* or *venv/* folder. **You must NOT commit virtual environment files** — the *requirements.txt* file lists all the contents of your virtualenv so that it can be **re-created** on Heroku. `You can copy this file. <https://github.com/macloo/python-adv-web-apps/blob/master/.gitignore>`_
 
-4. Create *Procfile*: This is a plain-text file that must be named exactly `Procfile` (uppercase P, and no file extension). Its contents declare which commands are run by the application’s dynos on Heroku. `Read more about *Procfile* here. <https://devcenter.heroku.com/articles/procfile>`_
+4. Create *Procfile*: This is a plain-text file that must be named exactly `Procfile` (uppercase P, and no file extension). Its contents declare which commands are run by the application’s dynos on Heroku. `Read more about Procfile here. <https://devcenter.heroku.com/articles/procfile>`_
 
 To run a simple Python web app (such as the example *students-flask-app*), the complete contents of *Procfile* are: ::
 
