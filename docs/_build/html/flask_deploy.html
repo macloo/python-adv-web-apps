@@ -187,26 +187,26 @@
 <li><p><a class="reference external" href="flask3.html">Flask templates</a>: Write HTML templates for a Flask app</p></li>
 </ol>
 <p>Code for this chapter is <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask">here</a>.</p>
-<p>In the Flask Templates chapter, we built a functioning Flask app. In this chapter, we’ll explore several ways to pt that Flask app online.</p>
+<p>In the Flask Templates chapter, we built a functioning Flask app. In this chapter, we’ll explore several ways to put that Flask app online.</p>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>When professionals deploy their Python web apps, nowadays they commonly deploy to a cloud service such as <a class="reference external" href="https://aws.amazon.com/">Amazon’s AWS</a>, <a class="reference external" href="https://www.heroku.com/">Heroku</a>, or <a class="reference external" href="https://cloud.google.com/free/">Google App Engine</a>.</p>
 <p>One thing to understand, though, is that often they do not deploy a Python executable. That is, the site they upload to a web server is not the Flask app and its associated templates, etc., but rather a traditional website with hard-coded HTML files that has been <em>“baked out”</em> from Flask.</p>
 <p>In this document, we’ll learn how to do that. Then we will also learn how to install a Flask app (one that has not been “baked out”) on:</p>
 <ul class="simple">
-<li><p>A typical web hosting service such as Reclaim Hosting <a class="reference external" href="https://reclaimhosting.com/">https://reclaimhosting.com/</a>, using a simple <strong>cPanel</strong> service there.</p></li>
+<li><p>A typical web hosting service such as <a class="reference external" href="https://reclaimhosting.com/">Reclaim Hosting</a>, using a simple <strong>cPanel</strong> service there.</p></li>
 <li><p>Heroku, via <code class="docutils literal notranslate"><span class="pre">git</span></code> commands, and using the Gunicorn server.</p></li>
 </ul>
 </div>
 <div class="section" id="baking-it-out-with-frozen-flask">
 <h2>“Baking it out” with Frozen-Flask<a class="headerlink" href="#baking-it-out-with-frozen-flask" title="Permalink to this headline">¶</a></h2>
-<p><strong>Frozen-Flask</strong> is a Flask extension, so we’ll need to install it. In Terminal, change into your Flask projects folder and <strong>activate your virtual environment</strong> there. Then install at the command prompt — <code class="docutils literal notranslate"><span class="pre">$</span></code> or <code class="docutils literal notranslate"><span class="pre">C:\Users\yourname&gt;</span></code> —</p>
+<p><strong>Frozen-Flask</strong> is a Flask extension, so we’ll need to install it. In Terminal, change into your Flask projects folder and <strong>activate your virtual environment</strong> there. Then install at the command prompt — wjere you see <code class="docutils literal notranslate"><span class="pre">$</span></code> (Mac) or <code class="docutils literal notranslate"><span class="pre">C:\Users\yourname&gt;</span></code> (Windows )—</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">Frozen</span><span class="o">-</span><span class="n">Flask</span>
 </pre></div>
 </div>
 <p>After installing the extension, create <strong>a new file</strong> inside the folder that contains the Flask app you want to “freeze.” Name the new file <em>freeze.py</em> and copy/paste this script into it:</p>
-<div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/freeze.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/freeze.py</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;standard freeze script&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">flask_frozen</span> <span class="kn">import</span> <span class="n">Freezer</span>
@@ -308,7 +308,7 @@
 </li>
 <li><p>Create or update <em>requirements.txt</em>: <a class="reference external" href="http://bit.ly/python-reqs">Instructions are here.</a> Even if you created a <em>requirements.txt</em> file earlier, you must re-create it to add <strong>Gunicorn</strong> to the list. <strong>This is absolutely necessary.</strong></p></li>
 <li><p>Make sure there is a <em>.gitignore</em> file in your repo and it excludes your <em>env/</em> or <em>venv/</em> folder. <strong>You must NOT commit virtual environment files</strong> — the <em>requirements.txt</em> file lists all the contents of your virtualenv so that it can be <strong>re-created</strong> on Heroku. <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/.gitignore">You can copy this file.</a></p></li>
-<li><p>Create <em>Procfile</em>: This is a plain-text file that must be named exactly <cite>Procfile</cite> (uppercase P, and no file extension). Its contents declare which commands are run by the application’s dynos on Heroku. <a class="reference external" href="https://devcenter.heroku.com/articles/procfile">Read more about *Procfile* here.</a></p></li>
+<li><p>Create <em>Procfile</em>: This is a plain-text file that must be named exactly <cite>Procfile</cite> (uppercase P, and no file extension). Its contents declare which commands are run by the application’s dynos on Heroku. <a class="reference external" href="https://devcenter.heroku.com/articles/procfile">Read more about Procfile here.</a></p></li>
 </ol>
 <p>To run a simple Python web app (such as the example <em>students-flask-app</em>), the complete contents of <em>Procfile</em> are:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">web</span><span class="p">:</span> <span class="n">gunicorn</span> <span class="n">students</span><span class="p">:</span><span class="n">app</span>
