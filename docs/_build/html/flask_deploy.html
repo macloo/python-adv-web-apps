@@ -94,7 +94,10 @@
 <li class="toctree-l1"><a class="reference internal" href="flask.html">Flask Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flask2.html">Flask, Part 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flask3.html">Flask Templates</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Flask: Deploy an App</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Flask: Deploy an App</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="flask_forms.html">Flask: Web Forms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
 </ul>
@@ -171,6 +174,16 @@
 </ol>
 <p>Code for this chapter is <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask">here</a>.</p>
 <p>In the Flask Templates chapter, we built a functioning Flask app. In this chapter, we’ll explore several ways to pt that Flask app online.</p>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>When professionals deploy their Python web apps, nowadays they commonly deploy to a cloud service such as <a class="reference external" href="https://aws.amazon.com/">Amazon’s AWS</a> or <a class="reference external" href="https://www.heroku.com/">Heroku</a>.</p>
+<p>One thing to understand, though, is that often they do not deploy a Python executable. That is, the site they upload to a web server is not the Flask app and its associated templates, etc., but rather a traditional website with hard-coded HTML files that has been <em>“baked out”</em> from Flask.</p>
+<p>In this document, we’ll learn how to do that. Then we will also learn how to install a Flask app (one that has not been “baked out”) on:</p>
+<ul class="simple">
+<li><p>A typical web hosting service such as Reclaim Hosting <a class="reference external" href="https://reclaimhosting.com/">https://reclaimhosting.com/</a>, using a simple <strong>cPanel</strong> service there.</p></li>
+<li><p>Heroku, via <code class="docutils literal notranslate"><span class="pre">git</span></code> commands, and using the Gunicorn server.</p></li>
+</ul>
+</div>
 </div>
 
 
