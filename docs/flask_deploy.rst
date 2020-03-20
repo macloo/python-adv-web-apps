@@ -162,13 +162,13 @@ To run a simple Python web app (such as the example *students-flask-app*), the c
 Deploy to Heroku
 ++++++++++++++++
 
-To *register* a new application with Heroku, use the ``apps:create`` command. **You must be in the root directory of your app.** So at the command prompt, I am *inside* the *students-flask-app* directory, and my virtualenv is **not active.**
+To *register* a new application with Heroku, use the ``apps:create`` command. **You must be in the root directory of your app.** So at the command prompt, I am *inside* the *students-flask-app* directory, and my virtualenv is **not active.** ::
 
     heroku apps:create students-flask
 
 Heroku applications must have a unique name, so if yours is taken, you will need to choose another name. It does not need to match your app folder name.
 
-The command will return the **web address** of your app:
+The command will return the **web address** of your app, such as:
 
 https://students-flask.herokuapp.com/
 
@@ -196,7 +196,7 @@ This should fix it (use your own Heroku app name, not *students-flask*): ::
 
     heroku git:remote -a students-flask
 
-Now this should work:
+Now this should work: ::
 
     git push heroku master
 
@@ -205,7 +205,7 @@ Use your web browser to go to the web address given above to view the active app
 You’ll find you have a new *branch* in your local repo.
 
 .. figure:: _static/images/heroku_branch.png
-   :scale: 50 %
+   :scale: 100 %
    :alt: Branch in GitHub app screenshot
 
 If you *make changes* to the app, you’ll need to **push to Heroku again.** Save files and commit locally. Log into Heroku (if not already logged in), and: ::
@@ -220,7 +220,9 @@ When you are logged in at Heroku.com, you’ll see your Heroku dashboard. All yo
 
 **To delete an app** from Heroku, once you’ve clicked its name, click *Settings.* Then click the **Delete app** button at the bottom of the page. You will be asked to confirm your choice.
 
-You can also manage other aspects of your app, such as config variables, on the *Settings* page. You can also add a `custom domain name <https://devcenter.heroku.com/articles/custom-domains>`_ for your app.
+.. tip:: Deleting an app on Heroku is easy, so don’t worry about messing up. You can just delete the whole app and start over.
+
+You can manage various other aspects of your app, such as config variables, on the *Settings* page. You can also add a `custom domain name <https://devcenter.heroku.com/articles/custom-domains>`_ for your app.
 
 Conclusion
 ----------
@@ -233,6 +235,6 @@ We’ve learned about three different options for deploying a Flask app:
 
 Depending on the characteristics of your Flask app, one of these options might be much better than the others, or they might all be equally suitable.
 
-`See more options for deploying <http://flask.pocoo.org/docs/1.0/deploying/>`_ in the Flask documentation.
+`See more options for deploying <https://flask.palletsprojects.com/en/1.1.x/deploying/>`_ in the Flask documentation.
 
 .
