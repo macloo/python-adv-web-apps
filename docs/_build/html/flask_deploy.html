@@ -96,6 +96,11 @@
 <li class="toctree-l1"><a class="reference internal" href="flask3.html">Flask Templates</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Flask: Deploy an App</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#baking-it-out-with-frozen-flask">“Baking it out” with Frozen-Flask</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#benefits-of-freezing">Benefits of freezing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#freezer-errors">Freezer errors</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="flask_forms.html">Flask: Web Forms</a></li>
@@ -176,13 +181,84 @@
 <p>In the Flask Templates chapter, we built a functioning Flask app. In this chapter, we’ll explore several ways to pt that Flask app online.</p>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>When professionals deploy their Python web apps, nowadays they commonly deploy to a cloud service such as <a class="reference external" href="https://aws.amazon.com/">Amazon’s AWS</a> or <a class="reference external" href="https://www.heroku.com/">Heroku</a>.</p>
+<p>When professionals deploy their Python web apps, nowadays they commonly deploy to a cloud service such as <a class="reference external" href="https://aws.amazon.com/">Amazon’s AWS</a>, <a class="reference external" href="https://www.heroku.com/">Heroku</a>, or <a class="reference external" href="https://cloud.google.com/free/">Google App Engine</a>.</p>
 <p>One thing to understand, though, is that often they do not deploy a Python executable. That is, the site they upload to a web server is not the Flask app and its associated templates, etc., but rather a traditional website with hard-coded HTML files that has been <em>“baked out”</em> from Flask.</p>
 <p>In this document, we’ll learn how to do that. Then we will also learn how to install a Flask app (one that has not been “baked out”) on:</p>
 <ul class="simple">
 <li><p>A typical web hosting service such as Reclaim Hosting <a class="reference external" href="https://reclaimhosting.com/">https://reclaimhosting.com/</a>, using a simple <strong>cPanel</strong> service there.</p></li>
 <li><p>Heroku, via <code class="docutils literal notranslate"><span class="pre">git</span></code> commands, and using the Gunicorn server.</p></li>
 </ul>
+</div>
+<div class="section" id="baking-it-out-with-frozen-flask">
+<h2>“Baking it out” with Frozen-Flask<a class="headerlink" href="#baking-it-out-with-frozen-flask" title="Permalink to this headline">¶</a></h2>
+<p><strong>Frozen-Flask</strong> is a Flask extension, so we’ll need to install it. In Terminal, change into your Flask projects folder and <strong>activate your virtual environment</strong> there. Then install at the command prompt (<code class="docutils literal notranslate"><span class="pre">$</span></code> or <code class="docutils literal notranslate"><span class="pre">C:\Users\yourname&gt;</span></code>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">Frozen</span><span class="o">-</span><span class="n">Flask</span>
+</pre></div>
+</div>
+<p>After installing the extension, create <strong>a new file</strong> inside the folder containing only the Flask app you want to “freeze.” Name the new file <em>freeze.py</em> and copy/paste this script into it:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/freeze.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;standard freeze script&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">flask_frozen</span> <span class="kn">import</span> <span class="n">Freezer</span>
+
+<span class="c1"># instead of &quot;filename,&quot;&quot; below, use the name of the file that</span>
+<span class="c1"># runs YOUR Flask app</span>
+<span class="kn">from</span> <span class="nn">filename</span> <span class="kn">import</span> <span class="n">app</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;FREEZER_RELATIVE_URLS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="n">freezer</span> <span class="o">=</span> <span class="n">Freezer</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">freezer</span><span class="o">.</span><span class="n">freeze</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Save all your open files.</p>
+<p>If the Flask web server is running, quit it with Control-C.</p>
+<p>In Terminal, in the directory containing the Flask app, enter this at the command prompt:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">freeze</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p><strong>If freezing worked:</strong> Inside your Flask app folder, you’ll now see a new folder named <em>build</em>. Open it. Inside <em>build</em>, you’ll see all the files created by Frozen-Flask.</p>
+<div class="figure align-default">
+<a class="reference internal image-reference" href="_images/freezer.png"><img alt="Flask app folder with build screenshot" src="_images/freezer.png" style="width: 563.0px; height: 428.0px;" /></a>
+</div>
+<p>The entire <em>build</em> folder can be uploaded to a web server, and the folder name can be changed (from <em>build</em> to anything) — and all the pages will work. (Just don’t change or rename anything inside the <em>build</em> folder.)</p>
+<p>Need to update the site? Make your edits, run <em>freeze.py</em> again, and re-deploy.</p>
+<div class="section" id="benefits-of-freezing">
+<h3>Benefits of freezing<a class="headerlink" href="#benefits-of-freezing" title="Permalink to this headline">¶</a></h3>
+<p>Pause for a moment and consider this: Imagine you needed to build a site with detailed data about the 535 members of the U.S. Congress. You build it with Flask (using a CSV file, a Python dictionary, or an SQL database to generate all the data) with two or maybe three HTML templates. Then you run <em>freeze.py</em> and in seconds you have 535 individual files, which you just upload as one folder, and you’re done.</p>
+<p>Similar apps might produce pages for:</p>
+<ul class="simple">
+<li><p>190 pages for each dog breed in the American Kennel Club</p></li>
+<li><p>318 pages for each character in all the Harry Potter novels</p></li>
+<li><p>3,144 counties and county equivalents in the United States</p></li>
+<li><p>6,909 living languages in the world</p></li>
+</ul>
+<p>When there are changes to the data, you update the data source, re-freeze and re-deploy.</p>
+</div>
+<div class="section" id="freezer-errors">
+<h3>Freezer errors<a class="headerlink" href="#freezer-errors" title="Permalink to this headline">¶</a></h3>
+<p><strong>If freezing did not work:</strong> This may happen because your app uses dynamic routes similar to this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/actor/&lt;id&gt;&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You might need to add a <a class="reference external" href="https://pythonhosted.org/Frozen-Flask/#url-generators">URL generator</a> to the <em>freeze.py</em> file.</p>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">data</span> <span class="kn">import</span> <span class="n">ACTORS</span>
+
+<span class="nd">@freezer</span><span class="o">.</span><span class="n">register_generator</span>
+<span class="k">def</span> <span class="nf">actor</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">ACTORS</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="p">{</span> <span class="s1">&#39;id&#39;</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>You can definitely freeze an app with dynamic route information, but you might need to play around with it a bit before you get it working.</p>
+<p>Some apps <em>cannot</em> work via freezing. See below for details.</p>
+<p>Read the <a class="reference external" href="http://pythonhosted.org/Frozen-Flask/">full documentation</a> for Frozen-Flask.</p>
+</div>
 </div>
 </div>
 
