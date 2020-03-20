@@ -307,7 +307,7 @@
 </div>
 </li>
 <li><p>Create or update <em>requirements.txt</em>: <a class="reference external" href="http://bit.ly/python-reqs">Instructions are here.</a> Even if you created a <em>requirements.txt</em> file earlier, you must re-create it to add <strong>Gunicorn</strong> to the list. <strong>This is absolutely necessary.</strong></p></li>
-<li><p>Make sure there is a <em>.gitignore</em> file in your repo and it excludes your <em>env/</em> or <em>venv/</em> folder. <strong>You must NOT commit virtual environment files</strong> — the <em>requirements.txt</em> file lists all the contents of your virtualenv so that it can be <strong>re-created</strong> on Heroku.</p></li>
+<li><p>Make sure there is a <em>.gitignore</em> file in your repo and it excludes your <em>env/</em> or <em>venv/</em> folder. <strong>You must NOT commit virtual environment files</strong> — the <em>requirements.txt</em> file lists all the contents of your virtualenv so that it can be <strong>re-created</strong> on Heroku. <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/.gitignore">You can copy this file.</a></p></li>
 <li><p>Create <em>Procfile</em>: This is a plain-text file that must be named exactly <cite>Procfile</cite> (uppercase P, and no file extension). Its contents declare which commands are run by the application’s dynos on Heroku. <a class="reference external" href="https://devcenter.heroku.com/articles/procfile">Read more about *Procfile* here.</a></p></li>
 </ol>
 <p>To run a simple Python web app (such as the example <em>students-flask-app</em>), the complete contents of <em>Procfile</em> are:</p>
@@ -319,11 +319,11 @@
 <div class="section" id="deploy-to-heroku">
 <h3>Deploy to Heroku<a class="headerlink" href="#deploy-to-heroku" title="Permalink to this headline">¶</a></h3>
 <p>To <em>register</em> a new application with Heroku, use the <code class="docutils literal notranslate"><span class="pre">apps:create</span></code> command. <strong>You must be in the root directory of your app.</strong> So at the command prompt, I am <em>inside</em> the <em>students-flask-app</em> directory, and my virtualenv is <strong>not active.</strong></p>
-<blockquote>
-<div><p>heroku apps:create students-flask</p>
-</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">heroku</span> <span class="n">apps</span><span class="p">:</span><span class="n">create</span> <span class="n">students</span><span class="o">-</span><span class="n">flask</span>
+</pre></div>
+</div>
 <p>Heroku applications must have a unique name, so if yours is taken, you will need to choose another name. It does not need to match your app folder name.</p>
-<p>The command will return the <strong>web address</strong> of your app:</p>
+<p>The command will return the <strong>web address</strong> of your app, such as:</p>
 <p><a class="reference external" href="https://students-flask.herokuapp.com/">https://students-flask.herokuapp.com/</a></p>
 <p>You’ll <em>register</em> the app only <em>once.</em></p>
 <div class="admonition important">
@@ -348,13 +348,13 @@
 </pre></div>
 </div>
 <p>Now this should work:</p>
-<blockquote>
-<div><p>git push heroku master</p>
-</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="n">heroku</span> <span class="n">master</span>
+</pre></div>
+</div>
 <p>Use your web browser to go to the web address given above to view the active app.</p>
 <p>You’ll find you have a new <em>branch</em> in your local repo.</p>
 <div class="figure align-default">
-<a class="reference internal image-reference" href="_images/heroku_branch.png"><img alt="Branch in GitHub app screenshot" src="_images/heroku_branch.png" style="width: 308.0px; height: 145.0px;" /></a>
+<a class="reference internal image-reference" href="_images/heroku_branch.png"><img alt="Branch in GitHub app screenshot" src="_images/heroku_branch.png" style="width: 616.0px; height: 290.0px;" /></a>
 </div>
 <p>If you <em>make changes</em> to the app, you’ll need to <strong>push to Heroku again.</strong> Save files and commit locally. Log into Heroku (if not already logged in), and:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="n">heroku</span> <span class="n">master</span>
@@ -365,7 +365,11 @@
 <h3>The Heroku dashboard<a class="headerlink" href="#the-heroku-dashboard" title="Permalink to this headline">¶</a></h3>
 <p>When you are logged in at Heroku.com, you’ll see your Heroku dashboard. All your registered apps are listed here. To manage an app, click its name.</p>
 <p><strong>To delete an app</strong> from Heroku, once you’ve clicked its name, click <em>Settings.</em> Then click the <strong>Delete app</strong> button at the bottom of the page. You will be asked to confirm your choice.</p>
-<p>You can also manage other aspects of your app, such as config variables, on the <em>Settings</em> page. You can also add a <a class="reference external" href="https://devcenter.heroku.com/articles/custom-domains">custom domain name</a> for your app.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Deleting an app on Heroku is easy, so don’t worry about messing up. You can just delete the whole app and start over.</p>
+</div>
+<p>You can manage various other aspects of your app, such as config variables, on the <em>Settings</em> page. You can also add a <a class="reference external" href="https://devcenter.heroku.com/articles/custom-domains">custom domain name</a> for your app.</p>
 </div>
 </div>
 <div class="section" id="conclusion">
@@ -377,7 +381,7 @@
 <li><p>Deploy to Heroku, a free cloud service</p></li>
 </ul>
 <p>Depending on the characteristics of your Flask app, one of these options might be much better than the others, or they might all be equally suitable.</p>
-<p><a class="reference external" href="http://flask.pocoo.org/docs/1.0/deploying/">See more options for deploying</a> in the Flask documentation.</p>
+<p><a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/deploying/">See more options for deploying</a> in the Flask documentation.</p>
 <p>.</p>
 </div>
 </div>
