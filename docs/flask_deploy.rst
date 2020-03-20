@@ -151,7 +151,7 @@ Before proceeding with command-line ``git``, your Flask app should be ready to d
 
 3. Make sure there is a *.gitignore* file in your repo and it excludes your *env/* or *venv/* folder. **You must NOT commit virtual environment files** — the *requirements.txt* file lists all the contents of your virtualenv so that it can be **re-created** on Heroku.
 
-4. Create *Procfile*: This is a plain-text file that must be named exactly `Procfile` (uppercase P, and no file extension). Its contents declare which commands are run by the application’s dynos on Heroku. Read more about *Procfile* `here <https://devcenter.heroku.com/articles/procfile>`_.
+4. Create *Procfile*: This is a plain-text file that must be named exactly `Procfile` (uppercase P, and no file extension). Its contents declare which commands are run by the application’s dynos on Heroku. `Read more about *Procfile* here. <https://devcenter.heroku.com/articles/procfile>`_
 
 To run a simple Python web app (such as the example *students-flask-app*), the complete contents of *Procfile* are: ::
 
