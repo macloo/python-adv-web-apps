@@ -152,3 +152,25 @@ Put the form in a template
 ++++++++++++++++++++++++++
 
 Before we break all that down and explain it, let’s look at the code in the template *index.html*:
+
+https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/actors_app/templates/index.html
+
+.. literalinclude:: ../python_code_examples/flask/actors_app/templates/index.html
+   :lines: 1-35
+   :linenos:
+   :caption:
+
+**Where is the form?** This is the amazing thing about Flask-WTF — by configuring the form as we did *in the Flask app,* we can generate a form with Bootstrap styles using nothing more than the template you see above.
+
+.. figure:: _static/images/rabbit_hat.png
+   :alt: Drawing of magician pulling rabbit from hat
+
+Note that in the Flask route function, we passed the variable ``form`` to the template *index.html*: ::
+
+    return render_template('index.html', names=names, form=form, message=message)
+
+So when you use ``wtf.quick_form()``, the argument inside the parentheses **must** be the *variable* that represents the form you created in the app. ::
+
+    form = NameForm()
+
+We discussed the configuration of ``NameForm`` above.
