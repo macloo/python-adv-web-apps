@@ -13,7 +13,7 @@ Previous:
 
 Code for this chapter is `here <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask>`_.
 
-In the **Flask Templates** chapter, we built a functioning Flask app. In this chapter, we’ll explore how to add web forms to a similar app.
+In the **Flask Templates** chapter, we built a functioning Flask app. In this chapter, we’ll explore how to add functional web forms to a similar app.
 
 .. figure:: _static/images/actors_app.png
    :alt: Actors app screenshots
