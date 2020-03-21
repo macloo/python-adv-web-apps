@@ -279,6 +279,8 @@ An example is the demo Flask app `Books Hopper <https://books-hopper.herokuapp.c
 .. figure:: _static/images/books_hopper.png
    :alt: Books Hopper screenshot
 
+Bootstrap 4 was used in all templates in the Books Hopper app, but Flask-Bootstrap was not.
+
 .. important:: You are using Bootstrap 4 in Flask if you installed with ``pip install Flask-Bootstrap4``. In early 2018, Bootstrap 4 replaced Bootstrap 3. The differences are significant.
 
 
