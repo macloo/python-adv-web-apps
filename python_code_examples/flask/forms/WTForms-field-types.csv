@@ -1,0 +1,18 @@
+field_type,description
+StringField,"Text field (input type=""text"")"
+TextAreaField,Multiple-line text field (textarea)
+RadioField,"List of radio buttons (input type=""radio"")"
+BooleanField,"Checkbox with True and False values (input type=""checkbox"")"
+SelectField,Drop-down list of choices (select)
+SubmitField,"Form submission button (input type=""submit"")"
+PasswordField,"Password text field (input type=""password"")"
+HiddenField,"Hidden text field (input type=""hidden"")"
+DateField,Text field that accepts a datetime.date value in a given format
+DateTimeField,Text field that accepts a datetime.datetime value in a given format 
+IntegerField,Text field that accepts an integer value
+DecimalField,Text field that accepts a decimal.Decimal value
+FloatField,Text field that accepts a floating-point value
+SelectMultipleField,Drop-down list of choices with multiple selection
+FileField,File upload field
+FormField,Embed a form as a field in a container form
+FieldList,List of fields of a given type
