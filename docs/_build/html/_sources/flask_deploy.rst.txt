@@ -29,7 +29,7 @@ In this document, we’ll learn how to do that. Then we will also learn how to i
 “Baking it out” with Frozen-Flask
 ---------------------------------
 
-**Frozen-Flask** is a Flask extension, so we’ll need to install it. In Terminal, change into your Flask projects folder and **activate your virtual environment** there. Then install at the command prompt — wjere you see ``$`` (Mac) or ``C:\Users\yourname>`` (Windows )— ::
+**Frozen-Flask** is a Flask extension, so we’ll need to install it. In Terminal, change into your Flask projects folder and **activate your virtual environment** there. Then install at the command prompt — where you see ``$`` (Mac) or ``C:\Users\yourname>`` (Windows )— ::
 
     pip install Frozen-Flask
 
