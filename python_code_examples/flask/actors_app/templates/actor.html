@@ -1,0 +1,48 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+{{ super() }}
+	<style>
+		body { background: #e8f1f9; }
+	</style>
+{% endblock %}
+
+
+{% block title %}
+Selected Actor: {{ name }}
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+
+      <!-- note, the id is not used in the template -->
+
+      <h1 class="pt-5 pb-2">{{ name }}</h1>
+
+      <p><a href="{{ url_for('index') }}">Return to search page</a></p>
+
+	  <!--
+	      notice how the URL in the link above is rendered for
+	      Flask - it needs to name the FUNCTION, not the route
+      -->
+
+	  <p>Images are from <a href="https://placebear.com/">placebear</a>.</p>
+
+	  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel mi ut lorem porta porttitor. Nullam vestibulum nulla quis ligula lobortis, sed commodo dolor lobortis. Cras accumsan justo quis sem dictum ultricies. Pellentesque placerat, dolor vitae fringilla pretium, orci dolor convallis odio, vitae cursus nibh sapien sit amet enim. Mauris imperdiet hendrerit risus, quis congue justo molestie in. Sed et lobortis nunc, sed rutrum nibh.</p>
+
+    </div>
+    <div class="col-sm-6">
+
+      <img src="{{ photo }}" alt="Photo: {{ name }}" class="img-fluid pt-5">
+
+      <p><em>Above: {{ name }}</em></p>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

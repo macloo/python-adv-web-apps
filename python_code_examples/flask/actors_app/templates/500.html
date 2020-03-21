@@ -1,0 +1,22 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block title %}
+500 Error - Internal Server Error
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-lg-8 mx-lg-auto mx-md-auto">
+
+      <h1 class="pt-5 pb-2">Internal server error (500)</h1>
+
+      <p><a href="{{ url_for('index') }}">Go to search page</a></p>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
