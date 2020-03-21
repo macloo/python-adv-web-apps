@@ -13,7 +13,7 @@ Previous:
 
 Code for this chapter is `here <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask>`_.
 
-In the **Flask Templates** chapter, we built a functioning Flask app. In this chapter, we’ll explore how to add web forms to a similar app.
+In the **Flask Templates** chapter, we built a functioning Flask app. In this chapter, we’ll explore how to add functional web forms to a similar app.
 
 .. figure:: _static/images/actors_app.png
    :alt: Actors app screenshots
@@ -278,6 +278,8 @@ An example is the demo Flask app `Books Hopper <https://books-hopper.herokuapp.c
 
 .. figure:: _static/images/books_hopper.png
    :alt: Books Hopper screenshot
+
+Bootstrap 4 was used in all templates in the Books Hopper app, but Flask-Bootstrap was not.
 
 .. important:: You are using Bootstrap 4 in Flask if you installed with ``pip install Flask-Bootstrap4``. In early 2018, Bootstrap 4 replaced Bootstrap 3. The differences are significant.
 
