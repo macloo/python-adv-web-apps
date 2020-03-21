@@ -35,7 +35,7 @@ Setup for using forms in Flask
 
 We will install the **Flask-WTF** extension to help us work with forms in Flask. There are many extensions for Flask, and each one adds a different set of functions and capabilities. See the `list of Flask extensions <https://flask.palletsprojects.com/en/1.1.x/extensions/>`_ for more.
 
-In Terminal, change into your Flask projects folder and **activate your virtual environment** there. Then install at the command prompt — where you see ``$`` (Mac) or ``C:\Users\yourname>`` (Windows )— ::
+In Terminal, change into your Flask projects folder and **activate your virtual environment** there. Then, at the command prompt — where you see ``$`` (Mac) or ``C:\Users\yourname>`` (Windows )— ::
 
     pip install Flask-WTF
 
@@ -89,7 +89,7 @@ You can read more about ``app.config['SECRET_KEY']`` in this `StackOverflow post
 Configure the form
 ++++++++++++++++++
 
-Next, we configure a form that inherits from Flask-WTF’s ``FlaskForm``. Python style dictates that a **class** starts with an uppercase letter and uses `camelCase <https://www.computerhope.com/jargon/c/camelcase.htm>`_, so here our new class is ``NameForm``.
+Next, we configure a form that inherits from Flask-WTF’s class ``FlaskForm``. Python style dictates that a **class** starts with an uppercase letter and uses `camelCase <https://www.computerhope.com/jargon/c/camelcase.htm>`_, so here our new class is named ``NameForm`` (we will use the form to search for a name).
 
 In the class, we assign each form control to a unique variable. This form has only one text input field and one submit button.
 
@@ -103,7 +103,7 @@ In the class, we assign each form control to a unique variable. This form has on
 
 `Learn more about classes in Python here. <https://docs.python.org/3/tutorial/classes.html#a-first-look-at-classes>`_
 
-If you had more than one form in the app, you would define more than one new class in this manner.
+If you had **more than one form** in the app, you would define more than one new class in this manner.
 
 Note that ``StringField`` and ``SubmitField`` were **imported** at the top of the file. If we needed other form-control types in this form, we would need to import those also. `See a list of all WTForms field types. <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv>`_
 
@@ -141,9 +141,12 @@ Now we will use the form in a Flask route: ::
         return render_template('index.html', names=names, form=form, message=message)
 
 
-A crucial line is where we assign our configured form object to a new variable:
+A crucial line is where we assign our configured form object to a new variable: ::
 
     form = NameForm()
+
+Be aware that if we had created **more than one** form class, each of those would need to be assigned to a unique variable.
+
 
 Put the form in a template
 ++++++++++++++++++++++++++
