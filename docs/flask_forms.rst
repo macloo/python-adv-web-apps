@@ -13,7 +13,7 @@ Previous:
 
 Code for this chapter is `here <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask>`_.
 
-In the **Flask Templates** chapter, we built a functioning Flask app. In this chapter, we’ll explore how to add web forms to that app and others.
+In the **Flask Templates** chapter, we built a functioning Flask app. In this chapter, we’ll explore how to add web forms to a similar app.
 
 
 Introduction
@@ -81,14 +81,15 @@ After the imports, these lines follow in the app script: ::
 
 Flask allows us to set a “secret key” value. You can grab a string from a site such as `RandomKeygen <https://randomkeygen.com/>`_. This value is used to prevent malicious hijacking of your form from an outside submission.
 
-Flask-WTF's ``FlaskForm`` will automatically create a secure session with CSRF (cross-site request forgery) protection if this key-value is set. **Don't publish the actual key on GitHub!**
+Flask-WTF's ``FlaskForm`` will automatically create a secure session with CSRF (cross-site request forgery) protection *if this key-value is set.*  **Don’t publish the actual key on GitHub!**
 
 You can read more about ``app.config['SECRET_KEY']`` in this `StackOverflow post <https://stackoverflow.com/questions/22463939/demystify-flask-app-secret-key>`_.
+
 
 Configure the form
 ++++++++++++++++++
 
-Next, we configure a form that inherits from Flask-WTF’s ``FlaskForm``. Python style dictates that a class starts with an uppercase letter and uses camel case, so here our new class is ``NameForm``.
+Next, we configure a form that inherits from Flask-WTF’s ``FlaskForm``. Python style dictates that a **class** starts with an uppercase letter and uses `camelCase <https://www.computerhope.com/jargon/c/camelcase.htm>`_, so here our new class is ``NameForm``.
 
 In the class, we assign each form control to a unique variable. This form has only one text input field and one submit button.
 
@@ -101,6 +102,8 @@ In the class, we assign each form control to a unique variable. This form has on
 
 
 `Learn more about classes in Python here. <https://docs.python.org/3/tutorial/classes.html#a-first-look-at-classes>`_
+
+If you had more than one form in the app, you would define more than one new class in this manner.
 
 Note that ``StringField`` and ``SubmitField`` were **imported** at the top of the file. If we needed other form-control types in this form, we would need to import those also. `See a list of all WTForms field types. <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv>`_
 
@@ -145,4 +148,4 @@ A crucial line is where we assign our configured form object to a new variable:
 Put the form in a template
 ++++++++++++++++++++++++++
 
-Before we break all that down and explain it, let’s look at the code in the template *index.html*: 
+Before we break all that down and explain it, let’s look at the code in the template *index.html*:
