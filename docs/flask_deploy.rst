@@ -229,7 +229,7 @@ Conclusion
 
 We’ve learned about three different options for deploying a Flask app:
 
-* Use Frozen-Flask
+* Use Frozen-Flask and then upload a folder to your server
 * Deploy to a hosted web account
 * Deploy to Heroku, a free cloud service
 
