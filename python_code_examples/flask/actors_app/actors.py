@@ -2,7 +2,7 @@ from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
-from wtforms.validators import Required
+from wtforms.validators import DataRequired
 from data import ACTORS
 from modules import get_names, get_actor, get_id
 
@@ -18,7 +18,7 @@ Bootstrap(app)
 # "NameForm" can change; "(FlaskForm)" cannot
 # see the route for "/" and "index.html" to see how this is used
 class NameForm(FlaskForm):
-    name = StringField('Which actor is your favorite?', validators=[Required()])
+    name = StringField('Which actor is your favorite?', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 

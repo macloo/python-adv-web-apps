@@ -68,7 +68,7 @@ You will have a long list of imports at the top of your Flask app file: ::
     from flask_bootstrap import Bootstrap
     from flask_wtf import FlaskForm
     from wtforms import StringField, SubmitField
-    from wtforms.validators import Required
+    from wtforms.validators import DataRequired
 
 Note as always that Python is case-sensitive, so upper- and lowercase must be used exactly as shown. **The fourth line will change** depending on **your form’s contents.** For example, if you have a SELECT element, you’ll need to import that. `See the complete list <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv>`_ of WTForms form field types.
 
@@ -105,7 +105,7 @@ In the class, we assign each form control to a unique variable. This form has on
 
 
     class NameForm(FlaskForm):
-        name = StringField('Which actor is your favorite?', validators=[Required()])
+        name = StringField('Which actor is your favorite?', validators=[DataRequired()])
         submit = SubmitField('Submit')
 
 
@@ -117,7 +117,7 @@ Note that ``StringField`` and ``SubmitField`` were **imported** at the top of th
 
 Note that several field types (such as ``RadioField`` and ``SelectField``) must have an option ``choices=[]`` specified, after the label text. Within the list, each choice is a pair in this format: ``('string1', 'string2')``.
 
-WTForms also has a long list of `validators <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-validators.csv>`_ we can use. The ``Required()`` validator prevents the form from being submitted if that field is empty. Note that these validators must also be imported at the top of the file.
+WTForms also has a long list of `validators <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-validators.csv>`_ we can use. The ``DataRequired()`` validator prevents the form from being submitted if that field is empty. Note that these validators must also be imported at the top of the file.
 
 
 Put the form in a route function
@@ -230,7 +230,7 @@ We create a new, empty variable, ``message``. ::
 
 
     class NameForm(FlaskForm):
-       name = StringField('Which actor is your favorite?', validators=[Required()])
+       name = StringField('Which actor is your favorite?', validators=[DataRequired()])
        submit = SubmitField('Submit')
 
 
