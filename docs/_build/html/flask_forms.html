@@ -232,7 +232,7 @@
 <span class="kn">from</span> <span class="nn">flask_bootstrap</span> <span class="kn">import</span> <span class="n">Bootstrap</span>
 <span class="kn">from</span> <span class="nn">flask_wtf</span> <span class="kn">import</span> <span class="n">FlaskForm</span>
 <span class="kn">from</span> <span class="nn">wtforms</span> <span class="kn">import</span> <span class="n">StringField</span><span class="p">,</span> <span class="n">SubmitField</span>
-<span class="kn">from</span> <span class="nn">wtforms.validators</span> <span class="kn">import</span> <span class="n">Required</span>
+<span class="kn">from</span> <span class="nn">wtforms.validators</span> <span class="kn">import</span> <span class="n">DataRequired</span>
 </pre></div>
 </div>
 <p>Note as always that Python is case-sensitive, so upper- and lowercase must be used exactly as shown. <strong>The fourth line will change</strong> depending on <strong>your form’s contents.</strong> For example, if you have a SELECT element, you’ll need to import that. <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv">See the complete list</a> of WTForms form field types.</p>
@@ -258,7 +258,7 @@
 <p>In the class, we assign each form control to a unique variable. This form has only one text input field and one submit button.</p>
 <p><strong>Every form control</strong> must be configured here.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NameForm</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">&#39;Which actor is your favorite?&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">Required</span><span class="p">()])</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">&#39;Which actor is your favorite?&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">()])</span>
     <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s1">&#39;Submit&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -266,7 +266,7 @@
 <p>If you had <strong>more than one form</strong> in the app, you would define more than one new class in this manner.</p>
 <p>Note that <code class="docutils literal notranslate"><span class="pre">StringField</span></code> and <code class="docutils literal notranslate"><span class="pre">SubmitField</span></code> were <strong>imported</strong> at the top of the file. If we needed other form-control types in this form, we would need to import those also. <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv">See a list of all WTForms field types.</a></p>
 <p>Note that several field types (such as <code class="docutils literal notranslate"><span class="pre">RadioField</span></code> and <code class="docutils literal notranslate"><span class="pre">SelectField</span></code>) must have an option <code class="docutils literal notranslate"><span class="pre">choices=[]</span></code> specified, after the label text. Within the list, each choice is a pair in this format: <code class="docutils literal notranslate"><span class="pre">('string1',</span> <span class="pre">'string2')</span></code>.</p>
-<p>WTForms also has a long list of <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-validators.csv">validators</a> we can use. The <code class="docutils literal notranslate"><span class="pre">Required()</span></code> validator prevents the form from being submitted if that field is empty. Note that these validators must also be imported at the top of the file.</p>
+<p>WTForms also has a long list of <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-validators.csv">validators</a> we can use. The <code class="docutils literal notranslate"><span class="pre">DataRequired()</span></code> validator prevents the form from being submitted if that field is empty. Note that these validators must also be imported at the top of the file.</p>
 </div>
 <div class="section" id="put-the-form-in-a-route-function">
 <h3>Put the form in a route function<a class="headerlink" href="#put-the-form-in-a-route-function" title="Permalink to this headline">¶</a></h3>
@@ -494,7 +494,7 @@
 <p><code class="docutils literal notranslate"><span class="pre">validate_on_submit()</span></code> is a built-in WTForms function, called on <code class="docutils literal notranslate"><span class="pre">form</span></code> (our variable). <strong>If it returns True,</strong> the following commands and statements in the block will run. If not, the form is simply not submitted, and invalid fields are flagged. It will return True if the form was filled in and submitted.</p>
 <p><code class="docutils literal notranslate"><span class="pre">form.name.data</span></code> is the contents of the text input field represented by <code class="docutils literal notranslate"><span class="pre">name</span></code>. Perhaps we should review how we configured the form:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NameForm</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
-   <span class="n">name</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">&#39;Which actor is your favorite?&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">Required</span><span class="p">()])</span>
+   <span class="n">name</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">&#39;Which actor is your favorite?&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">()])</span>
    <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s1">&#39;Submit&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
