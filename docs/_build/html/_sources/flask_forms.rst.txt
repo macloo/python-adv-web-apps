@@ -295,6 +295,6 @@ Resources
 
 * `Flask-Bootstrap documentation <https://pythonhosted.org/Flask-Bootstrap/>`_
 
-* `About Flask-Bootstrap templates <https://pythonhosted.org/Flask-Bootstrap/basic-usage.html#templates`>_
+* `About Flask-Bootstrap templates <https://pythonhosted.org/Flask-Bootstrap/basic-usage.html#templates>`_
 
 .
