@@ -20,7 +20,7 @@ In the **Flask Templates** chapter, we built a functioning Flask app. In this ch
 
 **Flask forms app example** (*actors_app*):
 
-* `Live app <https://weimergeeks.com/flask_form/>`_
+* `Live app <https://weimergeeks.com/flaskform/>`_
 * `Code <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/actors_app>`_
 
 
@@ -187,7 +187,7 @@ There’s an `excellent how-to video <https://www.youtube.com/watch?v=PE9ZGniSDW
 Examining the route function
 ----------------------------
 
-Before reading further, try out a `working version of this app <https://weimergeeks.com/flask_form/>`_. The complete code for the app is in the folder named `actors_app <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/actors_app>`_.
+Before reading further, try out a `working version of this app <https://weimergeeks.com/flaskform/>`_. The complete code for the app is in the folder named `actors_app <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/actors_app>`_.
 
 1. You type an actor’s name into the form and submit it.
 2. If the actor’s name is in the data source (ACTORS), the app loads a detail page for that actor. (Photos of bears 🐻 stand in for real photos of the actors.)
