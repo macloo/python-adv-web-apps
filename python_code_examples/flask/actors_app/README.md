@@ -6,6 +6,6 @@ This app is discussed in the [Flask Forms chapter](https://python-adv-web-apps.r
 
 A live version of this app can be viewed here:
 
-https://weimergeeks.com/flask_form/
+https://weimergeeks.com/flaskform/
 
 .
