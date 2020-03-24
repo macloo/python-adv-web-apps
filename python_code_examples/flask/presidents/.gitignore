@@ -1,0 +1,21 @@
+# Mac file types to be ignored
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# old versions
+*_BAK*
+
+# Python executables
+*.pyc
+
+# folders to be ignored
+env/
+__pycache__/
+
+# Selenim WebDriver
+chromedriver
