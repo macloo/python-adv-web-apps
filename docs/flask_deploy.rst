@@ -39,7 +39,7 @@ After installing the extension, create **a new file** inside the folder that con
    :caption:
 
 
-.. warning:: `filename` in the script above must **OMIT** the file extension `.py` from the filename.
+.. warning:: ``filename`` in the script above must **OMIT** the file extension ``.py`` from the filename.
 
 
 Save all your open files.
