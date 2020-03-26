@@ -212,7 +212,7 @@
 <span class="kn">from</span> <span class="nn">flask_frozen</span> <span class="kn">import</span> <span class="n">Freezer</span>
 
 <span class="c1"># instead of &quot;filename,&quot; below, use the name of the file that</span>
-<span class="c1"># runs YOUR Flask app</span>
+<span class="c1"># runs YOUR Flask app - omit .py from the filename</span>
 <span class="kn">from</span> <span class="nn">filename</span> <span class="kn">import</span> <span class="n">app</span>
 
 <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;FREEZER_RELATIVE_URLS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
@@ -223,6 +223,10 @@
     <span class="n">freezer</span><span class="o">.</span><span class="n">freeze</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><cite>filename</cite> in the script above must <strong>OMIT</strong> the file extension <cite>.py</cite> from the filename.</p>
 </div>
 <p>Save all your open files.</p>
 <p>If the Flask web server is running, quit it with Control-C.</p>
