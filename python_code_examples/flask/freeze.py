@@ -3,7 +3,7 @@
 from flask_frozen import Freezer
 
 # instead of "filename," below, use the name of the file that
-# runs YOUR Flask app
+# runs YOUR Flask app - omit .py from the filename
 from filename import app
 
 app.config['FREEZER_RELATIVE_URLS'] = True

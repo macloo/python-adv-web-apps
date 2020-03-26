@@ -38,6 +38,10 @@ After installing the extension, create **a new file** inside the folder that con
 .. literalinclude:: ../python_code_examples/flask/freeze.py
    :caption:
 
+
+.. warning:: `filename` in the script above must **OMIT** the file extension `.py` from the filename.
+
+
 Save all your open files.
 
 If the Flask web server is running, quit it with Control-C.
