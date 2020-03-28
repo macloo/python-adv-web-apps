@@ -98,6 +98,7 @@
 <li class="toctree-l1"><a class="reference internal" href="flask_forms.html">Flask: Web Forms</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Flask and Databases</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#setup-flask-sqlalchemy">Setup: Flask-SQLAlchemy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basics-of-using-a-database-with-flask">Basics of using a database with Flask</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
@@ -167,7 +168,8 @@
             
   <div class="section" id="flask-and-databases">
 <h1>Flask and Databases<a class="headerlink" href="#flask-and-databases" title="Permalink to this headline">¶</a></h1>
-<p><strong>SQLAlchemy</strong> is a Python SQL toolkit and object relational mapper (ORM) that enables Python to communicate with the SQL database system you prefer: MySQL, PostgreSQL, SQLite. An ORM converts data between incompatible systems (object structure in Python, table structure in SQL database). SQLAlchemy is basically a <strong>bridge</strong> between Python and a SQL database.</p>
+<p>To add database functionality to a Flask app, we will use SQLAlchemy.</p>
+<p><strong>SQLAlchemy</strong> is a Python SQL toolkit and object relational mapper (ORM) that enables Python to communicate with the SQL database system you prefer: MySQL, PostgreSQL, SQLite, and others. An ORM converts data between incompatible systems (object structure in Python, table structure in SQL database). SQLAlchemy is basically a <strong>bridge</strong> between Python and a SQL database.</p>
 <p><strong>Flask-SQLAlchemy</strong> is an <em>extension</em> for Flask that adds SQLAlchemy to your Flask app.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.sqlalchemy.org/">SQLAlchemy documentation</a></p></li>
@@ -177,11 +179,34 @@
 <div class="section" id="setup-flask-sqlalchemy">
 <h2>Setup: Flask-SQLAlchemy<a class="headerlink" href="#setup-flask-sqlalchemy" title="Permalink to this headline">¶</a></h2>
 <p>We will install the <strong>Flask-SQLAlchemy</strong> extension to enable us to work with a SQL database in Flask. There are many extensions for Flask; each one adds a different set of functions and capabilities. See the <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/extensions/">list of Flask extensions</a> for more.</p>
-<p>In Terminal, change into your Flask projects folder and <strong>activate your virtual environment</strong> there. Then install at the command prompt — where you see <code class="docutils literal notranslate"><span class="pre">$</span></code> (Mac) or <code class="docutils literal notranslate"><span class="pre">C:\Users\yourname&gt;</span></code> (Windows) —</p>
+<p>In Terminal, change into your Flask projects folder and <strong>activate your virtual environment</strong> there. Then install the extension at the command prompt — where you see <code class="docutils literal notranslate"><span class="pre">$</span></code> (Mac) or <code class="docutils literal notranslate"><span class="pre">C:\Users\yourname&gt;</span></code> (Windows) —</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">flask</span><span class="o">-</span><span class="n">sqlalchemy</span>
 </pre></div>
 </div>
-<p>xxx</p>
+<p>We will use SQLite3 for database examples here. SQLAlchemy can bridge between Python and various different SQL database systems — some of which need an additional module, or library, to be installed. SQLite <em>does not</em> require an additional module — the <code class="docutils literal notranslate"><span class="pre">sqlite3</span></code> module is included in Python 3.x. <a class="reference external" href="https://docs.sqlalchemy.org/en/13/dialects/">Find other modules for other SQL databases.</a></p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If you’re using a MySQL or PostgreSQL database, you will need to install a DBAPI module such as <code class="docutils literal notranslate"><span class="pre">psycopg2</span></code> (PostgreSQL) or <code class="docutils literal notranslate"><span class="pre">PyMySQL</span></code> (MySQL).</p>
+</div>
+</div>
+<div class="section" id="basics-of-using-a-database-with-flask">
+<h2>Basics of using a database with Flask<a class="headerlink" href="#basics-of-using-a-database-with-flask" title="Permalink to this headline">¶</a></h2>
+<p>You’ll <em>connect</em> your Flask app to an existing SQL database, whether the app reads from the database, writes to the database, or both. Connecting will require your own database username and database password. (You are the owner of the database.)</p>
+<p>You <em>can</em> create the SQL database using Python, but <em>that is not required.</em> If you already have a database, all you need to worry about is how to connect it.</p>
+<p>If you <em>do</em> use Python to create a SQL database (and that’s an “if,” not a necessity), you will only do it once. You don’t create the same database again and again.</p>
+<p>Your database may have one table, or more than one table. That depends on what you need, or the structure of the existing SQL database.</p>
+<p>Your app might only <em>read from</em> your SQL database. You can write SQL queries to accomplish this — using <strong>Flask-SQLAlchemy</strong> commands to do so. Note that you won’t write a straightforward SQL query. Here is an example of Flask-SQLAlchemy syntax:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">socks</span> <span class="o">=</span> <span class="n">Sock</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;knee-high&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sock</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The Flask-SQLAlchemy statement to the right of the equals sign, above, is equivalent to this standard SQL statement:</p>
+<p>It is assumed you are familiar with how to write basic SQL queries.</p>
+<p><a class="reference external" href="https://flask-sqlalchemy.palletsprojects.com/en/2.x/queries/#querying-records">Details about writing queries with Flask-SQLAlchemy.</a></p>
+<p>In addition to <em>reading from</em> your SQL database, your app might allow people to <em>write to</em> the database. In that case, you will probably want people to log in securely. Alternatively, you might set up a Python script that updates your database on a regular schedule (e.g., writing in new records from a monthly data dump).</p>
+<p>You might write a Python script to populate your database from the contents of a CSV file. This would be fairly simple if you only need to run it once. If you need to add records repeatedly (say, once per month) to an existing database, you might need to check whether you are <em>duplicating records that are already there.</em> If you need to check for existing records and update them, that’s more challenging.</p>
+<p>If people are <em>writing into</em> your database, you will want to give them a web form, or forms, for doing so. See <a class="reference external" href="flask_forms.html">Flask: Web Forms</a> if you need to create a web form in your Flask app.</p>
+<p>You will not necessarily need forms if your app only <em>reads from</em> the database, but it is possible you’ll want to allow people to search for content, or choose content from a menu using a <code class="docutils literal notranslate"><span class="pre">&lt;select&gt;</span></code> element in a form that queries the database. Then a form or forms will be required.</p>
+<p>.</p>
 </div>
 </div>
 
