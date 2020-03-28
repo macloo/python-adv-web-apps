@@ -99,6 +99,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Flask and Databases</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#setup-flask-sqlalchemy">Setup: Flask-SQLAlchemy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#basics-of-using-a-database-with-flask">Basics of using a database with Flask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-connect-a-mysql-database-to-a-flask-app">How to connect a MySQL database to a Flask app</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
@@ -192,20 +193,33 @@
 <div class="section" id="basics-of-using-a-database-with-flask">
 <h2>Basics of using a database with Flask<a class="headerlink" href="#basics-of-using-a-database-with-flask" title="Permalink to this headline">¶</a></h2>
 <p>You’ll <em>connect</em> your Flask app to an existing SQL database, whether the app reads from the database, writes to the database, or both. Connecting will require your own database username and database password. (You are the owner of the database.)</p>
-<p>You <em>can</em> create the SQL database using Python, but <em>that is not required.</em> If you already have a database, all you need to worry about is how to connect it.</p>
-<p>If you <em>do</em> use Python to create a SQL database (and that’s an “if,” not a necessity), you will only do it once. You don’t create the same database again and again.</p>
-<p>Your database may have one table, or more than one table. That depends on what you need, or the structure of the existing SQL database.</p>
-<p>Your app might only <em>read from</em> your SQL database. You can write SQL queries to accomplish this — using <strong>Flask-SQLAlchemy</strong> commands to do so. Note that you won’t write a straightforward SQL query. Here is an example of Flask-SQLAlchemy syntax:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">socks</span> <span class="o">=</span> <span class="n">Sock</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;knee-high&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sock</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You <em>can</em> create the SQL database using Python, but <em>that is not required.</em> If you already have a database, all you need to worry about is how to connect it. If you <em>do</em> use Python to create a SQL database (and that’s an “if,” not a necessity), you will only do it once. You don’t create the same database again and again.</p>
+</div>
+<p>Your database may have one table, or more than one table. That depends on what you need, or the structure of the existing SQL database. You’ll need to know the table name(s).</p>
+<p>Your app might only <em>read from</em> your SQL database. You can write SQL queries to accomplish this — using Flask-SQLAlchemy commands to do so. Note that you won’t write a straightforward SQL query. Here is an example of Flask-SQLAlchemy syntax:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">socks</span> <span class="o">=</span> <span class="n">Sock</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;knee-high&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sock</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>The Flask-SQLAlchemy statement to the right of the equals sign, above, is equivalent to this standard SQL statement:</p>
+<p>The Flask-SQLAlchemy statement to the right of the equals sign, <em>above,</em> is equivalent to this standard SQL statement:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">socks</span> <span class="k">WHERE</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;knee-high&quot;</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">name</span>
+</pre></div>
+</div>
 <p>It is assumed you are familiar with how to write basic SQL queries.</p>
-<p><a class="reference external" href="https://flask-sqlalchemy.palletsprojects.com/en/2.x/queries/#querying-records">Details about writing queries with Flask-SQLAlchemy.</a></p>
-<p>In addition to <em>reading from</em> your SQL database, your app might allow people to <em>write to</em> the database. In that case, you will probably want people to log in securely. Alternatively, you might set up a Python script that updates your database on a regular schedule (e.g., writing in new records from a monthly data dump).</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://flask-sqlalchemy.palletsprojects.com/en/2.x/queries/#querying-records">Details about writing queries with Flask-SQLAlchemy.</a></p></li>
+</ul>
+<p>In addition to <em>reading from</em> your SQL database, your Flask app might allow people to <em>write to</em> the database. In that case, you will probably want people to log in securely. Alternatively, you might set up a Python script that updates your database on a regular schedule (e.g., writing in new records from a monthly data dump).</p>
 <p>You might write a Python script to populate your database from the contents of a CSV file. This would be fairly simple if you only need to run it once. If you need to add records repeatedly (say, once per month) to an existing database, you might need to check whether you are <em>duplicating records that are already there.</em> If you need to check for existing records and update them, that’s more challenging.</p>
 <p>If people are <em>writing into</em> your database, you will want to give them a web form, or forms, for doing so. See <a class="reference external" href="flask_forms.html">Flask: Web Forms</a> if you need to create a web form in your Flask app.</p>
-<p>You will not necessarily need forms if your app only <em>reads from</em> the database, but it is possible you’ll want to allow people to search for content, or choose content from a menu using a <code class="docutils literal notranslate"><span class="pre">&lt;select&gt;</span></code> element in a form that queries the database. Then a form or forms will be required.</p>
+<p>You will not necessarily need forms if your app only <em>reads from</em> the database, but it is possible you’ll want to allow people to search for content, or to choose content from a menu using a <code class="docutils literal notranslate"><span class="pre">&lt;select&gt;</span></code> element in a form that queries the database. Then a form or forms will be required.</p>
+<p>Of course, you’ll be using templates and all the other aspects of Flask covered in previous chapters here.</p>
+<p>For all Python and SQL commands, refer to the links listed under “User’s Guide” in the <a class="reference external" href="https://flask-sqlalchemy.palletsprojects.com/">Flask-SQLAlchemy documentation</a>.</p>
+</div>
+<div class="section" id="how-to-connect-a-mysql-database-to-a-flask-app">
+<h2>How to connect a MySQL database to a Flask app<a class="headerlink" href="#how-to-connect-a-mysql-database-to-a-flask-app" title="Permalink to this headline">¶</a></h2>
+<p>Here’s a starter script for testing whether you can connect:</p>
 <p>.</p>
 </div>
 </div>
