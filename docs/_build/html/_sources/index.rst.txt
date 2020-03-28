@@ -39,4 +39,5 @@ See also the `official Python documentation <https://docs.python.org/3/>`_.
    flask3
    flask_deploy
    flask_forms
+   flask_db1
    configparser

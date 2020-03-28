@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Search &mdash; Python Beginners  documentation</title>
+  <title>Flask and Databases &mdash; Python Beginners  documentation</title>
   
 
   
@@ -25,7 +25,6 @@
         <script type="text/javascript" src="_static/underscore.js"></script>
         <script type="text/javascript" src="_static/doctools.js"></script>
         <script type="text/javascript" src="_static/language_data.js"></script>
-        <script type="text/javascript" src="_static/searchtools.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -35,7 +34,9 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="#" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="configparser" href="configparser.html" />
+    <link rel="prev" title="Flask: Web Forms" href="flask_forms.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -62,7 +63,7 @@
 
           
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="#" method="get">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -80,7 +81,7 @@
             
             
               <p class="caption"><span class="caption-text">Contents</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="learn_python.html">Starting Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="functions.html">Functions in Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lists.html">Working with Lists</a></li>
@@ -95,7 +96,10 @@
 <li class="toctree-l1"><a class="reference internal" href="flask3.html">Flask Templates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flask_deploy.html">Flask: Deploy an App</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flask_forms.html">Flask: Web Forms</a></li>
-<li class="toctree-l1"><a class="reference internal" href="flask_db1.html">Flask and Databases</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Flask and Databases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setup-flask-sqlalchemy">Setup: Flask-SQLAlchemy</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
 </ul>
 
@@ -142,12 +146,14 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Search</li>
+      <li>Flask and Databases</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
+            <a href="_sources/flask_db1.rst.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
     
@@ -159,24 +165,40 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <noscript>
-  <div id="fallback" class="admonition warning">
-    <p class="last">
-      Please activate JavaScript to enable the search
-      functionality.
-    </p>
-  </div>
-  </noscript>
+  <div class="section" id="flask-and-databases">
+<h1>Flask and Databases<a class="headerlink" href="#flask-and-databases" title="Permalink to this headline">¶</a></h1>
+<p><strong>SQLAlchemy</strong> is a Python SQL toolkit and object relational mapper (ORM) that enables Python to communicate with the SQL database system you prefer: MySQL, PostgreSQL, SQLite. An ORM converts data between incompatible systems (object structure in Python, table structure in SQL database). SQLAlchemy is basically a <strong>bridge</strong> between Python and a SQL database.</p>
+<p><strong>Flask-SQLAlchemy</strong> is an <em>extension</em> for Flask that adds SQLAlchemy to your Flask app.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.sqlalchemy.org/">SQLAlchemy documentation</a></p></li>
+<li><p><a class="reference external" href="https://flask-sqlalchemy.palletsprojects.com/">Flask-SQLAlchemy documentation</a></p></li>
+<li><p>Code for this chapter TK</p></li>
+</ul>
+<div class="section" id="setup-flask-sqlalchemy">
+<h2>Setup: Flask-SQLAlchemy<a class="headerlink" href="#setup-flask-sqlalchemy" title="Permalink to this headline">¶</a></h2>
+<p>We will install the <strong>Flask-SQLAlchemy</strong> extension to enable us to work with a SQL database in Flask. There are many extensions for Flask; each one adds a different set of functions and capabilities. See the <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/extensions/">list of Flask extensions</a> for more.</p>
+<p>In Terminal, change into your Flask projects folder and <strong>activate your virtual environment</strong> there. Then install at the command prompt — where you see <code class="docutils literal notranslate"><span class="pre">$</span></code> (Mac) or <code class="docutils literal notranslate"><span class="pre">C:\Users\yourname&gt;</span></code> (Windows) —</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">flask</span><span class="o">-</span><span class="n">sqlalchemy</span>
+</pre></div>
+</div>
+<p>xxx</p>
+</div>
+</div>
 
-  
-  <div id="search-results">
-  
-  </div>
 
            </div>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="configparser.html" class="btn btn-neutral float-right" title="configparser" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="flask_forms.html" class="btn btn-neutral float-left" title="Flask: Web Forms" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -209,14 +231,7 @@
   
   
     
-  
-  <script type="text/javascript">
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script type="text/javascript" id="searchindexloader"></script>
    
-
 
 </body>
 </html>
