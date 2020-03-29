@@ -99,7 +99,12 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Flask and Databases</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#setup-flask-sqlalchemy">Setup: Flask-SQLAlchemy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#basics-of-using-a-database-with-flask">Basics of using a database with Flask</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#how-to-connect-a-sqlite-database-to-a-flask-app">How to connect a SQLite database to a Flask app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-connect-a-database-to-a-flask-app">How to connect a database to a Flask app</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sqlite-resources">SQLite resources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#connecting-to-a-mysql-database">Connecting to a MySQL database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setting-environment-variables">Setting environment variables</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
@@ -217,8 +222,8 @@
 <p>Of course, you’ll be using templates and all the other aspects of Flask covered in previous chapters here.</p>
 <p>For all Python and SQL commands, refer to the links listed under “User’s Guide” in the <a class="reference external" href="https://flask-sqlalchemy.palletsprojects.com/">Flask-SQLAlchemy documentation</a>.</p>
 </div>
-<div class="section" id="how-to-connect-a-sqlite-database-to-a-flask-app">
-<h2>How to connect a SQLite database to a Flask app<a class="headerlink" href="#how-to-connect-a-sqlite-database-to-a-flask-app" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="how-to-connect-a-database-to-a-flask-app">
+<h2>How to connect a database to a Flask app<a class="headerlink" href="#how-to-connect-a-database-to-a-flask-app" title="Permalink to this headline">¶</a></h2>
 <p>Here’s a starter script for testing whether you can connect:</p>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/test_local_sqlite_db.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
@@ -298,7 +303,48 @@
 </pre></div>
 </td></tr></table></div>
 </div>
+<p>The script above assumes that a SQLite database file (see filename on line 14) is in the same directory as the <code class="docutils literal notranslate"><span class="pre">.py</span></code> file. The script will work with any SQLite database file.</p>
+<p>Run the script above:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">test_local_sqlite_db</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>Open <code class="docutils literal notranslate"><span class="pre">http://localhost:5000/</span></code> in your web browser. If you see the text “It works.” — then all is well. Otherwise, you’ll see an error message that should enable you to resolve the problem.</p>
+<div class="section" id="sqlite-resources">
+<h3>SQLite resources<a class="headerlink" href="#sqlite-resources" title="Permalink to this headline">¶</a></h3>
+<p>SQLite is a SQL database engine that is especially easy to work with because the database — regardless of its size or how many tables it might include — is in a single <code class="docutils literal notranslate"><span class="pre">.db</span></code> file.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.sqlite.org/index.html">SQLite homepage</a></p></li>
+<li><p>Download the free <a class="reference external" href="https://sqlitebrowser.org/">DB Browser for SQLite</a></p></li>
+<li><p>SQLite can be used without SQLAlchemy: <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/patterns/sqlite3/">Using SQLite3 with Flask</a></p></li>
+</ul>
+</div>
+<div class="section" id="connecting-to-a-mysql-database">
+<h3>Connecting to a MySQL database<a class="headerlink" href="#connecting-to-a-mysql-database" title="Permalink to this headline">¶</a></h3>
+<p>Two scripts are provided to test a connection to a MySQL database. <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases/test_mysql_connection">They are here.</a> An additional Python module must be installed — PyMySQL — and a username and password must be included in the connection string.</p>
+<p>In addition, when running the MySQL database locally, a socket string must be included. This string will be different on MacOS and Windows.</p>
+</div>
+<div class="section" id="setting-environment-variables">
+<h3>Setting environment variables<a class="headerlink" href="#setting-environment-variables" title="Permalink to this headline">¶</a></h3>
+<p>Instead of including username, password, and the whole database connection string within a Python script, you can set the complete string as an <strong>environment variable.</strong> If you do, then add the following lines near the top of your script:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="c1"># check for environment variable</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;DATABASE_URL&quot;</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;DATABASE_URL is not set&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And change the <code class="docutils literal notranslate"><span class="pre">app.config</span></code> statement to this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SQLALCHEMY_DATABASE_URI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;DATABASE_URL&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Look up how to set an environment variable for your operating system.</p>
+<p><code class="docutils literal notranslate"><span class="pre">os</span></code> is a built-in Python module.</p>
+<p>When setting up a Flask app on a server, there will be an option to set environment variables there. Your Python script will not change.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Only one environment variable on your computer, or in an app, can be named <code class="docutils literal notranslate"><span class="pre">DATABASE_URL</span></code> — it’s a var1able name, so you can change the string to something else.</p>
+</div>
 <p>.</p>
+</div>
 </div>
 </div>
 
