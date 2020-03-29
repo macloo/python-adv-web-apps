@@ -106,6 +106,20 @@ Two scripts are provided to test a connection to a MySQL database. `They are her
 
 In addition, when running the MySQL database locally, a socket string must be included. This string will be very different on MacOS and Windows.
 
+The connection string
++++++++++++++++++++++
+
+The database connection string requires a **strict syntax,** or it will not work. The SQLite string is by far the simplest: ::
+
+    'sqlite:///' + db_name
+
+For other database systems, the connection string will be more complex:
+
+    'mysql+pymysql://' + username + ':' + password + '@' + server + database
+
+Note, that example is for MySQL only; the protocol will be different for, say, PostgreSQL.
+
+
 Setting environment variables
 +++++++++++++++++++++++++++++
 
@@ -128,7 +142,7 @@ Look up how to set an environment variable for your operating system.
 
 When setting up a Flask app on a server, there will be an option to set environment variables there. The lines in the script referring to the environment variable will not change.
 
-.. important:: Only one environment variable on your computer, or in an app, can be named ``DATABASE_URL`` — it’s a var1able name, so you can change the string to something else.
+.. important:: Only one environment variable on your computer, or in an app, can be named ``DATABASE_URL`` — it’s a variable name, so you can change the string to something else, and you can set as many different variables as you need.
 
 
 

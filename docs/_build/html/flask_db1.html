@@ -102,6 +102,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#how-to-connect-a-database-to-a-flask-app">How to connect a database to a Flask app</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#sqlite-resources">SQLite resources</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#connecting-to-a-mysql-database">Connecting to a MySQL database</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-connection-string">The connection string</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#setting-environment-variables">Setting environment variables</a></li>
 </ul>
 </li>
@@ -325,6 +326,18 @@
 <p>Two scripts are provided to test a connection to a MySQL database. <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases/test_mysql_connection">They are here.</a> An additional Python module must be installed — PyMySQL — and a username and password <strong>must</strong> be included in the connection string (even an <em>empty</em> password has a place).</p>
 <p>In addition, when running the MySQL database locally, a socket string must be included. This string will be very different on MacOS and Windows.</p>
 </div>
+<div class="section" id="the-connection-string">
+<h3>The connection string<a class="headerlink" href="#the-connection-string" title="Permalink to this headline">¶</a></h3>
+<p>The database connection string requires a <strong>strict syntax,</strong> or it will not work. The SQLite string is by far the simplest:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;sqlite:///&#39;</span> <span class="o">+</span> <span class="n">db_name</span>
+</pre></div>
+</div>
+<p>For other database systems, the connection string will be more complex:</p>
+<blockquote>
+<div><p>‘mysql+pymysql://’ + username + ‘:’ + password + ‘&#64;’ + server + database</p>
+</div></blockquote>
+<p>Note, that example is for MySQL only; the protocol will be different for, say, PostgreSQL.</p>
+</div>
 <div class="section" id="setting-environment-variables">
 <h3>Setting environment variables<a class="headerlink" href="#setting-environment-variables" title="Permalink to this headline">¶</a></h3>
 <p>Instead of including username, password, and the whole database connection string <em>within a Python script,</em> you can set the complete string as an <strong>environment variable.</strong> If you do, then add the following lines near the top of your script:</p>
@@ -347,7 +360,7 @@
 <p>When setting up a Flask app on a server, there will be an option to set environment variables there. The lines in the script referring to the environment variable will not change.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Only one environment variable on your computer, or in an app, can be named <code class="docutils literal notranslate"><span class="pre">DATABASE_URL</span></code> — it’s a var1able name, so you can change the string to something else.</p>
+<p>Only one environment variable on your computer, or in an app, can be named <code class="docutils literal notranslate"><span class="pre">DATABASE_URL</span></code> — it’s a variable name, so you can change the string to something else, and you can set as many different variables as you need.</p>
 </div>
 <p>.</p>
 </div>
