@@ -21,7 +21,9 @@ In Terminal, change into your Flask projects folder and **activate your virtual 
 
     pip install flask-sqlalchemy
 
-We will use SQLite3 for database examples here. SQLAlchemy can bridge between Python and various different SQL database systems — some of which need an additional module, or library, to be installed. SQLite *does not* require an additional module — the ``sqlite3`` module is included in Python 3.x. `Find other modules for other SQL databases. <https://docs.sqlalchemy.org/en/13/dialects/>`_
+We will use SQLite for database examples here. Although it’s not necessary to use SQLAlchemy to interact with a SQLite database, learning to use SQLAlchemy gives you a skill set that can be applied to *any* SQL database system.
+
+SQLAlchemy can bridge between Python and various different SQL database systems — some of which need an additional module, or library, to be installed. SQLite *does not* require an additional module — the ``sqlite3`` module is included in Python 3.x. `Find other modules for other SQL databases. <https://docs.sqlalchemy.org/en/13/dialects/>`_
 
 .. important:: If you’re using a MySQL or PostgreSQL database, you will need to install a DBAPI module such as ``psycopg2`` (PostgreSQL) or ``PyMySQL`` (MySQL).
 
@@ -29,11 +31,11 @@ We will use SQLite3 for database examples here. SQLAlchemy can bridge between Py
 Basics of using a database with Flask
 -------------------------------------
 
-You’ll *connect* your Flask app to an existing SQL database, whether the app reads from the database, writes to the database, or both. Connecting will require your own database username and database password. (You are the owner of the database.)
+You’ll *connect* your Flask app to an existing SQL database. Connecting will require your own database username and database password, *unless* using SQLite.
 
 .. note:: You *can* create the SQL database using Python, but *that is not required.* If you already have a database, all you need to worry about is how to connect it. If you *do* use Python to create a SQL database (and that’s an “if,” not a necessity), you will only do it once. You don’t create the same database again and again.
 
-Your database may have one table, or more than one table. That depends on what you need, or the structure of the existing SQL database. You’ll need to know the table name(s).
+Your database may have one table, or more than one table. That depends on what you need, or the structure of the existing SQL database. You’ll need to know the table name(s). You’ll need to know the fieldnames (column headings) in each table.
 
 Your app might only *read from* your SQL database. You can write SQL queries to accomplish this — using Flask-SQLAlchemy commands to do so. Note that you won’t write a straightforward SQL query. Here is an example of Flask-SQLAlchemy syntax:
 
