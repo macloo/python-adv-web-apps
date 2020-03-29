@@ -113,7 +113,7 @@ The database connection string requires a **strict syntax,** or it will not work
 
     'sqlite:///' + db_name
 
-For other database systems, the connection string will be more complex:
+For other database systems, the connection string will be more complex: ::
 
     'mysql+pymysql://' + username + ':' + password + '@' + server + database
 
@@ -123,7 +123,9 @@ Note, that example is for MySQL only; the protocol will be different for, say, P
 Setting environment variables
 +++++++++++++++++++++++++++++
 
-Instead of including username, password, and the whole database connection string *within a Python script,* you can set the complete string as an **environment variable.** If you do, then add the following lines near the top of your script: ::
+Instead of including username, password, and the whole database connection string *within a Python script,* you can set the complete string as an **environment variable.** Note that the connection string must be complete and correct for your configuration, as discussed in the previous section.
+
+If you set an environment variable for the connection string, then add the following lines near the top of your script: ::
 
     import os
     # check for environment variable
@@ -140,9 +142,11 @@ Look up how to set an environment variable for your operating system.
 
 .. note::  ``os`` is a built-in Python module.
 
-When setting up a Flask app on a server, there will be an option to set environment variables there. The lines in the script referring to the environment variable will not change.
+When setting up a Flask app on a server, there will be an option to set environment variables there. The lines in the Flask script referring to the environment variable will not change.
 
 .. important:: Only one environment variable on your computer, or in an app, can be named ``DATABASE_URL`` — it’s a variable name, so you can change the string to something else, and you can set as many different variables as you need.
+
+.. note:: If you’re using a SQLite database, don’t bother with environment variables.
 
 
 

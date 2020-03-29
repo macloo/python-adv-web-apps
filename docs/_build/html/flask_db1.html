@@ -333,14 +333,15 @@
 </pre></div>
 </div>
 <p>For other database systems, the connection string will be more complex:</p>
-<blockquote>
-<div><p>‘mysql+pymysql://’ + username + ‘:’ + password + ‘&#64;’ + server + database</p>
-</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;mysql+pymysql://&#39;</span> <span class="o">+</span> <span class="n">username</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">password</span> <span class="o">+</span> <span class="s1">&#39;@&#39;</span> <span class="o">+</span> <span class="n">server</span> <span class="o">+</span> <span class="n">database</span>
+</pre></div>
+</div>
 <p>Note, that example is for MySQL only; the protocol will be different for, say, PostgreSQL.</p>
 </div>
 <div class="section" id="setting-environment-variables">
 <h3>Setting environment variables<a class="headerlink" href="#setting-environment-variables" title="Permalink to this headline">¶</a></h3>
-<p>Instead of including username, password, and the whole database connection string <em>within a Python script,</em> you can set the complete string as an <strong>environment variable.</strong> If you do, then add the following lines near the top of your script:</p>
+<p>Instead of including username, password, and the whole database connection string <em>within a Python script,</em> you can set the complete string as an <strong>environment variable.</strong> Note that the connection string must be complete and correct for your configuration, as discussed in the previous section.</p>
+<p>If you set an environment variable for the connection string, then add the following lines near the top of your script:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="c1"># check for environment variable</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;DATABASE_URL&quot;</span><span class="p">):</span>
@@ -357,10 +358,14 @@
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">os</span></code> is a built-in Python module.</p>
 </div>
-<p>When setting up a Flask app on a server, there will be an option to set environment variables there. The lines in the script referring to the environment variable will not change.</p>
+<p>When setting up a Flask app on a server, there will be an option to set environment variables there. The lines in the Flask script referring to the environment variable will not change.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Only one environment variable on your computer, or in an app, can be named <code class="docutils literal notranslate"><span class="pre">DATABASE_URL</span></code> — it’s a variable name, so you can change the string to something else, and you can set as many different variables as you need.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you’re using a SQLite database, don’t bother with environment variables.</p>
 </div>
 <p>.</p>
 </div>

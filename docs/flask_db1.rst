@@ -146,6 +146,8 @@ When setting up a Flask app on a server, there will be an option to set environm
 
 .. important:: Only one environment variable on your computer, or in an app, can be named ``DATABASE_URL`` — it’s a variable name, so you can change the string to something else, and you can set as many different variables as you need.
 
+.. note:: If you’re using a SQLite database, don’t bother with environment variables.
+
 
 
 
