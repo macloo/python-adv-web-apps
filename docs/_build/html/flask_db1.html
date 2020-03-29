@@ -99,7 +99,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Flask and Databases</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#setup-flask-sqlalchemy">Setup: Flask-SQLAlchemy</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#basics-of-using-a-database-with-flask">Basics of using a database with Flask</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#how-to-connect-a-mysql-database-to-a-flask-app">How to connect a MySQL database to a Flask app</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#how-to-connect-a-sqlite-database-to-a-flask-app">How to connect a SQLite database to a Flask app</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
@@ -217,9 +217,87 @@
 <p>Of course, you’ll be using templates and all the other aspects of Flask covered in previous chapters here.</p>
 <p>For all Python and SQL commands, refer to the links listed under “User’s Guide” in the <a class="reference external" href="https://flask-sqlalchemy.palletsprojects.com/">Flask-SQLAlchemy documentation</a>.</p>
 </div>
-<div class="section" id="how-to-connect-a-mysql-database-to-a-flask-app">
-<h2>How to connect a MySQL database to a Flask app<a class="headerlink" href="#how-to-connect-a-mysql-database-to-a-flask-app" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="how-to-connect-a-sqlite-database-to-a-flask-app">
+<h2>How to connect a SQLite database to a Flask app<a class="headerlink" href="#how-to-connect-a-sqlite-database-to-a-flask-app" title="Permalink to this headline">¶</a></h2>
 <p>Here’s a starter script for testing whether you can connect:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/test_local_sqlite_db.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    test a SQLite database connection locally</span>
+<span class="sd">    assumes database file is in same location</span>
+<span class="sd">    as this .py file</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+<span class="kn">from</span> <span class="nn">sqlalchemy.sql</span> <span class="kn">import</span> <span class="n">text</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># change to name of your database; add path if necessary</span>
+<span class="n">db_name</span> <span class="o">=</span> <span class="s1">&#39;sockmarket.db&#39;</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SQLALCHEMY_DATABASE_URI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sqlite:///&#39;</span> <span class="o">+</span> <span class="n">db_name</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SQLALCHEMY_TRACK_MODIFICATIONS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># this variable, db, will be used for all SQLAlchemy commands</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+<span class="c1"># NOTHING BELOW THIS LINE NEEDS TO CHANGE</span>
+<span class="c1"># this route will test the database connection and nothing more</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">testdb</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">from_statement</span><span class="p">(</span><span class="n">text</span><span class="p">(</span><span class="s1">&#39;SELECT 1&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+        <span class="k">return</span> <span class="s1">&#39;&lt;h1&gt;It works.&lt;/h1&gt;&#39;</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="c1"># e holds description of the error</span>
+        <span class="n">error_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;p&gt;The error:&lt;br&gt;&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&lt;/p&gt;&quot;</span>
+        <span class="n">hed</span> <span class="o">=</span> <span class="s1">&#39;&lt;h1&gt;Something is broken.&lt;/h1&gt;&#39;</span>
+        <span class="k">return</span> <span class="n">hed</span> <span class="o">+</span> <span class="n">error_text</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
 <p>.</p>
 </div>
 </div>

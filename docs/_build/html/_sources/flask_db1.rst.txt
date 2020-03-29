@@ -68,12 +68,14 @@ Of course, you’ll be using templates and all the other aspects of Flask covere
 For all Python and SQL commands, refer to the links listed under “User’s Guide” in the `Flask-SQLAlchemy documentation <https://flask-sqlalchemy.palletsprojects.com/>`_.
 
 
-How to connect a MySQL database to a Flask app
-----------------------------------------------
+How to connect a SQLite database to a Flask app
+-----------------------------------------------
 
 Here’s a starter script for testing whether you can connect:
 
-
+.. literalinclude:: ../python_code_examples/flask/databases/test_local_sqlite_db.py
+   :linenos:
+   :caption:
 
 
 .
