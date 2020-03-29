@@ -193,7 +193,10 @@
 </pre></div>
 </div>
 <p>We will use SQLite for database examples here. Although it’s not necessary to use SQLAlchemy to interact with a SQLite database, learning to use SQLAlchemy gives you a skill set that can be applied to <em>any</em> SQL database system.</p>
-<p>SQLAlchemy can bridge between Python and various different SQL database systems — some of which need an additional module, or library, to be installed. SQLite <em>does not</em> require an additional module — the <code class="docutils literal notranslate"><span class="pre">sqlite3</span></code> module is included in Python 3.x. <a class="reference external" href="https://docs.sqlalchemy.org/en/13/dialects/">Find other modules for other SQL databases.</a></p>
+<p>SQLAlchemy can bridge between Python and various different SQL database systems — some of which need an additional module, or library, to be installed. SQLite <em>does not</em> require an additional module — the <code class="docutils literal notranslate"><span class="pre">sqlite3</span></code> module is included in Python 3.x.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.sqlalchemy.org/en/13/dialects/">Find other modules for other SQL databases.</a></p></li>
+</ul>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>If you’re using a MySQL or PostgreSQL database, you will need to install a DBAPI module such as <code class="docutils literal notranslate"><span class="pre">psycopg2</span></code> (PostgreSQL) or <code class="docutils literal notranslate"><span class="pre">PyMySQL</span></code> (MySQL).</p>
@@ -220,9 +223,9 @@
 <li><p><a class="reference external" href="https://flask-sqlalchemy.palletsprojects.com/en/2.x/queries/#querying-records">Details about writing queries with Flask-SQLAlchemy.</a></p></li>
 </ul>
 <p>In addition to <em>reading from</em> your SQL database, your Flask app might allow people to <em>write to</em> the database. In that case, you will probably want people to log in securely. Alternatively, you might set up a Python script that updates your database on a regular schedule (e.g., writing in new records from a monthly data dump).</p>
-<p>You might write a Python script to populate your database from the contents of a CSV file. This would be fairly simple if you only need to run it once. If you need to add records repeatedly (say, once per month) to an existing database, you might need to check whether you are <em>duplicating records that are already there.</em> If you need to check for existing records and update them, that’s more challenging.</p>
+<p>You might write a Python script to populate your database from the contents of a CSV file. This would be fairly simple if you only need to run it once. If you need to add records repeatedly (say, once per month) to an existing database, you might need to check whether you are <em>duplicating records that are already there.</em> If you need to check for existing records and update them, that’s more challenging. You can handle each of these tasks within Flask, using route functions.</p>
 <p>If people are <em>writing into</em> your database, you will want to give them a web form, or forms, for doing so. See <a class="reference external" href="flask_forms.html">Flask: Web Forms</a> if you need to create a web form in your Flask app.</p>
-<p>You will not necessarily need forms if your app only <em>reads from</em> the database, but it is possible you’ll want to allow people to search for content, or to choose content from a menu using a <code class="docutils literal notranslate"><span class="pre">&lt;select&gt;</span></code> element in a form that queries the database. Then a form or forms will be required.</p>
+<p>You will not necessarily need forms if your app only <em>reads from</em> the database, but it is possible you’ll want to allow people to search for content, or to choose content from a menu using a <code class="docutils literal notranslate"><span class="pre">&lt;select&gt;</span></code> element in a form that queries the database. Then a form or forms will be required. Again, you will handle these tasks within Flask, using route functions.</p>
 <p>Of course, you’ll be using templates and all the other aspects of Flask covered in previous chapters here.</p>
 <p>For all Python and SQL commands, refer to the links listed under “User’s Guide” in the <a class="reference external" href="https://flask-sqlalchemy.palletsprojects.com/">Flask-SQLAlchemy documentation</a>.</p>
 </div>
@@ -313,7 +316,7 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">test_local_sqlite_db</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
-<p>Open <code class="docutils literal notranslate"><span class="pre">http://localhost:5000/</span></code> in your web browser. If you see the text “It works.” — then all is well. Otherwise, you’ll see an error message that should enable you to resolve the problem.</p>
+<p>Open <code class="docutils literal notranslate"><span class="pre">http://localhost:5000</span></code> in your web browser. If you see the text “It works.” — then all is well. Otherwise, you’ll see an error message that should enable you to resolve the problem.</p>
 <div class="section" id="sqlite-resources">
 <h3>SQLite resources<a class="headerlink" href="#sqlite-resources" title="Permalink to this headline">¶</a></h3>
 <p>SQLite is a SQL database engine that is especially easy to work with because the database — regardless of its size or how many tables it might include — is in a single <code class="docutils literal notranslate"><span class="pre">.db</span></code> file. You can copy the file, upload it to a server, and so on — it is a standalone file.</p>
@@ -329,6 +332,7 @@
 <h3>Connecting to a MySQL database<a class="headerlink" href="#connecting-to-a-mysql-database" title="Permalink to this headline">¶</a></h3>
 <p>Two scripts are provided to test a connection to a MySQL database. <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases/test_mysql_connection">They are here.</a> An additional Python module must be installed — PyMySQL — and a username and password <strong>must</strong> be included in the connection string (even an <em>empty</em> password has a place).</p>
 <p>In addition, when running the MySQL database locally, a socket string must be included. This string will be very different on MacOS and Windows.</p>
+<p>If you do not want to run the database locally, but instead you have the database on a remote server — while you are writing your Flask app (and testing it) on your own computer — you will need to <a class="reference external" href="http://bit.ly/mm-remote-mysql">remotely connect to your MySQL database</a>.</p>
 </div>
 <div class="section" id="the-connection-string">
 <h3>The connection string<a class="headerlink" href="#the-connection-string" title="Permalink to this headline">¶</a></h3>
