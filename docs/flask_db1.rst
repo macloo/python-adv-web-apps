@@ -94,7 +94,34 @@ SQLite is a SQL database engine that is especially easy to work with because the
 * Download the free `DB Browser for SQLite <https://sqlitebrowser.org/>`_
 * SQLite can be used without SQLAlchemy: `Using SQLite3 with Flask <https://flask.palletsprojects.com/en/1.1.x/patterns/sqlite3/>`_
 
+Connecting to a MySQL database
+++++++++++++++++++++++++++++++
 
+Two scripts are provided to test a connection to a MySQL database. `They are here. <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases/test_mysql_connection>`_ An additional Python module must be installed — PyMySQL — and a username and password must be included in the connection string.
+
+In addition, when running the MySQL database locally, a socket string must be included. This string will be different on MacOS and Windows.
+
+Setting environment variables
++++++++++++++++++++++++++++++
+
+Instead of including username, password, and the whole database connection string within a Python script, you can set the complete string as an **environment variable.** If you do, then add the following lines near the top of your script: ::
+
+    import os
+    # check for environment variable
+    if not os.getenv("DATABASE_URL"):
+        raise RuntimeError("DATABASE_URL is not set")
+
+And change the ``app.config`` statement to this: ::
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+
+Look up how to set an environment variable for your operating system.
+
+``os`` is a built-in Python module.
+
+When setting up a Flask app on a server, there will be an option to set environment variables there. Your Python script will not change.
+
+.. important:: Only one environment variable on your computer, or in an app, can be named ``DATABASE_URL`` — it’s a var1able name, so you can change the string to something else.
 
 
 
