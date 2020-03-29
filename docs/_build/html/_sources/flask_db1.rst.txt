@@ -75,9 +75,12 @@ Here’s a starter script for testing whether you can connect:
 
 .. literalinclude:: ../python_code_examples/flask/databases/test_local_sqlite_db.py
    :linenos:
+   :emphasize-lines: 16
    :caption:
 
 The script above assumes that a SQLite database file (see filename on line 14) is in the same directory as the ``.py`` file. The script will work with any SQLite database file.
+
+Note that line 16 is the key to the connection — it contains the **database connection string,** which will be *different* depending on which SQL database system you are connecting to. The SQLite connection string is simpler than the others, so be sure to read on if you're using MySQL, PostgreSQL, or another system.
 
 Run the script above: ::
 
@@ -90,6 +93,8 @@ SQLite resources
 
 SQLite is a SQL database engine that is especially easy to work with because the database — regardless of its size or how many tables it might include — is in a single ``.db`` file.
 
+Unlike other database systems, a SQLite database does not have a username or password option.
+
 * `SQLite homepage <https://www.sqlite.org/index.html>`_
 * Download the free `DB Browser for SQLite <https://sqlitebrowser.org/>`_
 * SQLite can be used without SQLAlchemy: `Using SQLite3 with Flask <https://flask.palletsprojects.com/en/1.1.x/patterns/sqlite3/>`_
@@ -97,29 +102,31 @@ SQLite is a SQL database engine that is especially easy to work with because the
 Connecting to a MySQL database
 ++++++++++++++++++++++++++++++
 
-Two scripts are provided to test a connection to a MySQL database. `They are here. <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases/test_mysql_connection>`_ An additional Python module must be installed — PyMySQL — and a username and password must be included in the connection string.
+Two scripts are provided to test a connection to a MySQL database. `They are here. <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases/test_mysql_connection>`_ An additional Python module must be installed — PyMySQL — and a username and password **must** be included in the connection string (even an *empty* password has a place).
 
-In addition, when running the MySQL database locally, a socket string must be included. This string will be different on MacOS and Windows.
+In addition, when running the MySQL database locally, a socket string must be included. This string will be very different on MacOS and Windows.
 
 Setting environment variables
 +++++++++++++++++++++++++++++
 
-Instead of including username, password, and the whole database connection string within a Python script, you can set the complete string as an **environment variable.** If you do, then add the following lines near the top of your script: ::
+Instead of including username, password, and the whole database connection string *within a Python script,* you can set the complete string as an **environment variable.** If you do, then add the following lines near the top of your script: ::
 
     import os
     # check for environment variable
     if not os.getenv("DATABASE_URL"):
         raise RuntimeError("DATABASE_URL is not set")
 
-And change the ``app.config`` statement to this: ::
+Eliminate all lines that refer to username, password, server, and database name.
+
+Change the ``app.config`` statement to this: ::
 
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
 
 Look up how to set an environment variable for your operating system.
 
-``os`` is a built-in Python module.
+.. note::  ``os`` is a built-in Python module.
 
-When setting up a Flask app on a server, there will be an option to set environment variables there. Your Python script will not change.
+When setting up a Flask app on a server, there will be an option to set environment variables there. The lines in the script referring to the environment variable will not change.
 
 .. important:: Only one environment variable on your computer, or in an app, can be named ``DATABASE_URL`` — it’s a var1able name, so you can change the string to something else.
 
