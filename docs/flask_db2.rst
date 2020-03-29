@@ -87,6 +87,16 @@ When the code runs, this is the result in the browser:
 
 We have successfully queried data from this database and used it in a Flask route. Now we will put it into a Flask template.
 
+Add a template
+--------------
+
+Using a Flask template, we can make the list of socks display like this:
+
+.. figure:: _static/images/socks_list_template.png
+   :alt: Socks list in templated page screenshot
+
+Here is the central section of the HTML template that will display the socks. Instead of using an HTML list with ``<ul>`` and ``<li>`` tags, we’re using the standard HTML table tags with Bootstrap styles applied.
+
 
 
 

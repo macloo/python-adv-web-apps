@@ -100,6 +100,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Flask: Read from a Database</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#the-database">The database</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#first-read">First read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#add-a-template">Add a template</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
@@ -333,6 +334,14 @@
 <a class="reference internal image-reference" href="_images/db_read_result.png"><img alt="Results in browser screenshot" src="_images/db_read_result.png" style="width: 351.0px; height: 349.0px;" /></a>
 </div>
 <p>We have successfully queried data from this database and used it in a Flask route. Now we will put it into a Flask template.</p>
+</div>
+<div class="section" id="add-a-template">
+<h2>Add a template<a class="headerlink" href="#add-a-template" title="Permalink to this headline">¶</a></h2>
+<p>Using a Flask template, we can make the list of socks display like this:</p>
+<div class="figure align-default">
+<img alt="Socks list in templated page screenshot" src="_images/socks_list_template.png" />
+</div>
+<p>Here is the central section of the HTML template that will display the socks. Instead of using an HTML list with <code class="docutils literal notranslate"><span class="pre">&lt;ul&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;li&gt;</span></code> tags, we’re using the standard HTML table tags with Bootstrap styles applied.</p>
 <p>.</p>
 </div>
 </div>
