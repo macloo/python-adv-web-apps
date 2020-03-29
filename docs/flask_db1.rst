@@ -68,14 +68,35 @@ Of course, you’ll be using templates and all the other aspects of Flask covere
 For all Python and SQL commands, refer to the links listed under “User’s Guide” in the `Flask-SQLAlchemy documentation <https://flask-sqlalchemy.palletsprojects.com/>`_.
 
 
-How to connect a SQLite database to a Flask app
------------------------------------------------
+How to connect a database to a Flask app
+----------------------------------------
 
 Here’s a starter script for testing whether you can connect:
 
 .. literalinclude:: ../python_code_examples/flask/databases/test_local_sqlite_db.py
    :linenos:
    :caption:
+
+The script above assumes that a SQLite database file (see filename on line 14) is in the same directory as the ``.py`` file. The script will work with any SQLite database file.
+
+Run the script above: ::
+
+    python test_local_sqlite_db.py
+
+Open ``http://localhost:5000/`` in your web browser. If you see the text “It works.” — then all is well. Otherwise, you’ll see an error message that should enable you to resolve the problem.
+
+SQLite resources
+++++++++++++++++
+
+SQLite is a SQL database engine that is especially easy to work with because the database — regardless of its size or how many tables it might include — is in a single ``.db`` file.
+
+* `SQLite homepage <https://www.sqlite.org/index.html>`_
+* Download the free `DB Browser for SQLite <https://sqlitebrowser.org/>`_
+* SQLite can be used without SQLAlchemy: `Using SQLite3 with Flask <https://flask.palletsprojects.com/en/1.1.x/patterns/sqlite3/>`_
+
+
+
+
 
 
 .
