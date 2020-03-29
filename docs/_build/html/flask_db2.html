@@ -1,6 +1,5 @@
 
 
-
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
@@ -9,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; Python Beginners  documentation</title>
+  <title>Flask: Read from a Database &mdash; Python Beginners  documentation</title>
   
 
   
@@ -34,8 +33,10 @@
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="index" title="Index" href="#" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="configparser" href="configparser.html" />
+    <link rel="prev" title="Flask and Databases" href="flask_db1.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -80,7 +81,7 @@
             
             
               <p class="caption"><span class="caption-text">Contents</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="learn_python.html">Starting Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="functions.html">Functions in Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lists.html">Working with Lists</a></li>
@@ -96,7 +97,10 @@
 <li class="toctree-l1"><a class="reference internal" href="flask_deploy.html">Flask: Deploy an App</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flask_forms.html">Flask: Web Forms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flask_db1.html">Flask and Databases</a></li>
-<li class="toctree-l1"><a class="reference internal" href="flask_db2.html">Flask: Read from a Database</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Flask: Read from a Database</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-database">The database</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
 </ul>
 
@@ -143,12 +147,14 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Index</li>
+      <li>Flask: Read from a Database</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
+            <a href="_sources/flask_db2.rst.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
     
@@ -160,11 +166,26 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
+  <div class="section" id="flask-read-from-a-database">
+<h1>Flask: Read from a Database<a class="headerlink" href="#flask-read-from-a-database" title="Permalink to this headline">¶</a></h1>
+<p>It is essential to get your <strong>database connection</strong> working without errors before you try to do more with the database and Flask.</p>
+<ul class="simple">
+<li><p>Refer to <a class="reference external" href="flask_db1.html">the previous chapter</a> to test your database connection.</p></li>
+</ul>
+<p>In this chapter we focus on reading data from a SQLite database, using Flask-SQLAlchemy.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.sqlalchemy.org/">SQLAlchemy documentation</a></p></li>
+<li><p><a class="reference external" href="https://flask-sqlalchemy.palletsprojects.com/">Flask-SQLAlchemy documentation</a></p></li>
+<li><p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases">Code for this chapter</a></p></li>
+</ul>
+<div class="section" id="the-database">
+<h2>The database<a class="headerlink" href="#the-database" title="Permalink to this headline">¶</a></h2>
+<p>The SQLite database used here is named <em>sockmarket.db.</em> It has only one table, named <strong>socks.</strong> It has seven fields: <em>id, name, style, color, quantity, price,</em> and <em>updated.</em> You will see the table name and the field names later, in the Python code. The image below is a screenshot from the <a class="reference external" href="https://sqlitebrowser.org/">DB Browser for SQLite</a>, showing the top rows of the <strong>socks</strong> table.</p>
+<div class="figure align-default">
+<img alt="Socks table in DB Browser screenshot" src="_images/socks_db_browser.png" />
+</div>
+<p>.</p>
+</div>
 </div>
 
 
@@ -172,6 +193,15 @@
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="configparser.html" class="btn btn-neutral float-right" title="configparser" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="flask_db1.html" class="btn btn-neutral float-left" title="Flask and Databases" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

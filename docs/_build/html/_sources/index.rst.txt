@@ -40,4 +40,5 @@ See also the `official Python documentation <https://docs.python.org/3/>`_.
    flask_deploy
    flask_forms
    flask_db1
+   flask_db2
    configparser
