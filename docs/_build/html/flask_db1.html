@@ -192,7 +192,8 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">flask</span><span class="o">-</span><span class="n">sqlalchemy</span>
 </pre></div>
 </div>
-<p>We will use SQLite3 for database examples here. SQLAlchemy can bridge between Python and various different SQL database systems — some of which need an additional module, or library, to be installed. SQLite <em>does not</em> require an additional module — the <code class="docutils literal notranslate"><span class="pre">sqlite3</span></code> module is included in Python 3.x. <a class="reference external" href="https://docs.sqlalchemy.org/en/13/dialects/">Find other modules for other SQL databases.</a></p>
+<p>We will use SQLite for database examples here. Although it’s not necessary to use SQLAlchemy to interact with a SQLite database, learning to use SQLAlchemy gives you a skill set that can be applied to <em>any</em> SQL database system.</p>
+<p>SQLAlchemy can bridge between Python and various different SQL database systems — some of which need an additional module, or library, to be installed. SQLite <em>does not</em> require an additional module — the <code class="docutils literal notranslate"><span class="pre">sqlite3</span></code> module is included in Python 3.x. <a class="reference external" href="https://docs.sqlalchemy.org/en/13/dialects/">Find other modules for other SQL databases.</a></p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>If you’re using a MySQL or PostgreSQL database, you will need to install a DBAPI module such as <code class="docutils literal notranslate"><span class="pre">psycopg2</span></code> (PostgreSQL) or <code class="docutils literal notranslate"><span class="pre">PyMySQL</span></code> (MySQL).</p>
@@ -200,12 +201,12 @@
 </div>
 <div class="section" id="basics-of-using-a-database-with-flask">
 <h2>Basics of using a database with Flask<a class="headerlink" href="#basics-of-using-a-database-with-flask" title="Permalink to this headline">¶</a></h2>
-<p>You’ll <em>connect</em> your Flask app to an existing SQL database, whether the app reads from the database, writes to the database, or both. Connecting will require your own database username and database password. (You are the owner of the database.)</p>
+<p>You’ll <em>connect</em> your Flask app to an existing SQL database. Connecting will require your own database username and database password, <em>unless</em> using SQLite.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>You <em>can</em> create the SQL database using Python, but <em>that is not required.</em> If you already have a database, all you need to worry about is how to connect it. If you <em>do</em> use Python to create a SQL database (and that’s an “if,” not a necessity), you will only do it once. You don’t create the same database again and again.</p>
 </div>
-<p>Your database may have one table, or more than one table. That depends on what you need, or the structure of the existing SQL database. You’ll need to know the table name(s).</p>
+<p>Your database may have one table, or more than one table. That depends on what you need, or the structure of the existing SQL database. You’ll need to know the table name(s). You’ll need to know the fieldnames (column headings) in each table.</p>
 <p>Your app might only <em>read from</em> your SQL database. You can write SQL queries to accomplish this — using Flask-SQLAlchemy commands to do so. Note that you won’t write a straightforward SQL query. Here is an example of Flask-SQLAlchemy syntax:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">socks</span> <span class="o">=</span> <span class="n">Sock</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;knee-high&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sock</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 </pre></div>
