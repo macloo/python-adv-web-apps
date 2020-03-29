@@ -104,8 +104,10 @@
 <li class="toctree-l3"><a class="reference internal" href="#connecting-to-a-mysql-database">Connecting to a MySQL database</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#the-connection-string">The connection string</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#setting-environment-variables">Setting environment variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-could-go-wrong">What could go wrong?</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#conclusion">Conclusion</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
@@ -313,11 +315,12 @@
 <p>Open <code class="docutils literal notranslate"><span class="pre">http://localhost:5000/</span></code> in your web browser. If you see the text “It works.” — then all is well. Otherwise, you’ll see an error message that should enable you to resolve the problem.</p>
 <div class="section" id="sqlite-resources">
 <h3>SQLite resources<a class="headerlink" href="#sqlite-resources" title="Permalink to this headline">¶</a></h3>
-<p>SQLite is a SQL database engine that is especially easy to work with because the database — regardless of its size or how many tables it might include — is in a single <code class="docutils literal notranslate"><span class="pre">.db</span></code> file.</p>
-<p>Unlike other database systems, a SQLite database does not have a username or password option.</p>
+<p>SQLite is a SQL database engine that is especially easy to work with because the database — regardless of its size or how many tables it might include — is in a single <code class="docutils literal notranslate"><span class="pre">.db</span></code> file. You can copy the file, upload it to a server, and so on — it is a standalone file.</p>
+<p>Unlike other database systems, a SQLite database does not have a username or password for access to the database itself.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.sqlite.org/index.html">SQLite homepage</a></p></li>
-<li><p>Download the free <a class="reference external" href="https://sqlitebrowser.org/">DB Browser for SQLite</a></p></li>
+<li><p><a class="reference external" href="https://www.sqlite.org/download.html">Download and install SQLite for your operating system</a> (note: MacOS already has SQLite)</p></li>
+<li><p>Download the free <a class="reference external" href="https://sqlitebrowser.org/">DB Browser for SQLite</a> (you can easily create tables by importing CSV files) — use this to create a new database, add tables, set data types for columns, etc.</p></li>
 <li><p>SQLite can be used without SQLAlchemy: <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/patterns/sqlite3/">Using SQLite3 with Flask</a></p></li>
 </ul>
 </div>
@@ -367,8 +370,27 @@
 <p class="admonition-title">Note</p>
 <p>If you’re using a SQLite database, don’t bother with environment variables.</p>
 </div>
-<p>.</p>
 </div>
+<div class="section" id="what-could-go-wrong">
+<h3>What could go wrong?<a class="headerlink" href="#what-could-go-wrong" title="Permalink to this headline">¶</a></h3>
+<p>If you cannot get your Flask app to connect to your database, check the following:</p>
+<ul class="simple">
+<li><p>You forgot to install something (Flask-SQLAlchemy, or PyMySQL, etc.) in your Python virtual environment.</p></li>
+<li><p>Your virtual environment has not been activated.</p></li>
+<li><p>Your username and/or password for the database are wrong.</p></li>
+<li><p>Your database name is incorrect.</p></li>
+<li><p>On a remote server, permissions for the database user are not set correctly.</p></li>
+<li><p>For a local database, the socket does not match what you need on your computer.</p></li>
+<li><p>For a local MySQL database, you have not started the MySQL server.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>This has been a basic introduction to getting started with Flask-SQLAlchemy and databases in Flask. The first step is to make sure you are able to connect successfully to the database you want to use.</p>
+<p>Creating a database from scratch will not be covered here.</p>
+<p>You have not done any <strong>reading from</strong> or <strong>writing to</strong> the database yet. That comes next, in the following chapters.</p>
+<p>.</p>
 </div>
 </div>
 

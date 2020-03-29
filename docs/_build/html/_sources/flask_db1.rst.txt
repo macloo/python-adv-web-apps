@@ -91,12 +91,13 @@ Open ``http://localhost:5000/`` in your web browser. If you see the text “It w
 SQLite resources
 ++++++++++++++++
 
-SQLite is a SQL database engine that is especially easy to work with because the database — regardless of its size or how many tables it might include — is in a single ``.db`` file.
+SQLite is a SQL database engine that is especially easy to work with because the database — regardless of its size or how many tables it might include — is in a single ``.db`` file. You can copy the file, upload it to a server, and so on — it is a standalone file.
 
-Unlike other database systems, a SQLite database does not have a username or password option.
+Unlike other database systems, a SQLite database does not have a username or password for access to the database itself.
 
 * `SQLite homepage <https://www.sqlite.org/index.html>`_
-* Download the free `DB Browser for SQLite <https://sqlitebrowser.org/>`_
+* `Download and install SQLite for your operating system <https://www.sqlite.org/download.html>`_ (note: MacOS already has SQLite)
+* Download the free `DB Browser for SQLite <https://sqlitebrowser.org/>`_ (you can easily create tables by importing CSV files) — use this to create a new database, add tables, set data types for columns, etc.
 * SQLite can be used without SQLAlchemy: `Using SQLite3 with Flask <https://flask.palletsprojects.com/en/1.1.x/patterns/sqlite3/>`_
 
 Connecting to a MySQL database
@@ -118,7 +119,6 @@ For other database systems, the connection string will be more complex: ::
     'mysql+pymysql://' + username + ':' + password + '@' + server + database
 
 Note, that example is for MySQL only; the protocol will be different for, say, PostgreSQL.
-
 
 Setting environment variables
 +++++++++++++++++++++++++++++
@@ -149,6 +149,27 @@ When setting up a Flask app on a server, there will be an option to set environm
 .. note:: If you’re using a SQLite database, don’t bother with environment variables.
 
 
+What could go wrong?
+++++++++++++++++++++
+
+If you cannot get your Flask app to connect to your database, check the following:
+
+* You forgot to install something (Flask-SQLAlchemy, or PyMySQL, etc.) in your Python virtual environment.
+* Your virtual environment has not been activated.
+* Your username and/or password for the database are wrong.
+* Your database name is incorrect.
+* On a remote server, permissions for the database user are not set correctly.
+* For a local database, the socket does not match what you need on your computer.
+* For a local MySQL database, you have not started the MySQL server.
+
+
+Conclusion
+----------
+This has been a basic introduction to getting started with Flask-SQLAlchemy and databases in Flask. The first step is to make sure you are able to connect successfully to the database you want to use.
+
+Creating a database from scratch will not be covered here.
+
+You have not done any **reading from** or **writing to** the database yet. That comes next, in the following chapters.
 
 
 .
