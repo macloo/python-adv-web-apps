@@ -9,7 +9,7 @@ To add database functionality to a Flask app, we will use SQLAlchemy.
 
 * `SQLAlchemy documentation <https://www.sqlalchemy.org/>`_
 * `Flask-SQLAlchemy documentation <https://flask-sqlalchemy.palletsprojects.com/>`_
-* Code for this chapter TK
+* `Code for this chapter <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases>`_
 
 
 Setup: Flask-SQLAlchemy
