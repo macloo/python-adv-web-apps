@@ -73,7 +73,9 @@ How to connect a SQLite database to a Flask app
 
 Here’s a starter script for testing whether you can connect:
 
-
+.. literalinclude:: ../python_code_examples/flask/databases/test_local_sqlite_db.py
+   :linenos:
+   :caption:
 
 
 .
