@@ -252,16 +252,16 @@
 <span class="c1"># each table in the database needs a class to be created for it</span>
 <span class="c1"># db.Model is required - don&#39;t change it</span>
 <span class="c1"># identify all columns by name and data type</span>
-<span class="k">class</span> <span class="nc">Sock</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;socks&#39;</span>
-    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">)</span>
-    <span class="n">style</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">)</span>
-    <span class="n">color</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">)</span>
-    <span class="n">quantity</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
-    <span class="n">price</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
-    <span class="n">updated</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">)</span>
-
+<span class="hll"><span class="k">class</span> <span class="nc">Sock</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+</span><span class="hll">    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;socks&#39;</span>
+</span><span class="hll">    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span class="hll">    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">)</span>
+</span><span class="hll">    <span class="n">style</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">)</span>
+</span><span class="hll">    <span class="n">color</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">)</span>
+</span><span class="hll">    <span class="n">quantity</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
+</span><span class="hll">    <span class="n">price</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
+</span><span class="hll">    <span class="n">updated</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">)</span>
+</span>
 <span class="c1">#routes</span>
 </pre></div>
 </td></tr></table></div>
@@ -270,7 +270,12 @@
 <div class="section" id="the-model">
 <h3>The model<a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h3>
 <p>Lines 21–29 provide a <em>model</em> so that Python can translate the <strong>socks</strong> table. It’s a Python class that inherits from the <code class="docutils literal notranslate"><span class="pre">Model</span></code> class from SQLAlchemy. (Remember, <code class="docutils literal notranslate"><span class="pre">db</span></code> refers to SQLAlchemy.) We could name the new class anything, but <code class="docutils literal notranslate"><span class="pre">Sock</span></code> makes sense because this table’s data is all about socks.</p>
-<p>If your database has <em>more than one table,</em> you will need to create an additional class like this for each additional table. Note:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#class-names">Python style</a> dictates that a <strong>class</strong> starts with an uppercase letter and uses <a class="reference external" href="https://www.computerhope.com/jargon/c/camelcase.htm">camelCase</a>. Using uppercase (as in <strong>Sock</strong> here) helps us recognize when a class is being used in Python.</p>
+</div>
+<p>If your database has <em>more than one table,</em> you will need to create an additional class like this for each additional table.</p>
+<p>Note the following in the highlighted class above:</p>
 <ul class="simple">
 <li><p>Identify the primary_key field as shown (line 23).</p></li>
 <li><p>Write the field names <em>exactly</em> as they appear in the table.</p></li>
@@ -313,8 +318,8 @@
         <span class="k">for</span> <span class="n">sock</span> <span class="ow">in</span> <span class="n">socks</span><span class="p">:</span>
             <span class="n">sock_text</span> <span class="o">+=</span> <span class="s1">&#39;&lt;li&gt;&#39;</span> <span class="o">+</span> <span class="n">sock</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="n">sock</span><span class="o">.</span><span class="n">color</span> <span class="o">+</span> <span class="s1">&#39;&lt;/li&gt;&#39;</span>
         <span class="n">sock_text</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/ul&gt;&#39;</span>
-        <span class="k">return</span> <span class="n">sock_text</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+<span class="hll">        <span class="k">return</span> <span class="n">sock_text</span>
+</span>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="c1"># e holds description of the error</span>
         <span class="n">error_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;p&gt;The error:&lt;br&gt;&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&lt;/p&gt;&quot;</span>
         <span class="n">hed</span> <span class="o">=</span> <span class="s1">&#39;&lt;h1&gt;Something is broken.&lt;/h1&gt;&#39;</span>
@@ -330,30 +335,36 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">socks</span></code> is a new variable. We assign to it the data we are pulling from the database.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Sock.query</span></code> refers to the class we built, Sock, starting on line 21. We are querying the table specified in that class.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">.filter_by()</span></code> limits what we’re asking for. It’s the <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> clause in regular SQL.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">style='mini'</span></code> — <code class="docutils literal notranslate"><span class="pre">style</span></code> is a field name in this table. <code class="docutils literal notranslate"><span class="pre">'mini'</span></code> is a value in that field (column). So we will get only socks with the style “mini” — not “knee-high,” “ankle,” or “other.”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">style='mini'</span></code> —  in this table, <code class="docutils literal notranslate"><span class="pre">style</span></code> is a field name. <code class="docutils literal notranslate"><span class="pre">'mini'</span></code> is a <em>value</em> in that field (column). So we will get only socks with the style “mini” — not “knee-high,” “ankle,” or “other.”</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">order_by()</span></code> selects a field (column) to determine the <em>order</em> of the results listing. This is optional. Any field could be used.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Sock.name</span></code> refers to the property <code class="docutils literal notranslate"><span class="pre">name</span></code> in the Sock class.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">.all()</span></code> is tacked onto the end of every query, unless you expect or want only one record to be returned — in which case, use <code class="docutils literal notranslate"><span class="pre">.first()</span></code> instead.</p></li>
 </ol>
-<p>Lines 37–40 create a string using the data in <code class="docutils literal notranslate"><span class="pre">socks</span></code> and adding HTML tags around th data — <code class="docutils literal notranslate"><span class="pre">&lt;ul&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;li&gt;</span></code> tags should be familiar to you.</p>
-<p>After the for-loop completes, and the final closing tag <code class="docutils literal notranslate"><span class="pre">&lt;/ul&gt;</span></code> is concatenated to the string, the value of <code class="docutils literal notranslate"><span class="pre">sock_text</span></code> will be:</p>
+<p>The default for <code class="docutils literal notranslate"><span class="pre">order_by()</span></code> is <em>ascending.</em> To sort by a column in <em>descending</em> order:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">desc</span>
+<span class="n">Sock</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;mini&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span> <span class="n">desc</span><span class="p">(</span><span class="n">Sock</span><span class="o">.</span><span class="n">price</span><span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Lines 37–40 create a string using the data in <code class="docutils literal notranslate"><span class="pre">socks</span></code> and adding HTML tags around the data — the <code class="docutils literal notranslate"><span class="pre">&lt;ul&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;li&gt;</span></code> tags should be familiar to you.</p>
+<p>After the for-loop completes, and the final closing tag <code class="docutils literal notranslate"><span class="pre">&lt;/ul&gt;</span></code> is concatenated to the string, <code class="docutils literal notranslate"><span class="pre">sock_text</span></code>, and the final string will be:</p>
 <div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;</span>D&#39;Shawn, blue<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Divine, white stripes on navy<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Faye, dark purple<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Isabel, white<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Jenny, blue<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Jo-Anne, brown<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Krissie, blue<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Lizzy, red<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Nancie, purple<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Tanya, red<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Terrie, blue stripe<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
 </pre></div>
 </div>
-<p>Assuming everything worked, that is what will be <strong>returned</strong> (line 41).</p>
+<p>Assuming that everything worked, that string is what will be <strong>returned</strong> (line 41).</p>
 <p>The rest of the code (lines 42–49) is from <a class="reference external" href="flask_db1.html#how-to-connect-a-database-to-a-flask-app">the database intro chapter</a>.</p>
-<p>When the code runs, this is the result in the browser:</p>
+<p>When the script runs, this is the result in the browser:</p>
 <div class="figure align-default">
 <a class="reference internal image-reference" href="_images/db_read_result.png"><img alt="Results in browser screenshot" src="_images/db_read_result.png" style="width: 351.0px; height: 349.0px;" /></a>
 </div>
-<p>We have successfully queried data from this database and used it in a Flask route. Now we will put it into a Flask template.</p>
+<p>We have successfully queried data from this database and used it in a Flask route.</p>
+<p>Now we will put it into a Flask template.</p>
 </div>
 </div>
 <div class="section" id="add-a-template">
 <h2>Add a template<a class="headerlink" href="#add-a-template" title="Permalink to this headline">¶</a></h2>
-<p>Using a Flask template, we can make the list of socks display like this:</p>
+<p>Using a Flask template, we can make the list of socks display more beautifully:</p>
 <div class="figure align-default">
 <img alt="Socks list in templated page screenshot" src="_images/socks_list_template.png" />
 </div>
@@ -437,7 +448,8 @@
 </div>
 <div class="section" id="the-new-route">
 <h3>The new route<a class="headerlink" href="#the-new-route" title="Permalink to this headline">¶</a></h3>
-<p>If you refer to the Jinja code in the template above, you will see that it requires a value for <em>style</em> — <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">style</span> <span class="pre">}}</span></code> and the value <code class="docutils literal notranslate"><span class="pre">socks</span></code> — used in the for-loop. In the <code class="docutils literal notranslate"><span class="pre">render_template()</span></code> function returned by this route (below), you can see that these values are <strong>passed to the template.</strong></p>
+<p>If you refer to the Jinja code in the <strong>template</strong> above, you will see that it requires a value for <em>style</em> — <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">style</span> <span class="pre">}}</span></code> and the value <code class="docutils literal notranslate"><span class="pre">socks</span></code> — used in the for-loop. (Those lines are highlighted.)</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">render_template()</span></code> function returned by this route (below), you can see that these values are <strong>passed to the template.</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/inventory/&lt;style&gt;&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">inventory</span><span class="p">(</span><span class="n">style</span><span class="p">):</span>
     <span class="n">socks</span> <span class="o">=</span> <span class="n">Sock</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sock</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
@@ -472,8 +484,8 @@
 <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
     <span class="c1"># get a list of unique values in the style column</span>
-    <span class="n">styles</span> <span class="o">=</span> <span class="n">Sock</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">with_entities</span><span class="p">(</span><span class="n">Sock</span><span class="o">.</span><span class="n">style</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="n">styles</span><span class="o">=</span><span class="n">styles</span><span class="p">)</span>
+<span class="hll">    <span class="n">styles</span> <span class="o">=</span> <span class="n">Sock</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">with_entities</span><span class="p">(</span><span class="n">Sock</span><span class="o">.</span><span class="n">style</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span>
+</span>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="n">styles</span><span class="o">=</span><span class="n">styles</span><span class="p">)</span>
 
 </pre></div>
 </td></tr></table></div>
@@ -504,15 +516,15 @@
 
       &lt;ul&gt;
           {% for s in styles %}
-          &lt;li&gt;&lt;a href=&quot;{{ url_for( &#39;inventory&#39;, style=s.style ) }}&quot;&gt;{{ s.style }}&lt;/a&gt;&lt;/li&gt;
-          {% endfor %}
+<span class="hll">          &lt;li&gt;&lt;a href=&quot;{{ url_for( &#39;inventory&#39;, style=s.style ) }}&quot;&gt;{{ s.style }}&lt;/a&gt;&lt;/li&gt;
+</span>          {% endfor %}
       &lt;/ul&gt;
 </pre></div>
 </td></tr></table></div>
 </div>
 <p>Above is the HTML in the <em>index.html</em> template. The list <code class="docutils literal notranslate"><span class="pre">styles</span></code> came from the route, and we can loop over the list with a Jinja directive.</p>
 <p>The URL value for <code class="docutils literal notranslate"><span class="pre">href=</span></code> must be encoded for Flask (line 29). This was covered in the templates chapter.</p>
-<p>Both the <code class="docutils literal notranslate"><span class="pre">href=</span></code> value and the text that is linked use the same value from <code class="docutils literal notranslate"><span class="pre">styles</span></code>. As we loop over <code class="docutils literal notranslate"><span class="pre">styles</span></code>, the current record is <code class="docutils literal notranslate"><span class="pre">s</span></code> — so the value in the <strong>style</strong> column is accessed with <code class="docutils literal notranslate"><span class="pre">s.style</span></code>.</p>
+<p>In line 29, both the <code class="docutils literal notranslate"><span class="pre">href=</span></code> value and the text that is linked <em>use the same value</em> from <code class="docutils literal notranslate"><span class="pre">styles</span></code>. As we loop over <code class="docutils literal notranslate"><span class="pre">styles</span></code>, the current record is <code class="docutils literal notranslate"><span class="pre">s</span></code> — so the value in the <strong>style</strong> column is accessed with <code class="docutils literal notranslate"><span class="pre">s.style</span></code>. Because the list <code class="docutils literal notranslate"><span class="pre">styles</span></code> contains only unique values from the <strong>style</strong> column, each different style appears only once.</p>
 <p>The URL that executes the <em>other</em> route function in this app is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">inventory</span><span class="o">/&lt;</span><span class="n">style</span><span class="o">&gt;</span>
 </pre></div>
@@ -521,16 +533,26 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">president</span><span class="o">/&lt;</span><span class="n">num</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-<p>The result of clicking <em>knee-high</em> on the index page is that this request is sent to the server, and this URL appears in the browser:</p>
+<p>The result of clicking <em>knee-high</em> on the index page is that the following HTTP request is sent to the server:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">localhost</span><span class="p">:</span><span class="mi">5000</span><span class="o">/</span><span class="n">inventory</span><span class="o">/</span><span class="n">knee</span><span class="o">-</span><span class="n">high</span>
 </pre></div>
 </div>
+<p>The HTTP response comes from <strong>this route</strong> in the app script, with the value of <code class="docutils literal notranslate"><span class="pre">style</span></code> now being <code class="docutils literal notranslate"><span class="pre">knee-high</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/inventory/&lt;style&gt;&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">inventory</span><span class="p">(</span><span class="n">style</span><span class="p">):</span>
+    <span class="n">socks</span> <span class="o">=</span> <span class="n">Sock</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sock</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;list.html&#39;</span><span class="p">,</span> <span class="n">socks</span><span class="o">=</span><span class="n">socks</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the browser, the <em>list.html</em> template will be loaded, displaying a table showing all sock records that have the style <em>knee-high.</em></p>
 </div>
 <div class="section" id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
-<p>Reading from the database depends on being able to connect to the database in the first place.</p>
-<p>After that is accomplished, you need to write a database query (in a Flask route function) that gets what you need from the database. This might be one record (part or whole), several records, or just values from one column in the database. If your database has more than one table, you might need to <a class="reference external" href="https://docs.sqlalchemy.org/en/13/orm/query.html#sqlalchemy.orm.query.Query.join">write SQL joins</a> to get what you need.</p>
-<p>Values obtained from a database query are then passed to the Flask template, as explained in another chapter here. Values are used in a template file according to the Jinja template syntax.</p>
+<p>Reading from the database depends on being able to <strong>connect</strong> to the database in the first place.</p>
+<p>After that is accomplished, you need to write a <strong>database query</strong> (in a Flask route function) that gets what you need from the database. That might be one record (part or whole), several records, or just values from one column in the database.</p>
+<p>Before writing any queries, though, you need to create a <strong>model</strong> for each table in your database. The name of this model class will be used in your database queries.</p>
+<p>If your database has more than one table, you might need to <a class="reference external" href="https://docs.sqlalchemy.org/en/13/orm/query.html#sqlalchemy.orm.query.Query.join">write SQL joins</a> to get what you need.</p>
+<p>Values obtained from a database query are then passed to <strong>a Flask template,</strong> as explained in the templates chapter here. Using the Jinja template syntax in the template file’s code determines where the values appear in the HTML.</p>
 <p>.</p>
 </div>
 </div>

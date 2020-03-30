@@ -208,14 +208,14 @@
 <p>You’ll <em>connect</em> your Flask app to an existing SQL database. Connecting will require your own database username and database password, <em>unless</em> using SQLite.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>You <em>can</em> create the SQL database using Python, but <em>that is not required.</em> If you already have a database, all you need to worry about is how to connect it. If you <em>do</em> use Python to create a SQL database (and that’s an “if,” not a necessity), you will only do it once. You don’t create the same database again and again.</p>
+<p>You <em>can</em> create the SQL database using Python, but <em>that is not required.</em> If you already have a database, all you need to worry about is how to connect it. If you <em>do</em> use Python to create a SQL database (and that’s an “if,” not a necessity), you will only do it once. You don’t create the same database again and again. Yes, this seems like a no-brainer — but you need to think about what your code is <em>doing.</em></p>
 </div>
-<p>Your database may have one table, or more than one table. That depends on what you need, or the structure of the existing SQL database. You’ll need to know the table name(s). You’ll need to know the fieldnames (column headings) in each table.</p>
+<p>Your database may have one table, or more than one table. That depends on what you need, or the structure of the existing SQL database. You’ll need to know the table name(s). You’ll need to know the field names (column headings) in each table.</p>
 <p>Your app might only <em>read from</em> your SQL database. You can write SQL queries to accomplish this — using Flask-SQLAlchemy commands to do so. Note that you won’t write a straightforward SQL query. Here is an example of Flask-SQLAlchemy syntax:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">socks</span> <span class="o">=</span> <span class="n">Sock</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;knee-high&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sock</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>The Flask-SQLAlchemy statement to the right of the equals sign, <em>above,</em> is equivalent to this standard SQL statement:</p>
+<p>The Flask-SQLAlchemy statement <em>to the right of the equals sign,</em> above, is equivalent to this standard SQL statement:</p>
 <div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">socks</span> <span class="k">WHERE</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;knee-high&quot;</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">name</span>
 </pre></div>
 </div>
@@ -228,10 +228,12 @@
 <p>If people are <em>writing into</em> your database, you will want to give them a web form, or forms, for doing so. See <a class="reference external" href="flask_forms.html">Flask: Web Forms</a> if you need to create a web form in your Flask app.</p>
 <p>You will not necessarily need forms if your app only <em>reads from</em> the database, but it is possible you’ll want to allow people to search for content, or to choose content from a menu using a <code class="docutils literal notranslate"><span class="pre">&lt;select&gt;</span></code> element in a form that queries the database. Then a form or forms will be required. Again, you will handle these tasks within Flask, using route functions.</p>
 <p>Of course, you’ll be using templates and all the other aspects of Flask covered in previous chapters here.</p>
+<p>This overview should get you thinking about what you will need <em>your</em> Flask app to do, and how you will be querying the database, inserting new records, etc.</p>
 <p>For all Python and SQL commands, refer to the links listed under “User’s Guide” in the <a class="reference external" href="https://flask-sqlalchemy.palletsprojects.com/">Flask-SQLAlchemy documentation</a>.</p>
 </div>
 <div class="section" id="how-to-connect-a-database-to-a-flask-app">
 <h2>How to connect a database to a Flask app<a class="headerlink" href="#how-to-connect-a-database-to-a-flask-app" title="Permalink to this headline">¶</a></h2>
+<p>The first step, assuming you have a database, is getting your app (or a starter script for your app) to <strong>connect</strong> to the database. <strong>Do this first.</strong></p>
 <p>Here’s a starter script for testing whether you can connect:</p>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/test_local_sqlite_db.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
@@ -312,6 +314,9 @@
 </td></tr></table></div>
 </div>
 <p>The script above assumes that a SQLite database file (see filename on line 14) is in the same directory as the <code class="docutils literal notranslate"><span class="pre">.py</span></code> file. The script will work with any SQLite database file.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases/test_mysql_connection">Starter scripts for a MySQL database connection are here.</a> More about this below.</p></li>
+</ul>
 <p>Note that line 16 is the key to the connection — it contains the <strong>database connection string,</strong> which will be <em>different</em> depending on which SQL database system you are connecting to. The SQLite connection string is simpler than the others, so be sure to read on if you’re using MySQL, PostgreSQL, or another system.</p>
 <p>Run the script above:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">test_local_sqlite_db</span><span class="o">.</span><span class="n">py</span>
@@ -326,7 +331,8 @@
 <li><p><a class="reference external" href="https://www.sqlite.org/index.html">SQLite homepage</a></p></li>
 <li><p><a class="reference external" href="https://www.sqlite.org/download.html">Download and install SQLite for your operating system</a> (note: MacOS already has SQLite)</p></li>
 <li><p>Download the free <a class="reference external" href="https://sqlitebrowser.org/">DB Browser for SQLite</a> (you can easily create tables by importing CSV files) — use this to create a new database, add tables, set data types for columns, etc.</p></li>
-<li><p>SQLite can be used without SQLAlchemy: <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/patterns/sqlite3/">Using SQLite3 with Flask</a></p></li>
+<li><p><a class="reference external" href="https://www.sqlitetutorial.net/">SQLite Tutorial</a></p></li>
+<li><p>SQLite can be used <em>without</em> SQLAlchemy: <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/patterns/sqlite3/">Using SQLite3 with Flask</a></p></li>
 </ul>
 </div>
 <div class="section" id="connecting-to-a-mysql-database">
@@ -341,6 +347,7 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;sqlite:///&#39;</span> <span class="o">+</span> <span class="n">db_name</span>
 </pre></div>
 </div>
+<p>That assumes the <code class="docutils literal notranslate"><span class="pre">.db</span></code> file is adjacent to your <code class="docutils literal notranslate"><span class="pre">.py</span></code> file. If not, write the path as needed.</p>
 <p>For other database systems, the connection string will be more complex:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;mysql+pymysql://&#39;</span> <span class="o">+</span> <span class="n">username</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="n">password</span> <span class="o">+</span> <span class="s1">&#39;@&#39;</span> <span class="o">+</span> <span class="n">server</span> <span class="o">+</span> <span class="n">database</span>
 </pre></div>
