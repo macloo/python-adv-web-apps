@@ -28,6 +28,7 @@ Without templates or anything fancy, let’s attempt to read some data from the 
 .. literalinclude:: ../python_code_examples/flask/databases/read_db_basic.py
    :linenos:
    :lines: 1-31
+   :emphasize-lines: 21-29
    :caption:
 
 Everything up to line 18 comes from the script explained `in the previous chapter <flask_db1.html#how-to-connect-a-database-to-a-flask-app>`_.
@@ -37,7 +38,11 @@ The model
 
 Lines 21–29 provide a *model* so that Python can translate the **socks** table. It’s a Python class that inherits from the ``Model`` class from SQLAlchemy. (Remember, ``db`` refers to SQLAlchemy.) We could name the new class anything, but ``Sock`` makes sense because this table’s data is all about socks.
 
-If your database has *more than one table,* you will need to create an additional class like this for each additional table. Note:
+.. note:: `Python style <https://www.python.org/dev/peps/pep-0008/#class-names>`_ dictates that a **class** starts with an uppercase letter and uses `camelCase <https://www.computerhope.com/jargon/c/camelcase.htm>`_. Using uppercase (as in **Sock** here) helps us recognize when a class is being used in Python.
+
+If your database has *more than one table,* you will need to create an additional class like this for each additional table.
+
+Note the following in the highlighted class above:
 
 * Identify the primary_key field as shown (line 23).
 * Write the field names *exactly* as they appear in the table.
@@ -57,7 +62,7 @@ We will provide only one route to start with, and it includes a try/except just 
    :linenos:
    :lines: 31-49
    :lineno-start: 31
-   :emphasize-lines: 6
+   :emphasize-lines: 6,11
    :caption:
 
 
@@ -66,14 +71,21 @@ The only code that “talks” to the database is in line 36.
 1. ``socks`` is a new variable. We assign to it the data we are pulling from the database.
 2. ``Sock.query`` refers to the class we built, Sock, starting on line 21. We are querying the table specified in that class.
 3. ``.filter_by()`` limits what we’re asking for. It’s the ``WHERE`` clause in regular SQL.
-4. ``style='mini'`` — ``style`` is a field name in this table. ``'mini'`` is a value in that field (column). So we will get only socks with the style “mini” — not “knee-high,” “ankle,” or “other.”
+4. ``style='mini'`` —  in this table, ``style`` is a field name. ``'mini'`` is a *value* in that field (column). So we will get only socks with the style “mini” — not “knee-high,” “ankle,” or “other.”
 5. ``order_by()`` selects a field (column) to determine the *order* of the results listing. This is optional. Any field could be used.
 6. ``Sock.name`` refers to the property ``name`` in the Sock class.
 7. ``.all()`` is tacked onto the end of every query, unless you expect or want only one record to be returned — in which case, use ``.first()`` instead.
 
-Lines 37–40 create a string using the data in ``socks`` and adding HTML tags around th data — ``<ul>`` and ``<li>`` tags should be familiar to you.
 
-After the for-loop completes, and the final closing tag ``</ul>`` is concatenated to the string, the value of ``sock_text`` will be:
+The default for ``order_by()`` is *ascending.* To sort by a column in *descending* order: ::
+
+    from sqlalchemy import desc
+    Sock.query.filter_by(style='mini').order_by( desc(Sock.price) ).all()
+
+
+Lines 37–40 create a string using the data in ``socks`` and adding HTML tags around the data — the ``<ul>`` and ``<li>`` tags should be familiar to you.
+
+After the for-loop completes, and the final closing tag ``</ul>`` is concatenated to the string, ``sock_text``, and the final string will be:
 
 .. code-block:: html
 
@@ -81,22 +93,25 @@ After the for-loop completes, and the final closing tag ``</ul>`` is concatenate
     <li>Isabel, white</li><li>Jenny, blue</li><li>Jo-Anne, brown</li><li>Krissie, blue</li>
     <li>Lizzy, red</li><li>Nancie, purple</li><li>Tanya, red</li><li>Terrie, blue stripe</li></ul>
 
-Assuming everything worked, that is what will be **returned** (line 41).
+Assuming that everything worked, that string is what will be **returned** (line 41).
 
 The rest of the code (lines 42–49) is from `the database intro chapter <flask_db1.html#how-to-connect-a-database-to-a-flask-app>`_.
 
-When the code runs, this is the result in the browser:
+When the script runs, this is the result in the browser:
 
 .. figure:: _static/images/db_read_result.png
    :scale: 50 %
    :alt: Results in browser screenshot
 
-We have successfully queried data from this database and used it in a Flask route. Now we will put it into a Flask template.
+We have successfully queried data from this database and used it in a Flask route.
+
+Now we will put it into a Flask template.
+
 
 Add a template
 --------------
 
-Using a Flask template, we can make the list of socks display like this:
+Using a Flask template, we can make the list of socks display more beautifully:
 
 .. figure:: _static/images/socks_list_template.png
    :alt: Socks list in templated page screenshot
@@ -137,7 +152,9 @@ Note that the **database query** is the same below, in the new route that *uses 
 The new route
 +++++++++++++
 
-If you refer to the Jinja code in the template above, you will see that it requires a value for *style* — ``{{ style }}`` and the value ``socks`` — used in the for-loop. In the ``render_template()`` function returned by this route (below), you can see that these values are **passed to the template.** ::
+If you refer to the Jinja code in the **template** above, you will see that it requires a value for *style* — ``{{ style }}`` and the value ``socks`` — used in the for-loop. (Those lines are highlighted.)
+
+In the ``render_template()`` function returned by this route (below), you can see that these values are **passed to the template.** ::
 
     @app.route('/inventory/<style>')
     def inventory(style):
@@ -165,6 +182,7 @@ We might know exactly which styles are available in this database — but what i
    :linenos:
    :lines: 35-42
    :lineno-start: 35
+   :emphasize-lines: 6
    :caption:
 
 Above is the route for the index (or starting page) of the app. It calls the template named *index.html,* which you can see in part below. But focus your attention on the **database query** in line 40.
