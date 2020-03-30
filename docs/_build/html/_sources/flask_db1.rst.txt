@@ -178,13 +178,15 @@ If you cannot get your Flask app to connect to your database, check the followin
 * For a local MySQL database, you have not started the MySQL server.
 
 
-Conclusion
+Summary
 ----------
-This has been a basic introduction to getting started with Flask-SQLAlchemy and databases in Flask. The first step is to make sure you are able to connect successfully to the database you want to use.
+This has been a basic introduction to *getting started* with Flask-SQLAlchemy and databases in Flask. The first step is to make sure you are able to **connect** successfully to the database you want to use.
 
-Creating a database from scratch will not be covered here.
+A successful connection depends on **which type of SQL system** your database was built in. In this chapter, SQLite and MySQL are covered. PostgreSQL is another popular option but not covered here.
 
-You have not done any **reading from** or **writing to** the database yet. That comes next, in the following chapters.
+Creating a database from scratch is not covered here.
+
+The following two chapters cover **reading from** or **writing to** the database.
 
 
 .
