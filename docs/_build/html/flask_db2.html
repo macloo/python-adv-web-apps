@@ -551,7 +551,7 @@
 <p>Reading from the database depends on being able to <strong>connect</strong> to the database in the first place. That is covered in <a class="reference external" href="flask_db1.html">Flask and Databases</a>.</p>
 <p>After that is accomplished, you need to write a <strong>database query</strong> (in a Flask route function) that gets what you need from the database. You might need only one record (part or whole), several records, or just values from one column in the database.</p>
 <p>Before writing any queries, though, you need to create a <strong>model</strong> for each table in your database. The name of this model class will be used in your database queries.</p>
-<p>If your database has more than one table, you might need to <a class="reference external" href="https://docs.sqlalchemy.org/en/13/orm/query.html#sqlalchemy.orm.query.Query.join">write SQL joins</a> to get what you need. Joins are not covered here.</p>
+<p>If your database has more than one table, you might need to <a class="reference external" href="https://docs.sqlalchemy.org/en/13/orm/query.html#sqlalchemy.orm.query.Query.join">write SQL joins</a> to get what you need. Joins are not covered here. <a class="reference external" href="https://docs.sqlalchemy.org/en/13/core/constraints.html?highlight=foreignkey#sqlalchemy.schema.ForeignKey">Explicit linking of tables with a foreign key</a> also is not covered here.</p>
 <p>Values obtained from a database query are then passed to <strong>a Flask template.</strong> Using the Jinja template syntax in the template file’s code determines where the values appear in the HTML. That is covered in <a class="reference external" href="flask3.html">Flask Templates</a> and also in this chapter.</p>
 <p>.</p>
 </div>

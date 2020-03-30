@@ -237,7 +237,7 @@ After that is accomplished, you need to write a **database query** (in a Flask r
 
 Before writing any queries, though, you need to create a **model** for each table in your database. The name of this model class will be used in your database queries.
 
-If your database has more than one table, you might need to `write SQL joins <https://docs.sqlalchemy.org/en/13/orm/query.html#sqlalchemy.orm.query.Query.join>`_ to get what you need. Joins are not covered here.
+If your database has more than one table, you might need to `write SQL joins <https://docs.sqlalchemy.org/en/13/orm/query.html#sqlalchemy.orm.query.Query.join>`_ to get what you need. Joins are not covered here. `Explicit linking of tables with a foreign key <https://docs.sqlalchemy.org/en/13/core/constraints.html?highlight=foreignkey#sqlalchemy.schema.ForeignKey>`_ also is not covered here.
 
 Values obtained from a database query are then passed to **a Flask template.** Using the Jinja template syntax in the template file’s code determines where the values appear in the HTML. That is covered in `Flask Templates <flask3.html>`_ and also in this chapter.
 
