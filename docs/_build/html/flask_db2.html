@@ -110,7 +110,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#a-different-database-query">A different database query</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
@@ -200,8 +200,8 @@
 <div class="section" id="first-read">
 <h2>First read<a class="headerlink" href="#first-read" title="Permalink to this headline">¶</a></h2>
 <p>Without templates or anything fancy, let’s attempt to read some data from the database and return it in the browser.</p>
-<div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/read_db_basic.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/read_db_basic.py</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -288,8 +288,8 @@
 <div class="section" id="the-query-in-the-route">
 <h3>The query in the route<a class="headerlink" href="#the-query-in-the-route" title="Permalink to this headline">¶</a></h3>
 <p>We will provide only one route to start with, and it includes a try/except just like the example <a class="reference external" href="flask_db1.html#how-to-connect-a-database-to-a-flask-app">in the previous chapter</a>.</p>
-<div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/read_db_basic.py</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/read_db_basic.py</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>31
 32
 33
@@ -369,8 +369,8 @@
 <img alt="Socks list in templated page screenshot" src="_images/socks_list_template.png" />
 </div>
 <p>Here is the central section of the HTML template that will display the socks. Instead of using an HTML list with <code class="docutils literal notranslate"><span class="pre">&lt;ul&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;li&gt;</span></code> tags, we’re using the standard HTML table tags with <strong>Bootstrap</strong> styles applied.</p>
-<div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/flask_db_read/templates/list.html</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/flask_db_read/templates/list.html</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>22
 23
 24
@@ -470,8 +470,8 @@
 <img alt="Socks index template screenshot" src="_images/read_db_index_template.png" />
 </div>
 <p>We might know exactly which styles are available in this database — but what if we <em>don’t</em> know? What if we expect <em>new styles</em> to be added without warning? Then we cannot hard-code the style values into the page you see above. Someday there might be a fifth style. We need to extract the styles from the database itself.</p>
-<div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/flask_db_read/read_db.py</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/flask_db_read/read_db.py</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>35
 36
 37
@@ -496,8 +496,8 @@
 <li><p>The <code class="docutils literal notranslate"><span class="pre">distinct()</span></code> method returns only unique values in the specified column.</p></li>
 </ul>
 <p>Therefore, the contents of the new variable <code class="docutils literal notranslate"><span class="pre">styles</span></code> in line 40 above are one instance of each unique value in the <strong>style</strong> column. By passing <code class="docutils literal notranslate"><span class="pre">styles</span></code> to the template <em>index.html,</em> we can use those values to create a list of links.</p>
-<div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/flask_db_read/templates/index.html</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/flask_db_read/templates/index.html</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>21
 22
 23
@@ -546,13 +546,13 @@
 </div>
 <p>In the browser, the <em>list.html</em> template will be loaded, displaying a table showing all sock records that have the style <em>knee-high.</em></p>
 </div>
-<div class="section" id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
-<p>Reading from the database depends on being able to <strong>connect</strong> to the database in the first place.</p>
-<p>After that is accomplished, you need to write a <strong>database query</strong> (in a Flask route function) that gets what you need from the database. That might be one record (part or whole), several records, or just values from one column in the database.</p>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>Reading from the database depends on being able to <strong>connect</strong> to the database in the first place. That is covered in <a class="reference external" href="flask_db1.html">Flask and Databases</a>.</p>
+<p>After that is accomplished, you need to write a <strong>database query</strong> (in a Flask route function) that gets what you need from the database. You might need only one record (part or whole), several records, or just values from one column in the database.</p>
 <p>Before writing any queries, though, you need to create a <strong>model</strong> for each table in your database. The name of this model class will be used in your database queries.</p>
-<p>If your database has more than one table, you might need to <a class="reference external" href="https://docs.sqlalchemy.org/en/13/orm/query.html#sqlalchemy.orm.query.Query.join">write SQL joins</a> to get what you need.</p>
-<p>Values obtained from a database query are then passed to <strong>a Flask template,</strong> as explained in the templates chapter here. Using the Jinja template syntax in the template file’s code determines where the values appear in the HTML.</p>
+<p>If your database has more than one table, you might need to <a class="reference external" href="https://docs.sqlalchemy.org/en/13/orm/query.html#sqlalchemy.orm.query.Query.join">write SQL joins</a> to get what you need. Joins are not covered here.</p>
+<p>Values obtained from a database query are then passed to <strong>a Flask template.</strong> Using the Jinja template syntax in the template file’s code determines where the values appear in the HTML. That is covered in <a class="reference external" href="flask3.html">Flask Templates</a> and also in this chapter.</p>
 <p>.</p>
 </div>
 </div>

@@ -228,18 +228,18 @@ The HTTP response comes from **this route** in the app script, with the value of
 In the browser, the *list.html* template will be loaded, displaying a table showing all sock records that have the style *knee-high.*
 
 
-Conclusion
-----------
+Summary
+-------
 
-Reading from the database depends on being able to **connect** to the database in the first place.
+Reading from the database depends on being able to **connect** to the database in the first place. That is covered in `Flask and Databases <flask_db1.html>`_.
 
-After that is accomplished, you need to write a **database query** (in a Flask route function) that gets what you need from the database. That might be one record (part or whole), several records, or just values from one column in the database.
+After that is accomplished, you need to write a **database query** (in a Flask route function) that gets what you need from the database. You might need only one record (part or whole), several records, or just values from one column in the database.
 
 Before writing any queries, though, you need to create a **model** for each table in your database. The name of this model class will be used in your database queries.
 
-If your database has more than one table, you might need to `write SQL joins <https://docs.sqlalchemy.org/en/13/orm/query.html#sqlalchemy.orm.query.Query.join>`_ to get what you need.
+If your database has more than one table, you might need to `write SQL joins <https://docs.sqlalchemy.org/en/13/orm/query.html#sqlalchemy.orm.query.Query.join>`_ to get what you need. Joins are not covered here.
 
-Values obtained from a database query are then passed to **a Flask template,** as explained in the templates chapter here. Using the Jinja template syntax in the template file’s code determines where the values appear in the HTML.
+Values obtained from a database query are then passed to **a Flask template.** Using the Jinja template syntax in the template file’s code determines where the values appear in the HTML. That is covered in `Flask Templates <flask3.html>`_ and also in this chapter.
 
 
 .
