@@ -95,7 +95,68 @@ Using a Flask template, we can make the list of socks display like this:
 .. figure:: _static/images/socks_list_template.png
    :alt: Socks list in templated page screenshot
 
-Here is the central section of the HTML template that will display the socks. Instead of using an HTML list with ``<ul>`` and ``<li>`` tags, we’re using the standard HTML table tags with Bootstrap styles applied.
+Here is the central section of the HTML template that will display the socks. Instead of using an HTML list with ``<ul>`` and ``<li>`` tags, we’re using the standard HTML table tags with **Bootstrap** styles applied.
+
+.. literalinclude:: ../python_code_examples/flask/databases/flask_db_read/templates/list.html
+   :linenos:
+   :lines: 22-48
+   :lineno-start: 22
+   :emphasize-lines: 4,18,26
+   :caption:
+
+Refer to the `Flask: Web Forms <flask_forms.html>`_ chapter for details about adding Bootstrap to Flask. Refer to the `Flask Templates <flask3.html>`_ chapter for details about working with templates.
+
+`The entire app, including its templates and the database file, is here. <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases/flask_db_read>`_
+
+
+The first route
++++++++++++++++
+
+Our first working route with **no template** was this: ::
+
+    @app.route('/')
+    def index():
+        try:
+            socks = Sock.query.filter_by(style='mini').order_by(Sock.name).all()
+            sock_text = '<ul>'
+            for sock in socks:
+                sock_text += '<li>' + sock.name + ', ' + sock.color + '</li>'
+            sock_text += '</ul>'
+            return sock_text
+        # lines omitted here
+
+Note that the **database query** is the same below, in the new route that *uses a Flask template.*
+
+
+The new route
++++++++++++++
+
+If you refer to the Jinja code in the template above, you will see that it requires a value for *style* — ``{{ style }}`` and the value ``socks`` — used in the for-loop. In the ``render_template()`` function returned by this route (below), you can see that these values are **passed to the template.** ::
+
+    @app.route('/inventory/<style>')
+    def inventory(style):
+        socks = Sock.query.filter_by(style=style).order_by(Sock.name).all()
+        return render_template('list.html', socks=socks, style=style)
+
+The one difference in the **database query** is that instead of getting only records for which the style is ``'mini'``, here the value for ``style`` comes from a route variable. This technique is covered in the `templates chapter <flask3.html>`_.
+
+A different database query
+--------------------------
+
+If you’re familiar with SQL, you know there are many different kinds of queries we can write against a database. All of them can be constructed `one way or another <https://flask-sqlalchemy.palletsprojects.com/en/2.x/queries/>`_ with Flask-SQLAlchemy.
+
+As an example, let’s see how to get this result for the index page of this socks app:
+
+.. figure:: _static/images/read_db_index_template.png
+   :alt: Socks index template screenshot
+
+We might know exactly which styles are available in this database — but what if we *don’t* know? What if we expect *new styles* to be added without warning? Then we cannot hard-code the style values into the page you see above. Someday there miught be a fifth style. We need to extract the styles from the database itself.
+
+.. literalinclude:: ../python_code_examples/flask/databases/flask_db_read/read_db.py
+   :linenos:
+   :lines: 35-42
+   :lineno-start: 35
+   :caption:
 
 
 
