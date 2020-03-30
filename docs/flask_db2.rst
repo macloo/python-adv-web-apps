@@ -196,13 +196,14 @@ Therefore, the contents of the new variable ``styles`` in line 40 above are one 
    :linenos:
    :lines: 21-31
    :lineno-start: 21
+   :emphasize-lines: 9
    :caption:
 
 Above is the HTML in the *index.html* template. The list ``styles`` came from the route, and we can loop over the list with a Jinja directive.
 
 The URL value for ``href=`` must be encoded for Flask (line 29). This was covered in the templates chapter.
 
-Both the ``href=`` value and the text that is linked use the same value from ``styles``. As we loop over ``styles``, the current record is ``s`` — so the value in the **style** column is accessed with ``s.style``.
+In line 29, both the ``href=`` value and the text that is linked *use the same value* from ``styles``. As we loop over ``styles``, the current record is ``s`` — so the value in the **style** column is accessed with ``s.style``. Because the list ``styles`` contains only unique values from the **style** column, each different style appears only once.
 
 The URL that executes the *other* route function in this app is: ::
 
@@ -212,18 +213,33 @@ You’ve seen `this kind of Flask route before <flask3.html#the-route-to-one-sel
 
     /president/<num>
 
-The result of clicking *knee-high* on the index page is that this request is sent to the server, and this URL appears in the browser: ::
+The result of clicking *knee-high* on the index page is that the following HTTP request is sent to the server: ::
 
     localhost:5000/inventory/knee-high
+
+
+The HTTP response comes from **this route** in the app script, with the value of ``style`` now being ``knee-high``: ::
+
+    @app.route('/inventory/<style>')
+    def inventory(style):
+        socks = Sock.query.filter_by(style=style).order_by(Sock.name).all()
+        return render_template('list.html', socks=socks, style=style)
+
+In the browser, the *list.html* template will be loaded, displaying a table showing all sock records that have the style *knee-high.*
+
 
 Conclusion
 ----------
 
-Reading from the database depends on being able to connect to the database in the first place.
+Reading from the database depends on being able to **connect** to the database in the first place.
 
-After that is accomplished, you need to write a database query (in a Flask route function) that gets what you need from the database. This might be one record (part or whole), several records, or just values from one column in the database. If your database has more than one table, you might need to `write SQL joins <https://docs.sqlalchemy.org/en/13/orm/query.html#sqlalchemy.orm.query.Query.join>`_ to get what you need.
+After that is accomplished, you need to write a **database query** (in a Flask route function) that gets what you need from the database. That might be one record (part or whole), several records, or just values from one column in the database.
 
-Values obtained from a database query are then passed to the Flask template, as explained in another chapter here. Values are used in a template file according to the Jinja template syntax.
+Before writing any queries, though, you need to create a **model** for each table in your database. The name of this model class will be used in your database queries.
+
+If your database has more than one table, you might need to `write SQL joins <https://docs.sqlalchemy.org/en/13/orm/query.html#sqlalchemy.orm.query.Query.join>`_ to get what you need.
+
+Values obtained from a database query are then passed to **a Flask template,** as explained in the templates chapter here. Using the Jinja template syntax in the template file’s code determines where the values appear in the HTML.
 
 
 .
