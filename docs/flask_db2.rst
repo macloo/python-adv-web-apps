@@ -32,6 +32,9 @@ Without templates or anything fancy, let’s attempt to read some data from the 
 
 Everything up to line 18 comes from the script explained `in the previous chapter <flask_db1.html#how-to-connect-a-database-to-a-flask-app>`_.
 
+The model
++++++++++
+
 Lines 21–29 provide a *model* so that Python can translate the **socks** table. It’s a Python class that inherits from the ``Model`` class from SQLAlchemy. (Remember, ``db`` refers to SQLAlchemy.) We could name the new class anything, but ``Sock`` makes sense because this table’s data as all about socks.
 
 If your database has *more than one table,* you will need to create an additional class like this for each additional table. Note:
@@ -44,6 +47,9 @@ If your database has *more than one table,* you will need to create an additiona
 
 `See all possible data types here. <https://flask-sqlalchemy.palletsprojects.com/en/2.x/models/#simple-example>`_
 
+The query in the route
+++++++++++++++++++++++
+
 We will provide only one route to start with, and it includes a try/except just like the example `in the previous chapter <flask_db1.html#how-to-connect-a-database-to-a-flask-app>`_.
 
 
@@ -55,7 +61,7 @@ We will provide only one route to start with, and it includes a try/except just 
    :caption:
 
 
-The only code that talks to the database is in line 36.
+The only code that “talks” to the database is in line 36.
 
 1. ``socks`` is a new variable. We assign to it the data we are pulling from the database.
 2. ``Sock.query`` refers to the class we built, Sock, starting on line 21. We are querying the table specified in that class.
@@ -109,8 +115,8 @@ Refer to the `Flask: Web Forms <flask_forms.html>`_ chapter for details about ad
 `The entire app, including its templates and the database file, is here. <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases/flask_db_read>`_
 
 
-The first route
-+++++++++++++++
+The previous route
+++++++++++++++++++
 
 Our first working route with **no template** was this: ::
 
@@ -140,6 +146,7 @@ If you refer to the Jinja code in the template above, you will see that it requi
 
 The one difference in the **database query** is that instead of getting only records for which the style is ``'mini'``, here the value for ``style`` comes from a route variable. This technique is covered in the `templates chapter <flask3.html>`_.
 
+
 A different database query
 --------------------------
 
@@ -160,11 +167,45 @@ We might know exactly which styles are available in this database — but what i
    :lineno-start: 35
    :caption:
 
-Above is the route for the index (or starting page) of the app. It calls the template named *index.html,* which you can see in part below. But focus your attention on the database query.
+Above is the route for the index (or starting page) of the app. It calls the template named *index.html,* which you can see in part below. But focus your attention on the **database query** in line 40.
 
-The ``with_entities()`` method restricts the columns returned to only those you want.
+* The ``with_entities()`` method restricts the columns returned to only the one(s) you want. In this case, we want *only* the **style** column.
+* The ``distinct()`` method returns only unique values in the specified column.
 
-The
+Therefore, the contents of the new variable ``styles`` in line 40 above are one instance of each unique value in the **style** column. By passing ``styles`` to the template *index.html,* we can use those values to create a list of links.
+
+.. literalinclude:: ../python_code_examples/flask/databases/flask_db_read/templates/index.html
+   :linenos:
+   :lines: 21-31
+   :lineno-start: 21
+   :caption:
+
+Above is the HTML in the *index.html* template. The list ``styles`` came from the route, and we can loop over the list with a Jinja directive.
+
+The URL value for ``href=`` must be encoded for Flask (line 29). This was covered in the templates chapter.
+
+Both the ``href=`` value and the text that is linked use the same value from ``styles``. As we loop over ``styles``, the current record is ``s`` — so the value in the **style** column is accessed with ``s.style``.
+
+The URL that executes the *other* route function in this app is: ::
+
+    /inventory/<style>
+
+You’ve seen `this kind of Flask route before <flask3.html#the-route-to-one-selected-president>`_: ::
+
+    /president/<num>
+
+The result of clicking *knee-high* on the index page is that this request is sent to the server, and this URL appears in the browser: ::
+
+    localhost:5000/inventory/knee-high
+
+Conclusion
+----------
+
+Reading from the database depends on being able to connect to the database in the first place.
+
+After that is accomplished, you need to write a database query (in a Flask route function) that gets what you need from the database. This might be one record (part or whole), several records, or just values from one column in the database. If your database has more than one table, you might need to `write SQL joins <https://docs.sqlalchemy.org/en/13/orm/query.html#sqlalchemy.orm.query.Query.join>`_ to get what you need.
+
+Values obtained from a database query are then passed to the Flask template, as explained in another chapter here. Values are used in a template file according to the Jinja template syntax.
 
 
 .
