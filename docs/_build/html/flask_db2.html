@@ -269,7 +269,7 @@
 <p>Everything up to line 18 comes from the script explained <a class="reference external" href="flask_db1.html#how-to-connect-a-database-to-a-flask-app">in the previous chapter</a>.</p>
 <div class="section" id="the-model">
 <h3>The model<a class="headerlink" href="#the-model" title="Permalink to this headline">¶</a></h3>
-<p>Lines 21–29 provide a <em>model</em> so that Python can translate the <strong>socks</strong> table. It’s a Python class that inherits from the <code class="docutils literal notranslate"><span class="pre">Model</span></code> class from SQLAlchemy. (Remember, <code class="docutils literal notranslate"><span class="pre">db</span></code> refers to SQLAlchemy.) We could name the new class anything, but <code class="docutils literal notranslate"><span class="pre">Sock</span></code> makes sense because this table’s data as all about socks.</p>
+<p>Lines 21–29 provide a <em>model</em> so that Python can translate the <strong>socks</strong> table. It’s a Python class that inherits from the <code class="docutils literal notranslate"><span class="pre">Model</span></code> class from SQLAlchemy. (Remember, <code class="docutils literal notranslate"><span class="pre">db</span></code> refers to SQLAlchemy.) We could name the new class anything, but <code class="docutils literal notranslate"><span class="pre">Sock</span></code> makes sense because this table’s data is all about socks.</p>
 <p>If your database has <em>more than one table,</em> you will need to create an additional class like this for each additional table. Note:</p>
 <ul class="simple">
 <li><p>Identify the primary_key field as shown (line 23).</p></li>

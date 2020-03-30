@@ -35,7 +35,7 @@ Everything up to line 18 comes from the script explained `in the previous chapte
 The model
 +++++++++
 
-Lines 21–29 provide a *model* so that Python can translate the **socks** table. It’s a Python class that inherits from the ``Model`` class from SQLAlchemy. (Remember, ``db`` refers to SQLAlchemy.) We could name the new class anything, but ``Sock`` makes sense because this table’s data as all about socks.
+Lines 21–29 provide a *model* so that Python can translate the **socks** table. It’s a Python class that inherits from the ``Model`` class from SQLAlchemy. (Remember, ``db`` refers to SQLAlchemy.) We could name the new class anything, but ``Sock`` makes sense because this table’s data is all about socks.
 
 If your database has *more than one table,* you will need to create an additional class like this for each additional table. Note:
 
