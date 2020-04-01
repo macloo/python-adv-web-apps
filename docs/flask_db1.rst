@@ -120,6 +120,8 @@ In addition, when running the MySQL database locally, a socket string must be in
 
 If you do not want to run the database locally, but instead you have the database on a remote server — while you are writing your Flask app (and testing it) on your own computer — you will need to `remotely connect to your MySQL database <http://bit.ly/mm-remote-mysql>`_.
 
+* `See other examples of connection strings. <https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/#connection-uri-format>`_
+
 The connection string
 +++++++++++++++++++++
 
