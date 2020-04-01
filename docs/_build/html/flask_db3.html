@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Search &mdash; Python Beginners  documentation</title>
+  <title>Flask: Write to a Database &mdash; Python Beginners  documentation</title>
   
 
   
@@ -25,7 +25,6 @@
         <script type="text/javascript" src="_static/underscore.js"></script>
         <script type="text/javascript" src="_static/doctools.js"></script>
         <script type="text/javascript" src="_static/language_data.js"></script>
-        <script type="text/javascript" src="_static/searchtools.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -35,7 +34,9 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="#" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="configparser" href="configparser.html" />
+    <link rel="prev" title="Flask: Read from a Database" href="flask_db2.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -62,7 +63,7 @@
 
           
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="#" method="get">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
@@ -80,7 +81,7 @@
             
             
               <p class="caption"><span class="caption-text">Contents</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="learn_python.html">Starting Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="functions.html">Functions in Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lists.html">Working with Lists</a></li>
@@ -97,7 +98,10 @@
 <li class="toctree-l1"><a class="reference internal" href="flask_forms.html">Flask: Web Forms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flask_db1.html">Flask and Databases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flask_db2.html">Flask: Read from a Database</a></li>
-<li class="toctree-l1"><a class="reference internal" href="flask_db3.html">Flask: Write to a Database</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Flask: Write to a Database</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-database">The database</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
 </ul>
 
@@ -144,12 +148,14 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Search</li>
+      <li>Flask: Write to a Database</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
+            <a href="_sources/flask_db3.rst.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
     
@@ -161,24 +167,49 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <noscript>
-  <div id="fallback" class="admonition warning">
-    <p class="last">
-      Please activate JavaScript to enable the search
-      functionality.
-    </p>
-  </div>
-  </noscript>
+  <div class="section" id="flask-write-to-a-database">
+<h1>Flask: Write to a Database<a class="headerlink" href="#flask-write-to-a-database" title="Permalink to this headline">¶</a></h1>
+<p>In this chapter we focus on writing data to a SQLite database, using Flask-SQLAlchemy.</p>
+<p>We will cover:</p>
+<ol class="arabic simple">
+<li><p>Add a new record: Create a complete new entry and add it to the database.</p></li>
+<li><p>Update a record: Retrieve an existing record and allow the user to edit any part of it, then write the changes to the database.</p></li>
+<li><p>Delete a selected record.</p></li>
+</ol>
+<p>Resources:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.sqlalchemy.org/">SQLAlchemy documentation</a></p></li>
+<li><p><a class="reference external" href="https://flask-sqlalchemy.palletsprojects.com/">Flask-SQLAlchemy documentation</a></p></li>
+<li><p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases/flask_db_write">Code for this chapter</a></p></li>
+</ul>
+<div class="section" id="the-database">
+<h2>The database<a class="headerlink" href="#the-database" title="Permalink to this headline">¶</a></h2>
+<p>We will use the same SQLite database from the chapter <a class="reference external" href="flask_db2.html">Flask: Read from a Database</a>.</p>
+<p>The database is named <em>sockmarket.db.</em> It has only one table, named <strong>socks.</strong> It has seven fields: <em>id, name, style, color, quantity, price,</em> and <em>updated.</em> You will see the table name and the field names later, in the Python code. The image below is a screenshot from the <a class="reference external" href="https://sqlitebrowser.org/">DB Browser for SQLite</a>, showing the top rows of the <strong>socks</strong> table.</p>
+<div class="figure align-default">
+<img alt="Socks table in DB Browser screenshot" src="_images/socks_db_browser.png" />
+</div>
+<p>It is essential to get your <strong>database connection</strong> working without errors before you try to do more with the database and Flask.</p>
+<ul class="simple">
+<li><p>Refer to <a class="reference external" href="flask_db1.html">Flask and Databases</a> to test your database connection.</p></li>
+</ul>
+</div>
+</div>
 
-  
-  <div id="search-results">
-  
-  </div>
 
            </div>
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="configparser.html" class="btn btn-neutral float-right" title="configparser" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="flask_db2.html" class="btn btn-neutral float-left" title="Flask: Read from a Database" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
@@ -211,14 +242,7 @@
   
   
     
-  
-  <script type="text/javascript">
-    jQuery(function() { Search.loadIndex("searchindex.js"); });
-  </script>
-  
-  <script type="text/javascript" id="searchindexloader"></script>
    
-
 
 </body>
 </html>
