@@ -28,3 +28,20 @@ The database is named *sockmarket.db.* It has only one table, named **socks.** I
 It is essential to get your **database connection** working without errors before you try to do more with the database and Flask.
 
 * Refer to `Flask and Databases <flask_db1.html>`_ to test your database connection.
+
+Add new record to database
+--------------------------
+
+To add a new record to the database as part of a Flask app, you will likely use an HTML form similar to this:
+
+.. figure:: _static/images/sock_entry_form_ss.png
+   :alt: Add a new record form screenshot
+
+Flask forms using **Flask-WTF** and **Flask-Bootstrap4** were introduced in the chapter `Flask: Web Forms <flask_forms.html>`_.
+
+The example app we will build here begins with the app completed in the chapter about `reading from a database <flask_db2.html>`_. Now there will be a lot of *new imports* at the top of the app file:
+
+.. literalinclude:: ../python_code_examples/flask/databases/flask_db_write/write_db.py
+   :linenos:
+   :lines: 1-28
+   :caption:

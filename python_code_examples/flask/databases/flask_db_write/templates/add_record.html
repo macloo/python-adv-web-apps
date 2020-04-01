@@ -1,0 +1,50 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+
+{% block styles %}
+{{ super() }}
+	<style>
+		body { background: #e8f1f9; }
+	</style>
+{% endblock %}
+
+
+{% block title %}
+Add a Sock
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+	<div class="row pb-5">
+		<div class="col-md-10 col-lg-8 mx-lg-auto mx-md-auto">
+
+		<h1 class="pt-5 pb-2">Add a New Sock</h1>
+
+		{% if message %}
+			<!-- the form was submitted and message exists -->
+			<p class="lead"><strong>{{ message }}</strong></p>
+
+			<!-- open the form via GET -->
+			<p><a href="{{ url_for('add_record') }}">Submit another sock</a></p>
+
+			<p><a href="{{ url_for('index') }}">Return to the index.</a></p>
+
+		{% else %}
+			<!-- the form is displayed when template opens via GET not POST -->
+
+			<p class="lead alert alert-primary">Add a new sock to our inventory.</p>
+
+			<p class="ml-4"><a href="{{ url_for('index') }}">Return to the index.</a></p>
+
+		    {{ wtf.quick_form(form1) }}
+
+		{% endif %}
+
+		</div>
+	</div>
+</div>
+
+{% endblock %}

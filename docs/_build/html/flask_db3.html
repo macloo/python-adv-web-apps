@@ -100,6 +100,7 @@
 <li class="toctree-l1"><a class="reference internal" href="flask_db2.html">Flask: Read from a Database</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Flask: Write to a Database</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#the-database">The database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#add-new-record-to-database">Add new record to database</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
@@ -193,6 +194,75 @@
 <ul class="simple">
 <li><p>Refer to <a class="reference external" href="flask_db1.html">Flask and Databases</a> to test your database connection.</p></li>
 </ul>
+</div>
+<div class="section" id="add-new-record-to-database">
+<h2>Add new record to database<a class="headerlink" href="#add-new-record-to-database" title="Permalink to this headline">¶</a></h2>
+<p>To add a new record to the database as part of a Flask app, you will likely use an HTML form similar to this:</p>
+<div class="figure align-default">
+<img alt="Add a new record form screenshot" src="_images/sock_entry_form_ss.png" />
+</div>
+<p>Flask forms using <strong>Flask-WTF</strong> and <strong>Flask-Bootstrap4</strong> were introduced in the chapter <a class="reference external" href="flask_forms.html">Flask: Web Forms</a>.</p>
+<p>The example app we will build here begins with the app completed in the chapter about <a class="reference external" href="flask_db2.html">reading from a database</a>. There are a lot of new imports at the top of the app file:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/flask_db_write/write_db.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; write to a SQLite database with forms, templates &quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">flash</span>
+<span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
+<span class="kn">from</span> <span class="nn">flask_bootstrap</span> <span class="kn">import</span> <span class="n">Bootstrap</span>
+
+<span class="kn">from</span> <span class="nn">flask_wtf</span> <span class="kn">import</span> <span class="n">FlaskForm</span>
+<span class="kn">from</span> <span class="nn">wtforms</span> <span class="kn">import</span> <span class="n">SubmitField</span><span class="p">,</span> <span class="n">SelectField</span><span class="p">,</span> <span class="n">RadioField</span><span class="p">,</span> <span class="n">HiddenField</span><span class="p">,</span> <span class="n">StringField</span><span class="p">,</span> <span class="n">IntegerField</span><span class="p">,</span> <span class="n">FloatField</span>
+<span class="kn">from</span> <span class="nn">wtforms.validators</span> <span class="kn">import</span> <span class="n">InputRequired</span><span class="p">,</span> <span class="n">Length</span><span class="p">,</span> <span class="n">Regexp</span><span class="p">,</span> <span class="n">NumberRange</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+<span class="c1"># Flask-WTF requires an enryption key - the string can be anything</span>
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SECRET_KEY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;MLXH243GssUWwKdTWS7FDhdwYF56wPj8&#39;</span>
+
+<span class="c1"># Flask-Bootstrap requires this line</span>
+<span class="n">Bootstrap</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
+<span class="c1"># the name of the database; add path if necessary</span>
+<span class="n">db_name</span> <span class="o">=</span> <span class="s1">&#39;sockmarket.db&#39;</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SQLALCHEMY_DATABASE_URI&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sqlite:///&#39;</span> <span class="o">+</span> <span class="n">db_name</span>
+
+<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SQLALCHEMY_TRACK_MODIFICATIONS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># this variable, db, will be used for all SQLAlchemy commands</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+</pre></div>
+</td></tr></table></div>
+</div>
 </div>
 </div>
 
