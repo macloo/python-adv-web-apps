@@ -52,17 +52,6 @@ def inventory(style):
         hed = '<h1>Something is broken.</h1>'
         return hed + error_text
 
-# error handlers
-
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template('404.html', error=e), 404
-
-@app.errorhandler(500)
-def internal_server_error(e):
-    return render_template('500.html', error=e), 500
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)
