@@ -244,6 +244,34 @@ The template
 
 Because of the ``flash()`` messages, this template is a bit complicated.
 
+The top part (lines 26–33) runs only if the data were just written to the database. This is the case where the form is not on the page and the message says the data have been submitted.
 
+The *else* clause is discussed below.
+
+.. literalinclude:: ../python_code_examples/flask/databases/flask_db_write/templates/add_record.html
+   :language: html
+   :linenos:
+   :lines: 24-62
+   :lineno-start: 24
+   :emphasize-lines: 3,12,39
+   :caption:
+
+The key thing to notice in the *else* clause is that the form is displayed (line 60): ::
+
+    {{ wtf.quick_form(form1) }}
+
+Recall that ``form1`` was passed to the template in the route function.
+
+Lines 48–57 handle the ``flash()`` messages that are written *if the form is submitted with invalid data.* The way this section of code works is explained in `this tutorial <https://pythonprogramming.net/flash-flask-tutorial/>`_.
+
+Update a record
+---------------
+
+xyz
+
+Delete a record
+---------------
+
+xyz
 
 .
