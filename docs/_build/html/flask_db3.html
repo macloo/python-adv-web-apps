@@ -100,7 +100,15 @@
 <li class="toctree-l1"><a class="reference internal" href="flask_db2.html">Flask: Read from a Database</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Flask: Write to a Database</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#the-database">The database</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#add-new-record-to-database">Add new record to database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#add-new-record-to-database">Add new record to database</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#app-setup">App setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#database-table-setup">Database table setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-form-without-validators">The form without validators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-form-with-validators">The form with validators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-route-function">The route function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#the-template">The template</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
@@ -201,8 +209,11 @@
 <div class="figure align-default">
 <img alt="Add a new record form screenshot" src="_images/sock_entry_form_ss.png" />
 </div>
-<p>Flask forms using <strong>Flask-WTF</strong> and <strong>Flask-Bootstrap4</strong> were introduced in the chapter <a class="reference external" href="flask_forms.html">Flask: Web Forms</a>.</p>
-<p>The example app we will build here begins with the app completed in the chapter about <a class="reference external" href="flask_db2.html">reading from a database</a>. There are a lot of new imports at the top of the app file:</p>
+<p>The route: <em>localhost:5000/add_record</em></p>
+<p>Flask forms using <strong>Flask-WTF</strong> and <strong>Flask-Bootstrap4</strong> were introduced in the chapter <a class="reference external" href="flask_forms.html">Flask: Web Forms</a>. See <a class="reference external" href="#the-form-without-validators">the code for this form</a> below.</p>
+<div class="section" id="app-setup">
+<h3>App setup<a class="headerlink" href="#app-setup" title="Permalink to this headline">¶</a></h3>
+<p>The example app we will build here begins with the app completed in the chapter about <a class="reference external" href="flask_db2.html">reading from a database</a>. Now there will be a lot of <em>new imports</em> at the top of the app file:</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/flask_db_write/write_db.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -232,7 +243,8 @@
 25
 26
 27
-28</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; write to a SQLite database with forms, templates &quot;&quot;&quot;</span>
+28
+29</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; write to a SQLite database with forms, templates &quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">flash</span>
 <span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
@@ -260,8 +272,253 @@
 
 <span class="c1"># this variable, db, will be used for all SQLAlchemy commands</span>
 <span class="n">db</span> <span class="o">=</span> <span class="n">SQLAlchemy</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+
 </pre></div>
 </td></tr></table></div>
+</div>
+<ul class="simple">
+<li><p>Line 3: new imports from Flask — <code class="docutils literal notranslate"><span class="pre">request</span></code> and <code class="docutils literal notranslate"><span class="pre">flash</span></code>. You’ll see these in the first new route.</p></li>
+<li><p>Line 8: new form fields you have not seen before, because the form here has a lot more going on than the simple form in the introductory chapter.</p></li>
+<li><p>Line 9: new form validators to prevent unwanted values going into your database.</p></li>
+<li><p>Line 10: import to enable Python to insert a date automatically into your database.</p></li>
+<li><p>Line 15: required by WTForms; covered in the forms chapter.</p></li>
+<li><p>Everything else above was covered in previous chapters.</p></li>
+</ul>
+</div>
+<div class="section" id="database-table-setup">
+<h3>Database table setup<a class="headerlink" href="#database-table-setup" title="Permalink to this headline">¶</a></h3>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/flask_db_write/write_db.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># each table in the database needs a class to be created for it</span>
+<span class="c1"># db.Model is required - don&#39;t change it</span>
+<span class="c1"># identify all columns by name and data type</span>
+<span class="hll"><span class="k">class</span> <span class="nc">Sock</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+</span>    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;socks&#39;</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">style</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">quantity</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">price</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
+    <span class="n">updated</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">)</span>
+
+<span class="hll">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">style</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">quantity</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">updated</span><span class="p">):</span>
+</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="n">style</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">quantity</span> <span class="o">=</span> <span class="n">quantity</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">price</span> <span class="o">=</span> <span class="n">price</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">updated</span> <span class="o">=</span> <span class="n">updated</span>
+
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>Lines 33–41 were explained in the chapter about reading from a database. Lines 43–49 were not needed there, but now we need them, or we’ll get an error when we try to write a new record into this table in the database.</p>
+<p><code class="docutils literal notranslate"><span class="pre">__init__()</span></code> is a reserved method in Python classes. It is called when an object is created from the class, to initialize the properties of the class. Here, it specifies that when we pass values into <strong>a new record</strong> in this table, <strong>the order of the values</strong> will be <em>name, style, color, quantity, price, updated.</em>  <strong>Note</strong> that the order matters! You’ll see this in the first new route. <code class="docutils literal notranslate"><span class="pre">self</span></code> represents the new instance of the class, and everywhere you see it, it needs to stay.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If your app needs to write a new record into <em>more than one</em> table, you’ll need to set up each of those tables in this way also.</p>
+</div>
+</div>
+<div class="section" id="the-form-without-validators">
+<h3>The form without validators<a class="headerlink" href="#the-form-without-validators" title="Permalink to this headline">¶</a></h3>
+<p>As explained in the web forms chapter, we can vastly simplify <strong>the template HTML</strong> by defining every aspect of a form in a new class <strong>in the app script.</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AddRecord</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
+    <span class="c1"># id used only by update_record</span>
+    <span class="n">id_field</span> <span class="o">=</span> <span class="n">HiddenField</span><span class="p">()</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">&#39;Sock name&#39;</span><span class="p">)</span>
+    <span class="n">style</span> <span class="o">=</span> <span class="n">SelectField</span><span class="p">(</span><span class="s1">&#39;Choose the sock style&#39;</span><span class="p">,</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span> <span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ankle&#39;</span><span class="p">,</span> <span class="s1">&#39;Ankle&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;knee-high&#39;</span><span class="p">,</span> <span class="s1">&#39;Knee-high&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;mini&#39;</span><span class="p">,</span> <span class="s1">&#39;Mini&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;other&#39;</span><span class="p">,</span> <span class="s1">&#39;Other&#39;</span><span class="p">)</span> <span class="p">])</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">&#39;Color&#39;</span><span class="p">)</span>
+    <span class="n">quantity</span> <span class="o">=</span> <span class="n">IntegerField</span><span class="p">(</span><span class="s1">&#39;Quantity in stock&#39;</span><span class="p">)</span>
+    <span class="n">price</span> <span class="o">=</span> <span class="n">FloatField</span><span class="p">(</span><span class="s1">&#39;Retail price per pair&#39;</span><span class="p">)</span>
+    <span class="c1"># updated - date - handled in the route function</span>
+    <span class="n">updated</span> <span class="o">=</span> <span class="n">HiddenField</span><span class="p">()</span>
+    <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s1">&#39;Add/Update Record&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Each different field type here was <em>imported</em> from <strong>wtforms</strong> at the top of the script file.</p>
+</div>
+<p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv">See a list of all WTForms field types.</a> Note that they are <em>case-sensitive.</em></p>
+<p>The following might be puzzling:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">choices=[]</span></code> — required for a SelectField. Inside the square brackets are tuples. The first item in a tuple is the value for the database. The second item in a tuple is the text visible in the select menu.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HiddenField()</span></code> denotes an HTML form element: <code class="docutils literal notranslate"><span class="pre">&lt;input</span> <span class="pre">type=&quot;hidden&quot;&gt;</span></code>. <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/hidden">Learn more at MDN.</a></p></li>
+</ul>
+<p>Everything else should be clear if you are familiar with regular HTML forms. Compare the code to <a class="reference external" href="#add-new-record-to-database">the screenshot of the form</a>.</p>
+</div>
+<div class="section" id="the-form-with-validators">
+<h3>The form with validators<a class="headerlink" href="#the-form-with-validators" title="Permalink to this headline">¶</a></h3>
+<p>Validators — also imported from <strong>wtforms</strong> — can get pretty complicated. They can do quite a lot to prevent bad values from being written to your database, though, so it’s worthwhile to learn how to use them.</p>
+<p>Below is <em>the same form class</em> with the validators added. This is the class used in the example app.</p>
+<p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-validators.csv">See a list of all WTForms validators.</a></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AddRecord</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
+    <span class="c1"># id used only by update_record</span>
+    <span class="n">id_field</span> <span class="o">=</span> <span class="n">HiddenField</span><span class="p">()</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">&#39;Sock name&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="n">InputRequired</span><span class="p">(),</span>
+        <span class="n">Regexp</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[A-Za-z\s\-</span><span class="se">\&#39;</span><span class="s1">]+$&#39;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Invalid sock name&quot;</span><span class="p">),</span>
+        <span class="n">Length</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Invalid sock name length&quot;</span><span class="p">)</span>
+        <span class="p">])</span>
+    <span class="n">style</span> <span class="o">=</span> <span class="n">SelectField</span><span class="p">(</span><span class="s1">&#39;Choose the sock style&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="n">InputRequired</span><span class="p">()],</span>
+        <span class="n">choices</span><span class="o">=</span><span class="p">[</span> <span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;ankle&#39;</span><span class="p">,</span> <span class="s1">&#39;Ankle&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;knee-high&#39;</span><span class="p">,</span> <span class="s1">&#39;Knee-high&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;mini&#39;</span><span class="p">,</span> <span class="s1">&#39;Mini&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;other&#39;</span><span class="p">,</span> <span class="s1">&#39;Other&#39;</span><span class="p">)</span> <span class="p">])</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">&#39;Color&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="n">InputRequired</span><span class="p">(),</span>
+        <span class="n">Regexp</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[A-Za-z\s\-</span><span class="se">\&#39;</span><span class="s1">\/]+$&#39;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Invalid color&quot;</span><span class="p">),</span>
+        <span class="n">Length</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Invalid color length&quot;</span><span class="p">)</span>
+        <span class="p">])</span>
+    <span class="n">quantity</span> <span class="o">=</span> <span class="n">IntegerField</span><span class="p">(</span><span class="s1">&#39;Quantity in stock&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="n">InputRequired</span><span class="p">(),</span>
+        <span class="n">NumberRange</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">999</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Invalid range&quot;</span><span class="p">)</span>
+        <span class="p">])</span>
+    <span class="n">price</span> <span class="o">=</span> <span class="n">FloatField</span><span class="p">(</span><span class="s1">&#39;Retail price per pair&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="n">InputRequired</span><span class="p">(),</span>
+        <span class="n">NumberRange</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mf">1.00</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mf">99.99</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Invalid range&quot;</span><span class="p">)</span>
+        <span class="p">])</span>
+    <span class="c1"># updated - date - handled in the route</span>
+    <span class="n">updated</span> <span class="o">=</span> <span class="n">HiddenField</span><span class="p">()</span>
+    <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s1">&#39;Add/Update Record&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">InputRequired()</span></code> means the field cannot be left empty.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Regexp()</span></code> is used to provide a <em>regular expression,</em> which is a <em>pattern</em> the entered string needs to match. <a class="reference external" href="https://docs.python.org/3/howto/regex.html">Learn about regular expressions in Python.</a> The <code class="docutils literal notranslate"><span class="pre">message=</span></code> value inside the parentheses will appear if the pattern is not matched.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Length()</span></code> allows us to provide a minimum and maximum length for the string. It also provides a <code class="docutils literal notranslate"><span class="pre">message=</span></code> option.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">NumberRange()</span></code> allows us to provide a minimum and maximum number for an integer or a float.</p></li>
+</ul>
+</div>
+<div class="section" id="the-route-function">
+<h3>The route function<a class="headerlink" href="#the-route-function" title="Permalink to this headline">¶</a></h3>
+<p>The route — like all the code shown above — is in the app script, <em>write_db.py.</em></p>
+<p>The route <em>add_record</em> renders a template that contains the web form discussed above. In the decorator we add <code class="docutils literal notranslate"><span class="pre">methods=['GET',</span> <span class="pre">'POST']</span></code> because this template can legitimately open via a regular HTTP request (<em>get</em>) or via a request with form data attached to it (<em>post</em>).</p>
+<p>The function has an if/else to handle two different circumstances:</p>
+<ol class="arabic">
+<li><p>The form on the page has been submitted, and the form data were all valid. (The <code class="docutils literal notranslate"><span class="pre">validate_on_submit()</span></code> function returns True.) In that case, we want to send the data to the database.</p></li>
+<li><p>No data will be written to the database. That case actually has two possible conditions:</p>
+<blockquote>
+<div><ol class="loweralpha simple">
+<li><p>The form has not yet been filled in and submitted.</p></li>
+<li><p>The form was submitted, but there is invalid data in one or more fields.</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+<p>First, we’ll look at what happens if the data are valid and are written to the database:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># add a new sock to the database</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/add_record&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+    <span class="k">def</span> <span class="nf">add_record</span><span class="p">():</span>
+<span class="hll">        <span class="n">form1</span> <span class="o">=</span> <span class="n">AddRecord</span><span class="p">()</span>
+</span>        <span class="k">if</span> <span class="n">form1</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+            <span class="n">style</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;style&#39;</span><span class="p">]</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]</span>
+            <span class="n">quantity</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;quantity&#39;</span><span class="p">]</span>
+            <span class="n">price</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span>
+            <span class="c1"># get today&#39;s date from function, above all the routes</span>
+            <span class="n">updated</span> <span class="o">=</span> <span class="n">stringdate</span><span class="p">()</span>
+            <span class="c1"># the data to be inserted into Sock model - the table, socks</span>
+            <span class="n">record</span> <span class="o">=</span> <span class="n">Sock</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">style</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">quantity</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">updated</span><span class="p">)</span>
+            <span class="c1"># Flask-SQLAlchemy magic adds record to database</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+            <span class="c1"># create a message to send to the template</span>
+<span class="hll">            <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;The data for sock </span><span class="si">{name}</span><span class="s2"> has been submitted.&quot;</span>
+</span>            <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;add_record.html&#39;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+</pre></div>
+</td></tr></table></div>
+<p>Line numbers start at 1 here, but not in the app.</p>
+<ul class="simple">
+<li><p>Line 4: Using <a class="reference external" href="#the-form-without-validators">the form class created above</a>, we create an <em>instance</em> of that form and assign it to the variable <code class="docutils literal notranslate"><span class="pre">form1</span></code>.</p></li>
+<li><p>Line 5: The <code class="docutils literal notranslate"><span class="pre">if</span></code> clause runs if the form data were valid. That means we want to write the data to the database.</p></li>
+<li><p>Lines 6–10: Create new variables from the data received from the form.</p></li>
+<li><p>Line 12: Run a function to create a date string representing today’s date. Assign that string to the new variable <code class="docutils literal notranslate"><span class="pre">updated</span></code>.</p></li>
+<li><p>Line 14: Using the <a class="reference external" href="#database-table-setup">model class created above</a> — <code class="docutils literal notranslate"><span class="pre">Sock</span></code> — we format the data in the manner expected by the database, following the order in the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> function. Assign this to a new variable, <code class="docutils literal notranslate"><span class="pre">record</span></code>.</p></li>
+<li><p>Lines 16–17: This is SQLAlchemy handling everything to securely write to the database. Note that the variable <code class="docutils literal notranslate"><span class="pre">record</span></code> is used in line 16. <code class="docutils literal notranslate"><span class="pre">db.session.commit()</span></code> is necessary to update your database.</p></li>
+<li><p>Line 19: Create a message to pass to the template. Note that this message <em>only exists if</em> the data were sent to the database.</p></li>
+<li><p>Line 20: Render the template, passing the message to it.</p></li>
+</ul>
+<div class="figure align-default">
+<img alt="Result of successful submit in browser screenshot" src="_images/submit_success.png" />
+</div>
+<p>Above, the result of successfully writing to the database renders the template <em>without showing the form.</em> It displays the message, including the name of the sock just submitted.</p>
+<p><strong>What happens if data in one or more form fields are invalid when the form is submitted?</strong></p>
+<p>Recall that in <a class="reference external" href="#the-form-with-validators">the form class</a>, <em>validators</em> were added to restrict what can be sent to the database.</p>
+<div class="figure align-default">
+<img alt="Result of unsuccessful submit in browser screenshot" src="_images/errors_in_form.png" />
+</div>
+<p>Above, you can see the result of <strong>invalid data</strong> in two of the form fields. The user can correct the errors and submit the form again. This is handled in the second part of the route function — the <em>else</em> clause:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>21
+22
+23
+24
+25
+26
+27
+28
+29</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">else</span><span class="p">:</span>
+    <span class="c1"># show validaton errors</span>
+    <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">errors</span> <span class="ow">in</span> <span class="n">form1</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">errors</span><span class="p">:</span>
+            <span class="n">flash</span><span class="p">(</span><span class="s2">&quot;Error in </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="nb">getattr</span><span class="p">(</span><span class="n">form1</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+                <span class="n">error</span>
+            <span class="p">),</span> <span class="s1">&#39;error&#39;</span><span class="p">)</span>
+<span class="hll">    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;add_record.html&#39;</span><span class="p">,</span> <span class="n">form1</span><span class="o">=</span><span class="n">form1</span><span class="p">)</span>
+</span></pre></div>
+</td></tr></table></div>
+<p>See the <a class="reference external" href="https://pythonprogramming.net/flash-flask-tutorial/">Flask Flash Function Tutorial</a> for details about using <code class="docutils literal notranslate"><span class="pre">flash()</span></code> and the for-loop in the code above.</p>
+<p>Note that the <em>else</em> clause also runs if this page is freshly opened in the browser, with an empty form. The for-loop runs, but there are no errors, and so no <code class="docutils literal notranslate"><span class="pre">flash()</span></code> messages will appear on the page.</p>
+<p>The form — <code class="docutils literal notranslate"><span class="pre">form1</span></code> — <em>must</em> be passed to the template in the return statement.</p>
+</div>
+<div class="section" id="the-template">
+<h3>The template<a class="headerlink" href="#the-template" title="Permalink to this headline">¶</a></h3>
+<p>Because of the <code class="docutils literal notranslate"><span class="pre">flash()</span></code> messages, this template is a bit complicated.</p>
+<p>.</p>
 </div>
 </div>
 </div>
