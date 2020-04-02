@@ -412,12 +412,16 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">Length()</span></code> allows us to provide a minimum and maximum length for the string. It also provides a <code class="docutils literal notranslate"><span class="pre">message=</span></code> option.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">NumberRange()</span></code> allows us to provide a minimum and maximum number for an integer or a float.</p></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Each different validator above was <em>imported</em> from <strong>wtforms</strong> at the top of the script file.</p>
+</div>
 </div>
 <div class="section" id="the-route-function">
 <h3>The route function<a class="headerlink" href="#the-route-function" title="Permalink to this headline">¶</a></h3>
 <p>The route — like all the code shown above — is in the app script, <em>write_db.py.</em></p>
 <p>The route <em>add_record</em> renders a template that contains the web form discussed above. In the decorator we add <code class="docutils literal notranslate"><span class="pre">methods=['GET',</span> <span class="pre">'POST']</span></code> because this template can legitimately open via a regular HTTP request (<em>get</em>) or via a request with form data attached to it (<em>post</em>).</p>
-<p>The function has an if/else to handle two different circumstances:</p>
+<p>The function has an if/else to handle <strong>two different circumstances</strong>:</p>
 <ol class="arabic">
 <li><p>The form on the page has been submitted, and the form data were all valid. (The <code class="docutils literal notranslate"><span class="pre">validate_on_submit()</span></code> function returns True.) In that case, we want to send the data to the database.</p></li>
 <li><p>No data will be written to the database. That case actually has two possible conditions:</p>
@@ -610,6 +614,7 @@
 </div>
 <p>Recall that <code class="docutils literal notranslate"><span class="pre">form1</span></code> was passed to the template in the route function.</p>
 <p>Lines 48–57 handle the <code class="docutils literal notranslate"><span class="pre">flash()</span></code> messages that are written <em>if the form is submitted with invalid data.</em> The way this section of code works is explained in <a class="reference external" href="https://pythonprogramming.net/flash-flask-tutorial/">this tutorial</a>.</p>
+<p>If the page was just opened and the form is empty, unfilled, then there are no <code class="docutils literal notranslate"><span class="pre">flash()</span></code> messages.</p>
 </div>
 </div>
 <div class="section" id="update-a-record">

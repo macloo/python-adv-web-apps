@@ -150,6 +150,9 @@ Below is *the same form class* with the validators added. This is the class used
 * ``Length()`` allows us to provide a minimum and maximum length for the string. It also provides a ``message=`` option.
 * ``NumberRange()`` allows us to provide a minimum and maximum number for an integer or a float.
 
+.. note:: Each different validator above was *imported* from **wtforms** at the top of the script file.
+
+
 The route function
 ++++++++++++++++++
 
@@ -157,7 +160,7 @@ The route — like all the code shown above — is in the app script, *write_db.
 
 The route *add_record* renders a template that contains the web form discussed above. In the decorator we add ``methods=['GET', 'POST']`` because this template can legitimately open via a regular HTTP request (*get*) or via a request with form data attached to it (*post*).
 
-The function has an if/else to handle two different circumstances:
+The function has an if/else to handle **two different circumstances**:
 
 1. The form on the page has been submitted, and the form data were all valid. (The ``validate_on_submit()`` function returns True.) In that case, we want to send the data to the database.
 2. No data will be written to the database. That case actually has two possible conditions:
@@ -263,6 +266,8 @@ The key thing to notice in the *else* clause is that the form is displayed (line
 Recall that ``form1`` was passed to the template in the route function.
 
 Lines 48–57 handle the ``flash()`` messages that are written *if the form is submitted with invalid data.* The way this section of code works is explained in `this tutorial <https://pythonprogramming.net/flash-flask-tutorial/>`_.
+
+If the page was just opened and the form is empty, unfilled, then there are no ``flash()`` messages.
 
 Update a record
 ---------------
