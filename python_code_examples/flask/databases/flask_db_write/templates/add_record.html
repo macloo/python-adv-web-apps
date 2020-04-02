@@ -33,11 +33,29 @@ Add a Sock
 			<p><a href="{{ url_for('index') }}">Return to the index.</a></p>
 
 		{% else %}
+
 			<!-- the form is displayed when template opens via GET not POST -->
 
 			<p class="lead alert alert-primary">Add a new sock to our inventory.</p>
 
 			<p class="ml-4"><a href="{{ url_for('index') }}">Return to the index.</a></p>
+
+			<!-- show flash - based on WTForms validators
+				 see https://pythonprogramming.net/flash-flask-tutorial/
+				 get_flashed_messages() exists here because of flash()
+				 in the route function
+				 -->
+			{% with errors = get_flashed_messages() %}
+				{% if errors %}
+					{% for err in errors %}
+					<div class="alert alert-danger alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+						{{ err }}
+					</div>
+					{% endfor %}
+				{% endif %}
+			{% endwith %}
+			<!-- end of flash -->
 
 		    {{ wtf.quick_form(form1) }}
 

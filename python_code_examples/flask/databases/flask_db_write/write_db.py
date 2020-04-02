@@ -53,7 +53,7 @@ class Sock(db.Model):
 # form for add_record and update_record
 # each field includes validation requirements and messages
 class AddRecord(FlaskForm):
-    # id used by update_record
+    # id used only by update_record
     id_field = HiddenField()
     name = StringField('Sock name', [ InputRequired(),
         Regexp(r'^[A-Za-z\s\-\']+$', message="Invalid sock name"),
@@ -74,7 +74,7 @@ class AddRecord(FlaskForm):
     price = FloatField('Retail price per pair', [ InputRequired(),
         NumberRange(min=1.00, max=99.99, message="Invalid range")
         ])
-    # updated date - handled in the route
+    # updated - date - handled in the route
     updated = HiddenField()
     submit = SubmitField('Add/Update Record')
 
@@ -124,7 +124,13 @@ def add_record():
         return render_template('add_record.html', message=message)
     else:
         # show validaton errors
-        flash('placeholder')
+        # see https://pythonprogramming.net/flash-flask-tutorial/
+        for field, errors in form1.errors.items():
+            for error in errors:
+                flash("Error in {}: {}".format(
+                    getattr(form1, field).label.text,
+                    error
+                ), 'error')
         return render_template('add_record.html', form1=form1)
 
 
