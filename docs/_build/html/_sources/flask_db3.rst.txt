@@ -14,6 +14,7 @@ Resources:
 * `SQLAlchemy documentation <https://www.sqlalchemy.org/>`_
 * `Flask-SQLAlchemy documentation <https://flask-sqlalchemy.palletsprojects.com/>`_
 * `Code for this chapter <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases/flask_db_write>`_
+* `Live version of the Flask app <https://weimergeeks.com/flask_db_write/>`_
 
 The database
 ------------
@@ -48,14 +49,14 @@ The example app we will build here begins with the app completed in the chapter 
 
 .. literalinclude:: ../python_code_examples/flask/databases/flask_db_write/write_db.py
    :linenos:
-   :lines: 1-29
+   :lines: 1-31
    :caption:
 
-* Line 3: new imports from Flask — ``request`` and ``flash``. You’ll see these in the first new route.
-* Line 8: new form fields you have not seen before, because the form here has a lot more going on than the simple form in the introductory chapter.
-* Line 9: new form validators to prevent unwanted values going into your database.
-* Line 10: import to enable Python to insert a date automatically into your database.
-* Line 15: required by WTForms; covered in the forms chapter.
+* Line 5: new imports from Flask — ``request`` and ``flash``. You’ll see these in the first new route.
+* Line 10: new form fields you have not seen before, because the form here has a lot more going on than the simple form in the introductory chapter.
+* Line 11: new form validators to prevent unwanted values going into your database.
+* Line 12: import to enable Python to insert a date automatically into your database.
+* Line 17: required by WTForms; covered in the forms chapter.
 * Everything else above was covered in previous chapters.
 
 Database table setup
@@ -63,12 +64,12 @@ Database table setup
 
 .. literalinclude:: ../python_code_examples/flask/databases/flask_db_write/write_db.py
    :linenos:
-   :lines: 30-50
+   :lines: 32-52
    :emphasize-lines: 4,14
-   :lineno-start: 30
+   :lineno-start: 32
    :caption:
 
-Lines 33–41 were explained in the chapter about reading from a database. Lines 43–49 were not needed there, but now we need them, or we’ll get an error when we try to write a new record into this table in the database.
+Lines 35–43 were explained in the chapter about reading from a database. Lines 45–51 were not needed there, but *now we need them,* or we’ll get an error when we try to write a new record into this table in the database.
 
 ``__init__()`` is a reserved method in Python classes. It is called when an object is created from the class, to initialize the properties of the class. Here, it specifies that when we pass values into **a new record** in this table, **the order of the values** will be *name, style, color, quantity, price, updated.*  **Note** that the order matters! You’ll see this in the first new route. ``self`` represents the new instance of the class, and everywhere you see it, it needs to stay.
 
@@ -82,7 +83,7 @@ As explained in the web forms chapter, we can vastly simplify **the template HTM
 .. code-block:: python
 
     class AddRecord(FlaskForm):
-        # id used only by update_record
+        # id used only by update/edit
         id_field = HiddenField()
         name = StringField('Sock name')
         style = SelectField('Choose the sock style',
@@ -103,10 +104,10 @@ As explained in the web forms chapter, we can vastly simplify **the template HTM
 
 The following might be puzzling:
 
-* ``choices=[]`` — required for a SelectField. Inside the square brackets are tuples. The first item in a tuple is the value for the database. The second item in a tuple is the text visible in the select menu.
-*  ``HiddenField()`` denotes an HTML form element: ``<input type="hidden">``. `Learn more at MDN. <https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/hidden>`_
+* ``choices=[]`` — required for a SelectField. Inside the square brackets are tuples. The first item in a tuple is the value for the database. The second item in a tuple is the text visible in the select menu. These pairs translate into lines like this in the HTML: ``<option value="ankle">Ankle</option>``
+*  ``HiddenField()`` denotes an HTML form element: ``<input type="hidden">``. This kind of form element is used to pass values that should not be edited or even seen by users, such as a database primary key. `Learn more at MDN. <https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/hidden>`_
 
-Everything else should be clear if you are familiar with regular HTML forms. Compare the code to `the screenshot of the form <#add-new-record-to-database>`_.
+Everything else should be clear if you are familiar with regular HTML forms. Compare the code to `the screenshot of the form <#add-new-record-to-database>`_. The live page is ➡︎ `here <https://weimergeeks.com/flask_db_write/add_record>`_.
 
 The form with validators
 ++++++++++++++++++++++++
@@ -120,7 +121,7 @@ Below is *the same form class* with the validators added. This is the class used
 .. code-block:: python
 
     class AddRecord(FlaskForm):
-        # id used only by update_record
+        # id used only by update/edit
         id_field = HiddenField()
         name = StringField('Sock name', [ InputRequired(),
             Regexp(r'^[A-Za-z\s\-\']+$', message="Invalid sock name"),
@@ -141,7 +142,7 @@ Below is *the same form class* with the validators added. This is the class used
         price = FloatField('Retail price per pair', [ InputRequired(),
             NumberRange(min=1.00, max=99.99, message="Invalid range")
             ])
-        # updated - date - handled in the route
+        # updated - date - handled in the route function
         updated = HiddenField()
         submit = SubmitField('Add/Update Record')
 
@@ -168,44 +169,25 @@ The function has an if/else to handle **two different circumstances**:
     a. The form has not yet been filled in and submitted.
     b. The form was submitted, but there is invalid data in one or more fields.
 
-First, we’ll look at what happens if the data are valid and are written to the database:
+First we’ll look at what happens if the data are valid and are written to the database:
 
-.. code-block:: python
-    :linenos:
-    :emphasize-lines: 4,19
 
-    # add a new sock to the database
-    @app.route('/add_record', methods=['GET', 'POST'])
-        def add_record():
-            form1 = AddRecord()
-            if form1.validate_on_submit():
-                name = request.form['name']
-                style = request.form['style']
-                color = request.form['color']
-                quantity = request.form['quantity']
-                price = request.form['price']
-                # get today's date from function, above all the routes
-                updated = stringdate()
-                # the data to be inserted into Sock model - the table, socks
-                record = Sock(name, style, color, quantity, price, updated)
-                # Flask-SQLAlchemy magic adds record to database
-                db.session.add(record)
-                db.session.commit()
-                # create a message to send to the template
-                message = f"The data for sock {name} has been submitted."
-                return render_template('add_record.html', message=message)
-            else:
+.. literalinclude:: ../python_code_examples/flask/databases/flask_db_write/write_db.py
+   :linenos:
+   :lines: 114-134
+   :emphasize-lines: 4,19
+   :lineno-start: 114
+   :caption:
 
-Line numbers start at 1 here, but not in the app.
 
-* Line 4: Using `the form class created above <#the-form-without-validators>`_, we create an *instance* of that form and assign it to the variable ``form1``.
-* Line 5: The ``if`` clause runs if the form data were valid. That means we want to write the data to the database.
-* Lines 6–10: Create new variables from the data received from the form.
-* Line 12: Run a function to create a date string representing today’s date. Assign that string to the new variable ``updated``.
-* Line 14: Using the `model class created above <#database-table-setup>`_ — ``Sock`` — we format the data in the manner expected by the database, following the order in the ``__init__`` function. Assign this to a new variable, ``record``.
-* Lines 16–17: This is SQLAlchemy handling everything to securely write to the database. Note that the variable ``record`` is used in line 16. ``db.session.commit()`` is necessary to update your database.
-* Line 19: Create a message to pass to the template. Note that this message *only exists if* the data were sent to the database.
-* Line 20: Render the template, passing the message to it.
+* Line 117: Using `the form class created above <#the-form-without-validators>`_, we create an *instance* of that form and assign it to the variable ``form1``.
+* Line 118: The ``if`` clause runs if the form data were valid. That means we want to write the data to the database.
+* Lines 119–123: Create new variables from the data received from the form.
+* Line 125: Run a function to create a date string representing today’s date. Assign that string to the new variable ``updated``.
+* Line 127: Using the `model class created above <#database-table-setup>`_ — ``Sock`` — we format the data in the manner expected by the database, following the order in the ``__init__`` function. Assign this to a new variable, ``record``.
+* Lines 129–130: This is SQLAlchemy handling everything to securely write to the database. Note that the variable ``record`` is used in line 129. ``db.session.commit()`` is necessary to update your database.
+* Line 132: Create a message to pass to the template. Note that this message *only exists if* the data were sent to the database.
+* Line 133: Render the template, passing the message to it.
 
 .. figure:: _static/images/submit_success.png
    :alt: Result of successful submit in browser screenshot
@@ -219,44 +201,38 @@ Recall that in `the form class <#the-form-with-validators>`_, *validators* were 
 .. figure:: _static/images/errors_in_form.png
    :alt: Result of unsuccessful submit in browser screenshot
 
-Above, you can see the result of **invalid data** in two of the form fields. The user can correct the errors and submit the form again. This is handled in the second part of the route function — the *else* clause:
+Above, you can see the result of **invalid data** in two of the form fields. The user can correct the errors and submit the form again. Nothing will be written to the database until all fields contain valid data. This is handled in the second part of the route function — the *else* clause:
 
-.. code-block:: python
-    :linenos:
-    :lineno-start: 21
-    :emphasize-lines: 9
 
-    else:
-        # show validaton errors
-        for field, errors in form1.errors.items():
-            for error in errors:
-                flash("Error in {}: {}".format(
-                    getattr(form1, field).label.text,
-                    error
-                ), 'error')
-        return render_template('add_record.html', form1=form1)
+.. literalinclude:: ../python_code_examples/flask/databases/flask_db_write/write_db.py
+   :linenos:
+   :lines: 134-144
+   :emphasize-lines: 10
+   :lineno-start: 134
+   :caption:
+
 
 See the `Flask Flash Function Tutorial <https://pythonprogramming.net/flash-flask-tutorial/>`_ for details about using ``flash()`` and the for-loop in the code above.
 
-Note that the *else* clause also runs if this page is freshly opened in the browser, with an empty form. The for-loop runs, but there are no errors, and so no ``flash()`` messages will appear on the page.
+Note that the *else* clause also runs if this page is freshly opened in the browser, with an empty form. In that case, the for-loop runs, but there are no errors — and so no ``flash()`` messages will appear on the page.
 
-The form — ``form1`` — *must* be passed to the template in the return statement (line 29 above).
+The form — ``form1`` — *must* be passed to the template in the return statement (line 143 above).
 
 The template
 ++++++++++++
 
 Because of the ``flash()`` messages, this template is a bit complicated.
 
-The top part (lines 26–33) runs only if the data were just written to the database. This is the case where the form is not on the page and the message says the data have been submitted.
+The top part (lines 26–34) runs only if the data were just written to the database. This is the case where the form is not on the page and the **message** says the data have been submitted.
 
 The *else* clause is discussed below.
 
 .. literalinclude:: ../python_code_examples/flask/databases/flask_db_write/templates/add_record.html
    :language: html
    :linenos:
-   :lines: 24-62
+   :lines: 24-64
    :lineno-start: 24
-   :emphasize-lines: 3,12,39
+   :emphasize-lines: 3,13,41
    :caption:
 
 The key thing to notice in the *else* clause is that the form is displayed (line 60): ::

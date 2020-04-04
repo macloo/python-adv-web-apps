@@ -192,6 +192,7 @@
 <li><p><a class="reference external" href="https://www.sqlalchemy.org/">SQLAlchemy documentation</a></p></li>
 <li><p><a class="reference external" href="https://flask-sqlalchemy.palletsprojects.com/">Flask-SQLAlchemy documentation</a></p></li>
 <li><p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases/flask_db_write">Code for this chapter</a></p></li>
+<li><p><a class="reference external" href="https://weimergeeks.com/flask_db_write/">Live version of the Flask app</a></p></li>
 </ul>
 <div class="section" id="the-database">
 <h2>The database<a class="headerlink" href="#the-database" title="Permalink to this headline">¶</a></h2>
@@ -246,7 +247,11 @@
 26
 27
 28
-29</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; write to a SQLite database with forms, templates &quot;&quot;&quot;</span>
+29
+30
+31</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; write to a SQLite database with forms, templates</span>
+<span class="sd">    add new record, delete a record, edit/update a record</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">flash</span>
 <span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
@@ -279,11 +284,11 @@
 </td></tr></table></div>
 </div>
 <ul class="simple">
-<li><p>Line 3: new imports from Flask — <code class="docutils literal notranslate"><span class="pre">request</span></code> and <code class="docutils literal notranslate"><span class="pre">flash</span></code>. You’ll see these in the first new route.</p></li>
-<li><p>Line 8: new form fields you have not seen before, because the form here has a lot more going on than the simple form in the introductory chapter.</p></li>
-<li><p>Line 9: new form validators to prevent unwanted values going into your database.</p></li>
-<li><p>Line 10: import to enable Python to insert a date automatically into your database.</p></li>
-<li><p>Line 15: required by WTForms; covered in the forms chapter.</p></li>
+<li><p>Line 5: new imports from Flask — <code class="docutils literal notranslate"><span class="pre">request</span></code> and <code class="docutils literal notranslate"><span class="pre">flash</span></code>. You’ll see these in the first new route.</p></li>
+<li><p>Line 10: new form fields you have not seen before, because the form here has a lot more going on than the simple form in the introductory chapter.</p></li>
+<li><p>Line 11: new form validators to prevent unwanted values going into your database.</p></li>
+<li><p>Line 12: import to enable Python to insert a date automatically into your database.</p></li>
+<li><p>Line 17: required by WTForms; covered in the forms chapter.</p></li>
 <li><p>Everything else above was covered in previous chapters.</p></li>
 </ul>
 </div>
@@ -291,9 +296,7 @@
 <h3>Database table setup<a class="headerlink" href="#database-table-setup" title="Permalink to this headline">¶</a></h3>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/flask_db_write/write_db.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>30
-31
-32
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>32
 33
 34
 35
@@ -311,7 +314,9 @@
 47
 48
 49
-50</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># each table in the database needs a class to be created for it</span>
+50
+51
+52</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># each table in the database needs a class to be created for it</span>
 <span class="c1"># db.Model is required - don&#39;t change it</span>
 <span class="c1"># identify all columns by name and data type</span>
 <span class="hll"><span class="k">class</span> <span class="nc">Sock</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
@@ -335,7 +340,7 @@
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Lines 33–41 were explained in the chapter about reading from a database. Lines 43–49 were not needed there, but now we need them, or we’ll get an error when we try to write a new record into this table in the database.</p>
+<p>Lines 35–43 were explained in the chapter about reading from a database. Lines 45–51 were not needed there, but <em>now we need them,</em> or we’ll get an error when we try to write a new record into this table in the database.</p>
 <p><code class="docutils literal notranslate"><span class="pre">__init__()</span></code> is a reserved method in Python classes. It is called when an object is created from the class, to initialize the properties of the class. Here, it specifies that when we pass values into <strong>a new record</strong> in this table, <strong>the order of the values</strong> will be <em>name, style, color, quantity, price, updated.</em>  <strong>Note</strong> that the order matters! You’ll see this in the first new route. <code class="docutils literal notranslate"><span class="pre">self</span></code> represents the new instance of the class, and everywhere you see it, it needs to stay.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
@@ -346,7 +351,7 @@
 <h3>The form without validators<a class="headerlink" href="#the-form-without-validators" title="Permalink to this headline">¶</a></h3>
 <p>As explained in the web forms chapter, we can vastly simplify <strong>the template HTML</strong> by defining every aspect of a form in a new class <strong>in the app script.</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AddRecord</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
-    <span class="c1"># id used only by update_record</span>
+    <span class="c1"># id used only by update/edit</span>
     <span class="n">id_field</span> <span class="o">=</span> <span class="n">HiddenField</span><span class="p">()</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">&#39;Sock name&#39;</span><span class="p">)</span>
     <span class="n">style</span> <span class="o">=</span> <span class="n">SelectField</span><span class="p">(</span><span class="s1">&#39;Choose the sock style&#39;</span><span class="p">,</span>
@@ -369,10 +374,10 @@
 <p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv">See a list of all WTForms field types.</a> Note that they are <em>case-sensitive.</em></p>
 <p>The following might be puzzling:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">choices=[]</span></code> — required for a SelectField. Inside the square brackets are tuples. The first item in a tuple is the value for the database. The second item in a tuple is the text visible in the select menu.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">HiddenField()</span></code> denotes an HTML form element: <code class="docutils literal notranslate"><span class="pre">&lt;input</span> <span class="pre">type=&quot;hidden&quot;&gt;</span></code>. <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/hidden">Learn more at MDN.</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">choices=[]</span></code> — required for a SelectField. Inside the square brackets are tuples. The first item in a tuple is the value for the database. The second item in a tuple is the text visible in the select menu. These pairs translate into lines like this in the HTML: <code class="docutils literal notranslate"><span class="pre">&lt;option</span> <span class="pre">value=&quot;ankle&quot;&gt;Ankle&lt;/option&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HiddenField()</span></code> denotes an HTML form element: <code class="docutils literal notranslate"><span class="pre">&lt;input</span> <span class="pre">type=&quot;hidden&quot;&gt;</span></code>. This kind of form element is used to pass values that should not be edited or even seen by users, such as a database primary key. <a class="reference external" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/hidden">Learn more at MDN.</a></p></li>
 </ul>
-<p>Everything else should be clear if you are familiar with regular HTML forms. Compare the code to <a class="reference external" href="#add-new-record-to-database">the screenshot of the form</a>.</p>
+<p>Everything else should be clear if you are familiar with regular HTML forms. Compare the code to <a class="reference external" href="#add-new-record-to-database">the screenshot of the form</a>. The live page is ➡︎ <a class="reference external" href="https://weimergeeks.com/flask_db_write/add_record">here</a>.</p>
 </div>
 <div class="section" id="the-form-with-validators">
 <h3>The form with validators<a class="headerlink" href="#the-form-with-validators" title="Permalink to this headline">¶</a></h3>
@@ -380,7 +385,7 @@
 <p>Below is <em>the same form class</em> with the validators added. This is the class used in the example app.</p>
 <p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-validators.csv">See a list of all WTForms validators.</a></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AddRecord</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
-    <span class="c1"># id used only by update_record</span>
+    <span class="c1"># id used only by update/edit</span>
     <span class="n">id_field</span> <span class="o">=</span> <span class="n">HiddenField</span><span class="p">()</span>
     <span class="n">name</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">&#39;Sock name&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="n">InputRequired</span><span class="p">(),</span>
         <span class="n">Regexp</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[A-Za-z\s\-</span><span class="se">\&#39;</span><span class="s1">]+$&#39;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Invalid sock name&quot;</span><span class="p">),</span>
@@ -401,7 +406,7 @@
     <span class="n">price</span> <span class="o">=</span> <span class="n">FloatField</span><span class="p">(</span><span class="s1">&#39;Retail price per pair&#39;</span><span class="p">,</span> <span class="p">[</span> <span class="n">InputRequired</span><span class="p">(),</span>
         <span class="n">NumberRange</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mf">1.00</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mf">99.99</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Invalid range&quot;</span><span class="p">)</span>
         <span class="p">])</span>
-    <span class="c1"># updated - date - handled in the route</span>
+    <span class="c1"># updated - date - handled in the route function</span>
     <span class="n">updated</span> <span class="o">=</span> <span class="n">HiddenField</span><span class="p">()</span>
     <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s1">&#39;Add/Update Record&#39;</span><span class="p">)</span>
 </pre></div>
@@ -433,60 +438,62 @@
 </div></blockquote>
 </li>
 </ol>
-<p>First, we’ll look at what happens if the data are valid and are written to the database:</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># add a new sock to the database</span>
+<p>First we’ll look at what happens if the data are valid and are written to the database:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/flask_db_write/write_db.py</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># add a new sock to the database</span>
 <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/add_record&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
-    <span class="k">def</span> <span class="nf">add_record</span><span class="p">():</span>
-<span class="hll">        <span class="n">form1</span> <span class="o">=</span> <span class="n">AddRecord</span><span class="p">()</span>
-</span>        <span class="k">if</span> <span class="n">form1</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
-            <span class="n">style</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;style&#39;</span><span class="p">]</span>
-            <span class="n">color</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]</span>
-            <span class="n">quantity</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;quantity&#39;</span><span class="p">]</span>
-            <span class="n">price</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span>
-            <span class="c1"># get today&#39;s date from function, above all the routes</span>
-            <span class="n">updated</span> <span class="o">=</span> <span class="n">stringdate</span><span class="p">()</span>
-            <span class="c1"># the data to be inserted into Sock model - the table, socks</span>
-            <span class="n">record</span> <span class="o">=</span> <span class="n">Sock</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">style</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">quantity</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">updated</span><span class="p">)</span>
-            <span class="c1"># Flask-SQLAlchemy magic adds record to database</span>
-            <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
-            <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-            <span class="c1"># create a message to send to the template</span>
-<span class="hll">            <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;The data for sock </span><span class="si">{name}</span><span class="s2"> has been submitted.&quot;</span>
-</span>            <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;add_record.html&#39;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">add_record</span><span class="p">():</span>
+<span class="hll">    <span class="n">form1</span> <span class="o">=</span> <span class="n">AddRecord</span><span class="p">()</span>
+</span>    <span class="k">if</span> <span class="n">form1</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+        <span class="n">style</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;style&#39;</span><span class="p">]</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]</span>
+        <span class="n">quantity</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;quantity&#39;</span><span class="p">]</span>
+        <span class="n">price</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span>
+        <span class="c1"># get today&#39;s date from function, above all the routes</span>
+        <span class="n">updated</span> <span class="o">=</span> <span class="n">stringdate</span><span class="p">()</span>
+        <span class="c1"># the data to be inserted into Sock model - the table, socks</span>
+        <span class="n">record</span> <span class="o">=</span> <span class="n">Sock</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">style</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">quantity</span><span class="p">,</span> <span class="n">price</span><span class="p">,</span> <span class="n">updated</span><span class="p">)</span>
+        <span class="c1"># Flask-SQLAlchemy magic adds record to database</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="c1"># create a message to send to the template</span>
+<span class="hll">        <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;The data for sock </span><span class="si">{name}</span><span class="s2"> has been submitted.&quot;</span>
+</span>        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;add_record.html&#39;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
 </pre></div>
 </td></tr></table></div>
-<p>Line numbers start at 1 here, but not in the app.</p>
+</div>
 <ul class="simple">
-<li><p>Line 4: Using <a class="reference external" href="#the-form-without-validators">the form class created above</a>, we create an <em>instance</em> of that form and assign it to the variable <code class="docutils literal notranslate"><span class="pre">form1</span></code>.</p></li>
-<li><p>Line 5: The <code class="docutils literal notranslate"><span class="pre">if</span></code> clause runs if the form data were valid. That means we want to write the data to the database.</p></li>
-<li><p>Lines 6–10: Create new variables from the data received from the form.</p></li>
-<li><p>Line 12: Run a function to create a date string representing today’s date. Assign that string to the new variable <code class="docutils literal notranslate"><span class="pre">updated</span></code>.</p></li>
-<li><p>Line 14: Using the <a class="reference external" href="#database-table-setup">model class created above</a> — <code class="docutils literal notranslate"><span class="pre">Sock</span></code> — we format the data in the manner expected by the database, following the order in the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> function. Assign this to a new variable, <code class="docutils literal notranslate"><span class="pre">record</span></code>.</p></li>
-<li><p>Lines 16–17: This is SQLAlchemy handling everything to securely write to the database. Note that the variable <code class="docutils literal notranslate"><span class="pre">record</span></code> is used in line 16. <code class="docutils literal notranslate"><span class="pre">db.session.commit()</span></code> is necessary to update your database.</p></li>
-<li><p>Line 19: Create a message to pass to the template. Note that this message <em>only exists if</em> the data were sent to the database.</p></li>
-<li><p>Line 20: Render the template, passing the message to it.</p></li>
+<li><p>Line 117: Using <a class="reference external" href="#the-form-without-validators">the form class created above</a>, we create an <em>instance</em> of that form and assign it to the variable <code class="docutils literal notranslate"><span class="pre">form1</span></code>.</p></li>
+<li><p>Line 118: The <code class="docutils literal notranslate"><span class="pre">if</span></code> clause runs if the form data were valid. That means we want to write the data to the database.</p></li>
+<li><p>Lines 119–123: Create new variables from the data received from the form.</p></li>
+<li><p>Line 125: Run a function to create a date string representing today’s date. Assign that string to the new variable <code class="docutils literal notranslate"><span class="pre">updated</span></code>.</p></li>
+<li><p>Line 127: Using the <a class="reference external" href="#database-table-setup">model class created above</a> — <code class="docutils literal notranslate"><span class="pre">Sock</span></code> — we format the data in the manner expected by the database, following the order in the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> function. Assign this to a new variable, <code class="docutils literal notranslate"><span class="pre">record</span></code>.</p></li>
+<li><p>Lines 129–130: This is SQLAlchemy handling everything to securely write to the database. Note that the variable <code class="docutils literal notranslate"><span class="pre">record</span></code> is used in line 129. <code class="docutils literal notranslate"><span class="pre">db.session.commit()</span></code> is necessary to update your database.</p></li>
+<li><p>Line 132: Create a message to pass to the template. Note that this message <em>only exists if</em> the data were sent to the database.</p></li>
+<li><p>Line 133: Render the template, passing the message to it.</p></li>
 </ul>
 <div class="figure align-default">
 <img alt="Result of successful submit in browser screenshot" src="_images/submit_success.png" />
@@ -497,37 +504,44 @@
 <div class="figure align-default">
 <img alt="Result of unsuccessful submit in browser screenshot" src="_images/errors_in_form.png" />
 </div>
-<p>Above, you can see the result of <strong>invalid data</strong> in two of the form fields. The user can correct the errors and submit the form again. This is handled in the second part of the route function — the <em>else</em> clause:</p>
-<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>21
-22
-23
-24
-25
-26
-27
-28
-29</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="k">else</span><span class="p">:</span>
-    <span class="c1"># show validaton errors</span>
-    <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">errors</span> <span class="ow">in</span> <span class="n">form1</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">errors</span><span class="p">:</span>
-            <span class="n">flash</span><span class="p">(</span><span class="s2">&quot;Error in </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                <span class="nb">getattr</span><span class="p">(</span><span class="n">form1</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
-                <span class="n">error</span>
-            <span class="p">),</span> <span class="s1">&#39;error&#39;</span><span class="p">)</span>
-<span class="hll">    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;add_record.html&#39;</span><span class="p">,</span> <span class="n">form1</span><span class="o">=</span><span class="n">form1</span><span class="p">)</span>
-</span></pre></div>
+<p>Above, you can see the result of <strong>invalid data</strong> in two of the form fields. The user can correct the errors and submit the form again. Nothing will be written to the database until all fields contain valid data. This is handled in the second part of the route function — the <em>else</em> clause:</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/flask_db_write/write_db.py</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># show validaton errors</span>
+        <span class="c1"># see https://pythonprogramming.net/flash-flask-tutorial/</span>
+        <span class="k">for</span> <span class="n">field</span><span class="p">,</span> <span class="n">errors</span> <span class="ow">in</span> <span class="n">form1</span><span class="o">.</span><span class="n">errors</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">error</span> <span class="ow">in</span> <span class="n">errors</span><span class="p">:</span>
+                <span class="n">flash</span><span class="p">(</span><span class="s2">&quot;Error in </span><span class="si">{}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="nb">getattr</span><span class="p">(</span><span class="n">form1</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span><span class="o">.</span><span class="n">label</span><span class="o">.</span><span class="n">text</span><span class="p">,</span>
+                    <span class="n">error</span>
+                <span class="p">),</span> <span class="s1">&#39;error&#39;</span><span class="p">)</span>
+<span class="hll">        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;add_record.html&#39;</span><span class="p">,</span> <span class="n">form1</span><span class="o">=</span><span class="n">form1</span><span class="p">)</span>
+</span>
+</pre></div>
 </td></tr></table></div>
+</div>
 <p>See the <a class="reference external" href="https://pythonprogramming.net/flash-flask-tutorial/">Flask Flash Function Tutorial</a> for details about using <code class="docutils literal notranslate"><span class="pre">flash()</span></code> and the for-loop in the code above.</p>
-<p>Note that the <em>else</em> clause also runs if this page is freshly opened in the browser, with an empty form. The for-loop runs, but there are no errors, and so no <code class="docutils literal notranslate"><span class="pre">flash()</span></code> messages will appear on the page.</p>
-<p>The form — <code class="docutils literal notranslate"><span class="pre">form1</span></code> — <em>must</em> be passed to the template in the return statement (line 29 above).</p>
+<p>Note that the <em>else</em> clause also runs if this page is freshly opened in the browser, with an empty form. In that case, the for-loop runs, but there are no errors — and so no <code class="docutils literal notranslate"><span class="pre">flash()</span></code> messages will appear on the page.</p>
+<p>The form — <code class="docutils literal notranslate"><span class="pre">form1</span></code> — <em>must</em> be passed to the template in the return statement (line 143 above).</p>
 </div>
 <div class="section" id="the-template">
 <h3>The template<a class="headerlink" href="#the-template" title="Permalink to this headline">¶</a></h3>
 <p>Because of the <code class="docutils literal notranslate"><span class="pre">flash()</span></code> messages, this template is a bit complicated.</p>
-<p>The top part (lines 26–33) runs only if the data were just written to the database. This is the case where the form is not on the page and the message says the data have been submitted.</p>
+<p>The top part (lines 26–34) runs only if the data were just written to the database. This is the case where the form is not on the page and the <strong>message</strong> says the data have been submitted.</p>
 <p>The <em>else</em> clause is discussed below.</p>
-<div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/flask_db_write/templates/add_record.html</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/flask_db_write/templates/add_record.html</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
 <div class="highlight-html notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>24
 25
 26
@@ -566,14 +580,17 @@
 59
 60
 61
-62</pre></div></td><td class="code"><div class="highlight"><pre><span></span>		<span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;pt-5 pb-2&quot;</span><span class="p">&gt;</span>Add a New Sock<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+62
+63
+64</pre></div></td><td class="code"><div class="highlight"><pre><span></span>		<span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;pt-5 pb-2&quot;</span><span class="p">&gt;</span>Add a New Sock<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
 
 <span class="hll">		{% if message %}
-</span>			<span class="c">&lt;!-- the form was submitted and message exists --&gt;</span>
+</span>
+			<span class="c">&lt;!-- the form was submitted and message exists --&gt;</span>
 			<span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;lead&quot;</span><span class="p">&gt;&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>{{ message }}<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 
-			<span class="c">&lt;!-- open the form via GET --&gt;</span>
-			<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;add_record&#39;) }}&quot;</span><span class="p">&gt;</span>Submit another sock<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+			<span class="c">&lt;!-- links --&gt;</span>
+			<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;add_record&#39;) }}&quot;</span><span class="p">&gt;</span>Submit another sock.<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 
 			<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;{{ url_for(&#39;index&#39;) }}&quot;</span><span class="p">&gt;</span>Return to the index.<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
 
@@ -590,18 +607,19 @@
 <span class="c">				 get_flashed_messages() exists here because of flash()</span>
 <span class="c">				 in the route function</span>
 <span class="c">				 --&gt;</span>
-			{% with errors = get_flashed_messages() %}
-				{% if errors %}
-					{% for err in errors %}
-					<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert alert-danger alert-dismissible&quot;</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;alert&quot;</span><span class="p">&gt;</span>
-						<span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;close&quot;</span> <span class="na">data-dismiss</span><span class="o">=</span><span class="s">&quot;alert&quot;</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Close&quot;</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">aria-hidden</span><span class="o">=</span><span class="s">&quot;true&quot;</span><span class="p">&gt;</span>×<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-						{{ err }}
-					<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-					{% endfor %}
-				{% endif %}
-			{% endwith %}
+				 {% with errors = get_flashed_messages() %}
+		             {% if errors %}
+		                 {% for err in errors %}
+		                 <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert alert-danger alert-dismissible&quot;</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;alert&quot;</span><span class="p">&gt;</span>
+		                     <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;close&quot;</span> <span class="na">data-dismiss</span><span class="o">=</span><span class="s">&quot;alert&quot;</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Close&quot;</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">aria-hidden</span><span class="o">=</span><span class="s">&quot;true&quot;</span><span class="p">&gt;</span>×<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+		                     {{ err }}
+		                 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+		                 {% endfor %}
+		             {% endif %}
+		         {% endwith %}
 			<span class="c">&lt;!-- end of flash --&gt;</span>
 
+			<span class="c">&lt;!-- the form, thanks to WTForms --&gt;</span>
 		    {{ wtf.quick_form(form1) }}
 
 <span class="hll">		{% endif %}
