@@ -866,6 +866,18 @@
 <p class="admonition-title">Note</p>
 <p>It is always the <strong>function name</strong> as the argument for <code class="docutils literal notranslate"><span class="pre">url_for()</span></code> — <em>never</em> the template name. If the function is named differently from the route URL, be sure to use the function name.</p>
 </div>
+<p>When writing the decorator for a route, consider whether you need to assign ONLY the <em>post</em> method to it, or BOTH <em>post</em> and <em>get.</em> In the socks app, only one route requires both <em>post</em> and <em>get</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/add_record&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Three routes require only <em>post</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/edit_or_delete&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/delete_result&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/edit_result&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>The difference is this: for <em>/add_record</em> the user needs to be able to open the unfilled form with a regular link. That is the <em>get</em> method — the default for every regular web page. But when a route runs <strong>as the result of a form submission,</strong> the method <em>post</em> is required, because only <em>post</em> can convey form data to the server as attached data (not visible in the browser address bar). The <em>/add_record</em> route both opens the (empty) form and processes the form.</p>
+<p>The other three routes listed above ONLY run when a form is posted. If you try to open those directly, you’ll see an error message.</p>
 <p>.</p>
 </div>
 </div>

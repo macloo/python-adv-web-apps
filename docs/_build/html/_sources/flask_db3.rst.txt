@@ -404,6 +404,21 @@ If you do not assign an **action** to a form, it will call the same route again 
 
 .. note:: It is always the **function name** as the argument for ``url_for()`` — *never* the template name. If the function is named differently from the route URL, be sure to use the function name.
 
+When writing the decorator for a route, consider whether you need to assign ONLY the *post* method to it, or BOTH *post* and *get.* In the socks app, only one route requires both *post* and *get*: ::
+
+    @app.route('/add_record', methods=['GET', 'POST'])
+
+Three routes require only *post*: ::
+
+    @app.route('/edit_or_delete', methods=['POST'])
+    @app.route('/delete_result', methods=['POST'])
+    @app.route('/edit_result', methods=['POST'])
+
+The difference is this: for */add_record* the user needs to be able to open the unfilled form with a regular link. That is the *get* method — the default for every regular web page. But when a route runs **as the result of a form submission,** the method *post* is required, because only *post* can convey form data to the server as attached data (not visible in the browser address bar). The */add_record* route both opens the (empty) form and processes the form.
+
+The other three routes listed above ONLY run when a form is posted. If you try to open those directly, you’ll see an error message.
+
+
 
 
 .
