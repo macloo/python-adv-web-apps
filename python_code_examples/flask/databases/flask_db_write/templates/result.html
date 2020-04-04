@@ -1,0 +1,45 @@
+{% extends 'bootstrap/base.html' %}
+
+
+{% block styles %}
+{{ super() }}
+	<style>
+		body { background: #e8f1f9; }
+	</style>
+{% endblock %}
+
+
+{% block title %}
+Database Result
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+  <div class="row pb-5">
+    <div class="col-md-10 col-lg-8 mx-lg-auto mx-md-auto">
+
+    	<h1 class="pt-5 pb-2">Database Result</h1>
+
+	{% if message %}
+
+		<!-- the form was submitted and message exists -->
+		<p class="lead"><strong>{{ message }}</strong></p>
+
+	{% else %}
+
+		<p class="lead">There is nothing for you here.</p>
+
+	{% endif %}
+
+		<!-- links -->
+		<p><a href="{{ url_for('index') }}">Return to the index.</a></p>
+
+		<p><a href="{{ url_for( 'select_record', letters='AF' ) }}">Return to the selection page.</a></p>
+
+		</div>
+	</div>
+</div>
+
+{% endblock %}

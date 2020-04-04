@@ -1,7 +1,14 @@
 {% extends 'bootstrap/base.html' %}
 
+{% block styles %}
+{{ super() }}
+	<style>
+		body { background: #e8f1f9; }
+	</style>
+{% endblock %}
+
 {% block title %}
-404 Error - Page Not Found
+{{ pagetitle }}
 {% endblock %}
 
 
@@ -11,7 +18,7 @@
   <div class="row">
     <div class="col-md-10 col-lg-8 mx-lg-auto mx-md-auto">
 
-      <h1 class="pt-5 pb-2">Page not found (Error 404)</h1>
+      <h1 class="pt-5 pb-2">{{ pageheading }}</h1>
 
       <p>{{ error }}</p>
 

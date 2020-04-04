@@ -1,0 +1,85 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block styles %}
+{{ super() }}
+	<style>
+		body { background: #e8f1f9; }
+		ul { display: flex; }
+	</style>
+{% endblock %}
+
+
+{% block title %}
+Select a Sock
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+  <div class="row pb-5">
+    <div class="col-lg-10 mx-lg-auto">
+
+      <h1 class="pt-5 pb-2">Select a Sock</h1>
+
+      <p class="lead alert alert-success">Select one sock to edit or delete.</p>
+
+	  <!-- links to display a group of socks, alphabetically -->
+	  <ul class="pl-0">
+		  <li class="text-center list-group-item list-group-item-action"><a href="{{ url_for( 'select_record', letters='AF' ) }}">A &ndash; E</a></li>
+		  <li class="text-center list-group-item list-group-item-action"><a href="{{ url_for( 'select_record', letters='FM' ) }}">F &ndash; L</a></li>
+		  <li class="text-center list-group-item list-group-item-action"><a href="{{ url_for( 'select_record', letters='MS' ) }}">M &ndash; R</a></li>
+		  <li class="text-center list-group-item list-group-item-action"><a href="{{ url_for( 'select_record', letters='Sa' ) }}">S &ndash; Z</a></li>
+	  </ul>
+
+	  <p class="ml-4"><a href="{{ url_for('index') }}">Return to the index.</a></p>
+
+	  <!-- start form - not using WTForms here -->
+	  <form method="POST" id="form2" action="{{ url_for('edit_or_delete') }}">
+
+		<table class="table">
+			<tr>
+				<th></th>
+				<th>Sock Name</th>
+				<th>Color</th>
+				<th>Style</th>
+				<th>Price</th>
+				<th>Quantity</th>
+				<th>Updated</th>
+			</tr>
+
+			<!-- here is a for-loop to give us all the socks -->
+			{% for sock in socks %}
+			<tr>
+				<td class="center-align"><input type="radio" name="id" value="{{ sock.id }}" required></td>
+				<td>{{ sock.name }}</td>
+				<td>{{ sock.color }}</td>
+				<td>{{ sock.style }}</td>
+				<td>${{ sock.price }}</td>
+				<td>{{ sock.quantity }}</td>
+				<td>{{ sock.updated }}</td>
+			</tr>
+			{% endfor %}
+		</table>
+
+		<div class="form-group lead alert alert-success pb-4">
+          <p>What do you want to do with the selected record?</p>
+
+          <div class="form-check form-check-inline">
+          <label class="form-check-label"><input class="form-check-input" type="radio" name="choice" value="delete" required> Delete it</label>
+          </div>
+          <div class="form-check form-check-inline">
+          <label class="form-check-label"><input class="form-check-input" type="radio" name="choice" value="edit" required> Edit it</label>
+          </div>
+        </div><!-- end form-group -->
+
+		<div class="form-group">
+	        <input class="btn btn-success" type="submit" value="Submit Choice">
+        </div>
+
+		</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

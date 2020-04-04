@@ -30,7 +30,9 @@ Sock Market
           {% endfor %}
       </ul>
 
-	  <p>Or you can <a href="{{ url_for('add_record') }}">submit a new sock</a>.</p>
+	  <!-- links -->
+	  <p>You can <a href="{{ url_for('add_record') }}">submit a new sock</a>.</p>
+	  <p>You can <a href="{{ url_for( 'select_record', letters='AF' ) }}">select a sock for editing</a>.</p>
 
     </div>
   </div>
