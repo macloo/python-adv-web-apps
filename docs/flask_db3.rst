@@ -245,6 +245,16 @@ Lines 49–58 handle the ``flash()`` messages that are written *if the form is s
 
 If the page was just opened and the form is empty, unfilled, then there are no ``flash()`` messages.
 
+Summary: Add new record
++++++++++++++++++++++++
+
+While that probably seems like a lot, note that there are *one form, one route,* and *one template* used to create a new record and add it to the database.
+
+The template *and the route* in this case handle BOTH the form before it has been submitted AND the submission of the form.
+
+That will not be the same when we delete or update a database record in this app.
+
+
 Update a record
 ---------------
 
