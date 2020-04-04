@@ -254,15 +254,156 @@ The template *and the route* in this case handle BOTH the form before it has bee
 
 That will not be the same when we delete or update a database record in this app.
 
+* `Code for this app <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases/flask_db_write>`_
+* `Live version of this app <https://weimergeeks.com/flask_db_write/>`_
 
-Update a record
----------------
 
-xyz
+Delete or update a record
+-------------------------
 
-Delete a record
----------------
+In contrast to adding a new record, either deleting or editing an existing record requires your code to find a specific record that is already *in the database.* The record must be selected in a way that guarantees only one record will be selected.
 
-xyz
+In this app, the index page offers an option to select a sock for editing:
+
+.. figure:: _static/images/index_page.png
+   :alt: Socks app index page screenshot
+
+Above: */* — route; *index()* — function; *index.html* — template
+
+The link opens a page showing socks listed alphabetically by name, with a radio button at left to allow selection of just one sock:
+
+.. figure:: _static/images/select_sock.png
+   :alt: Select record page screenshot
+
+Above: */select_record/<letters>* — route; *select_record(letters)* — function; *select_record.html* — template
+
+The **value** encoded in the radio button is the unique ID (the primary key) for the sock record in the database. For example: ::
+
+    <tr>
+        <td class="center-align"><input type="radio" name="id" value="44" required></td>
+        <td>Evelyn</td>
+        <td>black multi</td>
+
+The form in the template *select_record.html* has this **action** attribute in the ``form`` tag: ::
+
+    action="{{ url_for('edit_or_delete') }}"
+
+As a result, **submitting that form** calls the route for the *edit_or_delete()* function:
+
+.. literalinclude:: ../python_code_examples/flask/databases/flask_db_write/write_db.py
+   :linenos:
+   :lines: 154-164
+   :lineno-start: 154
+   :emphasize-lines: 6
+   :caption:
+
+The unique ID is used in the database query (line 159) to retrieve the selected record from the database.
+
+The template rendered by that route — *edit_or_delete.html* — includes an if/else to determine whether to show the form for **deleting** a record *or* the form for **updating** a record. It tests the value of the variable ``choice``, which came from the form (line 158) and is passed to the template (line 163). The precise record that was selected is retrieved from the database in line 159 (highlighted) and passed to the template in line 163.
+
+If you chose to delete, this is what you’ll see:
+
+.. figure:: _static/images/delete_record.png
+   :alt: Delete record page screenshot
+
+Above: */edit_or_delete* — route; *edit_or_delete()* — function; *edit_or_delete.html* — template
+
+If you chose to edit, you’ll see the form with values filled in from the record that was retrieved from the database.:
+
+.. figure:: _static/images/edit_record.png
+   :alt: Edit record page screenshot
+
+Above: */edit_or_delete* — route; *edit_or_delete()* — function; *edit_or_delete.html* — template
+
+If you opened that route without submitting the form:
+
+.. figure:: _static/images/post_error.png
+   :alt: Post error page screenshot
+
+Above: */edit_or_delete* — route; *edit_or_delete()* — function; *edit_or_delete.html* — template
+
+.. important:: All of the three previous screenshots come from the same route, */edit_or_delete.* The template determines whether to show “Delete a Sock” or “Edit a Sock” based on the value of the variable ``choice``. The third screenshot is an error template (*error.html*) that renders automatically if the HTTP request was *get* and not *post* — because: ::
+
+    @app.route('/edit_or_delete', methods=['POST'])
+
+Deleting
+++++++++
+
+By submitting the deletion form that appears in the *enter_or_delete.html* template, the user causes the deletion to occur. The **action** in the form is: ::
+
+    action="{{ url_for('delete_result') }}"
+
+And so this route function is called:
+
+.. literalinclude:: ../python_code_examples/flask/databases/flask_db_write/write_db.py
+   :linenos:
+   :lines: 165-179
+   :lineno-start: 165
+   :emphasize-lines: 8,9
+   :caption:
+
+The record deletion is performed in lines 172–173. The unique ID for the record was obtained from the form. The record was retrieved from the database in line 170. A message will be passed to the template named *result.html* (line 175), and this is the result:
+
+.. figure:: _static/images/deleted.png
+   :alt: Deleted result page screenshot
+
+
+Editing
++++++++
+
+Alternatively, by submitting the edit/update form that appears in the *enter_or_delete.html* template, the user causes the record to be changed in the database. The **action** in the form is: ::
+
+    action="{{ url_for('edit_result') }}"
+
+And so this route function is called:
+
+.. literalinclude:: ../python_code_examples/flask/databases/flask_db_write/write_db.py
+   :linenos:
+   :lines: 180-202
+   :lineno-start: 180
+   :emphasize-lines: 6,19
+   :caption:
+
+This is a bit more complicated than the deletion function, but recall the way we *added a new record,* at the start of this chapter. Note that we are in fact **using the same form** that we used there. We are validating the data in exactly the same way (the ``else`` clause following line 202 is practically the same).
+
+In lines 187–191, we add the form data to ``sock`` — which contains the record retrieved from the database in line 185. However, we do not write the record back to the database *unless* the form data validates. This is also very similar to the way we *added a new record.* The most significant difference between this function and that one is that when we **add a new record** we use ``db.session.add(record)`` and **here, we do not.** We only commit the changes with: ::
+
+    db.session.commit()
+
+A message will be passed to the template named *result.html* (line 201), and this is the result:
+
+.. figure:: _static/images/edited.png
+   :alt: Edited result page screenshot
+
+.. important:: Both route functions — the one for deleting a record AND the one for editing a record — render the same template, *result.html.*
+
+Summary: Delete or update (and a diagram)
++++++++++++++++++++++++++++++++++++++++++
+
+This is a lot, with three different forms and three different templates. Perhaps this diagram will help.
+
+.. figure:: _static/images/flowchart.png
+   :alt: Flowchart showing edit or delete process
+
+Of course this is not the only way to build it — Flask gives us a lot of freedom to design templates and use routes whatever way is best for the application we need to build.
+
+Conclusion & tips
+-----------------
+
+If you’re making changes to a database via a Flask app, you are likely to use HTML forms.
+
+A key fact to remember is that if you use the WTForms/flask_wtf ``quick_form()``, you do not have a lot of options for that form outside the **class** you build in the Flask app. `See the documentation. <https://pythonhosted.org/Flask-Bootstrap/forms.html>`_
+
+If you want **more flexibility,** you can encode a form like the two forms in the template *edit_or_delete.html* — both of those have values assigned to each field. `See the complete template here. <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases/flask_db_write/templates/>`_
+
+For even more flexibility, you can write the entire form from scratch, as seen in the template *select_record.html.* In that case, you do not need to build a Python class for the form.
+
+If you do not assign an **action** to a form, it will call the same route again when you submit it. If you want it to call a *different* route, assign that route as the value of ``action=`` — using Jinja template syntax, like this: ::
+
+    action="{{ url_for('edit_result') }}"
+
+.. note:: It is always the **function name** as the argument for ``url_for()`` — *never* the template name. If the function is named differently from the route URL, be sure to use the function name.
+
+
 
 .

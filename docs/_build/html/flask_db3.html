@@ -110,8 +110,13 @@
 <li class="toctree-l3"><a class="reference internal" href="#summary-add-new-record">Summary: Add new record</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#update-a-record">Update a record</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#delete-a-record">Delete a record</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#delete-or-update-a-record">Delete or update a record</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#deleting">Deleting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#editing">Editing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary-delete-or-update-and-a-diagram">Summary: Delete or update (and a diagram)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#conclusion-tips">Conclusion &amp; tips</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
@@ -640,15 +645,227 @@
 <p>While that probably seems like a lot, note that there are <em>one form, one route,</em> and <em>one template</em> used to create a new record and add it to the database.</p>
 <p>The template <em>and the route</em> in this case handle BOTH the form before it has been submitted AND the submission of the form.</p>
 <p>That will not be the same when we delete or update a database record in this app.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases/flask_db_write">Code for this app</a></p></li>
+<li><p><a class="reference external" href="https://weimergeeks.com/flask_db_write/">Live version of this app</a></p></li>
+</ul>
 </div>
 </div>
-<div class="section" id="update-a-record">
-<h2>Update a record<a class="headerlink" href="#update-a-record" title="Permalink to this headline">¶</a></h2>
-<p>xyz</p>
+<div class="section" id="delete-or-update-a-record">
+<h2>Delete or update a record<a class="headerlink" href="#delete-or-update-a-record" title="Permalink to this headline">¶</a></h2>
+<p>In contrast to adding a new record, either deleting or editing an existing record requires your code to find a specific record that is already <em>in the database.</em> The record must be selected in a way that guarantees only one record will be selected.</p>
+<p>In this app, the index page offers an option to select a sock for editing:</p>
+<div class="figure align-default">
+<img alt="Socks app index page screenshot" src="_images/index_page.png" />
 </div>
-<div class="section" id="delete-a-record">
-<h2>Delete a record<a class="headerlink" href="#delete-a-record" title="Permalink to this headline">¶</a></h2>
-<p>xyz</p>
+<p>Above: <em>/</em> — route; <em>index()</em> — function; <em>index.html</em> — template</p>
+<p>The link opens a page showing socks listed alphabetically by name, with a radio button at left to allow selection of just one sock:</p>
+<div class="figure align-default">
+<img alt="Select record page screenshot" src="_images/select_sock.png" />
+</div>
+<p>Above: <em>/select_record/&lt;letters&gt;</em> — route; <em>select_record(letters)</em> — function; <em>select_record.html</em> — template</p>
+<p>The <strong>value</strong> encoded in the radio button is the unique ID (the primary key) for the sock record in the database. For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">tr</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">td</span> <span class="n">class</span><span class="o">=</span><span class="s2">&quot;center-align&quot;</span><span class="o">&gt;&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;radio&quot;</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;id&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;44&quot;</span> <span class="n">required</span><span class="o">&gt;&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span><span class="n">Evelyn</span><span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">td</span><span class="o">&gt;</span><span class="n">black</span> <span class="n">multi</span><span class="o">&lt;/</span><span class="n">td</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The form in the template <em>select_record.html</em> has this <strong>action</strong> attribute in the <code class="docutils literal notranslate"><span class="pre">form</span></code> tag:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">action</span><span class="o">=</span><span class="s2">&quot;{{ url_for(&#39;edit_or_delete&#39;) }}&quot;</span>
+</pre></div>
+</div>
+<p>As a result, <strong>submitting that form</strong> calls the route for the <em>edit_or_delete()</em> function:</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/flask_db_write/write_db.py</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># edit or delete - come here from form in /select_record</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/edit_or_delete&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">edit_or_delete</span><span class="p">():</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+    <span class="n">choice</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;choice&#39;</span><span class="p">]</span>
+<span class="hll">    <span class="n">sock</span> <span class="o">=</span> <span class="n">Sock</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Sock</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="nb">id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+</span>    <span class="c1"># two forms in this template</span>
+    <span class="n">form1</span> <span class="o">=</span> <span class="n">AddRecord</span><span class="p">()</span>
+    <span class="n">form2</span> <span class="o">=</span> <span class="n">DeleteForm</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;edit_or_delete.html&#39;</span><span class="p">,</span> <span class="n">sock</span><span class="o">=</span><span class="n">sock</span><span class="p">,</span> <span class="n">form1</span><span class="o">=</span><span class="n">form1</span><span class="p">,</span> <span class="n">form2</span><span class="o">=</span><span class="n">form2</span><span class="p">,</span> <span class="n">choice</span><span class="o">=</span><span class="n">choice</span><span class="p">)</span>
+
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>The unique ID is used in the database query (line 159) to retrieve the selected record from the database.</p>
+<p>The template rendered by that route — <em>edit_or_delete.html</em> — includes an if/else to determine whether to show the form for <strong>deleting</strong> a record <em>or</em> the form for <strong>updating</strong> a record. It tests the value of the variable <code class="docutils literal notranslate"><span class="pre">choice</span></code>, which came from the form (line 158) and is passed to the template (line 163). The precise record that was selected is retrieved from the database in line 159 (highlighted) and passed to the template in line 163.</p>
+<p>If you chose to delete, this is what you’ll see:</p>
+<div class="figure align-default">
+<img alt="Delete record page screenshot" src="_images/delete_record.png" />
+</div>
+<p>Above: <em>/edit_or_delete</em> — route; <em>edit_or_delete()</em> — function; <em>edit_or_delete.html</em> — template</p>
+<p>If you chose to edit, you’ll see the form with values filled in from the record that was retrieved from the database.:</p>
+<div class="figure align-default">
+<img alt="Edit record page screenshot" src="_images/edit_record.png" />
+</div>
+<p>Above: <em>/edit_or_delete</em> — route; <em>edit_or_delete()</em> — function; <em>edit_or_delete.html</em> — template</p>
+<p>If you opened that route without submitting the form:</p>
+<div class="figure align-default">
+<img alt="Post error page screenshot" src="_images/post_error.png" />
+</div>
+<p>Above: <em>/edit_or_delete</em> — route; <em>edit_or_delete()</em> — function; <em>edit_or_delete.html</em> — template</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>All of the three previous screenshots come from the same route, <em>/edit_or_delete.</em> The template determines whether to show “Delete a Sock” or “Edit a Sock” based on the value of the variable <code class="docutils literal notranslate"><span class="pre">choice</span></code>. The third screenshot is an error template (<em>error.html</em>) that renders automatically if the HTTP request was <em>get</em> and not <em>post</em> — because:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/edit_or_delete&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="deleting">
+<h3>Deleting<a class="headerlink" href="#deleting" title="Permalink to this headline">¶</a></h3>
+<p>By submitting the deletion form that appears in the <em>enter_or_delete.html</em> template, the user causes the deletion to occur. The <strong>action</strong> in the form is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">action</span><span class="o">=</span><span class="s2">&quot;{{ url_for(&#39;delete_result&#39;) }}&quot;</span>
+</pre></div>
+</div>
+<p>And so this route function is called:</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/flask_db_write/write_db.py</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># result of delete - this function deletes the record</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/delete_result&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">delete_result</span><span class="p">():</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;id_field&#39;</span><span class="p">]</span>
+    <span class="n">purpose</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;purpose&#39;</span><span class="p">]</span>
+    <span class="n">sock</span> <span class="o">=</span> <span class="n">Sock</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Sock</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="nb">id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">purpose</span> <span class="o">==</span> <span class="s1">&#39;delete&#39;</span><span class="p">:</span>
+<span class="hll">        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">sock</span><span class="p">)</span>
+</span><span class="hll">        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</span>        <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;The sock </span><span class="si">{sock.name}</span><span class="s2"> has been deleted from the database.&quot;</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;result.html&#39;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># this calls an error handler</span>
+        <span class="n">abort</span><span class="p">(</span><span class="mi">405</span><span class="p">)</span>
+
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>The record deletion is performed in lines 172–173. The unique ID for the record was obtained from the form. The record was retrieved from the database in line 170. A message will be passed to the template named <em>result.html</em> (line 175), and this is the result:</p>
+<div class="figure align-default">
+<img alt="Deleted result page screenshot" src="_images/deleted.png" />
+</div>
+</div>
+<div class="section" id="editing">
+<h3>Editing<a class="headerlink" href="#editing" title="Permalink to this headline">¶</a></h3>
+<p>Alternatively, by submitting the edit/update form that appears in the <em>enter_or_delete.html</em> template, the user causes the record to be changed in the database. The <strong>action</strong> in the form is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">action</span><span class="o">=</span><span class="s2">&quot;{{ url_for(&#39;edit_result&#39;) }}&quot;</span>
+</pre></div>
+</div>
+<p>And so this route function is called:</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/flask_db_write/write_db.py</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># result of edit - this function updates the record</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/edit_result&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">edit_result</span><span class="p">():</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;id_field&#39;</span><span class="p">]</span>
+    <span class="c1"># call up the record from the database</span>
+<span class="hll">    <span class="n">sock</span> <span class="o">=</span> <span class="n">Sock</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Sock</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="nb">id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+</span>    <span class="c1"># update all values</span>
+    <span class="n">sock</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+    <span class="n">sock</span><span class="o">.</span><span class="n">style</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;style&#39;</span><span class="p">]</span>
+    <span class="n">sock</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]</span>
+    <span class="n">sock</span><span class="o">.</span><span class="n">quantity</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;quantity&#39;</span><span class="p">]</span>
+    <span class="n">sock</span><span class="o">.</span><span class="n">price</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">form</span><span class="p">[</span><span class="s1">&#39;price&#39;</span><span class="p">]</span>
+    <span class="c1"># get today&#39;s date from function, above all the routes</span>
+    <span class="n">sock</span><span class="o">.</span><span class="n">updated</span> <span class="o">=</span> <span class="n">stringdate</span><span class="p">()</span>
+
+    <span class="n">form1</span> <span class="o">=</span> <span class="n">AddRecord</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">form1</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
+        <span class="c1"># update database record</span>
+<span class="hll">        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</span>        <span class="c1"># create a message to send to the template</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;The data for sock </span><span class="si">{sock.name}</span><span class="s2"> has been updated.&quot;</span>
+        <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;result.html&#39;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+</pre></div>
+</td></tr></table></div>
+</div>
+<p>This is a bit more complicated than the deletion function, but recall the way we <em>added a new record,</em> at the start of this chapter. Note that we are in fact <strong>using the same form</strong> that we used there. We are validating the data in exactly the same way (the <code class="docutils literal notranslate"><span class="pre">else</span></code> clause following line 202 is practically the same).</p>
+<p>In lines 187–191, we add the form data to <code class="docutils literal notranslate"><span class="pre">sock</span></code> — which contains the record retrieved from the database in line 185. However, we do not write the record back to the database <em>unless</em> the form data validates. This is also very similar to the way we <em>added a new record.</em> The most significant difference between this function and that one is that when we <strong>add a new record</strong> we use <code class="docutils literal notranslate"><span class="pre">db.session.add(record)</span></code> and <strong>here, we do not.</strong> We only commit the changes with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>A message will be passed to the template named <em>result.html</em> (line 201), and this is the result:</p>
+<div class="figure align-default">
+<img alt="Edited result page screenshot" src="_images/edited.png" />
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Both route functions — the one for deleting a record AND the one for editing a record — render the same template, <em>result.html.</em></p>
+</div>
+</div>
+<div class="section" id="summary-delete-or-update-and-a-diagram">
+<h3>Summary: Delete or update (and a diagram)<a class="headerlink" href="#summary-delete-or-update-and-a-diagram" title="Permalink to this headline">¶</a></h3>
+<p>This is a lot, with three different forms and three different templates. Perhaps this diagram will help.</p>
+<div class="figure align-default">
+<img alt="Flowchart showing edit or delete process" src="_images/flowchart.png" />
+</div>
+<p>Of course this is not the only way to build it — Flask gives us a lot of freedom to design templates and use routes whatever way is best for the application we need to build.</p>
+</div>
+</div>
+<div class="section" id="conclusion-tips">
+<h2>Conclusion &amp; tips<a class="headerlink" href="#conclusion-tips" title="Permalink to this headline">¶</a></h2>
+<p>If you’re making changes to a database via a Flask app, you are likely to use HTML forms.</p>
+<p>A key fact to remember is that if you use the WTForms/flask_wtf <code class="docutils literal notranslate"><span class="pre">quick_form()</span></code>, you do not have a lot of options for that form outside the <strong>class</strong> you build in the Flask app. <a class="reference external" href="https://pythonhosted.org/Flask-Bootstrap/forms.html">See the documentation.</a></p>
+<p>If you want <strong>more flexibility,</strong> you can encode a form like the two forms in the template <em>edit_or_delete.html</em> — both of those have values assigned to each field. <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases/flask_db_write/templates/">See the complete template here.</a></p>
+<p>For even more flexibility, you can write the entire form from scratch, as seen in the template <em>select_record.html.</em> In that case, you do not need to build a Python class for the form.</p>
+<p>If you do not assign an <strong>action</strong> to a form, it will call the same route again when you submit it. If you want it to call a <em>different</em> route, assign that route as the value of <code class="docutils literal notranslate"><span class="pre">action=</span></code> — using Jinja template syntax, like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">action</span><span class="o">=</span><span class="s2">&quot;{{ url_for(&#39;edit_result&#39;) }}&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is always the <strong>function name</strong> as the argument for <code class="docutils literal notranslate"><span class="pre">url_for()</span></code> — <em>never</em> the template name. If the function is named differently from the route URL, be sure to use the function name.</p>
+</div>
 <p>.</p>
 </div>
 </div>
