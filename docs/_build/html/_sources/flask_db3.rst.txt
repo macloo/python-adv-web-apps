@@ -235,15 +235,25 @@ The *else* clause is discussed below.
    :emphasize-lines: 3,13,41
    :caption:
 
-The key thing to notice in the *else* clause is that the form is displayed (line 60): ::
+The key thing to notice in the *else* clause is that the form is displayed (line 62): ::
 
     {{ wtf.quick_form(form1) }}
 
-Recall that ``form1`` was passed to the template in the route function.
+Recall that ``form1`` was passed to the template **in the route function.**
 
-Lines 48–57 handle the ``flash()`` messages that are written *if the form is submitted with invalid data.* The way this section of code works is explained in `this tutorial <https://pythonprogramming.net/flash-flask-tutorial/>`_.
+Lines 49–58 handle the ``flash()`` messages that are written *if the form is submitted with invalid data.* The way this section of code works is explained in `this tutorial <https://pythonprogramming.net/flash-flask-tutorial/>`_.
 
 If the page was just opened and the form is empty, unfilled, then there are no ``flash()`` messages.
+
+Summary: Add new record
++++++++++++++++++++++++
+
+While that probably seems like a lot, note that there are *one form, one route,* and *one template* used to create a new record and add it to the database.
+
+The template *and the route* in this case handle BOTH the form before it has been submitted AND the submission of the form.
+
+That will not be the same when we delete or update a database record in this app.
+
 
 Update a record
 ---------------

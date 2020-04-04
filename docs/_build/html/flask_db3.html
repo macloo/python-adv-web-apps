@@ -107,6 +107,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#the-form-with-validators">The form with validators</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#the-route-function">The route function</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#the-template">The template</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary-add-new-record">Summary: Add new record</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#update-a-record">Update a record</a></li>
@@ -607,16 +608,16 @@
 <span class="c">				 get_flashed_messages() exists here because of flash()</span>
 <span class="c">				 in the route function</span>
 <span class="c">				 --&gt;</span>
-				 {% with errors = get_flashed_messages() %}
-		             {% if errors %}
-		                 {% for err in errors %}
-		                 <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert alert-danger alert-dismissible&quot;</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;alert&quot;</span><span class="p">&gt;</span>
-		                     <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;close&quot;</span> <span class="na">data-dismiss</span><span class="o">=</span><span class="s">&quot;alert&quot;</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Close&quot;</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">aria-hidden</span><span class="o">=</span><span class="s">&quot;true&quot;</span><span class="p">&gt;</span>×<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-		                     {{ err }}
-		                 <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-		                 {% endfor %}
-		             {% endif %}
-		         {% endwith %}
+			{% with errors = get_flashed_messages() %}
+				{% if errors %}
+					{% for err in errors %}
+						<span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;alert alert-danger alert-dismissible&quot;</span> <span class="na">role</span><span class="o">=</span><span class="s">&quot;alert&quot;</span><span class="p">&gt;</span>
+						<span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;button&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;close&quot;</span> <span class="na">data-dismiss</span><span class="o">=</span><span class="s">&quot;alert&quot;</span> <span class="na">aria-label</span><span class="o">=</span><span class="s">&quot;Close&quot;</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">aria-hidden</span><span class="o">=</span><span class="s">&quot;true&quot;</span><span class="p">&gt;</span>×<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+						{{ err }}
+						<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+					{% endfor %}
+				{% endif %}
+			{% endwith %}
 			<span class="c">&lt;!-- end of flash --&gt;</span>
 
 			<span class="c">&lt;!-- the form, thanks to WTForms --&gt;</span>
@@ -626,13 +627,19 @@
 </span></pre></div>
 </td></tr></table></div>
 </div>
-<p>The key thing to notice in the <em>else</em> clause is that the form is displayed (line 60):</p>
+<p>The key thing to notice in the <em>else</em> clause is that the form is displayed (line 62):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{{</span> <span class="n">wtf</span><span class="o">.</span><span class="n">quick_form</span><span class="p">(</span><span class="n">form1</span><span class="p">)</span> <span class="p">}}</span>
 </pre></div>
 </div>
-<p>Recall that <code class="docutils literal notranslate"><span class="pre">form1</span></code> was passed to the template in the route function.</p>
-<p>Lines 48–57 handle the <code class="docutils literal notranslate"><span class="pre">flash()</span></code> messages that are written <em>if the form is submitted with invalid data.</em> The way this section of code works is explained in <a class="reference external" href="https://pythonprogramming.net/flash-flask-tutorial/">this tutorial</a>.</p>
+<p>Recall that <code class="docutils literal notranslate"><span class="pre">form1</span></code> was passed to the template <strong>in the route function.</strong></p>
+<p>Lines 49–58 handle the <code class="docutils literal notranslate"><span class="pre">flash()</span></code> messages that are written <em>if the form is submitted with invalid data.</em> The way this section of code works is explained in <a class="reference external" href="https://pythonprogramming.net/flash-flask-tutorial/">this tutorial</a>.</p>
 <p>If the page was just opened and the form is empty, unfilled, then there are no <code class="docutils literal notranslate"><span class="pre">flash()</span></code> messages.</p>
+</div>
+<div class="section" id="summary-add-new-record">
+<h3>Summary: Add new record<a class="headerlink" href="#summary-add-new-record" title="Permalink to this headline">¶</a></h3>
+<p>While that probably seems like a lot, note that there are <em>one form, one route,</em> and <em>one template</em> used to create a new record and add it to the database.</p>
+<p>The template <em>and the route</em> in this case handle BOTH the form before it has been submitted AND the submission of the form.</p>
+<p>That will not be the same when we delete or update a database record in this app.</p>
 </div>
 </div>
 <div class="section" id="update-a-record">
