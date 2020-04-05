@@ -299,6 +299,8 @@ As a result, **submitting that form** calls the route for the *edit_or_delete()*
 
 The unique ID is used in the database query (line 159) to retrieve the selected record from the database.
 
+.. note:: The difference between ending the database query with ``.first()`` is that it returns only one record, while ``.all()`` returns all matching records *as a list.* Do not try to loop over a result obtained with ``.first()``.
+
 The template rendered by that route — *edit_or_delete.html* — includes an if/else to determine whether to show the form for **deleting** a record *or* the form for **updating** a record. It tests the value of the variable ``choice``, which came from the form (line 158) and is passed to the template (line 163). The precise record that was selected is retrieved from the database in line 159 (highlighted) and passed to the template in line 163.
 
 If you chose to delete, this is what you’ll see:

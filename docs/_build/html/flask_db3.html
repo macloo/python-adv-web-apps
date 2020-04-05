@@ -703,6 +703,10 @@
 </td></tr></table></div>
 </div>
 <p>The unique ID is used in the database query (line 159) to retrieve the selected record from the database.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The difference between ending the database query with <code class="docutils literal notranslate"><span class="pre">.first()</span></code> is that it returns only one record, while <code class="docutils literal notranslate"><span class="pre">.all()</span></code> returns all matching records <em>as a list.</em> Do not try to loop over a result obtained with <code class="docutils literal notranslate"><span class="pre">.first()</span></code>.</p>
+</div>
 <p>The template rendered by that route — <em>edit_or_delete.html</em> — includes an if/else to determine whether to show the form for <strong>deleting</strong> a record <em>or</em> the form for <strong>updating</strong> a record. It tests the value of the variable <code class="docutils literal notranslate"><span class="pre">choice</span></code>, which came from the form (line 158) and is passed to the template (line 163). The precise record that was selected is retrieved from the database in line 159 (highlighted) and passed to the template in line 163.</p>
 <p>If you chose to delete, this is what you’ll see:</p>
 <div class="figure align-default">
