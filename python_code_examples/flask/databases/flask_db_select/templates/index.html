@@ -1,0 +1,44 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block styles %}
+{{ super() }}
+	<style>
+		body { background: #f5f5f5; }
+	</style>
+{% endblock %}
+
+
+{% block title %}
+Sock Market
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+
+      <h1 class="text-center mt-5 display-2 text-primary">Welcome to the Sock Market!</h1>
+
+      <p class="lead text-center pt-4 pb-4">This is the index page for an example Flask app using a MySQL database containing socks.</p>
+
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-8 col-lg-6 mx-md-auto mx-lg-auto">
+			<div class="bg-secondary text-white p-4">
+
+	<!-- add some goodies to the form - for help, see
+	     https://pythonhosted.org/Flask-Bootstrap/forms.html
+		 -->
+       {{ wtf.quick_form(form, action=url_for("sock_detail"), method="post") }}
+
+	   </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
