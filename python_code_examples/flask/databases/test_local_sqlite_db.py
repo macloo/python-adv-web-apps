@@ -25,7 +25,7 @@ db = SQLAlchemy(app)
 @app.route('/')
 def testdb():
     try:
-        db.session.query('1').from_statement(text('SELECT 1')).all()
+        db.session.query(text('1')).from_statement(text('SELECT 1')).all()
         return '<h1>It works.</h1>'
     except Exception as e:
         # e holds description of the error
