@@ -5,6 +5,18 @@ To begin learning Python, read chapters 1 and 2 in Sweigart’s `Automate the Bo
 
 `Python scripts for this section <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/learn_python>`_
 
+Install Python
+--------------
+
+If you haven’t installed Python yet, I made a Google doc for that:
+
+- `Getting Started with Python 3 <http://bit.ly/py3-quick-install>`_
+
+Two other helpful docs are linked on the CONTENTS page (under “Outside Resources”):
+
+- `Contents page <index.html>`_
+
+
 Interactively learning Python
 -----------------------------
 
