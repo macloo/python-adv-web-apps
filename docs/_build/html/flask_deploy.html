@@ -113,6 +113,9 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="flask_forms.html">Flask: Web Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_db1.html">Flask and Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_db2.html">Flask: Read from a Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_db3.html">Flask: Write to a Database</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
 </ul>
 
@@ -335,7 +338,7 @@
 <p>Before you <em>push to Heroku,</em> make sure <strong>all changes</strong> are <em>committed</em> (in the GitHub Desktop app).</p>
 </div>
 <p>Then at the command prompt, type:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="n">heroku</span> <span class="n">master</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="n">heroku</span> <span class="n">main</span>
 </pre></div>
 </div>
 <p>Many lines of messages from the <em>remote</em> branch on Heroku will be printed to the Terminal. Wait until you see <code class="docutils literal notranslate"><span class="pre">Verifying</span> <span class="pre">deploy...</span> <span class="pre">done.</span></code> And then … you’re back at the command prompt.</p>
@@ -352,7 +355,7 @@
 </pre></div>
 </div>
 <p>Now this should work:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="n">heroku</span> <span class="n">master</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="n">heroku</span> <span class="n">main</span>
 </pre></div>
 </div>
 <p>Use your web browser to go to the web address given above to view the active app.</p>
@@ -360,8 +363,9 @@
 <div class="figure align-default">
 <a class="reference internal image-reference" href="_images/heroku_branch.png"><img alt="Branch in GitHub app screenshot" src="_images/heroku_branch.png" style="width: 616.0px; height: 290.0px;" /></a>
 </div>
+<p><em>Screenshot shows “master”; new repos have a “main” branch, not a “master” branch.</em></p>
 <p>If you <em>make changes</em> to the app, you’ll need to <strong>push to Heroku again.</strong> Save all files and commit locally. Log into Heroku (if not already logged in), and:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="n">heroku</span> <span class="n">master</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="n">heroku</span> <span class="n">main</span>
 </pre></div>
 </div>
 </div>
