@@ -212,7 +212,7 @@ You’ll find you have a new *branch* in your local repo.
    :scale: 100 %
    :alt: Branch in GitHub app screenshot
 
-*Screenshot shows "master"; new repos have a "main" branch, not a "master" branch.*
+*Screenshot shows "master"; new repos have a "main" branch, not a "master" branch.* 
 
 If you *make changes* to the app, you’ll need to **push to Heroku again.** Save all files and commit locally. Log into Heroku (if not already logged in), and: ::
 
