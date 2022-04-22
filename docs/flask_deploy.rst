@@ -182,7 +182,7 @@ You’ll *register* the app only *once.*
 
 Then at the command prompt, type: ::
 
-    git push heroku master
+    git push heroku main
 
 Many lines of messages from the *remote* branch on Heroku will be printed to the Terminal. Wait until you see ``Verifying deploy... done.`` And then ... you’re back at the command prompt.
 
@@ -202,7 +202,7 @@ This should fix it (use your own Heroku app name, not *students-flask*): ::
 
 Now this should work: ::
 
-    git push heroku master
+    git push heroku main
 
 Use your web browser to go to the web address given above to view the active app.
 
@@ -212,9 +212,11 @@ You’ll find you have a new *branch* in your local repo.
    :scale: 100 %
    :alt: Branch in GitHub app screenshot
 
+*Screenshot shows "master"; new repos have a "main" branch, not a "master" branch.*
+
 If you *make changes* to the app, you’ll need to **push to Heroku again.** Save all files and commit locally. Log into Heroku (if not already logged in), and: ::
 
-    git push heroku master
+    git push heroku main
 
 
 The Heroku dashboard
