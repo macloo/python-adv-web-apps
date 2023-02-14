@@ -36,7 +36,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Web Scraping, Part 2" href="scraping2.html" />
-    <link rel="prev" title="Reading and Writing Files" href="working_with_files.html" /> 
+    <link rel="prev" title="CSV Files" href="csv.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,6 +86,8 @@
 <li class="toctree-l1"><a class="reference internal" href="functions.html">Functions in Python</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lists.html">Working with Lists</a></li>
 <li class="toctree-l1"><a class="reference internal" href="working_with_files.html">Reading and Writing Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dicts.html">Dictionaries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="csv.html">CSV Files</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Web Scraping Intro</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#setup-for-beautifulsoup">Setup for BeautifulSoup</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#create-a-directory-and-change-into-it">Create a directory and change into it</a></li>
@@ -111,6 +113,15 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="scraping2.html">Web Scraping, Part 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="scraping3.html">Web Scraping, Part 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask.html">Flask Intro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask2.html">Flask, Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask3.html">Flask Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_deploy.html">Flask: Deploy an App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_forms.html">Flask: Web Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_db1.html">Flask and Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_db2.html">Flask: Read from a Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_db3.html">Flask: Write to a Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
 </ul>
 
             
@@ -271,7 +282,7 @@
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
 <p>If you got an error about SSL, quit Python (<code class="docutils literal notranslate"><span class="pre">quit()</span></code> or Command-D) and COPY/PASTE this at the command prompt (MacOS only):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">Python</span>\ <span class="mf">3.8</span><span class="o">/</span><span class="n">Install</span>\ <span class="n">Certificates</span><span class="o">.</span><span class="n">command</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">Python</span>\ <span class="mf">3.11</span><span class="o">/</span><span class="n">Install</span>\ <span class="n">Certificates</span><span class="o">.</span><span class="n">command</span>
 </pre></div>
 </div>
 <p>Then return to the Python prompt and retry the five lines above.</p>
@@ -327,7 +338,7 @@
 <p class="admonition-title">Attention</p>
 <p>The word <em>class</em> is a <strong>reserved word</strong> in Python. Using <em>class</em> (alone) in the code above would give you a syntax error. So when we search by CSS class with BeautifulSoup, we use the keyword argument <code class="docutils literal notranslate"><span class="pre">class_</span></code> — note the added <em>underscore</em>. Other HTML attributes DO NOT need the underscore.</p>
 </div>
-<p>Maybe there were 10 cities in <code class="docutils literal notranslate"><span class="pre">&lt;td&gt;</span></code> tags in that HTML file. Maybe there were 10,000. No matter how many, they are now in a <em>list</em> (assigned to the variable <code class="docutils literal notranslate"><span class="pre">city_list</span></code>), and you can search them, print them, write them out to a database or a JSON file — whatever you like. Often you will want to perform the same actions on each item in the list, so you will use a normal Python <em>for-loop</em>:</p>
+<p>Maybe there were 10 cities in <code class="docutils literal notranslate"><span class="pre">&lt;td&gt;</span></code> tags in that HTML file. Maybe there were 10,000. No matter how many, they are now in a <em>list</em> (assigned to the variable <code class="docutils literal notranslate"><span class="pre">city_list</span></code>), and you can search them, print them, write them out to a database or a JSON file — whatever you like — using regular Python commands. Often you will want to perform the same actions on each item in the list, so you will use a normal Python <em>for-loop</em>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">city</span> <span class="ow">in</span> <span class="n">city_list</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span> <span class="n">city</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span> <span class="p">)</span>
 </pre></div>
@@ -335,18 +346,18 @@
 <p><code class="docutils literal notranslate"><span class="pre">.get_text()</span></code> is a handy BeautifulSoup method that will extract the text — and only the text — from the Tag object. If instead you wrote just <code class="docutils literal notranslate"><span class="pre">print(city)</span></code>, you’d get the complete <code class="docutils literal notranslate"><span class="pre">&lt;td&gt;</span></code> — and any other tags inside that as well.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The BeautifulSoup methods <code class="docutils literal notranslate"><span class="pre">.get_text()</span></code> and <code class="docutils literal notranslate"><span class="pre">.getText()</span></code> are the same. The BeautifulSoup property <code class="docutils literal notranslate"><span class="pre">.text</span></code> is a shortcut to <code class="docutils literal notranslate"><span class="pre">.get_text()</span></code> and is acceptable unless you need to pass arguments to <code class="docutils literal notranslate"><span class="pre">.get_text()</span></code>.</p>
+<p>The BeautifulSoup methods <code class="docutils literal notranslate"><span class="pre">.get_text()</span></code> and <code class="docutils literal notranslate"><span class="pre">.getText()</span></code> are the same. The BeautifulSoup property <code class="docutils literal notranslate"><span class="pre">.text</span></code> is a shortcut to <code class="docutils literal notranslate"><span class="pre">.get_text()</span></code> and is acceptable unless you need to pass arguments to <code class="docutils literal notranslate"><span class="pre">.get_text()</span></code>. It’s fine to use <code class="docutils literal notranslate"><span class="pre">.text</span></code> in almost all cases.</p>
 </div>
 </div>
 <div class="section" id="finding-all-vs-finding-one">
 <h3>Finding all vs. finding one<a class="headerlink" href="#finding-all-vs-finding-one" title="Permalink to this headline">¶</a></h3>
 <p>The BeautifulSoup <code class="docutils literal notranslate"><span class="pre">find_all()</span></code> method you just saw always produces a <em>list</em>. (Note: <code class="docutils literal notranslate"><span class="pre">findAll()</span></code> will also work.) If you know there will be <em>only one</em> item of the kind you want in a file, you should use the <code class="docutils literal notranslate"><span class="pre">find()</span></code> method instead.</p>
-<p>For example, maybe you are scraping the address and phone number from every page in a large website. In this case, there is only one phone number on the page, and it is enclosed in a pair of tags with the attribute <code class="docutils literal notranslate"><span class="pre">id=&quot;call&quot;</span></code>. One line of your code gets the phone number from the current page:</p>
+<p>For example, maybe you are scraping the address and phone number from every page in a large website. On the page we are currently using, there is only one phone number, and it is enclosed in a pair of tags with the attribute <code class="docutils literal notranslate"><span class="pre">id=&quot;call&quot;</span></code>. One line of your code gets the phone number from the current page:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">phone_number</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;call&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>You don’t need to loop through that result — the variable <code class="docutils literal notranslate"><span class="pre">phone_number</span></code> will contain only one Tag object, for whichever HTML tag had that ID. To test what the text alone will look like, just print it using <code class="docutils literal notranslate"><span class="pre">get_text()</span></code> to strip out the tags.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span> <span class="n">phone_number</span><span class="o">.</span><span class="n">get_text</span><span class="p">()</span> <span class="p">)</span>
+<p>You don’t need to loop through that result — the variable <code class="docutils literal notranslate"><span class="pre">phone_number</span></code> will contain only one Tag object, for whichever HTML tag had that ID. To test what the text alone will look like, just print it using <code class="docutils literal notranslate"><span class="pre">.text</span></code> to strip out the tags.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span> <span class="n">phone_number</span><span class="o">.</span><span class="n">text</span> <span class="p">)</span>
 </pre></div>
 </div>
 <p>Notice that you’re often using <code class="docutils literal notranslate"><span class="pre">soup</span></code>. Review above if you’ve forgotten where that came from. (You may use another variable name instead, but <code class="docutils literal notranslate"><span class="pre">soup</span></code> is the usual choice.)</p>
@@ -367,7 +378,7 @@
 <p>It is possible to condense that code and do the task in two lines, or even one line, but for beginners it is clearer to get the list of elements and name it, then use the named list and get what is wanted from it.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>We do not need <code class="docutils literal notranslate"><span class="pre">get_text()</span></code> in this case, because the contents of the <code class="docutils literal notranslate"><span class="pre">src</span></code> attribute (or any HTML attribute) are nothing but text. There are never tags inside the <code class="docutils literal notranslate"><span class="pre">src</span></code> attribute. So <em>think</em> about <em>exactly</em> what you’re trying to get, and what is it like inside the HTML of the page.</p>
+<p>We do not need <code class="docutils literal notranslate"><span class="pre">.text</span></code> (or <code class="docutils literal notranslate"><span class="pre">get_text()</span></code>) in this case, because the contents of the <code class="docutils literal notranslate"><span class="pre">src</span></code> attribute (or any HTML attribute) are nothing but text. There are never tags inside the <code class="docutils literal notranslate"><span class="pre">src</span></code> attribute. So <em>think</em> about <em>exactly</em> what you’re trying to get, and what is it like inside the HTML of the page.</p>
 </div>
 <p>You can see the code from above <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/first_bs_test.py">all in one file</a>.</p>
 <p>There’s a lot more to learn about BeautifulSoup, and we’ll be working with various examples. You can always <a class="reference external" href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/">read the docs</a>. Most of what we do with BeautifulSoup, though, involves these tasks:</p>
@@ -384,7 +395,7 @@
 <h2>A BeautifulSoup scraping example<a class="headerlink" href="#a-beautifulsoup-scraping-example" title="Permalink to this headline">¶</a></h2>
 <p>To demonstrate the process of thinking through a small scraping project, I made a <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/soup_practice.ipynb">Jupyter Notebook</a> that shows how I broke down the problem step by step, and tested one thing at a time, to reach the solution I wanted. Open the notebook here on GitHub to follow along and see all the steps. (If that link doesn’t work, <a class="reference external" href="https://nbviewer.jupyter.org/github/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/soup_practice.ipynb">try this instead</a>.)</p>
 <p>The code in the <em>final cell</em> of the notebook produces <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/movies.csv">this 51-line CSV file</a> by scraping <strong>10 separate web pages.</strong></p>
-<p>To <em>run</em> the notebook, you will need to have installed the <a class="reference external" href="https://requests.readthedocs.io/en/master/">Requests</a> module and also Jupyter Notebook.</p>
+<p>To <em>run</em> the notebook, you will need to have installed the <a class="reference external" href="https://requests.readthedocs.io/en/master/">Requests</a> module and also Jupyter Notebook IN YOUR VIRTUAL ENVIRONMENT where you already have BeautifulSoup.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">requests</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">jupyter</span>
 </pre></div>
@@ -414,7 +425,7 @@
         <a href="scraping2.html" class="btn btn-neutral float-right" title="Web Scraping, Part 2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="working_with_files.html" class="btn btn-neutral float-left" title="Reading and Writing Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="csv.html" class="btn btn-neutral float-left" title="CSV Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
