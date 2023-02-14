@@ -22,14 +22,14 @@ city_list = soup.find_all( "td", class_="city" )
 
 # print only the text from each of those TD elements
 for city in city_list:
-    print( city.get_text() )
+    print( city.text )
 
 # using find() gets only ONE element
 # here we assign that element to a new variable, phone_number
 phone_number = soup.find( id="call" )
 
 # print only the text from the element with the id 'call'
-print( phone_number.get_text() )
+print( phone_number.text )
 
 # get the values of all the src attributes for all the IMG elements
 # on the web page, and print them, one per line
