@@ -112,7 +112,7 @@ The methods ``find()``, ``find_all()``, and ``select()`` work on Tag objects as 
    :caption:
    :linenos:
 
-Once we’ve got ``table`` out of ``soup`` (line 9 above), we can go on to find elements inside the Tag object ``table``. First we get a list of all rows (line 12). Then we can loop over the list of row objects (starting on line 15) and make a list of all table cells in each row (line 17). From that list, we can extract the contents of one or more cells. In the for-loop, by printing ``cells[1].text`` (line 19), we will see a list of all Scottish monarchs in the first table on the page.
+Once we’ve got ``table`` out of ``soup`` (line 9 above), we can go on to find elements inside the Tag object ``table``. First we get a list of all rows (line 12). Then we can loop over the list of row objects (starting on line 15) and make a list of all table cells in each row (line 17). From that list, we can extract the contents of one or more cells. In the for-loop, by printing ``cells[0].text`` (line 19), we will see a list of all Scottish monarchs in the first table on the page.
 
 It’s as if we are taking apart a set of nested boxes. We go inside the table to get the rows. We go inside a row to get its cells.
 
@@ -130,20 +130,20 @@ And then we will need to loop through the tables: ::
             try:
                 cells = row.find_all('td')
                 # print contents of the second cell in the row
-                print( cells[1].text )
+                print( cells[0].text )
             except:
                 pass
 
 Our set of nested boxes actually begins with the page. Inside the page are several tables. Inside each table, we find rows, and inside each row, we find cells. Inside the second cell in each row, we find the name of a king.
 
-.. note:: The revised script will not work perfectly on `the Scottish monarchs page <https://en.wikipedia.org/wiki/List_of_Scottish_monarchs>`_ because the tables in that page are not formatted consistently. The first table on the page has the monarch’s name in the second column, but the other tables have it in the *first* column.
+.. note:: The revised script works perfectly on `the Scottish monarchs page <https://en.wikipedia.org/wiki/List_of_Scottish_monarchs>`_ because the tables in that page are formatted consistently. On many web pages containing multiple tables, this would not be so.
 
 Moving from page to page while scraping
 ---------------------------------------
 
 In chapter 12 of `Automate the Boring Stuff with Python <https://automatetheboringstuff.com/>`_ (second edition), Sweigart provides a script to scrape the XKCD comics website (“Project: Downloading All XKCD Comics”). The code in steps 3 and 4, which are part of a longer while-loop, get the URL from an element on the page that links to the previous comic. In this way, the script **starts on the home page** of the site, downloads one comic, and then **moves to the previous day’s comic page** and downloads the comic there. The script repeats this, moving to the previous page each time, until all comics have been downloaded.
 
-.. note:: This method is often exactly what you need to scrape the data that you want.
+.. note:: This method is often exactly what you need to scrape the data that you want. However, often you will move *forward* in a set of pages, using a “next” link instead of a “previous” link.
 
 The trick is to determine exactly **how to get the URL** that leads to the next page to be scraped.
 
@@ -212,9 +212,9 @@ The two scripts are:
 * `mls_pages.py <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/mls_pages.py>`_ — This one uses the “Go to next page” link until there is no next page.
 * `mls_pages_v2 <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/mls_pages_v2.py>`_ — This one uses ``for i in range()``, for use if you know how many pages there are.
 
-Note that the two scripts do *the same thing* on one particular website, the `Players section <https://www.mlssoccer.com/players>`_ of the Major League Soccer site. The difference is in the way each script gets the link *to the next page.*
+Note that the two scripts do *the same thing* on one particular website, the Players section of the Major League Soccer site (the code of that website has changed, and these scripts no longer work). The difference is in the way each script gets the link *to the next page.*
 
-.. important:: Remember that every website is different, so probably no other website in the world has the same HTML as the MLS website. However, many websites use a similar set of links to pages.
+.. important:: Remember that every website is different, so probably no other website in the world has the same HTML as the MLS website. However, many websites use a similar set of links to pages. The MLS site does not have a single Players list anymore but instead provides player lists on each team roster page, such as this one: `Atlanta United <https://www.mlssoccer.com/clubs/atlanta-united/roster/>`_ 
 
 
 Harvesting multiple URLs from one page

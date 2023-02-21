@@ -15,7 +15,7 @@ rows = table.find_all('tr')
 for row in rows:
     try:
         cells = row.find_all('td')
-        # print contents of the second cell in the row
-        print( cells[1].text )
+        # print contents of the first cell in the row
+        print( cells[0].text )
     except:
         pass
