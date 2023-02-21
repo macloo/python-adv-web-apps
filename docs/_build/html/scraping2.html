@@ -104,6 +104,11 @@
 <li class="toctree-l1"><a class="reference internal" href="flask.html">Flask Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flask2.html">Flask, Part 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flask3.html">Flask Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_deploy.html">Flask: Deploy an App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_forms.html">Flask: Web Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_db1.html">Flask and Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_db2.html">Flask: Read from a Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_db3.html">Flask: Write to a Database</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
 </ul>
 
@@ -302,14 +307,14 @@
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">cells</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;td&#39;</span><span class="p">)</span>
-        <span class="c1"># print contents of the second cell in the row</span>
-        <span class="nb">print</span><span class="p">(</span> <span class="n">cells</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">text</span> <span class="p">)</span>
+        <span class="c1"># print contents of the first cell in the row</span>
+        <span class="nb">print</span><span class="p">(</span> <span class="n">cells</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span> <span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
         <span class="k">pass</span>
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Once we’ve got <code class="docutils literal notranslate"><span class="pre">table</span></code> out of <code class="docutils literal notranslate"><span class="pre">soup</span></code> (line 9 above), we can go on to find elements inside the Tag object <code class="docutils literal notranslate"><span class="pre">table</span></code>. First we get a list of all rows (line 12). Then we can loop over the list of row objects (starting on line 15) and make a list of all table cells in each row (line 17). From that list, we can extract the contents of one or more cells. In the for-loop, by printing <code class="docutils literal notranslate"><span class="pre">cells[1].text</span></code> (line 19), we will see a list of all Scottish monarchs in the first table on the page.</p>
+<p>Once we’ve got <code class="docutils literal notranslate"><span class="pre">table</span></code> out of <code class="docutils literal notranslate"><span class="pre">soup</span></code> (line 9 above), we can go on to find elements inside the Tag object <code class="docutils literal notranslate"><span class="pre">table</span></code>. First we get a list of all rows (line 12). Then we can loop over the list of row objects (starting on line 15) and make a list of all table cells in each row (line 17). From that list, we can extract the contents of one or more cells. In the for-loop, by printing <code class="docutils literal notranslate"><span class="pre">cells[0].text</span></code> (line 19), we will see a list of all Scottish monarchs in the first table on the page.</p>
 <p>It’s as if we are taking apart a set of nested boxes. We go inside the table to get the rows. We go inside a row to get its cells.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -326,7 +331,7 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">cells</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;td&#39;</span><span class="p">)</span>
             <span class="c1"># print contents of the second cell in the row</span>
-            <span class="nb">print</span><span class="p">(</span> <span class="n">cells</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">text</span> <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span> <span class="n">cells</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span> <span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="k">pass</span>
 </pre></div>
@@ -334,7 +339,7 @@
 <p>Our set of nested boxes actually begins with the page. Inside the page are several tables. Inside each table, we find rows, and inside each row, we find cells. Inside the second cell in each row, we find the name of a king.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The revised script will not work perfectly on <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_Scottish_monarchs">the Scottish monarchs page</a> because the tables in that page are not formatted consistently. The first table on the page has the monarch’s name in the second column, but the other tables have it in the <em>first</em> column.</p>
+<p>The revised script works perfectly on <a class="reference external" href="https://en.wikipedia.org/wiki/List_of_Scottish_monarchs">the Scottish monarchs page</a> because the tables in that page are formatted consistently. On many web pages containing multiple tables, this would not be so.</p>
 </div>
 </div>
 <div class="section" id="moving-from-page-to-page-while-scraping">
@@ -342,7 +347,7 @@
 <p>In chapter 12 of <a class="reference external" href="https://automatetheboringstuff.com/">Automate the Boring Stuff with Python</a> (second edition), Sweigart provides a script to scrape the XKCD comics website (“Project: Downloading All XKCD Comics”). The code in steps 3 and 4, which are part of a longer while-loop, get the URL from an element on the page that links to the previous comic. In this way, the script <strong>starts on the home page</strong> of the site, downloads one comic, and then <strong>moves to the previous day’s comic page</strong> and downloads the comic there. The script repeats this, moving to the previous page each time, until all comics have been downloaded.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>This method is often exactly what you need to scrape the data that you want.</p>
+<p>This method is often exactly what you need to scrape the data that you want. However, often you will move <em>forward</em> in a set of pages, using a “next” link instead of a “previous” link.</p>
 </div>
 <p>The trick is to determine exactly <strong>how to get the URL</strong> that leads to the next page to be scraped.</p>
 <p>In the case of the XKCD site, this code works:</p>
@@ -404,10 +409,10 @@
 <li><p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/mls_pages.py">mls_pages.py</a> — This one uses the “Go to next page” link until there is no next page.</p></li>
 <li><p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/scraping/mls_pages_v2.py">mls_pages_v2</a> — This one uses <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">i</span> <span class="pre">in</span> <span class="pre">range()</span></code>, for use if you know how many pages there are.</p></li>
 </ul>
-<p>Note that the two scripts do <em>the same thing</em> on one particular website, the <a class="reference external" href="https://www.mlssoccer.com/players">Players section</a> of the Major League Soccer site. The difference is in the way each script gets the link <em>to the next page.</em></p>
+<p>Note that the two scripts do <em>the same thing</em> on one particular website, the Players section of the Major League Soccer site (the code of that website has changed, and these scripts no longer work). The difference is in the way each script gets the link <em>to the next page.</em></p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>Remember that every website is different, so probably no other website in the world has the same HTML as the MLS website. However, many websites use a similar set of links to pages.</p>
+<p>Remember that every website is different, so probably no other website in the world has the same HTML as the MLS website. However, many websites use a similar set of links to pages. The MLS site does not have a single Players list anymore but instead provides player lists on each team roster page, such as this one: <a class="reference external" href="https://www.mlssoccer.com/clubs/atlanta-united/roster/">Atlanta United</a></p>
 </div>
 </div>
 <div class="section" id="harvesting-multiple-urls-from-one-page">
