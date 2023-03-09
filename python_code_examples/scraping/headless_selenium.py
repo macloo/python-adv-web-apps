@@ -1,25 +1,28 @@
-import time
+# tested March 2023
+# run Selenium without seeing the browser
+
 from selenium import webdriver
+
+# new headless stuff
 from selenium.webdriver.chrome.options import Options
+chrome_options = Options()
+chrome_options.add_argument("--headless=new")
+driver = webdriver.Chrome(options=chrome_options)
+
 from bs4 import BeautifulSoup
 
-chrome_options = Options()
-chrome_options.add_argument("--headless")
-# fill in your own path to installed chromedriver
-driver = webdriver.Chrome( executable_path=
-            '/Users/dirname/dirname/dirname//chromedriver',
-            options=chrome_options )
-
 # fill in URL for page you want to scrape
-driver.get('https://somedomain.com');
-
-time.sleep(2)
+driver.get('https://en.wikipedia.org/wiki/Antarctica');
 
 page = driver.page_source
-
 soup = BeautifulSoup(page, 'html.parser')
 
-h1_list = soup.find_all('h1')
-print(h1_list)
+# example of scraping from one page
+heds = soup.find_all('span', class_="mw-headline")
+
+for hed in heds:
+    print( hed.text )
+
+print("There are " + str( len(heds) ) + " headings in the list.")
 
 driver.quit()
