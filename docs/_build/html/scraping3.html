@@ -205,7 +205,7 @@
 </div>
 <div class="section" id="selenium-commands">
 <h3>Selenium commands<a class="headerlink" href="#selenium-commands" title="Permalink to this headline">¶</a></h3>
-<p><strong>To manipulate elements on the page</strong> with Selenium, you <em>will</em> need to use Selenium commands such as <code class="docutils literal notranslate"><span class="pre">.find_element(By.TAG_NAME,</span> <span class="pre">'button')</span></code> — as seen in the example below.</p>
+<p><strong>To manipulate elements on the page</strong> with Selenium, you <em>will</em> need to use Selenium commands such as <code class="docutils literal notranslate"><span class="pre">.find_element(By.TAG_NAME,</span> <span class="pre">'button')</span></code> — as seen in the example below (line 20).</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">../python_code_examples/scraping/selenium_test3.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -303,7 +303,8 @@
 </td></tr></table></div>
 </div>
 <p>The page being scraped shows only 30 movies until you click a button at the bottom. Each time you click the bottom button, more movies are visible on the original page. By having Selenium click the button eight times, we are able to scrape information for 270 movies instead of only 30.</p>
-<p>If you run the code above, be sure you have installed both BeautifulSoup and Selenium. The <code class="docutils literal notranslate"><span class="pre">time</span></code> and <code class="docutils literal notranslate"><span class="pre">random</span></code> modules are Python built-ins, so you do not need to install those beforehand.</p>
+<p>Often you need to click a button (or other element) <em>only once</em> with Selenium. In that case, you just find the element and use <code class="docutils literal notranslate"><span class="pre">.click()</span></code></p>
+<p>If you run the code shown above, be sure you have installed both BeautifulSoup and Selenium. The <code class="docutils literal notranslate"><span class="pre">time</span></code> and <code class="docutils literal notranslate"><span class="pre">random</span></code> modules are Python built-ins, so you do not need to install those beforehand.</p>
 <p>Other Selenium methods for locating HTML elements are listed <a class="reference external" href="https://selenium-python.readthedocs.io/locating-elements.html">here</a>.</p>
 <p>To use the <code class="docutils literal notranslate"><span class="pre">By.</span></code> syntax, be sure to import:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">selenium.webdriver.common.by</span> <span class="kn">import</span> <span class="n">By</span>
