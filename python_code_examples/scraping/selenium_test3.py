@@ -1,36 +1,46 @@
-import time
+# tested Feb. 2023
+
 from selenium import webdriver
-from random import randint
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+
 from bs4 import BeautifulSoup
+from random import randint
+import time
 
-
-# my path is '/Users/mcadams/Documents/python/'
-# yours will be different
-
-
-# load your driver
-driver = webdriver.Chrome('/Users/mcadams/Documents/python/chromedriver')
+# load the driver
+driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 
 # get the web page
-driver.get('https://www.rottentomatoes.com/browse/dvd-streaming-all');
+driver.get('https://www.rottentomatoes.com/browse/movies_at_home/');
 
-# click the button exactly 8 times
+# click the button exactly 8 times to load more movies
 for n in range(8):
-    driver.find_element_by_css_selector('.btn.btn-secondary-rt.mb-load-btn').click()
-    # the button tag has class="btn btn-secondary-rt mb-load-btn"
+    button = driver.find_element(By.CLASS_NAME, "discovery__actions").find_element(By.TAG_NAME, "button")
+    button.click()
     # ... we told it which button to click
     # make a random wait time between 1 and 10 seconds to look less bot-like
     s = randint(1, 10)
     # sleep that number of seconds
     time.sleep(s)
 
+# page_source is a variable created by Selenium - it holds all the HTML
 page = driver.page_source
 
 soup = BeautifulSoup(page, "html.parser")
-title_list = soup.find_all("h3", class_="movieTitle")
-for title in title_list:
-    print(title.get_text())
+# each tile contains all info for one movie
+tiles = soup.find_all('a', class_="js-tile-link")
 
-print("There are " + str(len(title_list)) + " movies in the list.")
+movie_titles = []
+
+for tile in tiles:
+    span = tile.find('span', class_="p--small")
+    title = span.text.strip()
+    if len(title) > 0:
+        movie_titles.append( title )
+        print( title )
+
+print("There are " + str( len(movie_titles) ) + " movies in the list.")
 
 driver.quit()
