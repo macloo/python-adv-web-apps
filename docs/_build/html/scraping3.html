@@ -184,7 +184,9 @@
 <p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/scraping">The code for this chapter is here.</a></p>
 <div class="section" id="using-selenium">
 <h2>Using Selenium<a class="headerlink" href="#using-selenium" title="Permalink to this headline">¶</a></h2>
-<p>We can use <a class="reference external" href="https://selenium.dev/">Selenium</a> together with BeautifulSoup when BeautifulSoup <em>alone</em> is unable to get the contents we want from a web page. Selenium is a Python package or framework that automates a web browser.</p>
+<p><em>Updated March 2023 for Selenium 4.</em></p>
+<p>We can use <a class="reference external" href="https://www.selenium.dev/">Selenium</a> together with BeautifulSoup when BeautifulSoup <em>alone</em> is unable to get the contents we want from a web page. Selenium is a Python package or framework that automates a web browser.</p>
+<p>Selenium can be tricky. Refer to <a class="reference external" href="https://www.selenium.dev/documentation/webdriver/">the official documentation</a> as needed.</p>
 <p><strong>Two common situations where Selenium is necessary:</strong></p>
 <ol class="arabic simple">
 <li><p>JavaScript is writing the contents into the page after it opens; and/or</p></li>
@@ -206,7 +208,52 @@
 <p><strong>To manipulate elements on the page</strong> with Selenium, you <em>will</em> need to use Selenium commands such as <code class="docutils literal notranslate"><span class="pre">.find_element(By.TAG_NAME,</span> <span class="pre">'button')</span></code> — as seen in the example below.</p>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">../python_code_examples/scraping/selenium_test3.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># tested Feb. 2023</span>
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># tested Feb. 2023</span>
 
 <span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
 <span class="kn">from</span> <span class="nn">selenium.webdriver.chrome.service</span> <span class="kn">import</span> <span class="n">Service</span>
@@ -253,7 +300,7 @@
 
 <span class="n">driver</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
 </pre></div>
-</div>
+</td></tr></table></div>
 </div>
 <p>The page being scraped shows only 30 movies until you click a button at the bottom. Each time you click the bottom button, more movies are visible on the original page. By having Selenium click the button eight times, we are able to scrape information for 270 movies instead of only 30.</p>
 <p>If you run the code above, be sure you have installed both BeautifulSoup and Selenium. The <code class="docutils literal notranslate"><span class="pre">time</span></code> and <code class="docutils literal notranslate"><span class="pre">random</span></code> modules are Python built-ins, so you do not need to install those beforehand.</p>
