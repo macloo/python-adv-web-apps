@@ -10,7 +10,11 @@ In this chapter, more advanced topics are covered.
 Using Selenium
 --------------
 
-We can use `Selenium <https://selenium.dev/>`_ together with BeautifulSoup when BeautifulSoup *alone* is unable to get the contents we want from a web page. Selenium is a Python package or framework that automates a web browser.
+*Updated March 2023 for Selenium 4.*
+
+We can use `Selenium <https://www.selenium.dev/>`_ together with BeautifulSoup when BeautifulSoup *alone* is unable to get the contents we want from a web page. Selenium is a Python package or framework that automates a web browser.
+
+Selenium can be tricky. Refer to `the official documentation <https://www.selenium.dev/documentation/webdriver/>`_ as needed.
 
 **Two common situations where Selenium is necessary:**
 
@@ -36,6 +40,7 @@ Selenium commands
 
 .. literalinclude:: ../python_code_examples/scraping/selenium_test3.py
    :caption:
+   :linenos:
 
 The page being scraped shows only 30 movies until you click a button at the bottom. Each time you click the bottom button, more movies are visible on the original page. By having Selenium click the button eight times, we are able to scrape information for 270 movies instead of only 30.
 
