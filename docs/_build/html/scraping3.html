@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Introduction to Flask" href="flask.html" />
+    <link rel="next" title="Flask Intro" href="flask.html" />
     <link rel="prev" title="Web Scraping, Part 2" href="scraping2.html" /> 
 </head>
 
@@ -104,8 +104,15 @@
 <li class="toctree-l2"><a class="reference internal" href="#when-all-else-fails">When all else fails</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="flask.html">Introduction to Flask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask.html">Flask Intro</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flask2.html">Flask, Part 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask3.html">Flask Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_deploy.html">Flask: Deploy an App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_forms.html">Flask: Web Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_db1.html">Flask and Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_db2.html">Flask: Read from a Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_db3.html">Flask: Write to a Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
 </ul>
 
             
@@ -192,14 +199,69 @@
 </div>
 <div class="admonition attention">
 <p class="admonition-title">Attention</p>
-<p>Once you have that <code class="docutils literal notranslate"><span class="pre">page</span></code> variable, you can proceed as usual with a <code class="docutils literal notranslate"><span class="pre">soup</span></code> variable and BeautifulSoup scraping. You DO NOT need to use <code class="docutils literal notranslate"><span class="pre">driver</span></code> and a new set of selectors as shown in the Selenium documentation and many tutorials.</p>
+<p>Once you have that <code class="docutils literal notranslate"><span class="pre">page</span></code> variable, you can proceed as usual with a <code class="docutils literal notranslate"><span class="pre">soup</span></code> variable and BeautifulSoup scraping. You DO NOT need to use <code class="docutils literal notranslate"><span class="pre">driver</span></code> and a new set of selectors as shown in the Selenium documentation and many tutorials. The command <code class="docutils literal notranslate"><span class="pre">driver.page_source</span></code> will capture whichever page you are on, at the moment that command is executed.</p>
 </div>
 <div class="section" id="selenium-commands">
 <h3>Selenium commands<a class="headerlink" href="#selenium-commands" title="Permalink to this headline">¶</a></h3>
-<p><strong>To manipulate elements on the page</strong> with Selenium, you <em>will</em> need to use Selenium commands such as <code class="docutils literal notranslate"><span class="pre">.find_element_by_css_selector()</span></code> — as seen in the example below.</p>
-<p>The page being scraped shows only 32 movies until you click a button at the bottom. Each time you click the bottom button, more movies are visible on the original page. By having Selenium click the button eight times, we are able to scrape information for 275 movies instead of only 32.</p>
-<p>If you run the code above, be sure you have installed both BeautifulSoup and Selenium. The <code class="docutils literal notranslate"><span class="pre">time</span></code> and <code class="docutils literal notranslate"><span class="pre">random</span></code> modules are built-ins, so you do not need to install those beforehand.</p>
+<p><strong>To manipulate elements on the page</strong> with Selenium, you <em>will</em> need to use Selenium commands such as <code class="docutils literal notranslate"><span class="pre">.find_element(By.TAG_NAME,</span> <span class="pre">'button')</span></code> — as seen in the example below.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/scraping/selenium_test3.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># tested Feb. 2023</span>
+
+<span class="kn">from</span> <span class="nn">selenium</span> <span class="kn">import</span> <span class="n">webdriver</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.chrome.service</span> <span class="kn">import</span> <span class="n">Service</span>
+<span class="kn">from</span> <span class="nn">webdriver_manager.chrome</span> <span class="kn">import</span> <span class="n">ChromeDriverManager</span>
+<span class="kn">from</span> <span class="nn">selenium.webdriver.common.by</span> <span class="kn">import</span> <span class="n">By</span>
+
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="c1"># load the driver</span>
+<span class="n">driver</span> <span class="o">=</span> <span class="n">webdriver</span><span class="o">.</span><span class="n">Chrome</span><span class="p">(</span><span class="n">service</span><span class="o">=</span><span class="n">Service</span><span class="p">(</span><span class="n">ChromeDriverManager</span><span class="p">()</span><span class="o">.</span><span class="n">install</span><span class="p">()))</span>
+
+<span class="c1"># get the web page</span>
+<span class="n">driver</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;https://www.rottentomatoes.com/browse/movies_at_home/&#39;</span><span class="p">);</span>
+
+<span class="c1"># click the button exactly 8 times to load more movies</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+    <span class="n">button</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">CLASS_NAME</span><span class="p">,</span> <span class="s2">&quot;discovery__actions&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">TAG_NAME</span><span class="p">,</span> <span class="s2">&quot;button&quot;</span><span class="p">)</span>
+    <span class="n">button</span><span class="o">.</span><span class="n">click</span><span class="p">()</span>
+    <span class="c1"># ... we told it which button to click</span>
+    <span class="c1"># make a random wait time between 1 and 10 seconds to look less bot-like</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="c1"># sleep that number of seconds</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+<span class="c1"># page_source is a variable created by Selenium - it holds all the HTML</span>
+<span class="n">page</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">page_source</span>
+
+<span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+<span class="c1"># each tile contains all info for one movie</span>
+<span class="n">tiles</span> <span class="o">=</span> <span class="n">soup</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;js-tile-link&quot;</span><span class="p">)</span>
+
+<span class="n">movie_titles</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">tile</span> <span class="ow">in</span> <span class="n">tiles</span><span class="p">:</span>
+    <span class="n">span</span> <span class="o">=</span> <span class="n">tile</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;span&#39;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;p--small&quot;</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">span</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">title</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">movie_titles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">title</span> <span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span> <span class="n">title</span> <span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There are &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span> <span class="nb">len</span><span class="p">(</span><span class="n">movie_titles</span><span class="p">)</span> <span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; movies in the list.&quot;</span><span class="p">)</span>
+
+<span class="n">driver</span><span class="o">.</span><span class="n">quit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>The page being scraped shows only 30 movies until you click a button at the bottom. Each time you click the bottom button, more movies are visible on the original page. By having Selenium click the button eight times, we are able to scrape information for 270 movies instead of only 30.</p>
+<p>If you run the code above, be sure you have installed both BeautifulSoup and Selenium. The <code class="docutils literal notranslate"><span class="pre">time</span></code> and <code class="docutils literal notranslate"><span class="pre">random</span></code> modules are Python built-ins, so you do not need to install those beforehand.</p>
 <p>Other Selenium methods for locating HTML elements are listed <a class="reference external" href="https://selenium-python.readthedocs.io/locating-elements.html">here</a>.</p>
+<p>To use the <code class="docutils literal notranslate"><span class="pre">By.</span></code> syntax, be sure to import:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">selenium.webdriver.common.by</span> <span class="kn">import</span> <span class="n">By</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="headless-selenium">
 <h3>Headless Selenium<a class="headerlink" href="#headless-selenium" title="Permalink to this headline">¶</a></h3>
@@ -209,7 +271,7 @@
 </div>
 <div class="section" id="more-advanced-selenium-techniques">
 <h3>More advanced Selenium techniques<a class="headerlink" href="#more-advanced-selenium-techniques" title="Permalink to this headline">¶</a></h3>
-<p>If you’re still having trouble scraping a page even after adding Selenium to your Python script, the culprit might be a timing issue. See the <a class="reference external" href="https://selenium-python.readthedocs.io/waits.html">Selenium documentation</a> for an explanation of an <em>implicit wait</em> and the use of <code class="docutils literal notranslate"><span class="pre">expected_conditions</span></code>, a Selenium module.</p>
+<p>If you’re still having trouble scraping a page even after adding Selenium to your Python script, the culprit might be a timing issue. See the <a class="reference external" href="https://www.selenium.dev/documentation/webdriver/waits/">Selenium documentation</a> for an explanation of an <em>implicit wait</em> and the use of <code class="docutils literal notranslate"><span class="pre">expected_conditions</span></code>, a Selenium module.</p>
 <p>Look at how the page behaves when you access it normally, yourself, to determine whether to add this kind of code to your script.</p>
 <p>Also see the next section below.</p>
 </div>
@@ -271,8 +333,12 @@
 <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">page</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;html5lib&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Notice that I replaced the usual <code class="docutils literal notranslate"><span class="pre">'html.parser'</span></code> with <code class="docutils literal notranslate"><span class="pre">'html5lib'</span></code>. See  “Using a different parser,” above.</p>
+<p>Notice that I replaced the usual <code class="docutils literal notranslate"><span class="pre">'html.parser'</span></code> with <code class="docutils literal notranslate"><span class="pre">'html5lib'</span></code>. See  “Using a different parser,” above. That is not always necessary!</p>
 <p><strong>I did not need to use Selenium at all to scrape that forum site.</strong> The headers got me in, and everything after that was normal BeautifulSoup stuff.</p>
+<p>Sometimes you can just use the User-Agent, alone:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hdr</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;User-Agent&#39;</span><span class="p">:</span> <span class="s1">&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>You can see the actual headers <em>your</em> web browser is sending if you go to <a class="reference external" href="https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending">this page</a>. Do not copy my example code, as it is probably outdated now.</p>
@@ -325,7 +391,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="flask.html" class="btn btn-neutral float-right" title="Introduction to Flask" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="flask.html" class="btn btn-neutral float-right" title="Flask Intro" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="scraping2.html" class="btn btn-neutral float-left" title="Web Scraping, Part 2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

@@ -60,7 +60,7 @@ This is NOT covered in the “Getting Started” doc. See this `code for using C
 More advanced Selenium techniques
 +++++++++++++++++++++++++++++++++
 
-If you’re still having trouble scraping a page even after adding Selenium to your Python script, the culprit might be a timing issue. See the `Selenium documentation <https://selenium-python.readthedocs.io/waits.html>`_ for an explanation of an *implicit wait* and the use of ``expected_conditions``, a Selenium module.
+If you’re still having trouble scraping a page even after adding Selenium to your Python script, the culprit might be a timing issue. See the `Selenium documentation <https://www.selenium.dev/documentation/webdriver/waits/>`_ for an explanation of an *implicit wait* and the use of ``expected_conditions``, a Selenium module.
 
 Look at how the page behaves when you access it normally, yourself, to determine whether to add this kind of code to your script.
 
@@ -127,9 +127,13 @@ After that, I used the variable ``hdr`` to get the page and then create my ``sou
     page = requests.get(url, headers=hdr)
     soup = BeautifulSoup(page.text, 'html5lib')
 
-Notice that I replaced the usual ``'html.parser'`` with ``'html5lib'``. See  “Using a different parser,” above.
+Notice that I replaced the usual ``'html.parser'`` with ``'html5lib'``. See  “Using a different parser,” above. That is not always necessary!
 
 **I did not need to use Selenium at all to scrape that forum site.** The headers got me in, and everything after that was normal BeautifulSoup stuff.
+
+Sometimes you can just use the User-Agent, alone: ::
+
+    hdr = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/49.0.2623.110 Safari/537.36'}
 
 .. tip:: You can see the actual headers *your* web browser is sending if you go to `this page <https://www.whatismybrowser.com/detect/what-http-headers-is-my-browser-sending>`_. Do not copy my example code, as it is probably outdated now.
 

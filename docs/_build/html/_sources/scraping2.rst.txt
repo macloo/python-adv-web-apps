@@ -134,7 +134,7 @@ And then we will need to loop through the tables: ::
             except:
                 pass
 
-Our set of nested boxes actually begins with the page. Inside the page are several tables. Inside each table, we find rows, and inside each row, we find cells. Inside the second cell in each row, we find the name of a king.
+Our set of nested boxes actually begins with the page. Inside the page are several tables. Inside each table, we find rows, and inside each row, we find cells. Inside the first cell in each row, we find the name of a king.
 
 .. note:: The revised script works perfectly on `the Scottish monarchs page <https://en.wikipedia.org/wiki/List_of_Scottish_monarchs>`_ because the tables in that page are formatted consistently. On many web pages containing multiple tables, this would not be so.
 
@@ -214,7 +214,7 @@ The two scripts are:
 
 Note that the two scripts do *the same thing* on one particular website, the Players section of the Major League Soccer site (the code of that website has changed, and these scripts no longer work). The difference is in the way each script gets the link *to the next page.*
 
-.. important:: Remember that every website is different, so probably no other website in the world has the same HTML as the MLS website. However, many websites use a similar set of links to pages. The MLS site does not have a single Players list anymore but instead provides player lists on each team roster page, such as this one: `Atlanta United <https://www.mlssoccer.com/clubs/atlanta-united/roster/>`_ 
+.. important:: Remember that every website is different, so probably no other website in the world has the same HTML as the MLS website. However, many websites use a similar set of links to pages. The MLS site does not have a single Players list anymore but instead provides player lists on each team roster page, such as this one: `Atlanta United <https://www.mlssoccer.com/clubs/atlanta-united/roster/>`_
 
 
 Harvesting multiple URLs from one page
