@@ -27,21 +27,26 @@ When you examine the test scripts (linked in the “Getting Started” doc and a
 
     page = driver.page_source
 
-.. attention:: Once you have that ``page`` variable, you can proceed as usual with a ``soup`` variable and BeautifulSoup scraping. You DO NOT need to use ``driver`` and a new set of selectors as shown in the Selenium documentation and many tutorials.
+.. attention:: Once you have that ``page`` variable, you can proceed as usual with a ``soup`` variable and BeautifulSoup scraping. You DO NOT need to use ``driver`` and a new set of selectors as shown in the Selenium documentation and many tutorials. The command ``driver.page_source`` will capture whichever page you are on, at the moment that command is executed.
 
 Selenium commands
 +++++++++++++++++
 
-**To manipulate elements on the page** with Selenium, you *will* need to use Selenium commands such as ``.find_element_by_css_selector()`` — as seen in the example below.
+**To manipulate elements on the page** with Selenium, you *will* need to use Selenium commands such as ``.find_element(By.TAG_NAME, 'button')`` — as seen in the example below.
 
 .. literalinclude:: ../python_code_examples/scraping/selenium_test3.py
    :caption:
 
-The page being scraped shows only 32 movies until you click a button at the bottom. Each time you click the bottom button, more movies are visible on the original page. By having Selenium click the button eight times, we are able to scrape information for 275 movies instead of only 32.
+The page being scraped shows only 30 movies until you click a button at the bottom. Each time you click the bottom button, more movies are visible on the original page. By having Selenium click the button eight times, we are able to scrape information for 270 movies instead of only 30.
 
-If you run the code above, be sure you have installed both BeautifulSoup and Selenium. The ``time`` and ``random`` modules are built-ins, so you do not need to install those beforehand.
+If you run the code above, be sure you have installed both BeautifulSoup and Selenium. The ``time`` and ``random`` modules are Python built-ins, so you do not need to install those beforehand.
 
 Other Selenium methods for locating HTML elements are listed `here <https://selenium-python.readthedocs.io/locating-elements.html>`_.
+
+To use the ``By.`` syntax, be sure to import: ::
+
+    from selenium.webdriver.common.by import By
+
 
 Headless Selenium
 +++++++++++++++++
