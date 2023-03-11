@@ -111,6 +111,11 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="flask2.html">Flask, Part 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flask3.html">Flask Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_deploy.html">Flask: Deploy an App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_forms.html">Flask: Web Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_db1.html">Flask and Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_db2.html">Flask: Read from a Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_db3.html">Flask: Write to a Database</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
 </ul>
 
@@ -282,7 +287,14 @@
 <div class="figure align-default">
 <a class="reference internal image-reference" href="_images/flask_browser.png"><img alt="Results of starting Flask in browser screenshot" src="_images/flask_browser.png" style="width: 378.0px; height: 133.0px;" /></a>
 </div>
-<p>Flask includes a built-in web server, for development use.</p>
+<p>Flask includes a built-in web server, for development use. The red warning message simply means you should never use this as a live server online.</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>If the <em>Hello World</em> page will not open on a Mac, you likely have a port conflict. Exit from the server with Control-C and then run the startup code as shown below.</p>
+<p>export FLASK_APP=hello.py
+flask run –port 4999</p>
+</div>
+<p>In the browser’s address bar, type: <code class="docutils literal notranslate"><span class="pre">localhost:4999</span></code></p>
 <p>What you’ve done is:</p>
 <ol class="arabic simple">
 <li><p>With the <code class="docutils literal notranslate"><span class="pre">hello.py</span></code> file, you have written a small (and essentially useless) web app in Flask.</p></li>
