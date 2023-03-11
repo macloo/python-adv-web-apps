@@ -106,7 +106,9 @@ Open a new tab in your web browser and, in the address bar, type: ``localhost:50
 
 Flask includes a built-in web server, for development use. The red warning message simply means you should never use this as a live server online.
 
-.. attention:: If the *Hello World* page will not open on a Mac, you likely have a port conflict. Exit from the server with Control-C and then run the startup code as shown below.  ::
+.. attention:: If the *Hello World* page will not open on a Mac, you likely have a port conflict. Exit from the server with Control-C and then run the startup code as shown below.
+
+::
 
     export FLASK_APP=hello.py
     flask run --port 4999
