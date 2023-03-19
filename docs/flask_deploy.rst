@@ -16,15 +16,11 @@ In the Flask Templates chapter, we built a functioning Flask app. In this chapte
 Introduction
 ------------
 
-When professionals deploy their Python web apps, nowadays they commonly deploy to a cloud service such as `Amazon’s AWS <https://aws.amazon.com/>`_, `Heroku <https://www.heroku.com/>`_, or `Google App Engine <https://cloud.google.com/free/>`_.
+When professionals deploy their Python web apps, nowadays they commonly deploy to a cloud service such as `Amazon’s AWS <https://aws.amazon.com/>`_, `Heroku <https://heroku.com/>`_, or `Google App Engine <https://cloud.google.com/free/>`_.
 
 One thing to understand, though, is that often they do not deploy a Python executable. That is, the site they upload to a web server is not the Flask app and its associated templates, etc., but rather a traditional website with hard-coded HTML files that has been *“baked out”* from Flask.
 
-In this document, we’ll learn how to do that. Then we will also learn how to install a Flask app (one that has not been “baked out”) on:
-
-* A typical web hosting service such as `Reclaim Hosting <https://reclaimhosting.com/>`_, using a simple **cPanel** service there.
-
-* Heroku, via ``git`` commands, and using the Gunicorn server.
+In this document, we’ll learn how to do that. Then we will also learn how to install a Flask app (one that has not been “baked out”) on `Render.com <https://render.com/>`_.
 
 “Baking it out” with Frozen-Flask
 ---------------------------------
@@ -58,7 +54,10 @@ In Terminal, in the directory containing the Flask app, enter this at the comman
 
 The entire *build* folder can be uploaded to a web server (without any other files or folders), and the folder name can be changed (from *build* to anything) — and all the pages will work. (Just don't change or rename anything inside the *build* folder.)
 
-Need to update the site? Make your edits, run *freeze.py* again, and re-deploy.
+Need to update the site? Make your edits, **run *freeze.py* again,** and re-deploy.
+
+.. note:: If the generated HTML files do not have filenames ending with *.html,* they might not open in the browser locally. Upload the *build* folder to a server and test the pages there. `See an example! <https://weimergeeks.com/pres_frozen_build/>`_
+
 
 Benefits of freezing
 ++++++++++++++++++++
@@ -74,6 +73,7 @@ Similar apps might produce pages for:
 
 When there are changes to the data, you update the data source, re-freeze and re-deploy.
 
+
 Freezer errors
 ++++++++++++++
 
@@ -81,9 +81,9 @@ Freezer errors
 
     @app.route('/actor/<id>')
 
-You might need to add a `URL generator <https://pythonhosted.org/Frozen-Flask/#url-generators>`_ to the *freeze.py* file.
+You might need to add a `URL generator <https://pythonhosted.org/Frozen-Flask/#url-generators>`_ to the *freeze.py* file. **But read the NOTE above before you do this!**
 
-For example: ::
+For example (`see project files <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/actors_app>`_): ::
 
     from data import ACTORS
 
@@ -212,7 +212,7 @@ You’ll find you have a new *branch* in your local repo.
    :scale: 100 %
    :alt: Branch in GitHub app screenshot
 
-*Screenshot shows "master"; new repos have a "main" branch, not a "master" branch.* 
+*Screenshot shows "master"; new repos have a "main" branch, not a "master" branch.*
 
 If you *make changes* to the app, you’ll need to **push to Heroku again.** Save all files and commit locally. Log into Heroku (if not already logged in), and: ::
 
