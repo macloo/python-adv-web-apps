@@ -310,6 +310,26 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">selenium.webdriver.common.by</span> <span class="kn">import</span> <span class="n">By</span>
 </pre></div>
 </div>
+<p><strong>Selecting an option from a SELECT menu</strong></p>
+<p>If the page has a SELECT element and you need to click an option there:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">selenium.webdriver.support.ui</span> <span class="kn">import</span> <span class="n">Select</span>
+
+<span class="c1"># use Select() to get the select drop-down menu</span>
+<span class="n">category_menu</span> <span class="o">=</span> <span class="n">Select</span><span class="p">(</span><span class="n">driver</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span> <span class="s2">&quot;category&quot;</span><span class="p">))</span>
+
+<span class="c1"># go to 5th option in the select element</span>
+<span class="n">category_menu</span><span class="o">.</span><span class="n">select_by_index</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>After getting the option, you’ll usually need to click the form’s Submit button.</p>
+<p><strong>Using XPATH to locate an element</strong></p>
+<p>Xpath is helpful when you need to get the value of an attribute, or when the page structure is complicated:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">button</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">XPATH</span><span class="p">,</span> <span class="s2">&quot;//img[contains(@src, &#39;images/albert.png&#39;)]&quot;</span><span class="p">)</span>
+
+<span class="n">button</span> <span class="o">=</span> <span class="n">driver</span><span class="o">.</span><span class="n">find_element</span><span class="p">(</span><span class="n">By</span><span class="o">.</span><span class="n">XPATH</span><span class="p">,</span> <span class="s1">&#39;//button[text()=&quot;Follow Me&quot;]&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is a good resource: <a class="reference external" href="https://saucelabs.com/resources/blog/xpath-in-selenium-getting-started">Getting Started with XPath in Selenium</a>.</p>
 </div>
 <div class="section" id="headless-selenium">
 <h3>Headless Selenium<a class="headerlink" href="#headless-selenium" title="Permalink to this headline">¶</a></h3>

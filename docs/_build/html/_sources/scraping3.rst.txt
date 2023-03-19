@@ -54,6 +54,30 @@ To use the ``By.`` syntax, be sure to import: ::
 
     from selenium.webdriver.common.by import By
 
+**Selecting an option from a SELECT menu**
+
+If the page has a SELECT element and you need to click an option there: ::
+
+    from selenium.webdriver.support.ui import Select
+
+    # use Select() to get the select drop-down menu
+    category_menu = Select(driver.find_element(By.ID, "category"))
+
+    # go to 5th option in the select element
+    category_menu.select_by_index(4)
+
+After getting the option, you'll usually need to click the form's Submit button.
+
+**Using XPATH to locate an element**
+
+Xpath is helpful when you need to get the value of an attribute, or when the page structure is complicated: ::
+
+    button = driver.find_element(By.XPATH, "//img[contains(@src, 'images/albert.png')]")
+
+    button = driver.find_element(By.XPATH, '//button[text()="Follow Me"]')
+
+This is a good resource: `Getting Started with XPath in Selenium <https://saucelabs.com/resources/blog/xpath-in-selenium-getting-started>`_.
+
 
 Headless Selenium
 +++++++++++++++++
