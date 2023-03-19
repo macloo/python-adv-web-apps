@@ -101,14 +101,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#freezer-errors">Freezer errors</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#when-freezing-will-not-work-cannot-work">When freezing will not work, cannot work</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#the-hosted-website-solution">The hosted website solution</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#using-heroku-instead">Using Heroku instead</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#heroku-preliminary-steps">Heroku: Preliminary steps</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#deploy-to-heroku">Deploy to Heroku</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#the-heroku-dashboard">The Heroku dashboard</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#when-freezing-will-not-work-cannot-work">When freezing will not work, cannot work</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#conclusion">Conclusion</a></li>
 </ul>
 </li>
@@ -204,8 +197,8 @@
 </pre></div>
 </div>
 <p>After installing the extension, create <strong>a new file</strong> inside the folder that contains the Flask app you want to “freeze.” Name the new file <em>freeze.py</em> and copy/paste this script into it:</p>
-<div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/freeze.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/freeze.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;standard freeze script&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">flask_frozen</span> <span class="kn">import</span> <span class="n">Freezer</span>
@@ -279,32 +272,10 @@
 <div class="section" id="when-freezing-will-not-work-cannot-work">
 <h2>When freezing will not work, cannot work<a class="headerlink" href="#when-freezing-will-not-work-cannot-work" title="Permalink to this headline">¶</a></h2>
 <p>If your app depends on dynamic activity — for example, if you are using <strong>Flask-WTF</strong> to process a form — you will not get a fully functioning app if you freeze it. Similarly, if you’re accessing an API to get data that changes frequently (such as currency rates or weather), you cannot freeze that app.</p>
-<p>In those cases, you will need to run Python on a web server, where people are accessing your pages (and NOT freeze the app).</p>
-<p>There are ways to do this if you use a cloud service such as Amazon’s AWS or Heroku, but you don’t necessarily need to go that way if you’re a student and your app is not going to attract thousands of users.</p>
-<div class="section" id="the-hosted-website-solution">
-<h3>The hosted website solution<a class="headerlink" href="#the-hosted-website-solution" title="Permalink to this headline">¶</a></h3>
-<p>Most hosted web server accounts from companies such as <a class="reference external" href="https://reclaimhosting.com/">Reclaim Hosting</a> provide <strong>cPanel</strong> — a set of services that you access from a simple dashboard.</p>
-<div class="figure align-default">
-<a class="reference internal image-reference" href="_images/setup_python_cpanel.png"><img alt="Set up Python cPanel icon" src="_images/setup_python_cpanel.png" style="width: 212.0px; height: 72.0px;" /></a>
-</div>
-<p>If you find the icon above in the <strong>cPanel</strong> at your hosting provider, you’re probably good to go. I’ve written <a class="reference external" href="http://bit.ly/flask-deploy">detailed instructions</a> for how to install a Python app at Reclaim Hosting, and it’s probably the same or very nearly so in any <strong>cPanel</strong> instance.</p>
-</div>
-<div class="section" id="using-heroku-instead">
-<h3>Using Heroku instead<a class="headerlink" href="#using-heroku-instead" title="Permalink to this headline">¶</a></h3>
-<p>You can get started on <a class="reference external" href="https://www.heroku.com/">Heroku</a> for free, and if you find you need more than the free option provides, you can <a class="reference external" href="https://www.heroku.com/pricing">change your plan</a>.</p>
-<p><a class="reference external" href="https://github.com/macloo/students-flask-app">An example app for deployment to Heroku is here.</a></p>
-<p>The live app is running at this URL:</p>
-<p><a class="reference external" href="https://students-flask.herokuapp.com/">https://students-flask.herokuapp.com/</a></p>
-<p>Once you have a Heroku account, download the <a class="reference external" href="https://devcenter.heroku.com/articles/heroku-cli">Heroku CLI</a>, a command-line tool. Use the appropriate installer for your operating system. Test that it was installed successfully by entering this in Terminal at the command prompt:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">heroku</span> <span class="o">--</span><span class="n">version</span>
-</pre></div>
-</div>
-<p>Follow the <strong>login</strong> instructions under <a class="reference external" href="https://devcenter.heroku.com/articles/heroku-cli#getting-started">Getting Started</a>.</p>
-<p>You will log in this way <em>each time</em> you use the Heroku CLI. You can log out — <code class="docutils literal notranslate"><span class="pre">heroku</span> <span class="pre">logout</span></code> — or just quit Terminal.</p>
-<p>You can <a class="reference external" href="https://devcenter.heroku.com/categories/command-line">read more</a> about the Heroku CLI.</p>
-</div>
-<div class="section" id="heroku-preliminary-steps">
-<h3>Heroku: Preliminary steps<a class="headerlink" href="#heroku-preliminary-steps" title="Permalink to this headline">¶</a></h3>
+<p>In those cases, you will need to have Python running on a web server — and NOT freeze the app.</p>
+<p>There are various ways to do this if you pay to use a cloud service, but if you’re a student and your app is not going to attract thousands of users, there are some free options.</p>
+<p>In the past, it was possible to run Python apps on hosted web server accounts (“shared hosting”) that provide <strong>cPanel</strong> — a set of services accessed from a simple dashboard. Unfortunately, this option is no longer available. A free option that is no longer offered was the “hobby” level of service at Heroku.</p>
+<p>— TEXT BELOW WILL BE EDITED OR REPLACED SOON —</p>
 <p>If you use the <a class="reference external" href="https://desktop.github.com/">GitHub Desktop app</a>, you already have command-line <code class="docutils literal notranslate"><span class="pre">git</span></code>. This is not part of Heroku, but <strong>you will need to use</strong> command-line <code class="docutils literal notranslate"><span class="pre">git</span></code> to <em>deploy to</em> Heroku.</p>
 <p>Before proceeding with command-line <code class="docutils literal notranslate"><span class="pre">git</span></code>, your Flask app should be ready to deploy (all code completed and tested). You must also complete these steps:</p>
 <ol class="arabic">
@@ -322,63 +293,7 @@
 </pre></div>
 </div>
 <p><strong>Database:</strong> Note that Heroku prefers PostgreSQL and not MySQL or MariaDB. If your app includes a MySQL database, <a class="reference external" href="https://devcenter.heroku.com/articles/heroku-mysql">read this</a>. The example app <em>students-flask-app</em> does not use any SQL database, so we can deploy it simply.</p>
-</div>
-<div class="section" id="deploy-to-heroku">
-<h3>Deploy to Heroku<a class="headerlink" href="#deploy-to-heroku" title="Permalink to this headline">¶</a></h3>
-<p>To <em>register</em> a new application with Heroku, use the <code class="docutils literal notranslate"><span class="pre">apps:create</span></code> command. <strong>You must be in the root directory of your app.</strong> So at the command prompt, I am <em>inside</em> the <em>students-flask-app</em> directory, and my virtualenv is <strong>not active.</strong></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">heroku</span> <span class="n">apps</span><span class="p">:</span><span class="n">create</span> <span class="n">students</span><span class="o">-</span><span class="n">flask</span>
-</pre></div>
-</div>
-<p>Heroku applications must have a unique name, so if yours is taken, you will need to choose another name. It does not need to match your app folder name.</p>
-<p>The command will return the <strong>web address</strong> of your app, such as:</p>
-<p><a class="reference external" href="https://students-flask.herokuapp.com/">https://students-flask.herokuapp.com/</a></p>
-<p>You’ll <em>register</em> the app only <em>once.</em></p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Before you <em>push to Heroku,</em> make sure <strong>all changes</strong> are <em>committed</em> (in the GitHub Desktop app).</p>
-</div>
-<p>Then at the command prompt, type:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="n">heroku</span> <span class="n">main</span>
-</pre></div>
-</div>
-<p>Many lines of messages from the <em>remote</em> branch on Heroku will be printed to the Terminal. Wait until you see <code class="docutils literal notranslate"><span class="pre">Verifying</span> <span class="pre">deploy...</span> <span class="pre">done.</span></code> And then … you’re back at the command prompt.</p>
-<p>If you get this error message:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fatal</span><span class="p">:</span> <span class="s1">&#39;heroku&#39;</span> <span class="n">does</span> <span class="ow">not</span> <span class="n">appear</span> <span class="n">to</span> <span class="n">be</span> <span class="n">a</span> <span class="n">git</span> <span class="n">repository</span>
-<span class="n">fatal</span><span class="p">:</span> <span class="n">Could</span> <span class="ow">not</span> <span class="n">read</span> <span class="kn">from</span> <span class="nn">remote</span> <span class="n">repository</span><span class="o">.</span>
-
-<span class="n">Please</span> <span class="n">make</span> <span class="n">sure</span> <span class="n">you</span> <span class="n">have</span> <span class="n">the</span> <span class="n">correct</span> <span class="n">access</span> <span class="n">rights</span>
-<span class="ow">and</span> <span class="n">the</span> <span class="n">repository</span> <span class="n">exists</span><span class="o">.</span>
-</pre></div>
-</div>
-<p>This should fix it (use your own Heroku app name, not <em>students-flask</em>):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">heroku</span> <span class="n">git</span><span class="p">:</span><span class="n">remote</span> <span class="o">-</span><span class="n">a</span> <span class="n">students</span><span class="o">-</span><span class="n">flask</span>
-</pre></div>
-</div>
-<p>Now this should work:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="n">heroku</span> <span class="n">main</span>
-</pre></div>
-</div>
-<p>Use your web browser to go to the web address given above to view the active app.</p>
-<p>You’ll find you have a new <em>branch</em> in your local repo.</p>
-<div class="figure align-default">
-<a class="reference internal image-reference" href="_images/heroku_branch.png"><img alt="Branch in GitHub app screenshot" src="_images/heroku_branch.png" style="width: 616.0px; height: 290.0px;" /></a>
-</div>
-<p><em>Screenshot shows “master”; new repos have a “main” branch, not a “master” branch.</em></p>
-<p>If you <em>make changes</em> to the app, you’ll need to <strong>push to Heroku again.</strong> Save all files and commit locally. Log into Heroku (if not already logged in), and:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="n">heroku</span> <span class="n">main</span>
-</pre></div>
-</div>
-</div>
-<div class="section" id="the-heroku-dashboard">
-<h3>The Heroku dashboard<a class="headerlink" href="#the-heroku-dashboard" title="Permalink to this headline">¶</a></h3>
-<p>When you are logged in at Heroku.com, you’ll see your Heroku dashboard. All your registered apps are listed here. To manage an app, click its name.</p>
-<p><strong>To delete an app</strong> from Heroku, once you’ve clicked its name, click <em>Settings.</em> Then click the <strong>Delete app</strong> button at the bottom of the page. You will be asked to confirm your choice.</p>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>Deleting an app on Heroku is easy, so don’t worry about messing up. You can just delete the whole app and start over.</p>
-</div>
-<p>You can manage various other aspects of your app, such as config variables, on the <em>Settings</em> page. You can also add a <a class="reference external" href="https://devcenter.heroku.com/articles/custom-domains">custom domain name</a> for your app.</p>
-</div>
+<p>— TEXT ABOVE WILL BE EDITED OR REPLACED SOON —</p>
 </div>
 <div class="section" id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
