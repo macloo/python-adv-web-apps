@@ -419,9 +419,9 @@ Resources
 
 For answers to any questions about writing templates or using the Jinja template language:
 
-* `Jinja documentation <https://jinja.palletsprojects.com/en/2.11.x/templates/>`_ — All the commands for the Jinja template syntax are here.
+* `Jinja documentation <https://jinja.palletsprojects.com/en/3.0.x/templates/>`_ — All the commands for the Jinja template syntax are here.
 
-* `Flask documentation <https://flask.palletsprojects.com/en/1.1.x/quickstart/#rendering-templates>`_ for ``render_template()``.
+* `Flask documentation <https://flask.palletsprojects.com/en/2.2.x/quickstart/#rendering-templates>`_ for ``render_template()``.
 
 
 Summary

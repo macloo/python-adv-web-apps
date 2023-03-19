@@ -193,13 +193,9 @@
 <p>In the Flask Templates chapter, we built a functioning Flask app. In this chapter, we’ll explore several ways to put that Flask app online.</p>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>When professionals deploy their Python web apps, nowadays they commonly deploy to a cloud service such as <a class="reference external" href="https://aws.amazon.com/">Amazon’s AWS</a>, <a class="reference external" href="https://www.heroku.com/">Heroku</a>, or <a class="reference external" href="https://cloud.google.com/free/">Google App Engine</a>.</p>
+<p>When professionals deploy their Python web apps, nowadays they commonly deploy to a cloud service such as <a class="reference external" href="https://aws.amazon.com/">Amazon’s AWS</a>, <a class="reference external" href="https://heroku.com/">Heroku</a>, or <a class="reference external" href="https://cloud.google.com/free/">Google App Engine</a>.</p>
 <p>One thing to understand, though, is that often they do not deploy a Python executable. That is, the site they upload to a web server is not the Flask app and its associated templates, etc., but rather a traditional website with hard-coded HTML files that has been <em>“baked out”</em> from Flask.</p>
-<p>In this document, we’ll learn how to do that. Then we will also learn how to install a Flask app (one that has not been “baked out”) on:</p>
-<ul class="simple">
-<li><p>A typical web hosting service such as <a class="reference external" href="https://reclaimhosting.com/">Reclaim Hosting</a>, using a simple <strong>cPanel</strong> service there.</p></li>
-<li><p>Heroku, via <code class="docutils literal notranslate"><span class="pre">git</span></code> commands, and using the Gunicorn server.</p></li>
-</ul>
+<p>In this document, we’ll learn how to do that. Then we will also learn how to install a Flask app (one that has not been “baked out”) on <a class="reference external" href="https://render.com/">Render.com</a>.</p>
 </div>
 <div class="section" id="baking-it-out-with-frozen-flask">
 <h2>“Baking it out” with Frozen-Flask<a class="headerlink" href="#baking-it-out-with-frozen-flask" title="Permalink to this headline">¶</a></h2>
@@ -208,8 +204,8 @@
 </pre></div>
 </div>
 <p>After installing the extension, create <strong>a new file</strong> inside the folder that contains the Flask app you want to “freeze.” Name the new file <em>freeze.py</em> and copy/paste this script into it:</p>
-<div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/freeze.py</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/freeze.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;standard freeze script&quot;&quot;&quot;</span>
 
 <span class="kn">from</span> <span class="nn">flask_frozen</span> <span class="kn">import</span> <span class="n">Freezer</span>
@@ -242,7 +238,11 @@
 <a class="reference internal image-reference" href="_images/freezer.png"><img alt="Flask app folder with build screenshot" src="_images/freezer.png" style="width: 563.0px; height: 428.0px;" /></a>
 </div>
 <p>The entire <em>build</em> folder can be uploaded to a web server (without any other files or folders), and the folder name can be changed (from <em>build</em> to anything) — and all the pages will work. (Just don’t change or rename anything inside the <em>build</em> folder.)</p>
-<p>Need to update the site? Make your edits, run <em>freeze.py</em> again, and re-deploy.</p>
+<p>Need to update the site? Make your edits, <strong>run *freeze.py* again,</strong> and re-deploy.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the generated HTML files do not have filenames ending with <em>.html,</em> they might not open in the browser locally. Upload the <em>build</em> folder to a server and test the pages there. <a class="reference external" href="https://weimergeeks.com/pres_frozen_build/">See an example!</a></p>
+</div>
 <div class="section" id="benefits-of-freezing">
 <h3>Benefits of freezing<a class="headerlink" href="#benefits-of-freezing" title="Permalink to this headline">¶</a></h3>
 <p>Pause for a moment and consider this: Imagine you needed to build a site with detailed data about the 535 members of the U.S. Congress. You build it with Flask (using a CSV file, a Python dictionary, or an SQL database to generate all the data) with two or maybe three HTML templates. Then you run <em>freeze.py</em> and in seconds you have 535 individual files, which you just upload as one folder, and you’re done.</p>
@@ -261,8 +261,8 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/actor/&lt;id&gt;&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>You might need to add a <a class="reference external" href="https://pythonhosted.org/Frozen-Flask/#url-generators">URL generator</a> to the <em>freeze.py</em> file.</p>
-<p>For example:</p>
+<p>You might need to add a <a class="reference external" href="https://pythonhosted.org/Frozen-Flask/#url-generators">URL generator</a> to the <em>freeze.py</em> file. <strong>But read the NOTE above before you do this!</strong></p>
+<p>For example (<a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/actors_app">see project files</a>):</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">data</span> <span class="kn">import</span> <span class="n">ACTORS</span>
 
 <span class="nd">@freezer</span><span class="o">.</span><span class="n">register_generator</span>

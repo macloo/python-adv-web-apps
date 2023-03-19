@@ -16,7 +16,7 @@ In the Flask Templates chapter, we built a functioning Flask app. In this chapte
 Introduction
 ------------
 
-When professionals deploy their Python web apps, nowadays they commonly deploy to a cloud service such as `Amazon’s AWS <https://aws.amazon.com/>`_, `Heroku <https://heroku.com/>`_, or `Google App Engine <https://cloud.google.com/free/>`_.
+When professionals deploy their Python web apps, nowadays they commonly deploy to a cloud service such as `Amazon’s AWS <https://aws.amazon.com/>`_, `Heroku <https://www.heroku.com/>`_, or `Google App Engine <https://cloud.google.com/free/>`_.
 
 One thing to understand, though, is that often they do not deploy a Python executable. That is, the site they upload to a web server is not the Flask app and its associated templates, etc., but rather a traditional website with hard-coded HTML files that has been *“baked out”* from Flask.
 
@@ -54,7 +54,7 @@ In Terminal, in the directory containing the Flask app, enter this at the comman
 
 The entire *build* folder can be uploaded to a web server (without any other files or folders), and the folder name can be changed (from *build* to anything) — and all the pages will work. (Just don't change or rename anything inside the *build* folder.)
 
-Need to update the site? Make your edits, **run *freeze.py* again,** and re-deploy.
+Need to update the site? Make your edits, **run** *freeze.py* **again,** and re-deploy.
 
 .. note:: If the generated HTML files do not have filenames ending with *.html,* they might not open in the browser locally. Upload the *build* folder to a server and test the pages there. `See an example! <https://weimergeeks.com/pres_frozen_build/>`_
 
@@ -233,14 +233,13 @@ You can manage various other aspects of your app, such as config variables, on t
 Conclusion
 ----------
 
-We’ve learned about three different options for deploying a Flask app:
+We’ve learned about two different options for deploying a Flask app:
 
 * Use Frozen-Flask and then upload a folder to your server
-* Deploy to a hosted web account
-* Deploy to Heroku, a free cloud service
+* Deploy to Render.com
 
 Depending on the characteristics of your Flask app, one of these options might be much better than the others, or they might all be equally suitable.
 
-`See more options for deploying <https://flask.palletsprojects.com/en/1.1.x/deploying/>`_ in the Flask documentation.
+`See more options for deploying <https://flask.palletsprojects.com/en/2.2.x/deploying/>`_ in the Flask documentation.
 
 .
