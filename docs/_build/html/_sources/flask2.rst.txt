@@ -168,7 +168,7 @@ The weather script
 
 *Line 16:* The start of a function that *is not* a Flask route function. This just provides a simple way to make the API request and return the response — *separately* from the route. The zip code will be supplied when this function is called.
 
-*Line 20:* Using the variables ``API_URL`` and ``API_KEY`` (from lines 14 and 11), as well as the submitted zip code (covered below), the API request is constructed — ``API_URL.format(zip, API_KEY)`` — and passed into ``requests.get()``. Tacking ``.json()`` on the end will raise an exception if JSON decoding fails (`details <https://2.python-requests.org/en/master/user/quickstart/#json-response-content>`_). ::
+*Line 20:* Using the variables ``API_URL`` and ``API_KEY`` (from lines 14 and 11), as well as the submitted zip code (covered below), the API request is constructed — ``API_URL.format(zip, API_KEY)`` — and passed into ``requests.get()``. Tacking ``.json()`` on the end will raise an exception if JSON decoding fails (`details <https://docs.python-requests.org/en/latest/user/quickstart/#json-response-content>`_). ::
 
     data = requests.get(API_URL.format(zip, API_KEY)).json()
 
