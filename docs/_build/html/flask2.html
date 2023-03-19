@@ -105,6 +105,11 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="flask3.html">Flask Templates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_deploy.html">Flask: Deploy an App</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_forms.html">Flask: Web Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_db1.html">Flask and Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_db2.html">Flask: Read from a Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_db3.html">Flask: Write to a Database</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
 </ul>
 
@@ -199,7 +204,12 @@
 18
 19
 20
-21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;basic Flask app - demo of using a variable in a route&quot;&quot;&quot;</span>
+21
+22
+23
+24
+25
+26</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;basic Flask app - demo of using a variable in a route&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -220,6 +230,11 @@
 
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># app.run(host=&#39;0.0.0.0&#39;, port=4999, debug=True)</span>
+
+<span class="c1"># if you need to avoid using port 5000 - some Mac users -</span>
+<span class="c1"># delete the first app.run() line above and</span>
+<span class="c1"># un-comment the second app.run() line. Then use localhost:4999</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -230,7 +245,7 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">hello3</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
-<p>Do not use <code class="docutils literal notranslate"><span class="pre">flask</span> <span class="pre">run</span></code> to run this script. That is not necessary, thanks to lines 20 and 21.</p>
+<p>Do not use <code class="docutils literal notranslate"><span class="pre">flask</span> <span class="pre">run</span></code> to run this script. That is not necessary, thanks to lines 20 and 21. Do not use <code class="docutils literal notranslate"><span class="pre">export</span> <span class="pre">FLASK_APP</span></code> or <code class="docutils literal notranslate"><span class="pre">set</span> <span class="pre">FLASK_APP</span></code> either. The <code class="docutils literal notranslate"><span class="pre">app.run()</span></code> command in the script above replaces those.</p>
 </div>
 <p>When we go to <code class="docutils literal notranslate"><span class="pre">localhost:5000</span></code> in the browser, the following code from the Python script (in line 8 above) creates a functional link in the browser window:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;p&gt;&lt;a href=&quot;user/Albert&quot;&gt;Click me!&lt;/a&gt;&lt;/p&gt;
@@ -490,7 +505,7 @@
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
 <p>You should be starting to glimpse the potential of using Flask to create dynamic web apps.</p>
 <p>Maybe you are wondering how to combine Flask with attractive, responsive web pages in the browser, instead of ugly plaintext.</p>
-<p>That’s the topic of the next chapter!</p>
+<p>That’s the topic of the next chapter! See <a class="reference external" href="flask3.html">Flask Templates</a>.</p>
 <p>.</p>
 </div>
 </div>

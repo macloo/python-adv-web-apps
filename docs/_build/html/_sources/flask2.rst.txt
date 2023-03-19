@@ -21,7 +21,7 @@ We have **two routes** in the script. The first route, for ``'/'``, is not very 
 
         python hello3.py
 
-    Do not use ``flask run`` to run this script. That is not necessary, thanks to lines 20 and 21.
+    Do not use ``flask run`` to run this script. That is not necessary, thanks to lines 20 and 21. Do not use ``export FLASK_APP`` or ``set FLASK_APP`` either. The ``app.run()`` command in the script above replaces those.
 
 When we go to ``localhost:5000`` in the browser, the following code from the Python script (in line 8 above) creates a functional link in the browser window: ::
 
@@ -256,6 +256,6 @@ You should be starting to glimpse the potential of using Flask to create dynamic
 
 Maybe you are wondering how to combine Flask with attractive, responsive web pages in the browser, instead of ugly plaintext.
 
-That’s the topic of the next chapter!
+That’s the topic of the next chapter! See `Flask Templates <flask3.html>`_.
 
 .
