@@ -193,7 +193,7 @@
 <p>In the Flask Templates chapter, we built a functioning Flask app. In this chapter, we’ll explore several ways to put that Flask app online.</p>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>When professionals deploy their Python web apps, nowadays they commonly deploy to a cloud service such as <a class="reference external" href="https://aws.amazon.com/">Amazon’s AWS</a>, <a class="reference external" href="https://heroku.com/">Heroku</a>, or <a class="reference external" href="https://cloud.google.com/free/">Google App Engine</a>.</p>
+<p>When professionals deploy their Python web apps, nowadays they commonly deploy to a cloud service such as <a class="reference external" href="https://aws.amazon.com/">Amazon’s AWS</a>, <a class="reference external" href="https://www.heroku.com/">Heroku</a>, or <a class="reference external" href="https://cloud.google.com/free/">Google App Engine</a>.</p>
 <p>One thing to understand, though, is that often they do not deploy a Python executable. That is, the site they upload to a web server is not the Flask app and its associated templates, etc., but rather a traditional website with hard-coded HTML files that has been <em>“baked out”</em> from Flask.</p>
 <p>In this document, we’ll learn how to do that. Then we will also learn how to install a Flask app (one that has not been “baked out”) on <a class="reference external" href="https://render.com/">Render.com</a>.</p>
 </div>
@@ -238,7 +238,7 @@
 <a class="reference internal image-reference" href="_images/freezer.png"><img alt="Flask app folder with build screenshot" src="_images/freezer.png" style="width: 563.0px; height: 428.0px;" /></a>
 </div>
 <p>The entire <em>build</em> folder can be uploaded to a web server (without any other files or folders), and the folder name can be changed (from <em>build</em> to anything) — and all the pages will work. (Just don’t change or rename anything inside the <em>build</em> folder.)</p>
-<p>Need to update the site? Make your edits, <strong>run *freeze.py* again,</strong> and re-deploy.</p>
+<p>Need to update the site? Make your edits, <strong>run</strong> <em>freeze.py</em> <strong>again,</strong> and re-deploy.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If the generated HTML files do not have filenames ending with <em>.html,</em> they might not open in the browser locally. Upload the <em>build</em> folder to a server and test the pages there. <a class="reference external" href="https://weimergeeks.com/pres_frozen_build/">See an example!</a></p>
@@ -382,14 +382,13 @@
 </div>
 <div class="section" id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
-<p>We’ve learned about three different options for deploying a Flask app:</p>
+<p>We’ve learned about two different options for deploying a Flask app:</p>
 <ul class="simple">
 <li><p>Use Frozen-Flask and then upload a folder to your server</p></li>
-<li><p>Deploy to a hosted web account</p></li>
-<li><p>Deploy to Heroku, a free cloud service</p></li>
+<li><p>Deploy to Render.com</p></li>
 </ul>
 <p>Depending on the characteristics of your Flask app, one of these options might be much better than the others, or they might all be equally suitable.</p>
-<p><a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/deploying/">See more options for deploying</a> in the Flask documentation.</p>
+<p><a class="reference external" href="https://flask.palletsprojects.com/en/2.2.x/deploying/">See more options for deploying</a> in the Flask documentation.</p>
 <p>.</p>
 </div>
 </div>
