@@ -68,6 +68,6 @@ More info
 
 You might find it necessary to use Python’s ``pathlib`` module for writing relative paths. `Learn more here. <https://realpython.com/python-pathlib/>`_
 
-`See an example of the code in a short Flask script.<../python_code_examples/flask/weather2.py>`_
+`See an example of the code in a short Flask script. <../python_code_examples/flask/weather2.py>`_ 
 
 .
