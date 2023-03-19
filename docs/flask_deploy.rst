@@ -104,44 +104,13 @@ When freezing will not work, cannot work
 
 If your app depends on dynamic activity — for example, if you are using **Flask-WTF** to process a form — you will not get a fully functioning app if you freeze it. Similarly, if you’re accessing an API to get data that changes frequently (such as currency rates or weather), you cannot freeze that app.
 
-In those cases, you will need to run Python on a web server, where people are accessing your pages (and NOT freeze the app).
+In those cases, you will need to have Python running on a web server — and NOT freeze the app.
 
-There are ways to do this if you use a cloud service such as Amazon’s AWS or Heroku, but you don’t necessarily need to go that way if you’re a student and your app is not going to attract thousands of users.
+There are various ways to do this if you pay to use a cloud service, but if you’re a student and your app is not going to attract thousands of users, there are some free options.
 
-The hosted website solution
-+++++++++++++++++++++++++++
+In the past, it was possible to run Python apps on hosted web server accounts (“shared hosting”) that provide **cPanel** — a set of services accessed from a simple dashboard. Unfortunately, this option is no longer available. A free option that is no longer offered was the “hobby” level of service at Heroku.
 
-Most hosted web server accounts from companies such as `Reclaim Hosting <https://reclaimhosting.com/>`_ provide **cPanel** — a set of services that you access from a simple dashboard.
-
-.. figure:: _static/images/setup_python_cpanel.png
-   :scale: 50 %
-   :alt: Set up Python cPanel icon
-
-If you find the icon above in the **cPanel** at your hosting provider, you’re probably good to go. I’ve written `detailed instructions <http://bit.ly/flask-deploy>`_ for how to install a Python app at Reclaim Hosting, and it’s probably the same or very nearly so in any **cPanel** instance.
-
-Using Heroku instead
-++++++++++++++++++++
-
-You can get started on `Heroku <https://www.heroku.com/>`_ for free, and if you find you need more than the free option provides, you can `change your plan <https://www.heroku.com/pricing>`_.
-
-`An example app for deployment to Heroku is here. <https://github.com/macloo/students-flask-app>`_
-
-The live app is running at this URL:
-
-https://students-flask.herokuapp.com/
-
-Once you have a Heroku account, download the `Heroku CLI <https://devcenter.heroku.com/articles/heroku-cli>`_, a command-line tool. Use the appropriate installer for your operating system. Test that it was installed successfully by entering this in Terminal at the command prompt: ::
-
-    heroku --version
-
-Follow the **login** instructions under `Getting Started <https://devcenter.heroku.com/articles/heroku-cli#getting-started>`_.
-
-You will log in this way *each time* you use the Heroku CLI. You can log out — ``heroku logout`` — or just quit Terminal.
-
-You can `read more <https://devcenter.heroku.com/categories/command-line>`_ about the Heroku CLI.
-
-Heroku: Preliminary steps
-+++++++++++++++++++++++++
+--- TEXT BELOW WILL BE EDITED OR REPLACED SOON ---
 
 If you use the `GitHub Desktop app <https://desktop.github.com/>`_, you already have command-line ``git``. This is not part of Heroku, but **you will need to use** command-line ``git`` to *deploy to* Heroku.
 
@@ -163,72 +132,7 @@ To run a simple Python web app (such as the example *students-flask-app*), the c
 
 **Database:** Note that Heroku prefers PostgreSQL and not MySQL or MariaDB. If your app includes a MySQL database, `read this <https://devcenter.heroku.com/articles/heroku-mysql>`_. The example app *students-flask-app* does not use any SQL database, so we can deploy it simply.
 
-Deploy to Heroku
-++++++++++++++++
-
-To *register* a new application with Heroku, use the ``apps:create`` command. **You must be in the root directory of your app.** So at the command prompt, I am *inside* the *students-flask-app* directory, and my virtualenv is **not active.** ::
-
-    heroku apps:create students-flask
-
-Heroku applications must have a unique name, so if yours is taken, you will need to choose another name. It does not need to match your app folder name.
-
-The command will return the **web address** of your app, such as:
-
-https://students-flask.herokuapp.com/
-
-You’ll *register* the app only *once.*
-
-.. important:: Before you *push to Heroku,* make sure **all changes** are *committed* (in the GitHub Desktop app).
-
-Then at the command prompt, type: ::
-
-    git push heroku main
-
-Many lines of messages from the *remote* branch on Heroku will be printed to the Terminal. Wait until you see ``Verifying deploy... done.`` And then ... you’re back at the command prompt.
-
-If you get this error message: ::
-
-
-    fatal: 'heroku' does not appear to be a git repository
-    fatal: Could not read from remote repository.
-
-    Please make sure you have the correct access rights
-    and the repository exists.
-
-
-This should fix it (use your own Heroku app name, not *students-flask*): ::
-
-    heroku git:remote -a students-flask
-
-Now this should work: ::
-
-    git push heroku main
-
-Use your web browser to go to the web address given above to view the active app.
-
-You’ll find you have a new *branch* in your local repo.
-
-.. figure:: _static/images/heroku_branch.png
-   :scale: 100 %
-   :alt: Branch in GitHub app screenshot
-
-*Screenshot shows "master"; new repos have a "main" branch, not a "master" branch.*
-
-If you *make changes* to the app, you’ll need to **push to Heroku again.** Save all files and commit locally. Log into Heroku (if not already logged in), and: ::
-
-    git push heroku main
-
-
-The Heroku dashboard
-++++++++++++++++++++
-
-When you are logged in at Heroku.com, you’ll see your Heroku dashboard. All your registered apps are listed here. To manage an app, click its name.
-
-**To delete an app** from Heroku, once you’ve clicked its name, click *Settings.* Then click the **Delete app** button at the bottom of the page. You will be asked to confirm your choice.
-
-.. tip:: Deleting an app on Heroku is easy, so don’t worry about messing up. You can just delete the whole app and start over.
-
-You can manage various other aspects of your app, such as config variables, on the *Settings* page. You can also add a `custom domain name <https://devcenter.heroku.com/articles/custom-domains>`_ for your app.
+--- TEXT ABOVE WILL BE EDITED OR REPLACED SOON ---
 
 Conclusion
 ----------
