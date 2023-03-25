@@ -18,7 +18,7 @@ Introduction
 
 When professionals deploy their Python web apps, nowadays they commonly deploy to a cloud service such as `Amazon’s AWS <https://aws.amazon.com/>`_, `Heroku <https://www.heroku.com/>`_, or `Google App Engine <https://cloud.google.com/free/>`_.
 
-One thing to understand, though, is that often they do not deploy a Python executable. That is, the site they upload to a web server is not the Flask app and its associated templates, etc., but rather a traditional website with hard-coded HTML files that has been *“baked out”* from Flask.
+One thing to understand, though, is that *often* they do not deploy a Python executable. That is, the site they upload to a web server is not the Flask app and its associated templates, etc., but rather a traditional website with hard-coded HTML files that has been *“baked out”* from Flask.
 
 In this document, we’ll learn how to do that. Then we will also learn how to install a Flask app (one that has not been “baked out”) on `Render.com <https://render.com/>`_.
 
@@ -56,7 +56,7 @@ The entire *build* folder can be uploaded to a web server (without any other fil
 
 Need to update the site? Make your edits, **run** *freeze.py* **again,** and re-deploy.
 
-.. note:: If the generated HTML files do not have filenames ending with *.html,* they might not open in the browser locally. Upload the *build* folder to a server and test the pages there. `See an example! <https://weimergeeks.com/pres_frozen_build/>`_
+.. note:: If the generated HTML files do not have filenames ending with *.html,* they might not open in the browser locally. That is, they might open as raw code! Upload the *build* folder to a server and test the pages there. `See an example! <https://weimergeeks.com/pres_frozen_build/>`_
 
 
 Benefits of freezing
@@ -108,31 +108,10 @@ In those cases, you will need to have Python running on a web server — and NOT
 
 There are various ways to do this if you pay to use a cloud service, but if you’re a student and your app is not going to attract thousands of users, there are some free options.
 
-In the past, it was possible to run Python apps on hosted web server accounts (“shared hosting”) that provide **cPanel** — a set of services accessed from a simple dashboard. Unfortunately, this option is no longer available. A free option that is no longer offered was the “hobby” level of service at Heroku.
+In the past, it was possible to run Python apps on hosted web server accounts (“shared hosting”) that provide **cPanel** — a set of services accessed from a simple dashboard. Unfortunately, **this option is no longer available.** Another free option that is no longer offered was the “hobby” level of service at Heroku.
 
---- TEXT BELOW WILL BE EDITED OR REPLACED SOON ---
+In 2023, the best free option I am aware of for deploying a Python app is to use Render.com. `This document <https://bit.ly/mm-render-flask>`_ walks you through how to sign up, get started, and deploy your first Python app there. It’s relatively straightforward.
 
-If you use the `GitHub Desktop app <https://desktop.github.com/>`_, you already have command-line ``git``. This is not part of Heroku, but **you will need to use** command-line ``git`` to *deploy to* Heroku.
-
-Before proceeding with command-line ``git``, your Flask app should be ready to deploy (all code completed and tested). You must also complete these steps:
-
-1. Install **Gunicorn**: You need to add a production-level web server to your web app. Heroku recommends `Gunicorn <https://gunicorn.org/>`_ for Python applications. Activate the virtualenv for your app and install it with: ::
-
-    pip install gunicorn
-
-2. Create or update *requirements.txt*: `Instructions are here. <http://bit.ly/python-reqs>`_ Even if you created a *requirements.txt* file earlier, you must re-create it to add **Gunicorn** to the list. **This is absolutely necessary.**
-
-3. Make sure there is a *.gitignore* file in your repo and it excludes your *env/* or *venv/* folder. **You must NOT commit virtual environment files** — the *requirements.txt* file lists all the contents of your virtualenv so that it can be **re-created** on Heroku. `You can copy this file. <https://github.com/macloo/python-adv-web-apps/blob/master/.gitignore>`_
-
-4. Create *Procfile*: This is a plain-text file that must be named exactly `Procfile` (uppercase P, and no file extension). Its contents declare which commands are run by the application’s dynos on Heroku. `Read more about Procfile here. <https://devcenter.heroku.com/articles/procfile>`_
-
-To run a simple Python web app (such as the example *students-flask-app*), the complete contents of *Procfile* are: ::
-
-    web: gunicorn students:app
-
-**Database:** Note that Heroku prefers PostgreSQL and not MySQL or MariaDB. If your app includes a MySQL database, `read this <https://devcenter.heroku.com/articles/heroku-mysql>`_. The example app *students-flask-app* does not use any SQL database, so we can deploy it simply.
-
---- TEXT ABOVE WILL BE EDITED OR REPLACED SOON ---
 
 Conclusion
 ----------
@@ -142,7 +121,7 @@ We’ve learned about two different options for deploying a Flask app:
 * Use Frozen-Flask and then upload a folder to your server
 * Deploy to Render.com
 
-Depending on the characteristics of your Flask app, one of these options might be much better than the others, or they might all be equally suitable.
+Depending on the characteristics of your Flask app, one of these options might be much better than the other.
 
 `See more options for deploying <https://flask.palletsprojects.com/en/2.2.x/deploying/>`_ in the Flask documentation.
 
