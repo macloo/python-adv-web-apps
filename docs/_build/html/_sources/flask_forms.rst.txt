@@ -35,13 +35,13 @@ WTForms is “a flexible forms validation and rendering library for Python Web d
 * WTForms has built-in validation techniques.
 * WTForms can be combined with Bootstrap to help us make clean-looking, responsive forms for mobile and desktop screens.
 
-`Read the documentation for Flask-WTF. <https://flask-wtf.readthedocs.io/en/stable/>`_
+`Read the documentation for Flask-WTF. <https://flask-wtf.readthedocs.io/>`_
 
 
 Setup for using forms in Flask
 ------------------------------
 
-We will install the **Flask-WTF** extension to help us work with forms in Flask. There are many extensions for Flask, and each one adds a different set of functions and capabilities. See the `list of Flask extensions <https://flask.palletsprojects.com/en/1.1.x/extensions/>`_ for more.
+We will install the **Flask-WTF** extension to help us work with forms in Flask. There are many extensions for Flask, and each one adds a different set of functions and capabilities. See the `list of Flask extensions <https://flask.palletsprojects.com/en/2.2.x/extensions/>`_ for more.
 
 In Terminal, change into your Flask projects folder and **activate your virtual environment** there. Then, at the command prompt — where you see ``$`` (Mac) or ``C:\Users\yourname>`` (Windows )— ::
 
@@ -53,10 +53,19 @@ We will also install the **Flask-Bootstrap4** extension to provide Bootstrap sty
 
 This installation is done *only once* in any virtualenv. It is assumed you already have Flask installed there.
 
-* `Flask-WTF docs <https://flask-wtf.readthedocs.io/en/stable/>`_
-* More details in `WTForms docs <https://wtforms.readthedocs.io/en/stable/>`_
+* `Flask-WTF docs <https://flask-wtf.readthedocs.io/>`_
+* More details in `WTForms docs <https://wtforms.readthedocs.io/>`_
 * `Flask-Bootstrap docs <https://pythonhosted.org/Flask-Bootstrap/>`_
-* An *alternative* is `Bootstrap Flask <https://bootstrap-flask.readthedocs.io/en/latest/>`_ — but that is NOT used here
+* An *alternative* is `Bootstrap Flask <https://bootstrap-flask.readthedocs.io/>`_
+
+
+**UPDATES TO THIS PAGE are under way due to new and updated Flask extensions.**
+
+Links above have been updated (3/28/23).
+
+Currently evaluating: `Bootstrap Flask <https://github.com/helloflask/bootstrap-flask>`_
+
+Code and text below might soon change.
 
 
 Imports for forms with Flask-WTF and Flask-Bootstrap

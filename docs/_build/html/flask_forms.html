@@ -35,7 +35,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="configparser" href="configparser.html" />
+    <link rel="next" title="Flask and Databases" href="flask_db1.html" />
     <link rel="prev" title="Flask: Deploy an App" href="flask_deploy.html" /> 
 </head>
 
@@ -111,6 +111,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#resources">Resources</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="flask_db1.html">Flask and Databases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_db2.html">Flask: Read from a Database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flask_db3.html">Flask: Write to a Database</a></li>
 <li class="toctree-l1"><a class="reference internal" href="configparser.html">configparser</a></li>
 </ul>
 
@@ -204,11 +207,11 @@
 <li><p>WTForms has built-in validation techniques.</p></li>
 <li><p>WTForms can be combined with Bootstrap to help us make clean-looking, responsive forms for mobile and desktop screens.</p></li>
 </ul>
-<p><a class="reference external" href="https://flask-wtf.readthedocs.io/en/stable/">Read the documentation for Flask-WTF.</a></p>
+<p><a class="reference external" href="https://flask-wtf.readthedocs.io/">Read the documentation for Flask-WTF.</a></p>
 </div>
 <div class="section" id="setup-for-using-forms-in-flask">
 <h2>Setup for using forms in Flask<a class="headerlink" href="#setup-for-using-forms-in-flask" title="Permalink to this headline">¶</a></h2>
-<p>We will install the <strong>Flask-WTF</strong> extension to help us work with forms in Flask. There are many extensions for Flask, and each one adds a different set of functions and capabilities. See the <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/extensions/">list of Flask extensions</a> for more.</p>
+<p>We will install the <strong>Flask-WTF</strong> extension to help us work with forms in Flask. There are many extensions for Flask, and each one adds a different set of functions and capabilities. See the <a class="reference external" href="https://flask.palletsprojects.com/en/2.2.x/extensions/">list of Flask extensions</a> for more.</p>
 <p>In Terminal, change into your Flask projects folder and <strong>activate your virtual environment</strong> there. Then, at the command prompt — where you see <code class="docutils literal notranslate"><span class="pre">$</span></code> (Mac) or <code class="docutils literal notranslate"><span class="pre">C:\Users\yourname&gt;</span></code> (Windows )—</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">Flask</span><span class="o">-</span><span class="n">WTF</span>
 </pre></div>
@@ -219,11 +222,15 @@
 </div>
 <p>This installation is done <em>only once</em> in any virtualenv. It is assumed you already have Flask installed there.</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://flask-wtf.readthedocs.io/en/stable/">Flask-WTF docs</a></p></li>
-<li><p>More details in <a class="reference external" href="https://wtforms.readthedocs.io/en/stable/">WTForms docs</a></p></li>
+<li><p><a class="reference external" href="https://flask-wtf.readthedocs.io/">Flask-WTF docs</a></p></li>
+<li><p>More details in <a class="reference external" href="https://wtforms.readthedocs.io/">WTForms docs</a></p></li>
 <li><p><a class="reference external" href="https://pythonhosted.org/Flask-Bootstrap/">Flask-Bootstrap docs</a></p></li>
-<li><p>An <em>alternative</em> is <a class="reference external" href="https://bootstrap-flask.readthedocs.io/en/latest/">Bootstrap Flask</a> — but that is NOT used here</p></li>
+<li><p>An <em>alternative</em> is <a class="reference external" href="https://bootstrap-flask.readthedocs.io/">Bootstrap Flask</a></p></li>
 </ul>
+<p><strong>UPDATES TO THIS PAGE are under way due to new and updated Flask extensions.</strong></p>
+<p>Links above have been updated (3/28/23).</p>
+<p>Currently evaluating: <a class="reference external" href="https://github.com/helloflask/bootstrap-flask">Bootstrap Flask</a></p>
+<p>Code and text below might soon change.</p>
 </div>
 <div class="section" id="imports-for-forms-with-flask-wtf-and-flask-bootstrap">
 <h2>Imports for forms with Flask-WTF and Flask-Bootstrap<a class="headerlink" href="#imports-for-forms-with-flask-wtf-and-flask-bootstrap" title="Permalink to this headline">¶</a></h2>
@@ -271,8 +278,8 @@
 <div class="section" id="put-the-form-in-a-route-function">
 <h3>Put the form in a route function<a class="headerlink" href="#put-the-form-in-a-route-function" title="Permalink to this headline">¶</a></h3>
 <p>Now we will use the form in a Flask route:</p>
-<div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/actors_app/actors.py</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/actors_app/actors.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>27
 28
 29
@@ -321,8 +328,8 @@
 <div class="section" id="put-the-form-in-a-template">
 <h3>Put the form in a template<a class="headerlink" href="#put-the-form-in-a-template" title="Permalink to this headline">¶</a></h3>
 <p>Before we break all that down and explain it, let’s look at the code in the template <em>index.html</em>:</p>
-<div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/actors_app/templates/index.html</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/actors_app/templates/index.html</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
 <div class="highlight-jinja notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -430,8 +437,8 @@
 <li><p>If the actor’s name is in the data source (ACTORS), the app loads a detail page for that actor. (Photos of bears 🐻 stand in for real photos of the actors.)</p></li>
 <li><p>Otherwise, you stay on the same page, the form is cleared, and a message tells you that actor is not in the database.</p></li>
 </ol>
-<div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/actors_app/actors.py</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/actors_app/actors.py</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>27
 28
 29
@@ -571,7 +578,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="configparser.html" class="btn btn-neutral float-right" title="configparser" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="flask_db1.html" class="btn btn-neutral float-right" title="Flask and Databases" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="flask_deploy.html" class="btn btn-neutral float-left" title="Flask: Deploy an App" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
