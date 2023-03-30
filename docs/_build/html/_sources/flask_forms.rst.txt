@@ -29,11 +29,13 @@ Introduction
 
 Flask has an extension that makes it easy to create web forms.
 
-WTForms is “a flexible forms validation and rendering library for Python Web development.” With **Flask-WTF,** we get WTForms in Flask.
+WTForms is “a flexible forms validation and rendering library for Python Web development.” With **Flask-WTF,** we get WTForms *in Flask.*
 
 * WTForms includes security features for submitting form data.
 * WTForms has built-in validation techniques.
 * WTForms can be combined with Bootstrap to help us make clean-looking, responsive forms for mobile and desktop screens.
+* WTForms is a Python library.
+* Flask-WTF is a Flask extension that brings WTForms into Flask.
 
 `Read the documentation for Flask-WTF. <https://flask-wtf.readthedocs.io/>`_
 
@@ -47,28 +49,18 @@ In Terminal, change into your Flask projects folder and **activate your virtual 
 
     pip install Flask-WTF
 
-We will also install the **Flask-Bootstrap4** extension to provide Bootstrap styles for our forms. ::
+We will also install the **Bootstrap-Flask** extension to provide Bootstrap styles for our forms. ::
 
-    pip install Flask-Bootstrap4
+    pip install bootstrap-flask
 
 This installation is done *only once* in any virtualenv. It is assumed you already have Flask installed there.
 
 * `Flask-WTF docs <https://flask-wtf.readthedocs.io/>`_
 * More details in `WTForms docs <https://wtforms.readthedocs.io/>`_
-* `Flask-Bootstrap docs <https://pythonhosted.org/Flask-Bootstrap/>`_
-* An *alternative* is `Bootstrap Flask <https://bootstrap-flask.readthedocs.io/>`_
+* `Bootstrap-Flask docs <https://bootstrap-flask.readthedocs.io/>`_
 
 
-**UPDATES TO THIS PAGE are under way due to new and updated Flask extensions.**
-
-Links above have been updated (3/28/23).
-
-Currently evaluating: `Bootstrap Flask <https://github.com/helloflask/bootstrap-flask>`_
-
-Code and text below might soon change.
-
-
-Imports for forms with Flask-WTF and Flask-Bootstrap
+Imports for forms with Flask-WTF and Bootstrap-Flask
 ----------------------------------------------------
 
 You will have a long list of imports at the top of your Flask app file: ::
@@ -92,7 +84,7 @@ After the imports, these lines follow in the app script: ::
     # Flask-WTF requires an encryption key - the string can be anything
     app.config['SECRET_KEY'] = 'C2HWGVoMGfNTBsrYQg8EcMrdTimkZfAb'
 
-    # Flask-Bootstrap requires this line
+    # Bootstrap-Flask requires this line
     Bootstrap(app)
 
 
@@ -183,14 +175,14 @@ A quick note about Bootstrap in Flask
 
 There’s more about this in the **Resources** section at the bottom of this page — but to summarize briefly:
 
-* You pip-installed Flask-Bootstrap4 in your Flask virtual environment.
+* You pip-installed Bootstrap-Flask in your Flask virtual environment.
 * You wrote ``from flask_bootstrap import Bootstrap`` at the top of the Flask app file.
 * Below that, you wrote ``Bootstrap(app)`` in the Flask app file.
 * In any Flask template using Bootstrap styles, the top line will be: ``{% extends 'bootstrap/base.html' %}``
 
 That combination of four things has embedded Bootstrap 4 in this app *and* made ``wtf.quick_form()`` possible.
 
-There’s an `excellent how-to video <https://www.youtube.com/watch?v=PE9ZGniSDW8>`_ (only 9 minutes long) about using Bootstrap styles in Flask if you want to separate the **forms** information from the Bootstrap information in your mind. You can, of course, use Flask-Bootstrap4 *without* the forms!
+There’s an `excellent how-to video <https://www.youtube.com/watch?v=PE9ZGniSDW8>`_ (only 9 minutes long) about using Bootstrap styles in Flask if you want to separate the **forms** information from the Bootstrap information in your mind. You can, of course, use Bootstrap-Flask *without* the forms!
 
 
 Examining the route function
@@ -274,9 +266,9 @@ Conclusion
 
 **Flask-WTF** provides convenient methods for working with forms in Flask. Forms can be built easily and also processed easily, with a minimum of code.
 
-Adding **Flask-Bootstrap** ensures that we can build mobile-friendly forms with a minimum amount of effort.
+Adding **Bootstrap-Flask** ensures that we can build mobile-friendly forms with a minimum amount of effort.
 
-Note that it is possible to build a customized form layout using Bootstrap 4 styles in a Flask template, or to build a custom form with no Bootstrap styles. In either case, you cannot use ``{{ wtf.quick_form(form) }}`` but would instead write out all the form code in your Flask template as you would in a normal HTML file. To take advantage of WTForms, you would still create the form class with ``FlaskForm`` in the same way as shown above.
+Note that it is possible to build a customized form layout using Bootstrap styles in a Flask template, or to build a custom form with no Bootstrap styles. In either case, you cannot use ``{{ wtf.quick_form(form) }}`` but would instead write out all the form code in your Flask template as you would in a normal HTML file. To take advantage of WTForms, you would still create the form class with ``FlaskForm`` in the same way as shown above.
 
 An example is the demo Flask app `Books Hopper <https://books-hopper.herokuapp.com/>`_, which includes four separate Bootstrap forms:
 
@@ -288,9 +280,7 @@ An example is the demo Flask app `Books Hopper <https://books-hopper.herokuapp.c
 .. figure:: _static/images/books_hopper.png
    :alt: Books Hopper screenshot
 
-Bootstrap 4 was used in all templates in the Books Hopper app, but Flask-Bootstrap was not.
-
-.. important:: You are using Bootstrap 4 in Flask if you installed with ``pip install Flask-Bootstrap4``. In early 2018, Bootstrap 4 replaced Bootstrap 3. The differences are significant.
+Bootstrap 4 was used in all templates in the Books Hopper app, but Bootstrap-Flask was not. Bootstrap styles were all coded in the usual ways.
 
 
 Resources
@@ -298,12 +288,10 @@ Resources
 
 * `Sending form data <https://developer.mozilla.org/en-US/docs/Learn/Forms/Sending_and_retrieving_form_data>`_ — how web browsers interact with servers; request/response
 
-* `Flask-WTF documentation <https://flask-wtf.readthedocs.io/en/stable/>`_
+* `Flask-WTF documentation <https://flask-wtf.readthedocs.io/>`_
 
-* `Complete WTForms documentation <https://wtforms.readthedocs.io/en/stable/>`_
+* `Complete WTForms documentation <https://wtforms.readthedocs.io/>`_
 
-* `Flask-Bootstrap documentation <https://pythonhosted.org/Flask-Bootstrap/>`_
-
-* `About Flask-Bootstrap templates <https://pythonhosted.org/Flask-Bootstrap/basic-usage.html#templates>`_
+* `Bootstrap-Flask docs <https://bootstrap-flask.readthedocs.io/>`_
 
 .

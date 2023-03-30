@@ -98,7 +98,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Flask: Web Forms</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#setup-for-using-forms-in-flask">Setup for using forms in Flask</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#imports-for-forms-with-flask-wtf-and-flask-bootstrap">Imports for forms with Flask-WTF and Flask-Bootstrap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#imports-for-forms-with-flask-wtf-and-bootstrap-flask">Imports for forms with Flask-WTF and Bootstrap-Flask</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#set-up-a-form-in-a-flask-app">Set up a form in a Flask app</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#configure-the-form">Configure the form</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#put-the-form-in-a-route-function">Put the form in a route function</a></li>
@@ -201,11 +201,13 @@
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p>Flask has an extension that makes it easy to create web forms.</p>
-<p>WTForms is “a flexible forms validation and rendering library for Python Web development.” With <strong>Flask-WTF,</strong> we get WTForms in Flask.</p>
+<p>WTForms is “a flexible forms validation and rendering library for Python Web development.” With <strong>Flask-WTF,</strong> we get WTForms <em>in Flask.</em></p>
 <ul class="simple">
 <li><p>WTForms includes security features for submitting form data.</p></li>
 <li><p>WTForms has built-in validation techniques.</p></li>
 <li><p>WTForms can be combined with Bootstrap to help us make clean-looking, responsive forms for mobile and desktop screens.</p></li>
+<li><p>WTForms is a Python library.</p></li>
+<li><p>Flask-WTF is a Flask extension that brings WTForms into Flask.</p></li>
 </ul>
 <p><a class="reference external" href="https://flask-wtf.readthedocs.io/">Read the documentation for Flask-WTF.</a></p>
 </div>
@@ -216,24 +218,19 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">Flask</span><span class="o">-</span><span class="n">WTF</span>
 </pre></div>
 </div>
-<p>We will also install the <strong>Flask-Bootstrap4</strong> extension to provide Bootstrap styles for our forms.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">Flask</span><span class="o">-</span><span class="n">Bootstrap4</span>
+<p>We will also install the <strong>Bootstrap-Flask</strong> extension to provide Bootstrap styles for our forms.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">bootstrap</span><span class="o">-</span><span class="n">flask</span>
 </pre></div>
 </div>
 <p>This installation is done <em>only once</em> in any virtualenv. It is assumed you already have Flask installed there.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://flask-wtf.readthedocs.io/">Flask-WTF docs</a></p></li>
 <li><p>More details in <a class="reference external" href="https://wtforms.readthedocs.io/">WTForms docs</a></p></li>
-<li><p><a class="reference external" href="https://pythonhosted.org/Flask-Bootstrap/">Flask-Bootstrap docs</a></p></li>
-<li><p>An <em>alternative</em> is <a class="reference external" href="https://bootstrap-flask.readthedocs.io/">Bootstrap Flask</a></p></li>
+<li><p><a class="reference external" href="https://bootstrap-flask.readthedocs.io/">Bootstrap-Flask docs</a></p></li>
 </ul>
-<p><strong>UPDATES TO THIS PAGE are under way due to new and updated Flask extensions.</strong></p>
-<p>Links above have been updated (3/28/23).</p>
-<p>Currently evaluating: <a class="reference external" href="https://github.com/helloflask/bootstrap-flask">Bootstrap Flask</a></p>
-<p>Code and text below might soon change.</p>
 </div>
-<div class="section" id="imports-for-forms-with-flask-wtf-and-flask-bootstrap">
-<h2>Imports for forms with Flask-WTF and Flask-Bootstrap<a class="headerlink" href="#imports-for-forms-with-flask-wtf-and-flask-bootstrap" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="imports-for-forms-with-flask-wtf-and-bootstrap-flask">
+<h2>Imports for forms with Flask-WTF and Bootstrap-Flask<a class="headerlink" href="#imports-for-forms-with-flask-wtf-and-bootstrap-flask" title="Permalink to this headline">¶</a></h2>
 <p>You will have a long list of imports at the top of your Flask app file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">url_for</span>
 <span class="kn">from</span> <span class="nn">flask_bootstrap</span> <span class="kn">import</span> <span class="n">Bootstrap</span>
@@ -252,7 +249,7 @@
 <span class="c1"># Flask-WTF requires an encryption key - the string can be anything</span>
 <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SECRET_KEY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;C2HWGVoMGfNTBsrYQg8EcMrdTimkZfAb&#39;</span>
 
-<span class="c1"># Flask-Bootstrap requires this line</span>
+<span class="c1"># Bootstrap-Flask requires this line</span>
 <span class="n">Bootstrap</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -421,13 +418,13 @@
 <h2>A quick note about Bootstrap in Flask<a class="headerlink" href="#a-quick-note-about-bootstrap-in-flask" title="Permalink to this headline">¶</a></h2>
 <p>There’s more about this in the <strong>Resources</strong> section at the bottom of this page — but to summarize briefly:</p>
 <ul class="simple">
-<li><p>You pip-installed Flask-Bootstrap4 in your Flask virtual environment.</p></li>
+<li><p>You pip-installed Bootstrap-Flask in your Flask virtual environment.</p></li>
 <li><p>You wrote <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">flask_bootstrap</span> <span class="pre">import</span> <span class="pre">Bootstrap</span></code> at the top of the Flask app file.</p></li>
 <li><p>Below that, you wrote <code class="docutils literal notranslate"><span class="pre">Bootstrap(app)</span></code> in the Flask app file.</p></li>
 <li><p>In any Flask template using Bootstrap styles, the top line will be: <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">extends</span> <span class="pre">'bootstrap/base.html'</span> <span class="pre">%}</span></code></p></li>
 </ul>
 <p>That combination of four things has embedded Bootstrap 4 in this app <em>and</em> made <code class="docutils literal notranslate"><span class="pre">wtf.quick_form()</span></code> possible.</p>
-<p>There’s an <a class="reference external" href="https://www.youtube.com/watch?v=PE9ZGniSDW8">excellent how-to video</a> (only 9 minutes long) about using Bootstrap styles in Flask if you want to separate the <strong>forms</strong> information from the Bootstrap information in your mind. You can, of course, use Flask-Bootstrap4 <em>without</em> the forms!</p>
+<p>There’s an <a class="reference external" href="https://www.youtube.com/watch?v=PE9ZGniSDW8">excellent how-to video</a> (only 9 minutes long) about using Bootstrap styles in Flask if you want to separate the <strong>forms</strong> information from the Bootstrap information in your mind. You can, of course, use Bootstrap-Flask <em>without</em> the forms!</p>
 </div>
 <div class="section" id="examining-the-route-function">
 <h2>Examining the route function<a class="headerlink" href="#examining-the-route-function" title="Permalink to this headline">¶</a></h2>
@@ -539,8 +536,8 @@
 <div class="section" id="conclusion">
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
 <p><strong>Flask-WTF</strong> provides convenient methods for working with forms in Flask. Forms can be built easily and also processed easily, with a minimum of code.</p>
-<p>Adding <strong>Flask-Bootstrap</strong> ensures that we can build mobile-friendly forms with a minimum amount of effort.</p>
-<p>Note that it is possible to build a customized form layout using Bootstrap 4 styles in a Flask template, or to build a custom form with no Bootstrap styles. In either case, you cannot use <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">wtf.quick_form(form)</span> <span class="pre">}}</span></code> but would instead write out all the form code in your Flask template as you would in a normal HTML file. To take advantage of WTForms, you would still create the form class with <code class="docutils literal notranslate"><span class="pre">FlaskForm</span></code> in the same way as shown above.</p>
+<p>Adding <strong>Bootstrap-Flask</strong> ensures that we can build mobile-friendly forms with a minimum amount of effort.</p>
+<p>Note that it is possible to build a customized form layout using Bootstrap styles in a Flask template, or to build a custom form with no Bootstrap styles. In either case, you cannot use <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">wtf.quick_form(form)</span> <span class="pre">}}</span></code> but would instead write out all the form code in your Flask template as you would in a normal HTML file. To take advantage of WTForms, you would still create the form class with <code class="docutils literal notranslate"><span class="pre">FlaskForm</span></code> in the same way as shown above.</p>
 <p>An example is the demo Flask app <a class="reference external" href="https://books-hopper.herokuapp.com/">Books Hopper</a>, which includes four separate Bootstrap forms:</p>
 <ul class="simple">
 <li><p>a login form</p></li>
@@ -551,20 +548,15 @@
 <div class="figure align-default">
 <img alt="Books Hopper screenshot" src="_images/books_hopper.png" />
 </div>
-<p>Bootstrap 4 was used in all templates in the Books Hopper app, but Flask-Bootstrap was not.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>You are using Bootstrap 4 in Flask if you installed with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">Flask-Bootstrap4</span></code>. In early 2018, Bootstrap 4 replaced Bootstrap 3. The differences are significant.</p>
-</div>
+<p>Bootstrap 4 was used in all templates in the Books Hopper app, but Bootstrap-Flask was not. Bootstrap styles were all coded in the usual ways.</p>
 </div>
 <div class="section" id="resources">
 <h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Learn/Forms/Sending_and_retrieving_form_data">Sending form data</a> — how web browsers interact with servers; request/response</p></li>
-<li><p><a class="reference external" href="https://flask-wtf.readthedocs.io/en/stable/">Flask-WTF documentation</a></p></li>
-<li><p><a class="reference external" href="https://wtforms.readthedocs.io/en/stable/">Complete WTForms documentation</a></p></li>
-<li><p><a class="reference external" href="https://pythonhosted.org/Flask-Bootstrap/">Flask-Bootstrap documentation</a></p></li>
-<li><p><a class="reference external" href="https://pythonhosted.org/Flask-Bootstrap/basic-usage.html#templates">About Flask-Bootstrap templates</a></p></li>
+<li><p><a class="reference external" href="https://flask-wtf.readthedocs.io/">Flask-WTF documentation</a></p></li>
+<li><p><a class="reference external" href="https://wtforms.readthedocs.io/">Complete WTForms documentation</a></p></li>
+<li><p><a class="reference external" href="https://bootstrap-flask.readthedocs.io/">Bootstrap-Flask docs</a></p></li>
 </ul>
 <p>.</p>
 </div>
