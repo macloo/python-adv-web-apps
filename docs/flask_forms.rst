@@ -58,6 +58,7 @@ This installation is done *only once* in any virtualenv. It is assumed you alrea
 * `Flask-WTF docs <https://flask-wtf.readthedocs.io/>`_
 * More details in `WTForms docs <https://wtforms.readthedocs.io/>`_
 * `Bootstrap-Flask docs <https://bootstrap-flask.readthedocs.io/>`_
+* The Bootstrap-Flask `GitHub repository <https://github.com/helloflask/bootstrap-flask>`_ has good examples for forms; look at the README
 
 
 Imports for forms with Flask-WTF and Bootstrap-Flask
@@ -66,12 +67,13 @@ Imports for forms with Flask-WTF and Bootstrap-Flask
 You will have a long list of imports at the top of your Flask app file: ::
 
     from flask import Flask, render_template, redirect, url_for
-    from flask_bootstrap import Bootstrap
+    from flask_bootstrap import Bootstrap5
+
     from flask_wtf import FlaskForm
     from wtforms import StringField, SubmitField
     from wtforms.validators import DataRequired
 
-Note as always that Python is case-sensitive, so upper- and lowercase must be used exactly as shown. **The fourth line will change** depending on **your form’s contents.** For example, if you have a SELECT element, you’ll need to import that. `See a simplified list <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv>`_ of WTForms form field types or further explanation in the `WTForms documentation <https://wtforms.readthedocs.io/en/3.0.x/fields/#basic-fields>`_.
+Note as always that Python is case-sensitive, so upper- and lowercase must be used exactly as shown. **The wtforms import will change** depending on **your form’s contents.** For example, if you have a SELECT element, you’ll need to import that. `See a simplified list <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv>`_ of WTForms form field types or further explanation in the `WTForms documentation <https://wtforms.readthedocs.io/en/3.0.x/fields/#basic-fields>`_.
 
 Set up a form in a Flask app
 ----------------------------
@@ -81,18 +83,20 @@ After the imports, these lines follow in the app script: ::
 
     app = Flask(__name__)
 
-    # Flask-WTF requires an encryption key - the string can be anything
-    app.config['SECRET_KEY'] = 'C2HWGVoMGfNTBsrYQg8EcMrdTimkZfAb'
-
     # Bootstrap-Flask requires this line
-    Bootstrap(app)
+    bootstrap = Bootstrap5(app)
 
+
+
+** EDITS NEEDED BELOW **
 
 Flask allows us to set a “secret key” value. You can grab a string from a site such as `RandomKeygen <https://randomkeygen.com/>`_. This value is used to prevent malicious hijacking of your form from an outside submission.
 
 Flask-WTF's ``FlaskForm`` will automatically create a secure session with CSRF (cross-site request forgery) protection *if this key-value is set.*  **Don’t publish the actual key on GitHub!**
 
 You can read more about ``app.config['SECRET_KEY']`` in this `StackOverflow post <https://stackoverflow.com/questions/22463939/demystify-flask-app-secret-key>`_.
+
+** EDITS NEEDED ABOVE **
 
 
 Configure the form
@@ -106,7 +110,7 @@ In the class, we assign each form control to a unique variable. This form has on
 
 
     class NameForm(FlaskForm):
-        name = StringField('Which actor is your favorite?', validators=[DataRequired()])
+        name = StringField('Which actor is your favorite?', validators=[DataRequired(), Length(1, 30)])
         submit = SubmitField('Submit')
 
 
@@ -144,6 +148,8 @@ Be aware that if we had created **more than one** form class, each of those woul
 
 Put the form in a template
 ++++++++++++++++++++++++++
+
+** EDITS NEEDED BELOW **
 
 Before we break all that down and explain it, let’s look at the code in the template *index.html*:
 
