@@ -227,42 +227,43 @@
 <li><p><a class="reference external" href="https://flask-wtf.readthedocs.io/">Flask-WTF docs</a></p></li>
 <li><p>More details in <a class="reference external" href="https://wtforms.readthedocs.io/">WTForms docs</a></p></li>
 <li><p><a class="reference external" href="https://bootstrap-flask.readthedocs.io/">Bootstrap-Flask docs</a></p></li>
+<li><p>The Bootstrap-Flask <a class="reference external" href="https://github.com/helloflask/bootstrap-flask">GitHub repository</a> has good examples for forms; look at the README</p></li>
 </ul>
 </div>
 <div class="section" id="imports-for-forms-with-flask-wtf-and-bootstrap-flask">
 <h2>Imports for forms with Flask-WTF and Bootstrap-Flask<a class="headerlink" href="#imports-for-forms-with-flask-wtf-and-bootstrap-flask" title="Permalink to this headline">¶</a></h2>
 <p>You will have a long list of imports at the top of your Flask app file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">url_for</span>
-<span class="kn">from</span> <span class="nn">flask_bootstrap</span> <span class="kn">import</span> <span class="n">Bootstrap</span>
+<span class="kn">from</span> <span class="nn">flask_bootstrap</span> <span class="kn">import</span> <span class="n">Bootstrap5</span>
+
 <span class="kn">from</span> <span class="nn">flask_wtf</span> <span class="kn">import</span> <span class="n">FlaskForm</span>
 <span class="kn">from</span> <span class="nn">wtforms</span> <span class="kn">import</span> <span class="n">StringField</span><span class="p">,</span> <span class="n">SubmitField</span>
 <span class="kn">from</span> <span class="nn">wtforms.validators</span> <span class="kn">import</span> <span class="n">DataRequired</span>
 </pre></div>
 </div>
-<p>Note as always that Python is case-sensitive, so upper- and lowercase must be used exactly as shown. <strong>The fourth line will change</strong> depending on <strong>your form’s contents.</strong> For example, if you have a SELECT element, you’ll need to import that. <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv">See a simplified list</a> of WTForms form field types or further explanation in the <a class="reference external" href="https://wtforms.readthedocs.io/en/3.0.x/fields/#basic-fields">WTForms documentation</a>.</p>
+<p>Note as always that Python is case-sensitive, so upper- and lowercase must be used exactly as shown. <strong>The wtforms import will change</strong> depending on <strong>your form’s contents.</strong> For example, if you have a SELECT element, you’ll need to import that. <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv">See a simplified list</a> of WTForms form field types or further explanation in the <a class="reference external" href="https://wtforms.readthedocs.io/en/3.0.x/fields/#basic-fields">WTForms documentation</a>.</p>
 </div>
 <div class="section" id="set-up-a-form-in-a-flask-app">
 <h2>Set up a form in a Flask app<a class="headerlink" href="#set-up-a-form-in-a-flask-app" title="Permalink to this headline">¶</a></h2>
 <p>After the imports, these lines follow in the app script:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
-<span class="c1"># Flask-WTF requires an encryption key - the string can be anything</span>
-<span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SECRET_KEY&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;C2HWGVoMGfNTBsrYQg8EcMrdTimkZfAb&#39;</span>
-
 <span class="c1"># Bootstrap-Flask requires this line</span>
-<span class="n">Bootstrap</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="n">bootstrap</span> <span class="o">=</span> <span class="n">Bootstrap5</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>** EDITS NEEDED BELOW **</p>
 <p>Flask allows us to set a “secret key” value. You can grab a string from a site such as <a class="reference external" href="https://randomkeygen.com/">RandomKeygen</a>. This value is used to prevent malicious hijacking of your form from an outside submission.</p>
 <p>Flask-WTF’s <code class="docutils literal notranslate"><span class="pre">FlaskForm</span></code> will automatically create a secure session with CSRF (cross-site request forgery) protection <em>if this key-value is set.</em>  <strong>Don’t publish the actual key on GitHub!</strong></p>
 <p>You can read more about <code class="docutils literal notranslate"><span class="pre">app.config['SECRET_KEY']</span></code> in this <a class="reference external" href="https://stackoverflow.com/questions/22463939/demystify-flask-app-secret-key">StackOverflow post</a>.</p>
+<p>** EDITS NEEDED ABOVE **</p>
 <div class="section" id="configure-the-form">
 <h3>Configure the form<a class="headerlink" href="#configure-the-form" title="Permalink to this headline">¶</a></h3>
 <p>Next, we configure a form that inherits from Flask-WTF’s class <code class="docutils literal notranslate"><span class="pre">FlaskForm</span></code>. Python style dictates that a <strong>class</strong> starts with an uppercase letter and uses <a class="reference external" href="https://www.computerhope.com/jargon/c/camelcase.htm">camelCase</a>, so here our new class is named <code class="docutils literal notranslate"><span class="pre">NameForm</span></code> (we will use the form to search for a name).</p>
 <p>In the class, we assign each form control to a unique variable. This form has only one text input field and one submit button.</p>
 <p><strong>Every form control</strong> must be configured here.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NameForm</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">&#39;Which actor is your favorite?&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">()])</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">&#39;Which actor is your favorite?&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">(),</span> <span class="n">Length</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">)])</span>
     <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s1">&#39;Submit&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -324,6 +325,7 @@
 </div>
 <div class="section" id="put-the-form-in-a-template">
 <h3>Put the form in a template<a class="headerlink" href="#put-the-form-in-a-template" title="Permalink to this headline">¶</a></h3>
+<p>** EDITS NEEDED BELOW **</p>
 <p>Before we break all that down and explain it, let’s look at the code in the template <em>index.html</em>:</p>
 <div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/actors_app/templates/index.html</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
