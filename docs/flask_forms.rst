@@ -118,7 +118,7 @@ In the class, we assign each form control to a unique variable. This form has on
 
 If you had **more than one form** in the app, you would define more than one new class in this manner.
 
-Note that ``StringField`` and ``SubmitField`` were **imported** at the top of the file. If we needed other form-control types in this form, we would need to import those also. `See a simplified list <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv>`_ of WTForms form field types or further explanation in the `WTForms documentation <https://wtforms.readthedocs.io/en/3.0.x/fields/#basic-fields>`_.
+Note that ``StringField`` and ``SubmitField`` were **imported** at the top of the file. If we needed other form-control types in this form, we would need to import those also. `See a simplified list <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv>`__ of WTForms form field types or further explanation in the `WTForms documentation <https://wtforms.readthedocs.io/en/3.0.x/fields/#basic-fields>`__.
 
 Note that several field types (such as ``RadioField`` and ``SelectField``) must have an option ``choices=[]`` specified. Within the list, each choice is a pair in this format: ``('string-form-variable-name', 'string-label-text')``. ::
 
