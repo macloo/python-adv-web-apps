@@ -196,7 +196,7 @@ There’s more about this in the **Resources** section at the bottom of this pag
 
 That combination of four things has embedded Bootstrap 5 in this app *and* made ``{{ render_form() }}`` possible.
 
-Bootstrap-Flask *without* the forms!
+Note that it *is* possible to use Bootstrap-Flask *without* any forms! The `actors app <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/actors_app>`_ demonstrates how the usual Bootstrap classes such as ``container`` and ``row`` can be used in Flask templates.
 
 
 Examining the route function
