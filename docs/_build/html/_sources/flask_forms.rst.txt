@@ -131,7 +131,7 @@ Here is a live form page shown beside the rendered source code for choices.
    :alt: Live form page shown beside rendered source code for choices
 
 
-WTForms also has a long list of `validators <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-validators.csv>`_ we can use. The ``DataRequired()`` validator prevents the form from being submitted if that field is empty. Note that these validators must also be **imported** at the top of the file. `Validators <https://wtforms.readthedocs.io/en/3.0.x/crash_course/#validators>`_ and `custom validators <https://wtforms.readthedocs.io/en/3.0.x/crash_course/#custom-validators>`_ are discussed further in the WTForms documentation.
+WTForms also has a long list of `validators <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-validators.csv>`_ we can use. The ``DataRequired()`` validator prevents the form from being submitted if that field is empty. Note that these validators must also be **imported** at the top of the file. `Validators <https://wtforms.readthedocs.io/en/3.0.x/crash_course/#validators>`__ and `custom validators <https://wtforms.readthedocs.io/en/3.0.x/crash_course/#custom-validators>`_ are discussed further in the WTForms documentation.
 
 
 Put the form in a route function
