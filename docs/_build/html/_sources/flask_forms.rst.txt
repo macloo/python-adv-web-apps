@@ -1,4 +1,4 @@
-Flask: Web Forms
+  Flask: Web Forms
 ================
 
 Previous:
@@ -118,11 +118,19 @@ In the class, we assign each form control to a unique variable. This form has on
 
 If you had **more than one form** in the app, you would define more than one new class in this manner.
 
-Note that ``StringField`` and ``SubmitField`` were **imported** at the top of the file. If we needed other form-control types in this form, we would need to import those also. `See a list of all WTForms field types. <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv>`_
+Note that ``StringField`` and ``SubmitField`` were **imported** at the top of the file. If we needed other form-control types in this form, we would need to import those also. `See a simplified list <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv>`_ of WTForms form field types or further explanation in the `WTForms documentation <https://wtforms.readthedocs.io/en/3.0.x/fields/#basic-fields>`_.
 
-Note that several field types (such as ``RadioField`` and ``SelectField``) must have an option ``choices=[]`` specified, after the label text. Within the list, each choice is a pair in this format: ``('string1', 'string2')``.
+Note that several field types (such as ``RadioField`` and ``SelectField``) must have an option ``choices=[]`` specified. Within the list, each choice is a pair in this format: ``('string-form-variable-name', 'string-label-text')``. ::
 
-WTForms also has a long list of `validators <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-validators.csv>`_ we can use. The ``DataRequired()`` validator prevents the form from being submitted if that field is empty. Note that these validators must also be imported at the top of the file. `Validators <https://wtforms.readthedocs.io/en/3.0.x/crash_course/#validators>`_ and `custom validators <https://wtforms.readthedocs.io/en/3.0.x/crash_course/#custom-validators>`_ are discussed further in the WTForms documentation.
+
+    category = RadioField('Choose a detail to search:', validators=[InputRequired(message=None)], choices=[ ('President', 'President\'s Name, e.g. John'), ('Home-state', 'Home State, e.g. Virginia'), ('Occupation', 'Occupation, e.g. Lawyer'), ('College', 'College, e.g. Harvard')] )
+
+
+    .. figure:: _static/images/choices_example_WTForms.png
+       :alt: Live form page shown beside rendered source code for choices
+
+
+WTForms also has a long list of `validators <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-validators.csv>`_ we can use. The ``DataRequired()`` validator prevents the form from being submitted if that field is empty. Note that these validators must also be **imported** at the top of the file. `Validators <https://wtforms.readthedocs.io/en/3.0.x/crash_course/#validators>`_ and `custom validators <https://wtforms.readthedocs.io/en/3.0.x/crash_course/#custom-validators>`_ are discussed further in the WTForms documentation.
 
 
 Put the form in a route function

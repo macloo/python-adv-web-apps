@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Flask: Web Forms &mdash; Python Beginners  documentation</title>
+  <title>Introduction &mdash; Python Beginners  documentation</title>
   
 
   
@@ -95,22 +95,19 @@
 <li class="toctree-l1"><a class="reference internal" href="flask2.html">Flask, Part 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flask3.html">Flask Templates</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flask_deploy.html">Flask: Deploy an App</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Flask: Web Forms</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#setup-for-using-forms-in-flask">Setup for using forms in Flask</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#imports-for-forms-with-flask-wtf-and-bootstrap-flask">Imports for forms with Flask-WTF and Bootstrap-Flask</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#set-up-a-form-in-a-flask-app">Set up a form in a Flask app</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#configure-the-form">Configure the form</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#put-the-form-in-a-route-function">Put the form in a route function</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#put-the-form-in-a-template">Put the form in a template</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#setup-for-using-forms-in-flask">Setup for using forms in Flask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#imports-for-forms-with-flask-wtf-and-bootstrap-flask">Imports for forms with Flask-WTF and Bootstrap-Flask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#set-up-a-form-in-a-flask-app">Set up a form in a Flask app</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configure-the-form">Configure the form</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#put-the-form-in-a-route-function">Put the form in a route function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#put-the-form-in-a-template">Put the form in a template</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#a-quick-note-about-bootstrap-in-flask">A quick note about Bootstrap in Flask</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#examining-the-route-function">Examining the route function</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#conclusion">Conclusion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#resources">Resources</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="#a-quick-note-about-bootstrap-in-flask">A quick note about Bootstrap in Flask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#examining-the-route-function">Examining the route function</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#resources">Resources</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flask_db1.html">Flask and Databases</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flask_db2.html">Flask: Read from a Database</a></li>
 <li class="toctree-l1"><a class="reference internal" href="flask_db3.html">Flask: Write to a Database</a></li>
@@ -160,7 +157,7 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Flask: Web Forms</li>
+      <li>Introduction</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -179,8 +176,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="flask-web-forms">
-<h1>Flask: Web Forms<a class="headerlink" href="#flask-web-forms" title="Permalink to this headline">¶</a></h1>
+  <blockquote>
+<div><p>Flask: Web Forms</p>
+</div></blockquote>
+<hr class="docutils" />
 <p>Previous:</p>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="flask.html">Flask intro</a>: A very simple Flask app</p></li>
@@ -199,7 +198,7 @@
 <li><p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/actors_app">Code</a></p></li>
 </ul>
 <div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <p>Flask has an extension that makes it easy to create web forms.</p>
 <p>WTForms is “a flexible forms validation and rendering library for Python Web development.” With <strong>Flask-WTF,</strong> we get WTForms <em>in Flask.</em></p>
 <ul class="simple">
@@ -212,7 +211,7 @@
 <p><a class="reference external" href="https://flask-wtf.readthedocs.io/">Read the documentation for Flask-WTF.</a></p>
 </div>
 <div class="section" id="setup-for-using-forms-in-flask">
-<h2>Setup for using forms in Flask<a class="headerlink" href="#setup-for-using-forms-in-flask" title="Permalink to this headline">¶</a></h2>
+<h1>Setup for using forms in Flask<a class="headerlink" href="#setup-for-using-forms-in-flask" title="Permalink to this headline">¶</a></h1>
 <p>We will install the <strong>Flask-WTF</strong> extension to help us work with forms in Flask. There are many extensions for Flask, and each one adds a different set of functions and capabilities. See the <a class="reference external" href="https://flask.palletsprojects.com/en/2.2.x/extensions/">list of Flask extensions</a> for more.</p>
 <p>In Terminal, change into your Flask projects folder and <strong>activate your virtual environment</strong> there. Then, at the command prompt — where you see <code class="docutils literal notranslate"><span class="pre">$</span></code> (Mac) or <code class="docutils literal notranslate"><span class="pre">C:\Users\yourname&gt;</span></code> (Windows )—</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">Flask</span><span class="o">-</span><span class="n">WTF</span>
@@ -231,7 +230,7 @@
 </ul>
 </div>
 <div class="section" id="imports-for-forms-with-flask-wtf-and-bootstrap-flask">
-<h2>Imports for forms with Flask-WTF and Bootstrap-Flask<a class="headerlink" href="#imports-for-forms-with-flask-wtf-and-bootstrap-flask" title="Permalink to this headline">¶</a></h2>
+<h1>Imports for forms with Flask-WTF and Bootstrap-Flask<a class="headerlink" href="#imports-for-forms-with-flask-wtf-and-bootstrap-flask" title="Permalink to this headline">¶</a></h1>
 <p>You will have a long list of imports at the top of your Flask app file:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">url_for</span>
 <span class="kn">from</span> <span class="nn">flask_bootstrap</span> <span class="kn">import</span> <span class="n">Bootstrap5</span>
@@ -244,7 +243,7 @@
 <p>Note as always that Python is case-sensitive, so upper- and lowercase must be used exactly as shown. <strong>The wtforms import will change</strong> depending on <strong>your form’s contents.</strong> For example, if you have a SELECT element, you’ll need to import that. <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv">See a simplified list</a> of WTForms form field types or further explanation in the <a class="reference external" href="https://wtforms.readthedocs.io/en/3.0.x/fields/#basic-fields">WTForms documentation</a>.</p>
 </div>
 <div class="section" id="set-up-a-form-in-a-flask-app">
-<h2>Set up a form in a Flask app<a class="headerlink" href="#set-up-a-form-in-a-flask-app" title="Permalink to this headline">¶</a></h2>
+<h1>Set up a form in a Flask app<a class="headerlink" href="#set-up-a-form-in-a-flask-app" title="Permalink to this headline">¶</a></h1>
 <p>After the imports, these lines follow in the app script:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -258,7 +257,7 @@
 <p>You can read more about <code class="docutils literal notranslate"><span class="pre">app.config['SECRET_KEY']</span></code> in this <a class="reference external" href="https://stackoverflow.com/questions/22463939/demystify-flask-app-secret-key">StackOverflow post</a>.</p>
 <p>** EDITS NEEDED ABOVE **</p>
 <div class="section" id="configure-the-form">
-<h3>Configure the form<a class="headerlink" href="#configure-the-form" title="Permalink to this headline">¶</a></h3>
+<h2>Configure the form<a class="headerlink" href="#configure-the-form" title="Permalink to this headline">¶</a></h2>
 <p>Next, we configure a form that inherits from Flask-WTF’s class <code class="docutils literal notranslate"><span class="pre">FlaskForm</span></code>. Python style dictates that a <strong>class</strong> starts with an uppercase letter and uses <a class="reference external" href="https://www.computerhope.com/jargon/c/camelcase.htm">camelCase</a>, so here our new class is named <code class="docutils literal notranslate"><span class="pre">NameForm</span></code> (we will use the form to search for a name).</p>
 <p>In the class, we assign each form control to a unique variable. This form has only one text input field and one submit button.</p>
 <p><strong>Every form control</strong> must be configured here.</p>
@@ -269,15 +268,22 @@
 </div>
 <p><a class="reference external" href="https://docs.python.org/3/tutorial/classes.html#a-first-look-at-classes">Learn more about classes in Python here.</a></p>
 <p>If you had <strong>more than one form</strong> in the app, you would define more than one new class in this manner.</p>
-<p>Note that <code class="docutils literal notranslate"><span class="pre">StringField</span></code> and <code class="docutils literal notranslate"><span class="pre">SubmitField</span></code> were <strong>imported</strong> at the top of the file. If we needed other form-control types in this form, we would need to import those also. <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv">See a list of all WTForms field types.</a></p>
-<p>Note that several field types (such as <code class="docutils literal notranslate"><span class="pre">RadioField</span></code> and <code class="docutils literal notranslate"><span class="pre">SelectField</span></code>) must have an option <code class="docutils literal notranslate"><span class="pre">choices=[]</span></code> specified, after the label text. Within the list, each choice is a pair in this format: <code class="docutils literal notranslate"><span class="pre">('string1',</span> <span class="pre">'string2')</span></code>.</p>
-<p>WTForms also has a long list of <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-validators.csv">validators</a> we can use. The <code class="docutils literal notranslate"><span class="pre">DataRequired()</span></code> validator prevents the form from being submitted if that field is empty. Note that these validators must also be imported at the top of the file. <a class="reference external" href="https://wtforms.readthedocs.io/en/3.0.x/crash_course/#validators">Validators</a> and <a class="reference external" href="https://wtforms.readthedocs.io/en/3.0.x/crash_course/#custom-validators">custom validators</a> are discussed further in the WTForms documentation.</p>
+<p>Note that <code class="docutils literal notranslate"><span class="pre">StringField</span></code> and <code class="docutils literal notranslate"><span class="pre">SubmitField</span></code> were <strong>imported</strong> at the top of the file. If we needed other form-control types in this form, we would need to import those also. <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv">See a simplified list</a> of WTForms form field types or further explanation in the <a class="reference external" href="https://wtforms.readthedocs.io/en/3.0.x/fields/#basic-fields">WTForms documentation</a>.</p>
+<p>Note that several field types (such as <code class="docutils literal notranslate"><span class="pre">RadioField</span></code> and <code class="docutils literal notranslate"><span class="pre">SelectField</span></code>) must have an option <code class="docutils literal notranslate"><span class="pre">choices=[]</span></code> specified. Within the list, each choice is a pair in this format: <code class="docutils literal notranslate"><span class="pre">('string-form-variable-name',</span> <span class="pre">'string-label-text')</span></code>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">category</span> <span class="o">=</span> <span class="n">RadioField</span><span class="p">(</span><span class="s1">&#39;Choose a detail to search:&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">InputRequired</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="kc">None</span><span class="p">)],</span> <span class="n">choices</span><span class="o">=</span><span class="p">[</span> <span class="p">(</span><span class="s1">&#39;President&#39;</span><span class="p">,</span> <span class="s1">&#39;President</span><span class="se">\&#39;</span><span class="s1">s Name, e.g. John&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Home-state&#39;</span><span class="p">,</span> <span class="s1">&#39;Home State, e.g. Virginia&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Occupation&#39;</span><span class="p">,</span> <span class="s1">&#39;Occupation, e.g. Lawyer&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;College&#39;</span><span class="p">,</span> <span class="s1">&#39;College, e.g. Harvard&#39;</span><span class="p">)]</span> <span class="p">)</span>
+
+
+<span class="o">..</span> <span class="n">figure</span><span class="p">::</span> <span class="n">_static</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">choices_example_WTForms</span><span class="o">.</span><span class="n">png</span>
+   <span class="p">:</span><span class="n">alt</span><span class="p">:</span> <span class="n">Live</span> <span class="n">form</span> <span class="n">page</span> <span class="n">shown</span> <span class="n">beside</span> <span class="n">rendered</span> <span class="n">source</span> <span class="n">code</span> <span class="k">for</span> <span class="n">choices</span>
+</pre></div>
+</div>
+<p>WTForms also has a long list of <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-validators.csv">validators</a> we can use. The <code class="docutils literal notranslate"><span class="pre">DataRequired()</span></code> validator prevents the form from being submitted if that field is empty. Note that these validators must also be <strong>imported</strong> at the top of the file. <a class="reference external" href="https://wtforms.readthedocs.io/en/3.0.x/crash_course/#validators">Validators</a> and <a class="reference external" href="https://wtforms.readthedocs.io/en/3.0.x/crash_course/#custom-validators">custom validators</a> are discussed further in the WTForms documentation.</p>
 </div>
 <div class="section" id="put-the-form-in-a-route-function">
-<h3>Put the form in a route function<a class="headerlink" href="#put-the-form-in-a-route-function" title="Permalink to this headline">¶</a></h3>
+<h2>Put the form in a route function<a class="headerlink" href="#put-the-form-in-a-route-function" title="Permalink to this headline">¶</a></h2>
 <p>Now we will use the form in a Flask route:</p>
-<div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/actors_app/actors.py</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/actors_app/actors.py</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>27
 28
 29
@@ -324,11 +330,11 @@
 <p>Be aware that if we had created <strong>more than one</strong> form class, each of those would need to be assigned to a unique variable.</p>
 </div>
 <div class="section" id="put-the-form-in-a-template">
-<h3>Put the form in a template<a class="headerlink" href="#put-the-form-in-a-template" title="Permalink to this headline">¶</a></h3>
+<h2>Put the form in a template<a class="headerlink" href="#put-the-form-in-a-template" title="Permalink to this headline">¶</a></h2>
 <p>** EDITS NEEDED BELOW **</p>
 <p>Before we break all that down and explain it, let’s look at the code in the template <em>index.html</em>:</p>
-<div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/actors_app/templates/index.html</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/actors_app/templates/index.html</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
 <div class="highlight-jinja notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -417,7 +423,7 @@
 </div>
 </div>
 <div class="section" id="a-quick-note-about-bootstrap-in-flask">
-<h2>A quick note about Bootstrap in Flask<a class="headerlink" href="#a-quick-note-about-bootstrap-in-flask" title="Permalink to this headline">¶</a></h2>
+<h1>A quick note about Bootstrap in Flask<a class="headerlink" href="#a-quick-note-about-bootstrap-in-flask" title="Permalink to this headline">¶</a></h1>
 <p>There’s more about this in the <strong>Resources</strong> section at the bottom of this page — but to summarize briefly:</p>
 <ul class="simple">
 <li><p>You pip-installed Bootstrap-Flask in your Flask virtual environment.</p></li>
@@ -429,15 +435,15 @@
 <p>There’s an <a class="reference external" href="https://www.youtube.com/watch?v=PE9ZGniSDW8">excellent how-to video</a> (only 9 minutes long) about using Bootstrap styles in Flask if you want to separate the <strong>forms</strong> information from the Bootstrap information in your mind. You can, of course, use Bootstrap-Flask <em>without</em> the forms!</p>
 </div>
 <div class="section" id="examining-the-route-function">
-<h2>Examining the route function<a class="headerlink" href="#examining-the-route-function" title="Permalink to this headline">¶</a></h2>
+<h1>Examining the route function<a class="headerlink" href="#examining-the-route-function" title="Permalink to this headline">¶</a></h1>
 <p>Before reading further, try out a <a class="reference external" href="https://weimergeeks.com/flaskform/">working version of this app</a>. The complete code for the app is in the folder named <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/actors_app">actors_app</a>.</p>
 <ol class="arabic simple">
 <li><p>You type an actor’s name into the form and submit it.</p></li>
 <li><p>If the actor’s name is in the data source (ACTORS), the app loads a detail page for that actor. (Photos of bears 🐻 stand in for real photos of the actors.)</p></li>
 <li><p>Otherwise, you stay on the same page, the form is cleared, and a message tells you that actor is not in the database.</p></li>
 </ol>
-<div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/actors_app/actors.py</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/actors_app/actors.py</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>27
 28
 29
@@ -536,7 +542,7 @@
 </div>
 </div>
 <div class="section" id="conclusion">
-<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<h1>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h1>
 <p><strong>Flask-WTF</strong> provides convenient methods for working with forms in Flask. Forms can be built easily and also processed easily, with a minimum of code.</p>
 <p>Adding <strong>Bootstrap-Flask</strong> ensures that we can build mobile-friendly forms with a minimum amount of effort.</p>
 <p>Note that it is possible to build a customized form layout using Bootstrap styles in a Flask template, or to build a custom form with no Bootstrap styles. In either case, you cannot use <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">wtf.quick_form(form)</span> <span class="pre">}}</span></code> but would instead write out all the form code in your Flask template as you would in a normal HTML file. To take advantage of WTForms, you would still create the form class with <code class="docutils literal notranslate"><span class="pre">FlaskForm</span></code> in the same way as shown above.</p>
@@ -553,7 +559,7 @@
 <p>Bootstrap 4 was used in all templates in the Books Hopper app, but Bootstrap-Flask was not. Bootstrap styles were all coded in the usual ways.</p>
 </div>
 <div class="section" id="resources">
-<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<h1>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h1>
 <ul class="simple">
 <li><p><a class="reference external" href="https://developer.mozilla.org/en-US/docs/Learn/Forms/Sending_and_retrieving_form_data">Sending form data</a> — how web browsers interact with servers; request/response</p></li>
 <li><p><a class="reference external" href="https://flask-wtf.readthedocs.io/">Flask-WTF documentation</a></p></li>
@@ -561,7 +567,6 @@
 <li><p><a class="reference external" href="https://bootstrap-flask.readthedocs.io/">Bootstrap-Flask docs</a></p></li>
 </ul>
 <p>.</p>
-</div>
 </div>
 
 
