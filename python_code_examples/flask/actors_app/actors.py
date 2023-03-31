@@ -1,24 +1,26 @@
 from flask import Flask, render_template, redirect, url_for
-from flask_bootstrap import Bootstrap
-from flask_wtf import FlaskForm
+from flask_bootstrap import Bootstrap5
+
+from flask_wtf import FlaskForm, CSRFProtect
 from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Length
+
 from data import ACTORS
 from modules import get_names, get_actor, get_id
 
 app = Flask(__name__)
+app.secret_key = 'tO$&!|0wkamvVia0?n$NqIRVWOG'
 
-# Flask-WTF requires an enryption key - the string can be anything
-app.config['SECRET_KEY'] = 'C2HWGVoMGfNTBsrYQg8EcMrdTimkZfAb'
-
-# Flask-Bootstrap requires this line
-Bootstrap(app)
+# Bootstrap-Flask requires this line
+bootstrap = Bootstrap5(app)
+# Flask-WTF requires this line
+csrf = CSRFProtect(app)
 
 # with Flask-WTF, each web form is represented by a class
 # "NameForm" can change; "(FlaskForm)" cannot
 # see the route for "/" and "index.html" to see how this is used
 class NameForm(FlaskForm):
-    name = StringField('Which actor is your favorite?', validators=[DataRequired()])
+    name = StringField('Which actor is your favorite?', validators=[DataRequired(), Length(10, 40)])
     submit = SubmitField('Submit')
 
 

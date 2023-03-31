@@ -1,12 +1,4 @@
-{% extends 'bootstrap/base.html' %}
-
-{% block styles %}
-{{ super() }}
-	<style>
-		body { background: #e8f1f9; }
-	</style>
-{% endblock %}
-
+{% extends 'base.html' %}
 
 {% block title %}
 Selected Actor: {{ name }}
@@ -17,7 +9,7 @@ Selected Actor: {{ name }}
 
 <div class="container">
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-md-6 ps-md-5">
 
       <!-- note, the id is not used in the template -->
 
@@ -35,7 +27,7 @@ Selected Actor: {{ name }}
 	  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel mi ut lorem porta porttitor. Nullam vestibulum nulla quis ligula lobortis, sed commodo dolor lobortis. Cras accumsan justo quis sem dictum ultricies. Pellentesque placerat, dolor vitae fringilla pretium, orci dolor convallis odio, vitae cursus nibh sapien sit amet enim. Mauris imperdiet hendrerit risus, quis congue justo molestie in. Sed et lobortis nunc, sed rutrum nibh.</p>
 
     </div>
-    <div class="col-sm-6">
+    <div class="col-md-6">
 
       <img src="{{ photo }}" alt="Photo: {{ name }}" class="img-fluid pt-5">
 
