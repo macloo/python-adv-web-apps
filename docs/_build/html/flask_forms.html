@@ -427,12 +427,12 @@
 <p>There’s more about this in the <strong>Resources</strong> section at the bottom of this page — but to summarize briefly:</p>
 <ul class="simple">
 <li><p>You pip-installed Bootstrap-Flask in your Flask virtual environment.</p></li>
-<li><p>You wrote <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">flask_bootstrap</span> <span class="pre">import</span> <span class="pre">Bootstrap</span></code> at the top of the Flask app file.</p></li>
-<li><p>Below that, you wrote <code class="docutils literal notranslate"><span class="pre">Bootstrap(app)</span></code> in the Flask app file.</p></li>
-<li><p>In any Flask template using Bootstrap styles, the top line will be: <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">extends</span> <span class="pre">'bootstrap/base.html'</span> <span class="pre">%}</span></code></p></li>
+<li><p>You wrote <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">flask_bootstrap</span> <span class="pre">import</span> <span class="pre">Bootstrap5</span></code> at the top of the Flask app file.</p></li>
+<li><p>Below that, you wrote <code class="docutils literal notranslate"><span class="pre">bootstrap</span> <span class="pre">=</span> <span class="pre">Bootstrap5(app)</span></code> in the Flask app file.</p></li>
+<li><p>In the Flask template <em>index.html</em>, the top line is: <code class="docutils literal notranslate"><span class="pre">{%</span> <span class="pre">from</span> <span class="pre">'bootstrap5/form.html'</span> <span class="pre">import</span> <span class="pre">render_form</span> <span class="pre">%}</span></code></p></li>
 </ul>
-<p>That combination of four things has embedded Bootstrap 4 in this app <em>and</em> made <code class="docutils literal notranslate"><span class="pre">wtf.quick_form()</span></code> possible.</p>
-<p>There’s an <a class="reference external" href="https://www.youtube.com/watch?v=PE9ZGniSDW8">excellent how-to video</a> (only 9 minutes long) about using Bootstrap styles in Flask if you want to separate the <strong>forms</strong> information from the Bootstrap information in your mind. You can, of course, use Bootstrap-Flask <em>without</em> the forms!</p>
+<p>That combination of four things has embedded Bootstrap 5 in this app <em>and</em> made <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">render_form()</span> <span class="pre">}}</span></code> possible.</p>
+<p>Bootstrap-Flask <em>without</em> the forms!</p>
 </div>
 <div class="section" id="examining-the-route-function">
 <h2>Examining the route function<a class="headerlink" href="#examining-the-route-function" title="Permalink to this headline">¶</a></h2>
@@ -444,9 +444,7 @@
 </ol>
 <div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/actors_app/actors.py</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>27
-28
-29
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>29
 30
 31
 32
@@ -461,9 +459,9 @@
 41
 42
 43
-44</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># all Flask routes below</span>
-
-<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+44
+45
+46</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
     <span class="n">names</span> <span class="o">=</span> <span class="n">get_names</span><span class="p">(</span><span class="n">ACTORS</span><span class="p">)</span>
     <span class="c1"># you must tell the variable &#39;form&#39; what you named the class, above</span>
@@ -479,6 +477,8 @@
             <span class="c1"># redirect the browser to another route and template</span>
             <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span> <span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;actor&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span> <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;That actor is not in our database.&quot;</span>
+    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -506,33 +506,33 @@
 <p><code class="docutils literal notranslate"><span class="pre">validate_on_submit()</span></code> is a built-in WTForms function, called on <code class="docutils literal notranslate"><span class="pre">form</span></code> (our variable). <strong>If it returns True,</strong> the following commands and statements in the block will run. If not, the form is simply not submitted, and invalid fields are flagged. It will return True if the form was filled in and submitted.</p>
 <p><code class="docutils literal notranslate"><span class="pre">form.name.data</span></code> is the contents of the text input field represented by <code class="docutils literal notranslate"><span class="pre">name</span></code>. Perhaps we should review how we configured the form:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NameForm</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
-   <span class="n">name</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">&#39;Which actor is your favorite?&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">()])</span>
+   <span class="n">name</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">&#39;Which actor is your favorite?&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">(),</span> <span class="n">Length</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">40</span><span class="p">)])</span>
    <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s1">&#39;Submit&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>That <code class="docutils literal notranslate"><span class="pre">name</span></code> is the <code class="docutils literal notranslate"><span class="pre">name</span></code> in <code class="docutils literal notranslate"><span class="pre">form.name.data</span></code> — the contents of which we will now store in a new variable, <code class="docutils literal notranslate"><span class="pre">name</span></code>. To put it another way: The variable <code class="docutils literal notranslate"><span class="pre">name</span></code> <em>in the app</em> now contains whatever the user typed into the text input field on the web page — that is, the actor’s name.</p>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>36
-37
-38
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>38
 39
 40
 41
 42
-43</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
-        <span class="n">name</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">data</span>
-        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+43
+44
+45</pre></div></td><td class="code"><div class="highlight"><pre><span></span>        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
             <span class="c1"># empty the form field</span>
             <span class="n">form</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
             <span class="nb">id</span> <span class="o">=</span> <span class="n">get_id</span><span class="p">(</span><span class="n">ACTORS</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
             <span class="c1"># redirect the browser to another route and template</span>
             <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span> <span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;actor&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span> <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;That actor is not in our database.&quot;</span>
 </pre></div>
 </td></tr></table></div>
 <p>This if-statement is specific to this app. It checks whether the <code class="docutils literal notranslate"><span class="pre">name</span></code> (that was typed into the form) matches any name in the list <code class="docutils literal notranslate"><span class="pre">names</span></code>. If not, we jump down to <code class="docutils literal notranslate"><span class="pre">else</span></code> and text is put into the variable <code class="docutils literal notranslate"><span class="pre">message</span></code>. If <code class="docutils literal notranslate"><span class="pre">name</span></code> DOES match, we clear out the form, run a function called <code class="docutils literal notranslate"><span class="pre">get_id()</span></code> (from <em>modules.py</em>) and — <strong>important!</strong> — open a <em>different route</em> in this app:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="n">redirect</span><span class="p">(</span> <span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;actor&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span> <span class="p">)</span>
 </pre></div>
 </div>
-<p>Thus <code class="docutils literal notranslate"><span class="pre">redirect(</span> <span class="pre">url_for('actor',</span> <span class="pre">id=id)</span> <span class="pre">)</span></code> is calling a different route here in the same Flask app script. (See <em>actors.py,</em> lines 46-55.) The <code class="docutils literal notranslate"><span class="pre">redirect()</span></code> function is specifically for this use, and we <strong>imported</strong> it from the <code class="docutils literal notranslate"><span class="pre">flask</span></code> module at the top of the app. We also imported <code class="docutils literal notranslate"><span class="pre">url_for()</span></code>, which you have seen previously used within templates.</p>
+<p>Thus <code class="docutils literal notranslate"><span class="pre">redirect(</span> <span class="pre">url_for('actor',</span> <span class="pre">id=id)</span> <span class="pre">)</span></code> is calling a different route here in the same Flask app script. (See <em>actors.py,</em> lines 48-57.) The <code class="docutils literal notranslate"><span class="pre">redirect()</span></code> function is specifically for this use, and we <strong>imported</strong> it from the <code class="docutils literal notranslate"><span class="pre">flask</span></code> module at the top of the app. We also imported <code class="docutils literal notranslate"><span class="pre">url_for()</span></code>, which you have seen previously used within templates.</p>
 <p>As far as <strong>using forms with Flask</strong> is concerned, you don’t need to worry about the actors and their IDs, etc. What is important is that <strong>the route function</strong> can be used to <em>evaluate the data sent from the form.</em> We check to see whether it matched any of the actors in a list, and <em>a different response</em> will be sent based on match or no match.</p>
 <p>Any kind of form data can be handled in a Flask route function.</p>
 <p>You can do <em>any</em> of the things that are typically done with HTML forms — handle usernames and passwords, write new data to a database, create a quiz, etc.</p>
@@ -545,7 +545,7 @@
 <h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
 <p><strong>Flask-WTF</strong> provides convenient methods for working with forms in Flask. Forms can be built easily and also processed easily, with a minimum of code.</p>
 <p>Adding <strong>Bootstrap-Flask</strong> ensures that we can build mobile-friendly forms with a minimum amount of effort.</p>
-<p>Note that it is possible to build a customized form layout using Bootstrap styles in a Flask template, or to build a custom form with no Bootstrap styles. In either case, you cannot use <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">wtf.quick_form(form)</span> <span class="pre">}}</span></code> but would instead write out all the form code in your Flask template as you would in a normal HTML file. To take advantage of WTForms, you would still create the form class with <code class="docutils literal notranslate"><span class="pre">FlaskForm</span></code> in the same way as shown above.</p>
+<p>Note that it is possible to build a customized form layout using Bootstrap styles in a Flask template, or to build a custom form with no Bootstrap styles. In either of those two cases, you <strong>cannot</strong> use <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">render_form(form)</span> <span class="pre">}}</span></code> but would instead write out all the form code in your Flask template as you would in a normal HTML file. To take advantage of WTForms, you would still create the form class with <code class="docutils literal notranslate"><span class="pre">FlaskForm</span></code> in the same way as shown above.</p>
 <p>An example is the demo Flask app <a class="reference external" href="https://books-hopper.herokuapp.com/">Books Hopper</a>, which includes four separate Bootstrap forms:</p>
 <ul class="simple">
 <li><p>a login form</p></li>

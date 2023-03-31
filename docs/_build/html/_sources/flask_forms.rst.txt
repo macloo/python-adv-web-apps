@@ -163,7 +163,7 @@ Before we break all that down and explain it, let’s look at the code in the te
 
 .. literalinclude:: ../python_code_examples/flask/actors_app/templates/index.html
    :language: jinja
-   :lines: 1-34
+   :lines: 1-33
    :linenos:
    :emphasize-lines: 25
    :caption:
@@ -190,13 +190,13 @@ A quick note about Bootstrap in Flask
 There’s more about this in the **Resources** section at the bottom of this page — but to summarize briefly:
 
 * You pip-installed Bootstrap-Flask in your Flask virtual environment.
-* You wrote ``from flask_bootstrap import Bootstrap`` at the top of the Flask app file.
-* Below that, you wrote ``Bootstrap(app)`` in the Flask app file.
-* In any Flask template using Bootstrap styles, the top line will be: ``{% extends 'bootstrap/base.html' %}``
+* You wrote ``from flask_bootstrap import Bootstrap5`` at the top of the Flask app file.
+* Below that, you wrote ``bootstrap = Bootstrap5(app)`` in the Flask app file.
+* In the Flask template *index.html*, the top line is: ``{% from 'bootstrap5/form.html' import render_form %}``
 
-That combination of four things has embedded Bootstrap 4 in this app *and* made ``wtf.quick_form()`` possible.
+That combination of four things has embedded Bootstrap 5 in this app *and* made ``{{ render_form() }}`` possible.
 
-There’s an `excellent how-to video <https://www.youtube.com/watch?v=PE9ZGniSDW8>`_ (only 9 minutes long) about using Bootstrap styles in Flask if you want to separate the **forms** information from the Bootstrap information in your mind. You can, of course, use Bootstrap-Flask *without* the forms!
+Bootstrap-Flask *without* the forms!
 
 
 Examining the route function
@@ -210,9 +210,9 @@ Before reading further, try out a `working version of this app <https://weimerge
 
 
 .. literalinclude:: ../python_code_examples/flask/actors_app/actors.py
-   :lines: 27-44
+   :lines: 29-46
    :linenos:
-   :lineno-start: 27
+   :lineno-start: 29
    :caption:
 
 
@@ -245,7 +245,7 @@ We create a new, empty variable, ``message``. ::
 
 
     class NameForm(FlaskForm):
-       name = StringField('Which actor is your favorite?', validators=[DataRequired()])
+       name = StringField('Which actor is your favorite?', validators=[DataRequired(), Length(10, 40)])
        submit = SubmitField('Submit')
 
 
@@ -253,16 +253,16 @@ That ``name`` is the ``name`` in ``form.name.data`` — the contents of which we
 
 
 .. literalinclude:: ../python_code_examples/flask/actors_app/actors.py
-   :lines: 36-43
+   :lines: 38-45
    :linenos:
-   :lineno-start: 36
+   :lineno-start: 38
 
 
 This if-statement is specific to this app. It checks whether the ``name`` (that was typed into the form) matches any name in the list ``names``. If not, we jump down to ``else`` and text is put into the variable ``message``. If ``name`` DOES match, we clear out the form, run a function called ``get_id()`` (from *modules.py*) and — **important!** — open a *different route* in this app: ::
 
     return redirect( url_for('actor', id=id) )
 
-Thus ``redirect( url_for('actor', id=id) )`` is calling a different route here in the same Flask app script. (See *actors.py,* lines 46-55.) The ``redirect()`` function is specifically for this use, and we **imported** it from the ``flask`` module at the top of the app. We also imported ``url_for()``, which you have seen previously used within templates.
+Thus ``redirect( url_for('actor', id=id) )`` is calling a different route here in the same Flask app script. (See *actors.py,* lines 48-57.) The ``redirect()`` function is specifically for this use, and we **imported** it from the ``flask`` module at the top of the app. We also imported ``url_for()``, which you have seen previously used within templates.
 
 As far as **using forms with Flask** is concerned, you don’t need to worry about the actors and their IDs, etc. What is important is that **the route function** can be used to *evaluate the data sent from the form.* We check to see whether it matched any of the actors in a list, and *a different response* will be sent based on match or no match.
 
@@ -282,7 +282,7 @@ Conclusion
 
 Adding **Bootstrap-Flask** ensures that we can build mobile-friendly forms with a minimum amount of effort.
 
-Note that it is possible to build a customized form layout using Bootstrap styles in a Flask template, or to build a custom form with no Bootstrap styles. In either case, you cannot use ``{{ wtf.quick_form(form) }}`` but would instead write out all the form code in your Flask template as you would in a normal HTML file. To take advantage of WTForms, you would still create the form class with ``FlaskForm`` in the same way as shown above.
+Note that it is possible to build a customized form layout using Bootstrap styles in a Flask template, or to build a custom form with no Bootstrap styles. In either of those two cases, you **cannot** use ``{{ render_form(form) }}`` but would instead write out all the form code in your Flask template as you would in a normal HTML file. To take advantage of WTForms, you would still create the form class with ``FlaskForm`` in the same way as shown above.
 
 An example is the demo Flask app `Books Hopper <https://books-hopper.herokuapp.com/>`_, which includes four separate Bootstrap forms:
 
