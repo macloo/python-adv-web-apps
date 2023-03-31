@@ -126,7 +126,11 @@ Note that several field types (such as ``RadioField`` and ``SelectField``) must 
     category = RadioField('Choose a detail to search:', validators=[InputRequired(message=None)], choices=[ ('President', 'President\'s Name, e.g. John'), ('Home-state', 'Home State, e.g. Virginia'), ('Occupation', 'Occupation, e.g. Lawyer'), ('College', 'College, e.g. Harvard')] )
 
 
-WTForms also has a long list of `validators <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-validators.csv>`_ we can use. The ``DataRequired()`` validator prevents the form from being submitted if that field is empty. Note that these validators must also be imported at the top of the file. `Validators <https://wtforms.readthedocs.io/en/3.0.x/crash_course/#validators>`_ and `custom validators <https://wtforms.readthedocs.io/en/3.0.x/crash_course/#custom-validators>`_ are discussed further in the WTForms documentation.
+    .. figure:: _static/images/choices_example_WTForms.png
+       :alt: Live form page shown beside rendered source code for choices
+
+
+WTForms also has a long list of `validators <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-validators.csv>`_ we can use. The ``DataRequired()`` validator prevents the form from being submitted if that field is empty. Note that these validators must also be **imported** at the top of the file. `Validators <https://wtforms.readthedocs.io/en/3.0.x/crash_course/#validators>`_ and `custom validators <https://wtforms.readthedocs.io/en/3.0.x/crash_course/#custom-validators>`_ are discussed further in the WTForms documentation.
 
 
 Put the form in a route function
