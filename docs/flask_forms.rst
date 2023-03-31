@@ -69,9 +69,9 @@ You will have a long list of imports at the top of your Flask app file: ::
     from flask import Flask, render_template, redirect, url_for
     from flask_bootstrap import Bootstrap5
 
-    from flask_wtf import FlaskForm
+    from flask_wtf import FlaskForm, CSRFProtect
     from wtforms import StringField, SubmitField
-    from wtforms.validators import DataRequired
+    from wtforms.validators import DataRequired, Length
 
 Note as always that Python is case-sensitive, so upper- and lowercase must be used exactly as shown. **The wtforms import will change** depending on **your form’s contents.** For example, if you have a SELECT element, you’ll need to import that. `See a simplified list <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv>`_ of WTForms form field types or further explanation in the `WTForms documentation <https://wtforms.readthedocs.io/en/3.0.x/fields/#basic-fields>`_.
 
@@ -82,21 +82,19 @@ After the imports, these lines follow in the app script: ::
 
 
     app = Flask(__name__)
+    app.secret_key = 'tO$&!|0wkamvVia0?n$NqIRVWOG'
 
     # Bootstrap-Flask requires this line
     bootstrap = Bootstrap5(app)
+    # Flask-WTF requires this line
+    csrf = CSRFProtect(app)
 
-
-
-** EDITS NEEDED BELOW **
 
 Flask allows us to set a “secret key” value. You can grab a string from a site such as `RandomKeygen <https://randomkeygen.com/>`_. This value is used to prevent malicious hijacking of your form from an outside submission.
 
-Flask-WTF's ``FlaskForm`` will automatically create a secure session with CSRF (cross-site request forgery) protection *if this key-value is set.*  **Don’t publish the actual key on GitHub!**
+Flask-WTF's ``FlaskForm`` will automatically create a secure session with CSRF (cross-site request forgery) protection *if this key-value is set* and *the csrf variable is set.*  **Don’t publish the actual key on GitHub!**
 
-You can read more about ``app.config['SECRET_KEY']`` in this `StackOverflow post <https://stackoverflow.com/questions/22463939/demystify-flask-app-secret-key>`_.
-
-** EDITS NEEDED ABOVE **
+You can read more about the secret key in this `StackOverflow post <https://stackoverflow.com/questions/22463939/demystify-flask-app-secret-key>`_.
 
 
 Configure the form
@@ -110,7 +108,7 @@ In the class, we assign each form control to a unique variable. This form has on
 
 
     class NameForm(FlaskForm):
-        name = StringField('Which actor is your favorite?', validators=[DataRequired(), Length(1, 30)])
+        name = StringField('Which actor is your favorite?', validators=[DataRequired(), Length(10, 40)])
         submit = SubmitField('Submit')
 
 
@@ -123,13 +121,16 @@ Note that ``StringField`` and ``SubmitField`` were **imported** at the top of th
 Note that several field types (such as ``RadioField`` and ``SelectField``) must have an option ``choices=[]`` specified. Within the list, each choice is a pair in this format: ``('string-form-variable-name', 'string-label-text')``. ::
 
 
-    category = RadioField('Choose a detail to search:', validators=[InputRequired(message=None)], choices=[ ('President', 'President\'s Name, e.g. John'), ('Home-state', 'Home State, e.g. Virginia'), ('Occupation', 'Occupation, e.g. Lawyer'), ('College', 'College, e.g. Harvard')] )
+    category = RadioField('Choose a detail to search:', validators=[InputRequired(message=None)],
+    choices=[ ('President', 'President\'s Name, e.g. John'), ('Home-state', 'Home State, e.g. Virginia'),
+    ('Occupation', 'Occupation, e.g. Lawyer'), ('College', 'College, e.g. Harvard')] )
 
 Here is a live form page shown beside the rendered source code for choices.
 
 .. figure:: _static/images/choices_example_WTForms.png
    :alt: Live form page shown beside rendered source code for choices
 
+For more help with the FlaskForm class, `see this Bootstrap-Flask page <http://173.212.227.186/form>`_. It shows great examples with the exact code needed.
 
 WTForms also has a long list of `validators <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-validators.csv>`_ we can use. The ``DataRequired()`` validator prevents the form from being submitted if that field is empty. Note that these validators must also be **imported** at the top of the file. `Validators <https://wtforms.readthedocs.io/en/3.0.x/crash_course/#validators>`__ and `custom validators <https://wtforms.readthedocs.io/en/3.0.x/crash_course/#custom-validators>`_ are discussed further in the WTForms documentation.
 
@@ -140,10 +141,10 @@ Put the form in a route function
 Now we will use the form in a Flask route:
 
 .. literalinclude:: ../python_code_examples/flask/actors_app/actors.py
-   :lines: 27-44
+   :lines: 29-46
    :linenos:
    :emphasize-lines: 6,18
-   :lineno-start: 27
+   :lineno-start: 29
    :caption:
 
 A crucial line is where we assign our configured form object to a new variable: ::
