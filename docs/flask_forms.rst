@@ -1,4 +1,4 @@
-  Flask: Web Forms
+Flask: Web Forms
 ================
 
 Previous:
@@ -73,7 +73,7 @@ You will have a long list of imports at the top of your Flask app file: ::
     from wtforms import StringField, SubmitField
     from wtforms.validators import DataRequired
 
-Note as always that Python is case-sensitive, so upper- and lowercase must be used exactly as shown. **The wtforms import will change** depending on **your form’s contents.** For example, if you have a SELECT element, you’ll need to import that. `See a simplified list <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv>`_ of WTForms form field types or further explanation in the `WTForms documentation <https://wtforms.readthedocs.io/en/3.0.x/fields/#basic-fields>`_.
+Note as always that Python is case-sensitive, so upper- and lowercase must be used exactly as shown. **The wtforms import will change** depending on **your form’s contents.** For example, if you have a SELECT element, you’ll need to import that. `See a simplified list <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv>`_ of WTForms form field types or further explanation in the `WTForms documentation <https://wtforms.readthedocs.io/en/3.0.x/fields/#basic-fields>`_. 
 
 Set up a form in a Flask app
 ----------------------------
