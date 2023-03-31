@@ -336,7 +336,6 @@
 </div>
 <div class="section" id="put-the-form-in-a-template">
 <h3>Put the form in a template<a class="headerlink" href="#put-the-form-in-a-template" title="Permalink to this headline">¶</a></h3>
-<p>** EDITS NEEDED BELOW **</p>
 <p>Before we break all that down and explain it, let’s look at the code in the template <em>index.html</em>:</p>
 <div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/actors_app/templates/index.html</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
@@ -372,8 +371,7 @@
 30
 31
 32
-33
-34</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s1">&#39;base.html&#39;</span> <span class="cp">%}</span><span class="x"></span>
+33</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s1">&#39;base.html&#39;</span> <span class="cp">%}</span><span class="x"></span>
 <span class="cp">{%</span> <span class="k">from</span> <span class="s1">&#39;bootstrap5/form.html&#39;</span> <span class="k">import</span> <span class="nv">render_form</span> <span class="cp">%}</span><span class="x"></span>
 
 <span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span><span class="x"></span>
@@ -397,10 +395,9 @@
 
 <span class="x">      &lt;p class=&quot;lead&quot;&gt;This is the index page for an example Flask app using Bootstrap and WTForms. Note that &lt;em&gt;only 100 actors&lt;/em&gt; are in the data source. Partial names are not valid.&lt;/p&gt;</span>
 
-
-<span class="x">			</span><span class="cp">{{</span> <span class="nv">render_form</span><span class="o">(</span><span class="nv">form</span><span class="o">)</span> <span class="cp">}}</span><span class="x"></span>
-<span class="hll">
-</span><span class="x">      &lt;p class=&quot;pt-5&quot;&gt;&lt;strong&gt;</span><span class="cp">{{</span> <span class="nv">message</span> <span class="cp">}}</span><span class="x">&lt;/strong&gt;&lt;/p&gt;</span>
+<span class="hll"><span class="x">      </span><span class="cp">{{</span> <span class="nv">render_form</span><span class="o">(</span><span class="nv">form</span><span class="o">)</span> <span class="cp">}}</span><span class="x"></span>
+</span>
+<span class="x">      &lt;p class=&quot;pt-5&quot;&gt;&lt;strong&gt;</span><span class="cp">{{</span> <span class="nv">message</span> <span class="cp">}}</span><span class="x">&lt;/strong&gt;&lt;/p&gt;</span>
 
 <span class="x">    &lt;/div&gt;</span>
 <span class="x">  &lt;/div&gt;</span>
@@ -410,7 +407,7 @@
 </pre></div>
 </td></tr></table></div>
 </div>
-<p><strong>Where is the form?</strong> This is the amazing thing about Flask-WTF — by configuring the form as we did <em>in the Flask app,</em> we can generate a form with Bootstrap styles in HTML using nothing more than the template you see above. <strong>Line 27 is the form.</strong></p>
+<p><strong>Where is the form?</strong> This is the amazing thing about Flask-WTF — by configuring the form as we did <em>in the Flask app,</em> we can generate a form with Bootstrap styles in HTML using nothing more than the template you see above. <strong>Line 25 is the form.</strong></p>
 <div class="figure align-default">
 <img alt="Drawing of magician pulling rabbit from hat" src="_images/rabbit_hat.png" />
 </div>
@@ -418,7 +415,7 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>So when you use <code class="docutils literal notranslate"><span class="pre">wtf.quick_form()</span></code>, the argument inside the parentheses <strong>must</strong> be the <em>variable</em> that represents the form you created in the app.</p>
+<p>When you use <code class="docutils literal notranslate"><span class="pre">{{</span> <span class="pre">render_form(form)</span> <span class="pre">}}</span></code>, the argument inside the parentheses <strong>must</strong> be the <em>variable</em> that represents the form you created in the app.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">form</span> <span class="o">=</span> <span class="n">NameForm</span><span class="p">()</span>
 </pre></div>
 </div>
