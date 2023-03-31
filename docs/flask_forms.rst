@@ -159,18 +159,16 @@ Be aware that if we had created **more than one** form class, each of those woul
 Put the form in a template
 ++++++++++++++++++++++++++
 
-** EDITS NEEDED BELOW **
-
 Before we break all that down and explain it, let’s look at the code in the template *index.html*:
 
 .. literalinclude:: ../python_code_examples/flask/actors_app/templates/index.html
    :language: jinja
-   :lines: 1-35
+   :lines: 1-34
    :linenos:
-   :emphasize-lines: 27
+   :emphasize-lines: 25
    :caption:
 
-**Where is the form?** This is the amazing thing about Flask-WTF — by configuring the form as we did *in the Flask app,* we can generate a form with Bootstrap styles in HTML using nothing more than the template you see above. **Line 27 is the form.**
+**Where is the form?** This is the amazing thing about Flask-WTF — by configuring the form as we did *in the Flask app,* we can generate a form with Bootstrap styles in HTML using nothing more than the template you see above. **Line 25 is the form.**
 
 .. figure:: _static/images/rabbit_hat.png
    :alt: Drawing of magician pulling rabbit from hat
@@ -179,7 +177,7 @@ Note that in the Flask route function, we passed the variable ``form`` to the te
 
     return render_template('index.html', names=names, form=form, message=message)
 
-So when you use ``wtf.quick_form()``, the argument inside the parentheses **must** be the *variable* that represents the form you created in the app. ::
+When you use ``{{ render_form(form) }}``, the argument inside the parentheses **must** be the *variable* that represents the form you created in the app. ::
 
     form = NameForm()
 
