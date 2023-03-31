@@ -236,9 +236,9 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">url_for</span>
 <span class="kn">from</span> <span class="nn">flask_bootstrap</span> <span class="kn">import</span> <span class="n">Bootstrap5</span>
 
-<span class="kn">from</span> <span class="nn">flask_wtf</span> <span class="kn">import</span> <span class="n">FlaskForm</span>
+<span class="kn">from</span> <span class="nn">flask_wtf</span> <span class="kn">import</span> <span class="n">FlaskForm</span><span class="p">,</span> <span class="n">CSRFProtect</span>
 <span class="kn">from</span> <span class="nn">wtforms</span> <span class="kn">import</span> <span class="n">StringField</span><span class="p">,</span> <span class="n">SubmitField</span>
-<span class="kn">from</span> <span class="nn">wtforms.validators</span> <span class="kn">import</span> <span class="n">DataRequired</span>
+<span class="kn">from</span> <span class="nn">wtforms.validators</span> <span class="kn">import</span> <span class="n">DataRequired</span><span class="p">,</span> <span class="n">Length</span>
 </pre></div>
 </div>
 <p>Note as always that Python is case-sensitive, so upper- and lowercase must be used exactly as shown. <strong>The wtforms import will change</strong> depending on <strong>your form’s contents.</strong> For example, if you have a SELECT element, you’ll need to import that. <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv">See a simplified list</a> of WTForms form field types or further explanation in the <a class="reference external" href="https://wtforms.readthedocs.io/en/3.0.x/fields/#basic-fields">WTForms documentation</a>.</p>
@@ -247,23 +247,24 @@
 <h2>Set up a form in a Flask app<a class="headerlink" href="#set-up-a-form-in-a-flask-app" title="Permalink to this headline">¶</a></h2>
 <p>After the imports, these lines follow in the app script:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">secret_key</span> <span class="o">=</span> <span class="s1">&#39;tO$&amp;!|0wkamvVia0?n$NqIRVWOG&#39;</span>
 
 <span class="c1"># Bootstrap-Flask requires this line</span>
 <span class="n">bootstrap</span> <span class="o">=</span> <span class="n">Bootstrap5</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+<span class="c1"># Flask-WTF requires this line</span>
+<span class="n">csrf</span> <span class="o">=</span> <span class="n">CSRFProtect</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>** EDITS NEEDED BELOW **</p>
 <p>Flask allows us to set a “secret key” value. You can grab a string from a site such as <a class="reference external" href="https://randomkeygen.com/">RandomKeygen</a>. This value is used to prevent malicious hijacking of your form from an outside submission.</p>
-<p>Flask-WTF’s <code class="docutils literal notranslate"><span class="pre">FlaskForm</span></code> will automatically create a secure session with CSRF (cross-site request forgery) protection <em>if this key-value is set.</em>  <strong>Don’t publish the actual key on GitHub!</strong></p>
-<p>You can read more about <code class="docutils literal notranslate"><span class="pre">app.config['SECRET_KEY']</span></code> in this <a class="reference external" href="https://stackoverflow.com/questions/22463939/demystify-flask-app-secret-key">StackOverflow post</a>.</p>
-<p>** EDITS NEEDED ABOVE **</p>
+<p>Flask-WTF’s <code class="docutils literal notranslate"><span class="pre">FlaskForm</span></code> will automatically create a secure session with CSRF (cross-site request forgery) protection <em>if this key-value is set</em> and <em>the csrf variable is set.</em>  <strong>Don’t publish the actual key on GitHub!</strong></p>
+<p>You can read more about the secret key in this <a class="reference external" href="https://stackoverflow.com/questions/22463939/demystify-flask-app-secret-key">StackOverflow post</a>.</p>
 <div class="section" id="configure-the-form">
 <h3>Configure the form<a class="headerlink" href="#configure-the-form" title="Permalink to this headline">¶</a></h3>
 <p>Next, we configure a form that inherits from Flask-WTF’s class <code class="docutils literal notranslate"><span class="pre">FlaskForm</span></code>. Python style dictates that a <strong>class</strong> starts with an uppercase letter and uses <a class="reference external" href="https://www.computerhope.com/jargon/c/camelcase.htm">camelCase</a>, so here our new class is named <code class="docutils literal notranslate"><span class="pre">NameForm</span></code> (we will use the form to search for a name).</p>
 <p>In the class, we assign each form control to a unique variable. This form has only one text input field and one submit button.</p>
 <p><strong>Every form control</strong> must be configured here.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NameForm</span><span class="p">(</span><span class="n">FlaskForm</span><span class="p">):</span>
-    <span class="n">name</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">&#39;Which actor is your favorite?&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">(),</span> <span class="n">Length</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">)])</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="n">StringField</span><span class="p">(</span><span class="s1">&#39;Which actor is your favorite?&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">DataRequired</span><span class="p">(),</span> <span class="n">Length</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">40</span><span class="p">)])</span>
     <span class="n">submit</span> <span class="o">=</span> <span class="n">SubmitField</span><span class="p">(</span><span class="s1">&#39;Submit&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -271,13 +272,16 @@
 <p>If you had <strong>more than one form</strong> in the app, you would define more than one new class in this manner.</p>
 <p>Note that <code class="docutils literal notranslate"><span class="pre">StringField</span></code> and <code class="docutils literal notranslate"><span class="pre">SubmitField</span></code> were <strong>imported</strong> at the top of the file. If we needed other form-control types in this form, we would need to import those also. <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-field-types.csv">See a simplified list</a> of WTForms form field types or further explanation in the <a class="reference external" href="https://wtforms.readthedocs.io/en/3.0.x/fields/#basic-fields">WTForms documentation</a>.</p>
 <p>Note that several field types (such as <code class="docutils literal notranslate"><span class="pre">RadioField</span></code> and <code class="docutils literal notranslate"><span class="pre">SelectField</span></code>) must have an option <code class="docutils literal notranslate"><span class="pre">choices=[]</span></code> specified. Within the list, each choice is a pair in this format: <code class="docutils literal notranslate"><span class="pre">('string-form-variable-name',</span> <span class="pre">'string-label-text')</span></code>.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">category</span> <span class="o">=</span> <span class="n">RadioField</span><span class="p">(</span><span class="s1">&#39;Choose a detail to search:&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">InputRequired</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="kc">None</span><span class="p">)],</span> <span class="n">choices</span><span class="o">=</span><span class="p">[</span> <span class="p">(</span><span class="s1">&#39;President&#39;</span><span class="p">,</span> <span class="s1">&#39;President</span><span class="se">\&#39;</span><span class="s1">s Name, e.g. John&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Home-state&#39;</span><span class="p">,</span> <span class="s1">&#39;Home State, e.g. Virginia&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Occupation&#39;</span><span class="p">,</span> <span class="s1">&#39;Occupation, e.g. Lawyer&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;College&#39;</span><span class="p">,</span> <span class="s1">&#39;College, e.g. Harvard&#39;</span><span class="p">)]</span> <span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">category</span> <span class="o">=</span> <span class="n">RadioField</span><span class="p">(</span><span class="s1">&#39;Choose a detail to search:&#39;</span><span class="p">,</span> <span class="n">validators</span><span class="o">=</span><span class="p">[</span><span class="n">InputRequired</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="kc">None</span><span class="p">)],</span>
+<span class="n">choices</span><span class="o">=</span><span class="p">[</span> <span class="p">(</span><span class="s1">&#39;President&#39;</span><span class="p">,</span> <span class="s1">&#39;President</span><span class="se">\&#39;</span><span class="s1">s Name, e.g. John&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;Home-state&#39;</span><span class="p">,</span> <span class="s1">&#39;Home State, e.g. Virginia&#39;</span><span class="p">),</span>
+<span class="p">(</span><span class="s1">&#39;Occupation&#39;</span><span class="p">,</span> <span class="s1">&#39;Occupation, e.g. Lawyer&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;College&#39;</span><span class="p">,</span> <span class="s1">&#39;College, e.g. Harvard&#39;</span><span class="p">)]</span> <span class="p">)</span>
 </pre></div>
 </div>
 <p>Here is a live form page shown beside the rendered source code for choices.</p>
 <div class="figure align-default">
 <img alt="Live form page shown beside rendered source code for choices" src="_images/choices_example_WTForms.png" />
 </div>
+<p>For more help with the FlaskForm class, <a class="reference external" href="http://173.212.227.186/form">see this Bootstrap-Flask page</a>. It shows great examples with the exact code needed.</p>
 <p>WTForms also has a long list of <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-validators.csv">validators</a> we can use. The <code class="docutils literal notranslate"><span class="pre">DataRequired()</span></code> validator prevents the form from being submitted if that field is empty. Note that these validators must also be <strong>imported</strong> at the top of the file. <a class="reference external" href="https://wtforms.readthedocs.io/en/3.0.x/crash_course/#validators">Validators</a> and <a class="reference external" href="https://wtforms.readthedocs.io/en/3.0.x/crash_course/#custom-validators">custom validators</a> are discussed further in the WTForms documentation.</p>
 </div>
 <div class="section" id="put-the-form-in-a-route-function">
@@ -285,9 +289,7 @@
 <p>Now we will use the form in a Flask route:</p>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/actors_app/actors.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>27
-28
-29
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>29
 30
 31
 32
@@ -302,7 +304,9 @@
 41
 42
 43
-44</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+44
+45
+46</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
     <span class="n">names</span> <span class="o">=</span> <span class="n">get_names</span><span class="p">(</span><span class="n">ACTORS</span><span class="p">)</span>
     <span class="c1"># you must tell the variable &#39;form&#39; what you named the class, above</span>
@@ -369,17 +373,8 @@
 31
 32
 33
-34
-35</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s1">&#39;bootstrap/base.html&#39;</span> <span class="cp">%}</span><span class="x"></span>
-<span class="cp">{%</span> <span class="k">import</span> <span class="s2">&quot;bootstrap/wtf.html&quot;</span> <span class="k">as</span> <span class="nv">wtf</span> <span class="cp">%}</span><span class="x"></span>
-
-<span class="cp">{%</span> <span class="k">block</span> <span class="nv">styles</span> <span class="cp">%}</span><span class="x"></span>
-<span class="cp">{{</span> <span class="nb">super</span><span class="o">()</span> <span class="cp">}}</span><span class="x"></span>
-<span class="x">	&lt;style&gt;</span>
-<span class="x">		body { background: #e8f1f9; }</span>
-<span class="x">	&lt;/style&gt;</span>
-<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="x"></span>
-
+34</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="cp">{%</span> <span class="k">extends</span> <span class="s1">&#39;base.html&#39;</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">from</span> <span class="s1">&#39;bootstrap5/form.html&#39;</span> <span class="k">import</span> <span class="nv">render_form</span> <span class="cp">%}</span><span class="x"></span>
 
 <span class="cp">{%</span> <span class="k">block</span> <span class="nv">title</span> <span class="cp">%}</span><span class="x"></span>
 <span class="x">Best Movie Actors</span>
@@ -388,17 +383,24 @@
 
 <span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span><span class="x"></span>
 
+<span class="x">&lt;!--</span>
+<span class="x">	TIPS about using Bootstrap-Flask:</span>
+<span class="x">	https://github.com/helloflask/bootstrap-flask</span>
+<span class="x">	https://bootstrap-flask.readthedocs.io/</span>
+<span class="x">--&gt;</span>
+
 <span class="x">&lt;div class=&quot;container&quot;&gt;</span>
 <span class="x">  &lt;div class=&quot;row&quot;&gt;</span>
 <span class="x">    &lt;div class=&quot;col-md-10 col-lg-8 mx-lg-auto mx-md-auto&quot;&gt;</span>
 
 <span class="x">      &lt;h1 class=&quot;pt-5 pb-2&quot;&gt;Welcome to the best movie actors Flask example!&lt;/h1&gt;</span>
 
-<span class="x">      &lt;p class=&quot;lead&quot;&gt;This is the index page for an example Flask app using Bootstrap and WTForms. Note that only 100 actors are in the data source. Partial names are not valid.&lt;/p&gt;</span>
+<span class="x">      &lt;p class=&quot;lead&quot;&gt;This is the index page for an example Flask app using Bootstrap and WTForms. Note that &lt;em&gt;only 100 actors&lt;/em&gt; are in the data source. Partial names are not valid.&lt;/p&gt;</span>
 
-<span class="hll"><span class="x">      </span><span class="cp">{{</span> <span class="nv">wtf.quick_form</span><span class="o">(</span><span class="nv">form</span><span class="o">)</span> <span class="cp">}}</span><span class="x"></span>
-</span>
-<span class="x">      &lt;p class=&quot;pt-5&quot;&gt;&lt;strong&gt;</span><span class="cp">{{</span> <span class="nv">message</span> <span class="cp">}}</span><span class="x">&lt;/strong&gt;&lt;/p&gt;</span>
+
+<span class="x">			</span><span class="cp">{{</span> <span class="nv">render_form</span><span class="o">(</span><span class="nv">form</span><span class="o">)</span> <span class="cp">}}</span><span class="x"></span>
+<span class="hll">
+</span><span class="x">      &lt;p class=&quot;pt-5&quot;&gt;&lt;strong&gt;</span><span class="cp">{{</span> <span class="nv">message</span> <span class="cp">}}</span><span class="x">&lt;/strong&gt;&lt;/p&gt;</span>
 
 <span class="x">    &lt;/div&gt;</span>
 <span class="x">  &lt;/div&gt;</span>
@@ -462,7 +464,9 @@
 41
 42
 43
-44</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+44</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># all Flask routes below</span>
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;POST&#39;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
     <span class="n">names</span> <span class="o">=</span> <span class="n">get_names</span><span class="p">(</span><span class="n">ACTORS</span><span class="p">)</span>
     <span class="c1"># you must tell the variable &#39;form&#39; what you named the class, above</span>
@@ -478,8 +482,6 @@
             <span class="c1"># redirect the browser to another route and template</span>
             <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span> <span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;actor&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span> <span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;That actor is not in our database.&quot;</span>
-    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">names</span><span class="p">,</span> <span class="n">form</span><span class="o">=</span><span class="n">form</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">message</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -519,14 +521,14 @@
 40
 41
 42
-43</pre></div></td><td class="code"><div class="highlight"><pre><span></span>        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+43</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="k">if</span> <span class="n">form</span><span class="o">.</span><span class="n">validate_on_submit</span><span class="p">():</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">form</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">data</span>
+        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
             <span class="c1"># empty the form field</span>
             <span class="n">form</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
             <span class="nb">id</span> <span class="o">=</span> <span class="n">get_id</span><span class="p">(</span><span class="n">ACTORS</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
             <span class="c1"># redirect the browser to another route and template</span>
             <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span> <span class="n">url_for</span><span class="p">(</span><span class="s1">&#39;actor&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="nb">id</span><span class="p">)</span> <span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">message</span> <span class="o">=</span> <span class="s2">&quot;That actor is not in our database.&quot;</span>
 </pre></div>
 </td></tr></table></div>
 <p>This if-statement is specific to this app. It checks whether the <code class="docutils literal notranslate"><span class="pre">name</span></code> (that was typed into the form) matches any name in the list <code class="docutils literal notranslate"><span class="pre">names</span></code>. If not, we jump down to <code class="docutils literal notranslate"><span class="pre">else</span></code> and text is put into the variable <code class="docutils literal notranslate"><span class="pre">message</span></code>. If <code class="docutils literal notranslate"><span class="pre">name</span></code> DOES match, we clear out the form, run a function called <code class="docutils literal notranslate"><span class="pre">get_id()</span></code> (from <em>modules.py</em>) and — <strong>important!</strong> — open a <em>different route</em> in this app:</p>
