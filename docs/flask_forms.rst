@@ -1,6 +1,8 @@
 Flask: Web Forms
 ================
 
+*Updated March 31, 2023*
+
 Previous:
 
 1. `Flask intro <flask.html>`_: A very simple Flask app
