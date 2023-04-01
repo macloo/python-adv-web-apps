@@ -1,6 +1,8 @@
 Flask: Web Forms
 ================
 
+*Updated March 31, 2023*
+
 Previous:
 
 1. `Flask intro <flask.html>`_: A very simple Flask app
@@ -90,9 +92,15 @@ After the imports, these lines follow in the app script: ::
     csrf = CSRFProtect(app)
 
 
-Flask allows us to set a “secret key” value. You can grab a string from a site such as `RandomKeygen <https://randomkeygen.com/>`_. This value is used to prevent malicious hijacking of your form from an outside submission.
+Flask allows us to set a “secret key” value. This value is used to prevent malicious hijacking of your form from an outside submission. A better way to do it: ::
 
-Flask-WTF's ``FlaskForm`` will automatically create a secure session with CSRF (cross-site request forgery) protection *if this key-value is set* and *the csrf variable is set.*  **Don’t publish the actual key on GitHub!**
+
+    import secrets
+    foo = secrets.token_urlsafe(16)
+    app.secret_key = foo
+
+
+Flask-WTF's ``FlaskForm`` will automatically create a secure session with CSRF (cross-site request forgery) protection *if this key-value is set* and *the csrf variable is set.*  **Don’t publish an actual key on GitHub!**
 
 You can read more about the secret key in this `StackOverflow post <https://stackoverflow.com/questions/22463939/demystify-flask-app-secret-key>`_.
 

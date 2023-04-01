@@ -181,6 +181,7 @@
             
   <div class="section" id="flask-web-forms">
 <h1>Flask: Web Forms<a class="headerlink" href="#flask-web-forms" title="Permalink to this headline">¶</a></h1>
+<p><em>Updated March 31, 2023</em></p>
 <p>Previous:</p>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="flask.html">Flask intro</a>: A very simple Flask app</p></li>
@@ -255,8 +256,13 @@
 <span class="n">csrf</span> <span class="o">=</span> <span class="n">CSRFProtect</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Flask allows us to set a “secret key” value. You can grab a string from a site such as <a class="reference external" href="https://randomkeygen.com/">RandomKeygen</a>. This value is used to prevent malicious hijacking of your form from an outside submission.</p>
-<p>Flask-WTF’s <code class="docutils literal notranslate"><span class="pre">FlaskForm</span></code> will automatically create a secure session with CSRF (cross-site request forgery) protection <em>if this key-value is set</em> and <em>the csrf variable is set.</em>  <strong>Don’t publish the actual key on GitHub!</strong></p>
+<p>Flask allows us to set a “secret key” value. This value is used to prevent malicious hijacking of your form from an outside submission. A better way to do it:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">secrets</span>
+<span class="n">foo</span> <span class="o">=</span> <span class="n">secrets</span><span class="o">.</span><span class="n">token_urlsafe</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">app</span><span class="o">.</span><span class="n">secret_key</span> <span class="o">=</span> <span class="n">foo</span>
+</pre></div>
+</div>
+<p>Flask-WTF’s <code class="docutils literal notranslate"><span class="pre">FlaskForm</span></code> will automatically create a secure session with CSRF (cross-site request forgery) protection <em>if this key-value is set</em> and <em>the csrf variable is set.</em>  <strong>Don’t publish an actual key on GitHub!</strong></p>
 <p>You can read more about the secret key in this <a class="reference external" href="https://stackoverflow.com/questions/22463939/demystify-flask-app-secret-key">StackOverflow post</a>.</p>
 <div class="section" id="configure-the-form">
 <h3>Configure the form<a class="headerlink" href="#configure-the-form" title="Permalink to this headline">¶</a></h3>
