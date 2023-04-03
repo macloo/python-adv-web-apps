@@ -43,12 +43,8 @@ Your app might only *read from* your SQL database. You can write SQL queries to 
 
 .. code-block:: python
 
-   socks = Sock.query.filter_by(style='knee-high').order_by(Sock.name).all()
+   socks = db.session.execute(db.select(Sock).filter_by(style='knee-high').order_by(Sock.name)).scalars()
 
-//////// user = db.session.execute(db.select(User).filter_by(username=username))
-//////// .scalar_one()
-//////// users = db.session.execute(db.select(User).order_by(User.username))
-//////// .scalars()
 
 The Flask-SQLAlchemy statement *to the right of the first equals sign,* above, is equivalent to this standard SQL statement:
 
@@ -126,7 +122,7 @@ In addition, when running the MySQL database locally, a socket string must be in
 
 If you do not want to run the database locally, but instead you have the database on a remote server — while you are writing your Flask app (and testing it) on your own computer — you will need to `remotely connect to your MySQL database <http://bit.ly/mm-remote-mysql>`_.
 
-* `See other examples of connection strings. <https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/#connection-uri-format>`_
+* `See other examples of connection strings. <https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/config/#connection-url-format>`_
 
 The connection string
 +++++++++++++++++++++
