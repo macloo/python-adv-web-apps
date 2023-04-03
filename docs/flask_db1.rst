@@ -19,15 +19,15 @@ We will install the **Flask-SQLAlchemy** extension to enable us to work with a S
 
 In Terminal, change into your Flask projects folder and **activate your virtual environment** there. Then install the extension at the command prompt — where you see ``$`` (Mac) or ``C:\Users\yourname>`` (Windows) — ::
 
-    pip install flask-sqlalchemy
+    pip install Flask-SQLAlchemy
 
 We will use SQLite for database examples here. Although it’s not necessary to use SQLAlchemy to interact with a SQLite database, learning to use SQLAlchemy gives you a skill set that can be applied to *any* SQL database system.
 
 SQLAlchemy can bridge between Python and various different SQL database systems — some of which need an additional module, or library, to be installed. SQLite *does not* require an additional module — the ``sqlite3`` module is included in Python 3.x.
 
-* `Find other modules for other SQL databases. <https://docs.sqlalchemy.org/en/13/dialects/>`_
+* `Find other modules for other SQL databases. <https://docs.sqlalchemy.org/en/20/dialects/index.html>`_
 
-.. important:: If you’re using a MySQL or PostgreSQL database, you will need to install a DBAPI module such as ``psycopg2`` (PostgreSQL) or ``PyMySQL`` (MySQL).
+.. important:: If you’re using a MySQL/MariaDB or PostgreSQL database, you will need to install a DBAPI module such as ``psycopg2`` (PostgreSQL) or ``PyMySQL`` (MySQL).
 
 
 Basics of using a database with Flask
@@ -35,9 +35,9 @@ Basics of using a database with Flask
 
 You’ll *connect* your Flask app to an existing SQL database. Connecting will require your own database username and database password, *unless* using SQLite.
 
-.. note:: You *can* create the SQL database using Python, but *that is not required.* If you already have a database, all you need to worry about is how to connect it. If you *do* use Python to create a SQL database (and that’s an “if,” not a necessity), you will only do it once. You don’t create the same database again and again. Yes, this seems like a no-brainer — but you need to think about what your code is *doing.*
+.. note:: You *can* create the SQL database using Python, but *that is not required.* If you already have a database, all you need to worry about is how to connect it. If you *do* use Python to create a SQL database (and that’s an “if,” not a necessity), you will only do it once. You don’t create the same database again and again. Yes, this seems like a no-brainer — but you *do* need to think about what your code is *doing.*
 
-Your database may have one table, or more than one table. That depends on what you need, or the structure of the existing SQL database. You’ll need to know the table name(s). You’ll need to know the field names (column headings) in each table.
+Your database may have one table, or more than one table. That depends on what you need, or the structure of the existing SQL database. You’ll need to know the **table name(s).** You’ll need to know the **field names** (column headings) in each table.
 
 Your app might only *read from* your SQL database. You can write SQL queries to accomplish this — using Flask-SQLAlchemy commands to do so. Note that you won’t write a straightforward SQL query. Here is an example of Flask-SQLAlchemy syntax:
 
@@ -45,8 +45,12 @@ Your app might only *read from* your SQL database. You can write SQL queries to 
 
    socks = Sock.query.filter_by(style='knee-high').order_by(Sock.name).all()
 
+//////// user = db.session.execute(db.select(User).filter_by(username=username))
+//////// .scalar_one()
+//////// users = db.session.execute(db.select(User).order_by(User.username))
+//////// .scalars()
 
-The Flask-SQLAlchemy statement *to the right of the equals sign,* above, is equivalent to this standard SQL statement:
+The Flask-SQLAlchemy statement *to the right of the first equals sign,* above, is equivalent to this standard SQL statement:
 
 .. code-block:: mysql
 
@@ -56,7 +60,9 @@ The Flask-SQLAlchemy statement *to the right of the equals sign,* above, is equi
 It is assumed you are familiar with how to write basic SQL queries.
 
 
-* `Details about writing queries with Flask-SQLAlchemy. <https://flask-sqlalchemy.palletsprojects.com/en/2.x/queries/#querying-records>`_
+* `Details about writing queries with Flask-SQLAlchemy. <https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/queries/>`_
+
+* Complete SQLAlchemydocumentation: `ORM Querying Guide <https://docs.sqlalchemy.org/en/20/orm/queryguide/index.html>`_
 
 
 In addition to *reading from* your SQL database, your Flask app might allow people to *write to* the database. In that case, you will probably want people to log in securely. Alternatively, you might set up a Python script that updates your database on a regular schedule (e.g., writing in new records from a monthly data dump).
@@ -83,14 +89,14 @@ Here’s a starter script for testing whether you can connect:
 
 .. literalinclude:: ../python_code_examples/flask/databases/test_local_sqlite_db.py
    :linenos:
-   :emphasize-lines: 16
+   :emphasize-lines: 18
    :caption:
 
-The script above assumes that a SQLite database file (see filename on line 14) is in the same directory as the ``.py`` file. The script will work with any SQLite database file.
+The script above assumes that a SQLite database file (see **filename** on line 16) is in the same directory as the ``.py`` file. The script will work with any SQLite database file.
 
 * `Starter scripts for a MySQL database connection are here. <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases/test_mysql_connection>`_ More about this below.
 
-Note that line 16 is the key to the connection — it contains the **database connection string,** which will be *different* depending on which SQL database system you are connecting to. The SQLite connection string is simpler than the others, so be sure to read on if you're using MySQL, PostgreSQL, or another system.
+Note that line 18 is the key to the connection — it contains the **database connection string,** which will be *different* depending on which SQL database system you are connecting to. The SQLite connection string is simpler than the others, so be sure to read on if you're using MySQL, PostgreSQL, or another system.
 
 Run the script above: ::
 
@@ -109,7 +115,7 @@ Unlike other database systems, a SQLite database does not have a username or pas
 * `Download and install SQLite for your operating system <https://www.sqlite.org/download.html>`_ (note: MacOS already has SQLite)
 * Download the free `DB Browser for SQLite <https://sqlitebrowser.org/>`_ (you can easily create tables by importing CSV files) — use this to create a new database, add tables, set data types for columns, etc.
 * `SQLite Tutorial <https://www.sqlitetutorial.net/>`_
-* SQLite can be used *without* SQLAlchemy: `Using SQLite3 with Flask <https://flask.palletsprojects.com/en/1.1.x/patterns/sqlite3/>`_
+* SQLite can be used *without* SQLAlchemy: `Using SQLite3 with Flask <https://flask.palletsprojects.com/en/2.2.x/patterns/sqlite3/>`_
 
 Connecting to a MySQL database
 ++++++++++++++++++++++++++++++
