@@ -15,6 +15,7 @@ Thumbs.db
 
 # folders to be ignored
 env/
+instance/
 __pycache__/
 
 # Selenim WebDriver
