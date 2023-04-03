@@ -1,6 +1,8 @@
 Flask and Databases
 ===================
 
+*Updated April 3, 2023*
+
 To add database functionality to a Flask app, we will use SQLAlchemy.
 
 **SQLAlchemy** is a Python SQL toolkit and object relational mapper (ORM) that enables Python to communicate with the SQL database system you prefer: MySQL, PostgreSQL, SQLite, and others. An ORM converts data between incompatible systems (object structure in Python, table structure in SQL database). SQLAlchemy is basically a **bridge** between Python and a SQL database.
@@ -10,6 +12,9 @@ To add database functionality to a Flask app, we will use SQLAlchemy.
 * `SQLAlchemy documentation <https://www.sqlalchemy.org/>`_
 * `Flask-SQLAlchemy documentation <https://flask-sqlalchemy.palletsprojects.com/>`_
 * `Code for this chapter <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases>`_
+
+
+.. note:: SQLAlchemy 2.0 was released in October 2022 and was a major update. This document has been updated for SQLAlchemy 2.0. 
 
 
 Setup: Flask-SQLAlchemy
@@ -43,7 +48,8 @@ Your app might only *read from* your SQL database. You can write SQL queries to 
 
 .. code-block:: python
 
-   socks = db.session.execute(db.select(Sock).filter_by(style='knee-high').order_by(Sock.name)).scalars()
+   socks = db.session.execute(db.select(Sock).filter_by(style='knee-high')
+      .order_by(Sock.name)).scalars()
 
 
 The Flask-SQLAlchemy statement *to the right of the first equals sign,* above, is equivalent to this standard SQL statement:
@@ -58,7 +64,7 @@ It is assumed you are familiar with how to write basic SQL queries.
 
 * `Details about writing queries with Flask-SQLAlchemy. <https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/queries/>`_
 
-* Complete SQLAlchemydocumentation: `ORM Querying Guide <https://docs.sqlalchemy.org/en/20/orm/queryguide/index.html>`_
+* Complete SQLAlchemy documentation: `ORM Querying Guide <https://docs.sqlalchemy.org/en/20/orm/queryguide/index.html>`_
 
 
 In addition to *reading from* your SQL database, your Flask app might allow people to *write to* the database. In that case, you will probably want people to log in securely. Alternatively, you might set up a Python script that updates your database on a regular schedule (e.g., writing in new records from a monthly data dump).
