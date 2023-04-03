@@ -179,6 +179,7 @@
             
   <div class="section" id="flask-and-databases">
 <h1>Flask and Databases<a class="headerlink" href="#flask-and-databases" title="Permalink to this headline">¶</a></h1>
+<p><em>Updated April 3, 2023</em></p>
 <p>To add database functionality to a Flask app, we will use SQLAlchemy.</p>
 <p><strong>SQLAlchemy</strong> is a Python SQL toolkit and object relational mapper (ORM) that enables Python to communicate with the SQL database system you prefer: MySQL, PostgreSQL, SQLite, and others. An ORM converts data between incompatible systems (object structure in Python, table structure in SQL database). SQLAlchemy is basically a <strong>bridge</strong> between Python and a SQL database.</p>
 <p><strong>Flask-SQLAlchemy</strong> is an <em>extension</em> for Flask that adds SQLAlchemy to your Flask app.</p>
@@ -187,6 +188,10 @@
 <li><p><a class="reference external" href="https://flask-sqlalchemy.palletsprojects.com/">Flask-SQLAlchemy documentation</a></p></li>
 <li><p><a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases">Code for this chapter</a></p></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>SQLAlchemy 2.0 was released in October 2022 and was a major update. This document has been updated for SQLAlchemy 2.0.</p>
+</div>
 <div class="section" id="setup-flask-sqlalchemy">
 <h2>Setup: Flask-SQLAlchemy<a class="headerlink" href="#setup-flask-sqlalchemy" title="Permalink to this headline">¶</a></h2>
 <p>We will install the <strong>Flask-SQLAlchemy</strong> extension to enable us to work with a SQL database in Flask. There are many extensions for Flask; each one adds a different set of functions and capabilities. See the <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/extensions/">list of Flask extensions</a> for more.</p>
@@ -213,7 +218,8 @@
 </div>
 <p>Your database may have one table, or more than one table. That depends on what you need, or the structure of the existing SQL database. You’ll need to know the <strong>table name(s).</strong> You’ll need to know the <strong>field names</strong> (column headings) in each table.</p>
 <p>Your app might only <em>read from</em> your SQL database. You can write SQL queries to accomplish this — using Flask-SQLAlchemy commands to do so. Note that you won’t write a straightforward SQL query. Here is an example of Flask-SQLAlchemy syntax:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">socks</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">Sock</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;knee-high&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sock</span><span class="o">.</span><span class="n">name</span><span class="p">))</span><span class="o">.</span><span class="n">scalars</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">socks</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">Sock</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;knee-high&#39;</span><span class="p">)</span>
+   <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sock</span><span class="o">.</span><span class="n">name</span><span class="p">))</span><span class="o">.</span><span class="n">scalars</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>The Flask-SQLAlchemy statement <em>to the right of the first equals sign,</em> above, is equivalent to this standard SQL statement:</p>
@@ -223,7 +229,7 @@
 <p>It is assumed you are familiar with how to write basic SQL queries.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/queries/">Details about writing queries with Flask-SQLAlchemy.</a></p></li>
-<li><p>Complete SQLAlchemydocumentation: <a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/queryguide/index.html">ORM Querying Guide</a></p></li>
+<li><p>Complete SQLAlchemy documentation: <a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/queryguide/index.html">ORM Querying Guide</a></p></li>
 </ul>
 <p>In addition to <em>reading from</em> your SQL database, your Flask app might allow people to <em>write to</em> the database. In that case, you will probably want people to log in securely. Alternatively, you might set up a Python script that updates your database on a regular schedule (e.g., writing in new records from a monthly data dump).</p>
 <p>You might write a Python script to populate your database from the contents of a CSV file. This would be fairly simple if you only need to run it once. If you need to add records repeatedly (say, once per month) to an existing database, you might need to check whether you are <em>duplicating records that are already there.</em> If you need to check for existing records and update them, that’s more challenging. You can handle each of these tasks within Flask, using route functions.</p>
