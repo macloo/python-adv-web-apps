@@ -27,16 +27,16 @@ Without templates or anything fancy, let’s attempt to read some data from the 
 
 .. literalinclude:: ../python_code_examples/flask/databases/read_db_basic.py
    :linenos:
-   :lines: 1-31
-   :emphasize-lines: 21-29
+   :lines: 1-34
+   :emphasize-lines: 24-32
    :caption:
 
-Everything up to line 18 comes from the script explained `in the previous chapter <flask_db1.html#how-to-connect-a-database-to-a-flask-app>`_.
+Everything up to line 21 comes from the script explained `in the previous chapter <flask_db1.html#how-to-connect-a-database-to-a-flask-app>`_.
 
 The model
 +++++++++
 
-Lines 21–29 provide a *model* so that Python can translate the **socks** table. It’s a Python class that inherits from the ``Model`` class from SQLAlchemy. (Remember, ``db`` refers to SQLAlchemy.) We could name the new class anything, but ``Sock`` makes sense because this table’s data is all about socks.
+Lines 24-32 provide a *model* so that Python can translate the **socks** table. It’s a Python class that inherits from the ``Model`` class from SQLAlchemy. (Remember, ``db`` refers to SQLAlchemy.) We could name the new class anything, but ``Sock`` makes sense because this table’s data is all about socks.
 
 .. note:: `Python style <https://www.python.org/dev/peps/pep-0008/#class-names>`_ dictates that a **class** starts with an uppercase letter and uses `camelCase <https://www.computerhope.com/jargon/c/camelcase.htm>`_. Using uppercase (as in **Sock** here) helps us recognize when a class is being used in Python.
 
@@ -44,13 +44,13 @@ If your database has *more than one table,* you will need to create an additiona
 
 Note the following in the highlighted class above:
 
-* Identify the primary_key field as shown (line 23).
+* Identify the primary_key field as shown (line 26).
 * Write the field names *exactly* as they appear in the table.
 * In ``__tablename__ = 'socks'``, note that the name of the table is case-sensitive. Match it to your actual table’s name.
 * ``String``, ``Integer`` or ``Float`` must match the data type in your fields.
 * Include *every* field in the table.
 
-`See all possible data types here. <https://flask-sqlalchemy.palletsprojects.com/en/2.x/models/#simple-example>`_
+`See all possible data types here. <https://docs.sqlalchemy.org/en/20/core/type_basics.html#generic-camelcase-types>`_
 
 The query in the route
 ++++++++++++++++++++++
