@@ -25,18 +25,18 @@ First read
 
 Without templates or anything fancy, let’s attempt to read some data from the database and return it in the browser.
 
-.. literalinclude:: ../python_code_examples/flask/databases/read_db_basic.py
+.. literalinclude:: ../python_code_examples/flask/databases/read_db_basic_SQLITE.py
    :linenos:
-   :lines: 1-34
-   :emphasize-lines: 24-32
+   :lines: 1-40
+   :emphasize-lines: 30-38
    :caption:
 
-Everything up to line 21 comes from the script explained `in the previous chapter <flask_db1.html#how-to-connect-a-database-to-a-flask-app>`_.
+Everything up to line 22 comes from the script explained `in the previous chapter <flask_db1.html#how-to-connect-a-database-to-a-flask-app>`_.
 
 The model
 +++++++++
 
-Lines 24-32 provide a *model* so that Python can translate the **socks** table. It’s a Python class that inherits from the ``Model`` class from SQLAlchemy. (Remember, ``db`` refers to SQLAlchemy.) We could name the new class anything, but ``Sock`` makes sense because this table’s data is all about socks.
+Lines 30-38 provide a *model* so that Python can translate the **socks** table. It’s a Python class that inherits from the ``Model`` class from SQLAlchemy. (Remember, ``db`` refers to SQLAlchemy.) We could name the new class anything, but ``Sock`` makes sense because this table’s data is all about socks.
 
 .. note:: `Python style <https://www.python.org/dev/peps/pep-0008/#class-names>`_ dictates that a **class** starts with an uppercase letter and uses `camelCase <https://www.computerhope.com/jargon/c/camelcase.htm>`_. Using uppercase (as in **Sock** here) helps us recognize when a class is being used in Python.
 
@@ -44,7 +44,7 @@ If your database has *more than one table,* you will need to create an additiona
 
 Note the following in the highlighted class above:
 
-* Identify the primary_key field as shown (line 26).
+* Identify the primary_key field as shown (line 32).
 * Write the field names *exactly* as they appear in the table.
 * In ``__tablename__ = 'socks'``, note that the name of the table is case-sensitive. Match it to your actual table’s name.
 * ``String``, ``Integer`` or ``Float`` must match the data type in your fields.
@@ -58,23 +58,23 @@ The query in the route
 We will provide only one route to start with, and it includes a try/except just like the example `in the previous chapter <flask_db1.html#how-to-connect-a-database-to-a-flask-app>`_.
 
 
-.. literalinclude:: ../python_code_examples/flask/databases/read_db_basic.py
+.. literalinclude:: ../python_code_examples/flask/databases/read_db_basic_SQLITE.py
    :linenos:
-   :lines: 31-49
-   :lineno-start: 31
-   :emphasize-lines: 6,11
+   :lines: 40-59
+   :lineno-start: 40
+   :emphasize-lines: 6-8,12
    :caption:
 
 
-The only code that “talks” to the database is in line 36.
+The only code that “talks” to the database is in lines 45-47.
 
 1. ``socks`` is a new variable. We assign to it the data we are pulling from the database.
-2. ``Sock.query`` refers to the class we built, Sock, starting on line 21. We are querying the table specified in that class.
+2. ``Sock`` (uppercase S) refers to the class we built, Sock, starting on line 30. We are querying the table specified in that class.
 3. ``.filter_by()`` limits what we’re asking for. It’s the ``WHERE`` clause in regular SQL.
-4. ``style='mini'`` —  in this table, ``style`` is a field name. ``'mini'`` is a *value* in that field (column). So we will get only socks with the style “mini” — not “knee-high,” “ankle,” or “other.”
+4. ``style='knee-high'`` —  in this table, ``style`` is a field name. ``'knee-high'`` is a *value* in that field (column). So we will get only socks with the style “knee-high” — not “ankle,” mini,” or “other.”
 5. ``order_by()`` selects a field (column) to determine the *order* of the results listing. This is optional. Any field could be used.
 6. ``Sock.name`` refers to the property ``name`` in the Sock class.
-7. ``.all()`` is tacked onto the end of every query, unless you expect or want only one record to be returned — in which case, use ``.first()`` instead.
+7. ``.scalars()`` is tacked onto the end of every query, unless you expect or want *only one record* to be returned — in which case, use ``.scalar_one()`` instead.
 
 
 The default for ``order_by()`` is *ascending.* To sort by a column in *descending* order: ::
@@ -83,7 +83,7 @@ The default for ``order_by()`` is *ascending.* To sort by a column in *descendin
     Sock.query.filter_by(style='mini').order_by( desc(Sock.price) ).all()
 
 
-Lines 37–40 create a string using the data in ``socks`` and adding HTML tags around the data — the ``<ul>`` and ``<li>`` tags should be familiar to you.
+Lines 49-52 create a string using the data in ``socks`` and adding HTML tags around the data — the ``<ul>`` and ``<li>`` tags should be familiar to you.
 
 After the for-loop completes, and the final closing tag ``</ul>`` is concatenated to the string, ``sock_text``, and the final string will be:
 
@@ -93,9 +93,9 @@ After the for-loop completes, and the final closing tag ``</ul>`` is concatenate
     <li>Isabel, white</li><li>Jenny, blue</li><li>Jo-Anne, brown</li><li>Krissie, blue</li>
     <li>Lizzy, red</li><li>Nancie, purple</li><li>Tanya, red</li><li>Terrie, blue stripe</li></ul>
 
-Assuming that everything worked, that string is what will be **returned** (line 41).
+Assuming that everything worked, that string is what will be **returned** (line 53).
 
-The rest of the code (lines 42–49) is from `the database intro chapter <flask_db1.html#how-to-connect-a-database-to-a-flask-app>`_.
+The rest of the code (lines 54-58) is from `the database intro chapter <flask_db1.html#how-to-connect-a-database-to-a-flask-app>`_.
 
 When the script runs, this is the result in the browser:
 
