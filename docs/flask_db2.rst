@@ -122,8 +122,8 @@ Here is the central section of the HTML template that will display the socks. In
 
 .. literalinclude:: ../python_code_examples/flask/databases/flask_db_read/templates/list.html
    :linenos:
-   :lines: 22-48
-   :lineno-start: 22
+   :lines: 15-41
+   :lineno-start: 15
    :emphasize-lines: 4,18,26
    :caption:
 
@@ -137,10 +137,13 @@ The previous route
 
 Our first working route with **no template** was this: ::
 
-    @app.route('/')
-    def index():
+      @app.route('/')
+      def index():
         try:
-            socks = Sock.query.filter_by(style='mini').order_by(Sock.name).all()
+            socks = db.session.execute(db.select(Sock)
+                .filter_by(style='knee-high')
+                .order_by(Sock.name)).scalars()
+
             sock_text = '<ul>'
             for sock in socks:
                 sock_text += '<li>' + sock.name + ', ' + sock.color + '</li>'
@@ -160,18 +163,20 @@ In the ``render_template()`` function returned by this route (below), you can se
 
     @app.route('/inventory/<style>')
     def inventory(style):
-        socks = Sock.query.filter_by(style=style).order_by(Sock.name).all()
+        socks = db.session.execute(db.select(Sock)
+                .filter_by(style=style)
+                .order_by(Sock.name)).scalars()
         return render_template('list.html', socks=socks, style=style)
 
-The one difference in the **database query** is that instead of getting only records for which the style is ``'mini'``, here the value for ``style`` comes from a route variable. This technique is covered in the `templates chapter <flask3.html>`_.
+The one difference in the **database query** is that instead of getting only records for which the style is ``'knee-high'``, here the value for ``style`` comes from a route variable. This technique is covered in the `templates chapter <flask3.html>`_.
 
 
 A different database query
 --------------------------
 
-If you’re familiar with SQL, you know there are many different kinds of queries we can write against a database. All of them can be constructed `one way or another <https://flask-sqlalchemy.palletsprojects.com/en/2.x/queries/>`_ with Flask-SQLAlchemy.
+If you’re familiar with SQL, you know there are many different kinds of queries we can write against a database. All of them can be constructed `one way or another <https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/queries/>`_ with Flask-SQLAlchemy.
 
-* Search on the `Query API page <https://docs.sqlalchemy.org/en/13/orm/query.html>`_ in the SQLAlchemy documentation when you need to work out the syntax for an unusual query.
+* Search the `ORM Querying Guide <https://docs.sqlalchemy.org/en/20/orm/queryguide/index.html>`_ in the SQLAlchemy documentation when you need to work out the syntax for an unusual query.
 
 As an example, let’s see how to get this result for the index page of the socks app:
 
