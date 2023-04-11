@@ -1,6 +1,8 @@
 Flask: Read from a Database
 ===========================
 
+*Updated April 11, 2023*
+
 It is essential to get your **database connection** working without errors before you try to do more with the database and Flask.
 
 * Refer to `the previous chapter <flask_db1.html>`_ to test your database connection.
