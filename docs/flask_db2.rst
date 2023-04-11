@@ -195,7 +195,7 @@ We might know exactly which styles are available in this database — but what i
    :emphasize-lines: 6
    :caption:
 
-Above is the route for the index (or starting page) of the app. It calls the template named *index.html,* which you can see in part below. But focus your attention on the **database query** in line 47.
+Above is the route for the index (or starting page) of the app. It calls the template named *index.html,* which you can see in part below. But focus your attention on the **database query** in lines 46-47.
 
 * The ``with_only_columns`` method restricts the columns returned to only the one(s) you want. In this case, we want *only* the **style** column.
 * The ``distinct()`` method returns only unique values in the specified column.
