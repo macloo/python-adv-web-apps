@@ -394,7 +394,14 @@
 <p>Here is the central section of the HTML template that will display the socks. Instead of using an HTML list with <code class="docutils literal notranslate"><span class="pre">&lt;ul&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;li&gt;</span></code> tags, we’re using the standard HTML table tags with <strong>Bootstrap</strong> styles applied.</p>
 <div class="literal-block-wrapper docutils container" id="id5">
 <div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/databases/flask_db_read/templates/list.html</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
-<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>22
+<div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>15
+16
+17
+18
+19
+20
+21
+22
 23
 24
 25
@@ -413,39 +420,34 @@
 38
 39
 40
-41
-42
-43
-44
-45
-46
-47</pre></div></td><td class="code"><div class="highlight"><pre><span></span>		&lt;table class=&quot;table&quot;&gt;
+41</pre></div></td><td class="code"><div class="highlight"><pre><span></span>      &lt;h1 class=&quot;pt-5 pb-2&quot;&gt;List of Socks&lt;/h1&gt;
+
+      &lt;p class=&quot;lead alert alert-warning&quot;&gt;This is a list of all the socks of the
+<span class="hll">			&lt;strong&gt;{{ style }}&lt;/strong&gt; style in our inventory.&lt;/p&gt;
+</span>
+	  &lt;p class=&quot;ml-4&quot;&gt;&lt;a href=&quot;{{ url_for(&#39;index&#39;) }}&quot;&gt;Return to the index.&lt;/a&gt;&lt;/p&gt;
+
+		&lt;table class=&quot;table&quot;&gt;
 			&lt;tr&gt;
 				&lt;th&gt;Sock Name&lt;/th&gt;
-<span class="hll">				&lt;th&gt;Color&lt;/th&gt;
-</span>				&lt;th&gt;Price&lt;/th&gt;
+				&lt;th&gt;Color&lt;/th&gt;
+				&lt;th&gt;Price&lt;/th&gt;
 				&lt;th&gt;Quantity&lt;/th&gt;
 				&lt;th&gt;Updated&lt;/th&gt;
 			&lt;/tr&gt;
 
 			&lt;!-- here is a for-loop to give us all the socks --&gt;
-			{% for sock in socks %}
-			&lt;tr&gt;
+<span class="hll">			{% for sock in socks %}
+</span>			&lt;tr&gt;
 				&lt;td&gt;{{ sock.name }}&lt;/td&gt;
 				&lt;td&gt;{{ sock.color }}&lt;/td&gt;
 				&lt;td&gt;${{ sock.price }}&lt;/td&gt;
 				&lt;td&gt;{{ sock.quantity }}&lt;/td&gt;
 				&lt;td&gt;{{ sock.updated }}&lt;/td&gt;
-<span class="hll">			&lt;/tr&gt;
-</span>			{% endfor %}
-		&lt;/table&gt;
-
-		&lt;/div&gt;
-	&lt;/div&gt;
-&lt;/div&gt;
-
-<span class="hll">{% endblock %}
-</span></pre></div>
+			&lt;/tr&gt;
+<span class="hll">			{% endfor %}
+</span>		&lt;/table&gt;
+</pre></div>
 </td></tr></table></div>
 </div>
 <p>Refer to the <a class="reference external" href="flask_forms.html">Flask: Web Forms</a> chapter for details about adding Bootstrap to Flask. Refer to the <a class="reference external" href="flask3.html">Flask Templates</a> chapter for details about working with templates.</p>
@@ -455,14 +457,17 @@
 <p>Our first working route with <strong>no template</strong> was this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">socks</span> <span class="o">=</span> <span class="n">Sock</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;mini&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sock</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
-        <span class="n">sock_text</span> <span class="o">=</span> <span class="s1">&#39;&lt;ul&gt;&#39;</span>
-        <span class="k">for</span> <span class="n">sock</span> <span class="ow">in</span> <span class="n">socks</span><span class="p">:</span>
-            <span class="n">sock_text</span> <span class="o">+=</span> <span class="s1">&#39;&lt;li&gt;&#39;</span> <span class="o">+</span> <span class="n">sock</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="n">sock</span><span class="o">.</span><span class="n">color</span> <span class="o">+</span> <span class="s1">&#39;&lt;/li&gt;&#39;</span>
-        <span class="n">sock_text</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/ul&gt;&#39;</span>
-        <span class="k">return</span> <span class="n">sock_text</span>
-    <span class="c1"># lines omitted here</span>
+  <span class="k">try</span><span class="p">:</span>
+      <span class="n">socks</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">Sock</span><span class="p">)</span>
+          <span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;knee-high&#39;</span><span class="p">)</span>
+          <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sock</span><span class="o">.</span><span class="n">name</span><span class="p">))</span><span class="o">.</span><span class="n">scalars</span><span class="p">()</span>
+
+      <span class="n">sock_text</span> <span class="o">=</span> <span class="s1">&#39;&lt;ul&gt;&#39;</span>
+      <span class="k">for</span> <span class="n">sock</span> <span class="ow">in</span> <span class="n">socks</span><span class="p">:</span>
+          <span class="n">sock_text</span> <span class="o">+=</span> <span class="s1">&#39;&lt;li&gt;&#39;</span> <span class="o">+</span> <span class="n">sock</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="n">sock</span><span class="o">.</span><span class="n">color</span> <span class="o">+</span> <span class="s1">&#39;&lt;/li&gt;&#39;</span>
+      <span class="n">sock_text</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/ul&gt;&#39;</span>
+      <span class="k">return</span> <span class="n">sock_text</span>
+  <span class="c1"># lines omitted here</span>
 </pre></div>
 </div>
 <p>Note that the <strong>database query</strong> is the same below, in the new route that <em>uses a Flask template.</em></p>
@@ -473,18 +478,20 @@
 <p>In the <code class="docutils literal notranslate"><span class="pre">render_template()</span></code> function returned by this route (below), you can see that these values are <strong>passed to the template.</strong></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/inventory/&lt;style&gt;&#39;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">inventory</span><span class="p">(</span><span class="n">style</span><span class="p">):</span>
-    <span class="n">socks</span> <span class="o">=</span> <span class="n">Sock</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sock</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">socks</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">Sock</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">Sock</span><span class="o">.</span><span class="n">name</span><span class="p">))</span><span class="o">.</span><span class="n">scalars</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;list.html&#39;</span><span class="p">,</span> <span class="n">socks</span><span class="o">=</span><span class="n">socks</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">style</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The one difference in the <strong>database query</strong> is that instead of getting only records for which the style is <code class="docutils literal notranslate"><span class="pre">'mini'</span></code>, here the value for <code class="docutils literal notranslate"><span class="pre">style</span></code> comes from a route variable. This technique is covered in the <a class="reference external" href="flask3.html">templates chapter</a>.</p>
+<p>The one difference in the <strong>database query</strong> is that instead of getting only records for which the style is <code class="docutils literal notranslate"><span class="pre">'knee-high'</span></code>, here the value for <code class="docutils literal notranslate"><span class="pre">style</span></code> comes from a route variable. This technique is covered in the <a class="reference external" href="flask3.html">templates chapter</a>.</p>
 </div>
 </div>
 <div class="section" id="a-different-database-query">
 <h2>A different database query<a class="headerlink" href="#a-different-database-query" title="Permalink to this headline">¶</a></h2>
-<p>If you’re familiar with SQL, you know there are many different kinds of queries we can write against a database. All of them can be constructed <a class="reference external" href="https://flask-sqlalchemy.palletsprojects.com/en/2.x/queries/">one way or another</a> with Flask-SQLAlchemy.</p>
+<p>If you’re familiar with SQL, you know there are many different kinds of queries we can write against a database. All of them can be constructed <a class="reference external" href="https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/queries/">one way or another</a> with Flask-SQLAlchemy.</p>
 <ul class="simple">
-<li><p>Search on the <a class="reference external" href="https://docs.sqlalchemy.org/en/13/orm/query.html">Query API page</a> in the SQLAlchemy documentation when you need to work out the syntax for an unusual query.</p></li>
+<li><p>Search the <a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/queryguide/index.html">ORM Querying Guide</a> in the SQLAlchemy documentation when you need to work out the syntax for an unusual query.</p></li>
 </ul>
 <p>As an example, let’s see how to get this result for the index page of the socks app:</p>
 <div class="figure align-default">
