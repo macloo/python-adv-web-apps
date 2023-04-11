@@ -339,10 +339,10 @@
 </span>
         <span class="n">sock_text</span> <span class="o">=</span> <span class="s1">&#39;&lt;ul&gt;&#39;</span>
         <span class="k">for</span> <span class="n">sock</span> <span class="ow">in</span> <span class="n">socks</span><span class="p">:</span>
-<span class="hll">            <span class="n">sock_text</span> <span class="o">+=</span> <span class="s1">&#39;&lt;li&gt;&#39;</span> <span class="o">+</span> <span class="n">sock</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="n">sock</span><span class="o">.</span><span class="n">color</span> <span class="o">+</span> <span class="s1">&#39;&lt;/li&gt;&#39;</span>
-</span>        <span class="n">sock_text</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/ul&gt;&#39;</span>
-        <span class="k">return</span> <span class="n">sock_text</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">sock_text</span> <span class="o">+=</span> <span class="s1">&#39;&lt;li&gt;&#39;</span> <span class="o">+</span> <span class="n">sock</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="n">sock</span><span class="o">.</span><span class="n">color</span> <span class="o">+</span> <span class="s1">&#39;&lt;/li&gt;&#39;</span>
+        <span class="n">sock_text</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/ul&gt;&#39;</span>
+<span class="hll">        <span class="k">return</span> <span class="n">sock_text</span>
+</span>    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="c1"># e holds description of the error</span>
         <span class="n">error_text</span> <span class="o">=</span> <span class="s2">&quot;&lt;p&gt;The error:&lt;br&gt;&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;&lt;/p&gt;&quot;</span>
         <span class="n">hed</span> <span class="o">=</span> <span class="s1">&#39;&lt;h1&gt;Something is broken.&lt;/h1&gt;&#39;</span>
@@ -363,7 +363,9 @@
 </ol>
 <p>The default for <code class="docutils literal notranslate"><span class="pre">order_by()</span></code> is <em>ascending.</em> To sort by a column in <em>descending</em> order:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">desc</span>
-<span class="n">Sock</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;mini&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span> <span class="n">desc</span><span class="p">(</span><span class="n">Sock</span><span class="o">.</span><span class="n">price</span><span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+<span class="n">socks</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">Sock</span><span class="p">)</span>
+   <span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;knee-high&#39;</span><span class="p">)</span>
+   <span class="o">.</span><span class="n">order_by</span><span class="p">(</span> <span class="n">desc</span><span class="p">(</span><span class="n">Sock</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="p">))</span><span class="o">.</span><span class="n">scalars</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>Lines 49-52 create a string using the data in <code class="docutils literal notranslate"><span class="pre">socks</span></code> and adding HTML tags around the data — the <code class="docutils literal notranslate"><span class="pre">&lt;ul&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;li&gt;</span></code> tags should be familiar to you.</p>
@@ -417,35 +419,33 @@
 44
 45
 46
-47
-48</pre></div></td><td class="code"><div class="highlight"><pre><span></span>      &lt;h1 class=&quot;pt-5 pb-2&quot;&gt;List of Socks&lt;/h1&gt;
-
-      &lt;p class=&quot;lead alert alert-warning&quot;&gt;This is a list of all the socks of the
-<span class="hll">			&lt;strong&gt;{{ style }}&lt;/strong&gt; style in our inventory.&lt;/p&gt;
-</span>
-	  &lt;p class=&quot;ml-4&quot;&gt;&lt;a href=&quot;{{ url_for(&#39;index&#39;) }}&quot;&gt;Return to the index.&lt;/a&gt;&lt;/p&gt;
-
-		&lt;table class=&quot;table&quot;&gt;
+47</pre></div></td><td class="code"><div class="highlight"><pre><span></span>		&lt;table class=&quot;table&quot;&gt;
 			&lt;tr&gt;
 				&lt;th&gt;Sock Name&lt;/th&gt;
-				&lt;th&gt;Color&lt;/th&gt;
-				&lt;th&gt;Price&lt;/th&gt;
+<span class="hll">				&lt;th&gt;Color&lt;/th&gt;
+</span>				&lt;th&gt;Price&lt;/th&gt;
 				&lt;th&gt;Quantity&lt;/th&gt;
 				&lt;th&gt;Updated&lt;/th&gt;
 			&lt;/tr&gt;
 
 			&lt;!-- here is a for-loop to give us all the socks --&gt;
-<span class="hll">			{% for sock in socks %}
-</span>			&lt;tr&gt;
+			{% for sock in socks %}
+			&lt;tr&gt;
 				&lt;td&gt;{{ sock.name }}&lt;/td&gt;
 				&lt;td&gt;{{ sock.color }}&lt;/td&gt;
 				&lt;td&gt;${{ sock.price }}&lt;/td&gt;
 				&lt;td&gt;{{ sock.quantity }}&lt;/td&gt;
 				&lt;td&gt;{{ sock.updated }}&lt;/td&gt;
-			&lt;/tr&gt;
-<span class="hll">			{% endfor %}
-</span>		&lt;/table&gt;
-</pre></div>
+<span class="hll">			&lt;/tr&gt;
+</span>			{% endfor %}
+		&lt;/table&gt;
+
+		&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/div&gt;
+
+<span class="hll">{% endblock %}
+</span></pre></div>
 </td></tr></table></div>
 </div>
 <p>Refer to the <a class="reference external" href="flask_forms.html">Flask: Web Forms</a> chapter for details about adding Bootstrap to Flask. Refer to the <a class="reference external" href="flask3.html">Flask Templates</a> chapter for details about working with templates.</p>
@@ -500,13 +500,13 @@
 39
 40
 41
-42</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1">#routes</span>
-
-<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
-    <span class="c1"># get a list of unique values in the style column</span>
-<span class="hll">    <span class="n">styles</span> <span class="o">=</span> <span class="n">Sock</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">with_entities</span><span class="p">(</span><span class="n">Sock</span><span class="o">.</span><span class="n">style</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">()</span>
-</span>    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s1">&#39;index.html&#39;</span><span class="p">,</span> <span class="n">styles</span><span class="o">=</span><span class="n">styles</span><span class="p">)</span>
+42</pre></div></td><td class="code"><div class="highlight"><pre><span></span>    <span class="n">style</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">)</span>
+    <span class="n">quantity</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="n">price</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Float</span><span class="p">)</span>
+    <span class="n">updated</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">)</span>
+<span class="hll">
+</span><span class="c1">#routes</span>
 
 </pre></div>
 </td></tr></table></div>
@@ -529,17 +529,17 @@
 28
 29
 30
-31</pre></div></td><td class="code"><div class="highlight"><pre><span></span>      &lt;h1 class=&quot;pt-5 pb-2&quot;&gt;Welcome to the Sock Market!&lt;/h1&gt;
+31</pre></div></td><td class="code"><div class="highlight"><pre><span></span>      <span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span>
+          <span class="p">{</span><span class="o">%</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">styles</span> <span class="o">%</span><span class="p">}</span>
+          <span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s2">&quot;{{ url_for( &#39;inventory&#39;, style=s.style ) }}&quot;</span><span class="o">&gt;</span><span class="p">{{</span> <span class="n">s</span><span class="o">.</span><span class="n">style</span> <span class="p">}}</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;&lt;/</span><span class="n">li</span><span class="o">&gt;</span>
+          <span class="p">{</span><span class="o">%</span> <span class="n">endfor</span> <span class="o">%</span><span class="p">}</span>
+      <span class="o">&lt;/</span><span class="n">ul</span><span class="o">&gt;</span>
 
-      &lt;p class=&quot;lead&quot;&gt;This is the index page for an example Flask app using a SQL database containing an inventory of many colorful socks.&lt;/p&gt;
-
-      &lt;p&gt;Select the style of sock you would like to see:&lt;/p&gt;
-
-      &lt;ul&gt;
-          {% for s in styles %}
-<span class="hll">          &lt;li&gt;&lt;a href=&quot;{{ url_for( &#39;inventory&#39;, style=s.style ) }}&quot;&gt;{{ s.style }}&lt;/a&gt;&lt;/li&gt;
-</span>          {% endfor %}
-      &lt;/ul&gt;
+    <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+  <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="hll"><span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+</span>
+<span class="p">{</span><span class="o">%</span> <span class="n">endblock</span> <span class="o">%</span><span class="p">}</span>
 </pre></div>
 </td></tr></table></div>
 </div>

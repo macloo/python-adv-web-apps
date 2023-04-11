@@ -62,7 +62,7 @@ We will provide only one route to start with, and it includes a try/except just 
    :linenos:
    :lines: 40-59
    :lineno-start: 40
-   :emphasize-lines: 6-8,12
+   :emphasize-lines: 6-8,14
    :caption:
 
 
@@ -80,7 +80,9 @@ The only code that “talks” to the database is in lines 45-47.
 The default for ``order_by()`` is *ascending.* To sort by a column in *descending* order: ::
 
     from sqlalchemy import desc
-    Sock.query.filter_by(style='mini').order_by( desc(Sock.price) ).all()
+    socks = db.session.execute(db.select(Sock)
+       .filter_by(style='knee-high')
+       .order_by( desc(Sock.name) )).scalars()
 
 
 Lines 49-52 create a string using the data in ``socks`` and adding HTML tags around the data — the ``<ul>`` and ``<li>`` tags should be familiar to you.
