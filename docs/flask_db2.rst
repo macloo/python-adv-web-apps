@@ -122,6 +122,7 @@ Here is the central section of the HTML template that will display the socks. In
 
 .. literalinclude:: ../python_code_examples/flask/databases/flask_db_read/templates/list.html
    :linenos:
+   :language: jinja
    :lines: 15-41
    :lineno-start: 15
    :emphasize-lines: 4,18,26
@@ -187,30 +188,31 @@ We might know exactly which styles are available in this database — but what i
 
 .. literalinclude:: ../python_code_examples/flask/databases/flask_db_read/read_db.py
    :linenos:
-   :lines: 35-42
-   :lineno-start: 35
+   :lines: 43-49
+   :lineno-start: 43
    :emphasize-lines: 6
    :caption:
 
-Above is the route for the index (or starting page) of the app. It calls the template named *index.html,* which you can see in part below. But focus your attention on the **database query** in line 40.
+Above is the route for the index (or starting page) of the app. It calls the template named *index.html,* which you can see in part below. But focus your attention on the **database query** in line 47.
 
-* The ``with_entities()`` method restricts the columns returned to only the one(s) you want. In this case, we want *only* the **style** column.
+* The ``with_only_columns`` method restricts the columns returned to only the one(s) you want. In this case, we want *only* the **style** column.
 * The ``distinct()`` method returns only unique values in the specified column.
 
-Therefore, the contents of the new variable ``styles`` in line 40 above are one instance of each unique value in the **style** column. By passing ``styles`` to the template *index.html,* we can use those values to create a list of links.
+Therefore, the contents of the new variable ``styles`` in line 46 above are one instance of each unique value in the **style** column. By passing ``styles`` to the template *index.html,* we can use those values to create a list of links.
 
 .. literalinclude:: ../python_code_examples/flask/databases/flask_db_read/templates/index.html
    :linenos:
-   :lines: 21-31
-   :lineno-start: 21
+   :language: jinja
+   :lines: 15-25
+   :lineno-start: 15
    :emphasize-lines: 9
    :caption:
 
 Above is the HTML in the *index.html* template. The list ``styles`` came from the route, and we can loop over the list with a Jinja directive.
 
-The URL value for ``href=`` must be encoded for Flask (line 29). This was covered in the templates chapter.
+The URL value for ``href=`` must be encoded for Flask (line 23). This was covered in the templates chapter.
 
-In line 29, both the ``href=`` value and the text that is linked *use the same value* from ``styles``. As we loop over ``styles``, the current record is ``s`` — so the value in the **style** column is accessed with ``s.style``. Because the list ``styles`` contains only unique values from the **style** column, each different style appears only once.
+In line 23, both the ``href=`` value and the text that is linked *use the same value* from ``styles``. As we loop over ``styles``, the current record is ``s`` — so the value in the **style** column is accessed with ``s.style``. Because the list ``styles`` contains only unique values from the **style** column, each different style appears only once.
 
 The URL that executes the *other* route function in this app is: ::
 
@@ -229,8 +231,11 @@ The HTTP response comes from **this route** in the app script, with the value of
 
     @app.route('/inventory/<style>')
     def inventory(style):
-        socks = Sock.query.filter_by(style=style).order_by(Sock.name).all()
-        return render_template('list.html', socks=socks, style=style)
+        try:
+          socks = db.session.execute(db.select(Sock)
+              .filter_by(style=style)
+              .order_by(Sock.name)).scalars()
+          return render_template('list.html', socks=socks, style=style)
 
 In the browser, the *list.html* template will be loaded, displaying a table showing all sock records that have the style *knee-high.*
 
@@ -244,7 +249,7 @@ After that is accomplished, you need to write a **database query** (in a Flask r
 
 Before writing any queries, though, you need to create a **model** for each table in your database. The name of this model class will be used in your database queries.
 
-If your database has more than one table, you might need to `write SQL joins <https://docs.sqlalchemy.org/en/13/orm/query.html#sqlalchemy.orm.query.Query.join>`_ to get what you need. Joins are not covered here. `Explicit linking of tables with a foreign key <https://docs.sqlalchemy.org/en/13/core/constraints.html?highlight=foreignkey#sqlalchemy.schema.ForeignKey>`_ also is not covered here.
+If your database has more than one table, you might need to `write SQL joins <https://docs.sqlalchemy.org/en/20/orm/queryguide/select.html#joins>`_ to get what you need. Joins are not covered here. `Explicit linking of tables with a foreign key <https://docs.sqlalchemy.org/en/20/core/constraints.html#defining-foreign-keys>`_ also is not covered here.
 
 Values obtained from a database query are then passed to **a Flask template.** Using the Jinja template syntax in the template file’s code determines where the values appear in the HTML. That is covered in `Flask Templates <flask3.html>`_ and also in this chapter.
 
