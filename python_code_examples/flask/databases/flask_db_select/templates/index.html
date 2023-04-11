@@ -1,12 +1,5 @@
-{% extends 'bootstrap/base.html' %}
-{% import "bootstrap/wtf.html" as wtf %}
-
-{% block styles %}
-{{ super() }}
-	<style>
-		body { background: #f5f5f5; }
-	</style>
-{% endblock %}
+{% extends 'base.html' %}
+{% from 'bootstrap5/form.html' import render_form %}
 
 
 {% block title %}
@@ -32,9 +25,12 @@ Sock Market
 			<div class="bg-secondary text-white p-4">
 
 	<!-- add some goodies to the form - for help, see
-	     https://pythonhosted.org/Flask-Bootstrap/forms.html
+	     https://bootstrap-flask.readthedocs.io/en/stable/macros/#render-form
+       and
+       https://python-adv-web-apps.readthedocs.io/en/latest/flask_forms.html 
 		 -->
-       {{ wtf.quick_form(form, action=url_for("sock_detail"), method="post") }}
+
+			 {{ render_form(form, action=url_for("sock_detail"), method="post") }}
 
 	   </div>
     </div>

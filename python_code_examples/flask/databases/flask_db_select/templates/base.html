@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>
+  {% block title %}
+  {% endblock %}
+  </title>
+
+  {{ bootstrap.load_css() }}
+
+  <style>
+    body { background: #f5f5f5; }
+  </style>
+</head>
+<body>
+  <!-- this is a base template using Bootstrap-Flask
+       https://bootstrap-flask.readthedocs.io/ -->
+
+{% block content %}
+{% endblock %}
+
+
+<!-- you can delete the next line if you're not using any Bootstrap JS -->
+{{ bootstrap.load_js() }}
+</body>
+</html>
