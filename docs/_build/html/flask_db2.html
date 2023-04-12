@@ -110,6 +110,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#a-different-database-query">A different database query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#one-more-example">One more example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#summary">Summary</a></li>
 </ul>
 </li>
@@ -352,6 +353,10 @@
 </pre></div>
 </td></tr></table></div>
 </div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The database query shown above, lines 45-47, retrieves all columns in all rows where the value in the <cite>style</cite> column is <cite>‘knee-high’</cite> &amp;mdash; those rows are assigned to the variable named <cite>socks</cite>.</p>
+</div>
 <p>The only code that “talks” to the database is in lines 45-47.</p>
 <ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">socks</span></code> is a new variable. We assign to it the data we are pulling from the database.</p></li>
@@ -391,6 +396,10 @@
 <p>Using a Flask template, we can make the list of socks display more beautifully:</p>
 <div class="figure align-default">
 <img alt="Socks list in templated page screenshot" src="_images/socks_list_template.png" />
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The database query for the table shown above is in the route function <cite>inventory()</cite>. The code is shown &lt;a href=”#the-new-route”&gt;below&lt;/a&gt;.</p>
 </div>
 <p>Here is the central section of the HTML template that will display the socks. Instead of using an HTML list with <code class="docutils literal notranslate"><span class="pre">&lt;ul&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;li&gt;</span></code> tags, we’re using the standard HTML table tags with <strong>Bootstrap</strong> styles applied.</p>
 <div class="literal-block-wrapper docutils container" id="id5">
@@ -517,7 +526,7 @@
 </pre></div>
 </td></tr></table></div>
 </div>
-<p>Above is the route for the index (or starting page) of the app. It calls the template named <em>index.html,</em> which you can see in part below. But focus your attention on the <strong>database query</strong> in line 47.</p>
+<p>Above is the route for the index (or starting page) of the app. It calls the template named <em>index.html,</em> which you can see in part below. But focus your attention on the <strong>database query</strong> in lines 46-47.</p>
 <ul class="simple">
 <li><p>The <code class="docutils literal notranslate"><span class="pre">with_only_columns</span></code> method restricts the columns returned to only the one(s) you want. In this case, we want <em>only</em> the <strong>style</strong> column.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">distinct()</span></code> method returns only unique values in the specified column.</p></li>
@@ -575,6 +584,11 @@
 </pre></div>
 </div>
 <p>In the browser, the <em>list.html</em> template will be loaded, displaying a table showing all sock records that have the style <em>knee-high.</em></p>
+</div>
+<div class="section" id="one-more-example">
+<h2>One more example<a class="headerlink" href="#one-more-example" title="Permalink to this headline">¶</a></h2>
+<p>The example explained here (flask_db_read) provides two very different queries on the sockmarket database &amp;mdash; which is a SQLite database.</p>
+<p>A <em>separate</em> example (see <a class="reference external" href="https://weimergeeks.com/flask_db_select">a live version</a>) provides two <em>other</em> very different queries. The code for that example (flask_db_select) is <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases/flask_db_select">here</a>. The sockmarket database used in that example is a MySQL database.</p>
 </div>
 <div class="section" id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
