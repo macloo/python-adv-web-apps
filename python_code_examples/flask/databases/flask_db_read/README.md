@@ -1,5 +1,7 @@
 # Flask: Read from a Database
 
+*Updated April 11, 2023* for SQLAlchemy 2.0
+
 This section of the resource **Python Beginners** deals with Flask (see [Flask Intro](https://python-adv-web-apps.readthedocs.io/en/latest/flask.html)) and using Flask with a database (see [Flask and Databases](https://python-adv-web-apps.readthedocs.io/en/latest/flask_db1.html)).
 
 The code in this folder, */flask/databases/flask_db_read/,* applies to one specific SQLite database, which is wholly contained in the file named *sockmarket.db.*
