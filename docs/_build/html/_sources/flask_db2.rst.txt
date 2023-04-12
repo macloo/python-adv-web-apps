@@ -68,7 +68,7 @@ We will provide only one route to start with, and it includes a try/except just 
    :caption:
 
 
-.. important:: The database query shown above, lines 45-47, retrieves all columns in all rows where the value in the `style` column is `'knee-high'` &mdash; those rows are assigned to the variable named `socks`.
+.. important:: The database query shown above, lines 45-47, retrieves all columns in all rows where the value in the `style` column is `'knee-high'` — those rows are assigned to the variable named `socks`.
 
 The only code that “talks” to the database is in lines 45-47.
 
@@ -123,7 +123,7 @@ Using a Flask template, we can make the list of socks display more beautifully:
    :alt: Socks list in templated page screenshot
 
 
-.. important:: The database query for the table shown above is in the route function `inventory()`. The code is shown <a href="#the-new-route">below</a>.
+.. important:: The database query for the table shown above is in the route function `inventory()`. The code is shown `below <a href="#the-new-route">`_.
 
 Here is the central section of the HTML template that will display the socks. Instead of using an HTML list with ``<ul>`` and ``<li>`` tags, we’re using the standard HTML table tags with **Bootstrap** styles applied.
 
@@ -250,7 +250,7 @@ In the browser, the *list.html* template will be loaded, displaying a table show
 One more example
 ----------------
 
-The example explained here (flask_db_read) provides two very different queries on the sockmarket database &mdash; which is a SQLite database.
+The example explained here (flask_db_read) provides two very different queries on the sockmarket database — which is a SQLite database.
 
 A *separate* example (see `a live version <https://weimergeeks.com/flask_db_select>`_) provides two *other* very different queries. The code for that example (flask_db_select) is `here <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases/flask_db_select>`_. The sockmarket database used in that example is a MySQL database.
 
