@@ -200,7 +200,7 @@ Walkthrough of the presidents app
 
 Now we will examine this app so you can build one like it yourself.
 
-☞ `View the live presents app here. <https://weimergeeks.com/flask_pres/>`_
+☞ `View the live presidents app here. <https://presidents-flask.herokuapp.com/>`_
 
 ☞ `View the code for the presidents app. <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/presidents>`_
 
@@ -296,7 +296,7 @@ This is a simple route for the top page of the app: ::
 
 Because ``pairs_list`` already exists, the function has only one instruction: to return ``render_template()``. The ``render_template()`` function specifies the template named ``index.html`` (this is always the *first thing* inside the parentheses) and passes to it the ``pairs_list`` (assigned to ``pairs``) and the string *"Presidents Index"* (assigned to ``the_title``).
 
-`You can see the result here. <https://weimergeeks.com/flask_pres/>`_
+`You can see the result here. <https://presidents-flask.herokuapp.com/>`_
 
 
 The presidents templates
@@ -421,7 +421,7 @@ For answers to any questions about writing templates or using the Jinja template
 
 * `Jinja documentation <https://jinja.palletsprojects.com/en/3.0.x/templates/>`_ — All the commands for the Jinja template syntax are here.
 
-* `Flask documentation <https://flask.palletsprojects.com/en/2.2.x/quickstart/#rendering-templates>`_ for ``render_template()``.
+* `Flask documentation <https://flask.palletsprojects.com/en/2.3.x/quickstart/#rendering-templates>`_ for ``render_template()``.
 
 
 Summary
