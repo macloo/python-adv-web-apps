@@ -71,6 +71,12 @@ $ cd docs
 $ make html
 ```
 
+## Check the build
+
+Go here and log in to see why it failed: 
+https://readthedocs.org/dashboard/
+
+
 ## Create new page/chapter in docs
 
 1. Create a new .rst file in /docs/ e.g. `foobar.rst`
