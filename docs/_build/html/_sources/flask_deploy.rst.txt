@@ -1,6 +1,8 @@
 Flask: Deploy an App
 ====================
 
+*Updated 26 March 2024*
+
 Previous:
 
 1. `Flask intro <flask.html>`_: A very simple Flask app
@@ -81,7 +83,7 @@ Freezer errors
 
     @app.route('/actor/<id>')
 
-You might need to add a `URL generator <https://pythonhosted.org/Frozen-Flask/#url-generators>`_ to the *freeze.py* file. **But read the NOTE above before you do this!**
+You might need to add a `URL generator <https://frozen-flask.readthedocs.io/en/latest/#url-generators>`_ to the *freeze.py* file. **But read the NOTE above before you do this!**
 
 For example (`see project files <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/actors_app>`_): ::
 
