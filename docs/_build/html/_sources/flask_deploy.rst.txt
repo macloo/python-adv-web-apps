@@ -96,13 +96,13 @@ You can definitely freeze an app with dynamic route information, but you might n
 
 Some apps *cannot* work via freezing. See below for details.
 
-Read the `full documentation <http://pythonhosted.org/Frozen-Flask/>`_ for Frozen-Flask.
+Read the `full documentation <https://frozen-flask.readthedocs.io/en/latest/>`_ for Frozen-Flask.
 
 
 When freezing will not work, cannot work
 ----------------------------------------
 
-If your app depends on dynamic activity — for example, if you are using **Flask-WTF** to process a form — you will not get a fully functioning app if you freeze it. Similarly, if you’re accessing an API to get data that changes frequently (such as currency rates or weather), you cannot freeze that app.
+If your app depends on dynamic activity — for example, if you are using **Flask-WTF** to process a form — you WILL NOT get a fully functioning app if you freeze it. Similarly, if you’re accessing an API to get data that changes frequently (such as currency rates or weather), you CANNOT freeze that app.
 
 In those cases, you will need to have Python running on a web server — and NOT freeze the app.
 
@@ -123,6 +123,6 @@ We’ve learned about two different options for deploying a Flask app:
 
 Depending on the characteristics of your Flask app, one of these options might be much better than the other.
 
-`See more options for deploying <https://flask.palletsprojects.com/en/2.2.x/deploying/>`_ in the Flask documentation.
+`See more options for deploying <https://flask.palletsprojects.com/en/latest/deploying/>`_ in the Flask documentation.
 
 .
