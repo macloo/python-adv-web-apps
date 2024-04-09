@@ -179,7 +179,7 @@
             
   <div class="section" id="flask-and-databases">
 <h1>Flask and Databases<a class="headerlink" href="#flask-and-databases" title="Permalink to this headline">¶</a></h1>
-<p><em>Updated April 3, 2023</em></p>
+<p><em>Major update: April 3, 2023. All URLs checked and updated: April 9, 2024.</em></p>
 <p>To add database functionality to a Flask app, we will use SQLAlchemy.</p>
 <p><strong>SQLAlchemy</strong> is a Python SQL toolkit and object relational mapper (ORM) that enables Python to communicate with the SQL database system you prefer: MySQL, PostgreSQL, SQLite, and others. An ORM converts data between incompatible systems (object structure in Python, table structure in SQL database). SQLAlchemy is basically a <strong>bridge</strong> between Python and a SQL database.</p>
 <p><strong>Flask-SQLAlchemy</strong> is an <em>extension</em> for Flask that adds SQLAlchemy to your Flask app.</p>
@@ -194,7 +194,7 @@
 </div>
 <div class="section" id="setup-flask-sqlalchemy">
 <h2>Setup: Flask-SQLAlchemy<a class="headerlink" href="#setup-flask-sqlalchemy" title="Permalink to this headline">¶</a></h2>
-<p>We will install the <strong>Flask-SQLAlchemy</strong> extension to enable us to work with a SQL database in Flask. There are many extensions for Flask; each one adds a different set of functions and capabilities. See the <a class="reference external" href="https://flask.palletsprojects.com/en/1.1.x/extensions/">list of Flask extensions</a> for more.</p>
+<p>We will install the <strong>Flask-SQLAlchemy</strong> extension to enable us to work with a SQL database in Flask. There are many extensions for Flask; each one adds a different set of functions and capabilities. See the <a class="reference external" href="https://flask.palletsprojects.com/en/2.3.x/extensions/">list of Flask extensions</a> for more.</p>
 <p>In Terminal, change into your Flask projects folder and <strong>activate your virtual environment</strong> there. Then install the extension at the command prompt — where you see <code class="docutils literal notranslate"><span class="pre">$</span></code> (Mac) or <code class="docutils literal notranslate"><span class="pre">C:\Users\yourname&gt;</span></code> (Windows) —</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">Flask</span><span class="o">-</span><span class="n">SQLAlchemy</span>
 </pre></div>
@@ -228,7 +228,7 @@
 </div>
 <p>It is assumed you are familiar with how to write basic SQL queries.</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/queries/">Details about writing queries with Flask-SQLAlchemy.</a></p></li>
+<li><p><a class="reference external" href="https://flask-sqlalchemy.palletsprojects.com/en/3.1.x/queries/">Details about writing queries with Flask-SQLAlchemy.</a></p></li>
 <li><p>Complete SQLAlchemy documentation: <a class="reference external" href="https://docs.sqlalchemy.org/en/20/orm/queryguide/index.html">ORM Querying Guide</a></p></li>
 </ul>
 <p>In addition to <em>reading from</em> your SQL database, your Flask app might allow people to <em>write to</em> the database. In that case, you will probably want people to log in securely. Alternatively, you might set up a Python script that updates your database on a regular schedule (e.g., writing in new records from a monthly data dump).</p>
@@ -346,7 +346,7 @@
 <li><p><a class="reference external" href="https://www.sqlite.org/download.html">Download and install SQLite for your operating system</a> (note: MacOS already has SQLite)</p></li>
 <li><p>Download the free <a class="reference external" href="https://sqlitebrowser.org/">DB Browser for SQLite</a> (you can easily create tables by importing CSV files) — use this to create a new database, add tables, set data types for columns, etc.</p></li>
 <li><p><a class="reference external" href="https://www.sqlitetutorial.net/">SQLite Tutorial</a></p></li>
-<li><p>SQLite can be used <em>without</em> SQLAlchemy: <a class="reference external" href="https://flask.palletsprojects.com/en/2.2.x/patterns/sqlite3/">Using SQLite3 with Flask</a></p></li>
+<li><p>SQLite can be used <em>without</em> SQLAlchemy: <a class="reference external" href="https://flask.palletsprojects.com/en/2.3.x/patterns/sqlite3/">Using SQLite3 with Flask</a></p></li>
 </ul>
 </div>
 <div class="section" id="connecting-to-a-mysql-database">
@@ -355,7 +355,7 @@
 <p>In addition, when running the MySQL database locally, a socket string must be included. This string will be very different on MacOS and Windows.</p>
 <p>If you do not want to run the database locally, but instead you have the database on a remote server — while you are writing your Flask app (and testing it) on your own computer — you will need to <a class="reference external" href="http://bit.ly/mm-remote-mysql">remotely connect to your MySQL database</a>.</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/config/#connection-url-format">See other examples of connection strings.</a></p></li>
+<li><p><a class="reference external" href="https://flask-sqlalchemy.palletsprojects.com/en/3.1.x/config/#connection-url-format">See other examples of connection strings.</a></p></li>
 </ul>
 </div>
 <div class="section" id="the-connection-string">
@@ -391,7 +391,7 @@
 <p class="admonition-title">Note</p>
 <p><code class="docutils literal notranslate"><span class="pre">os</span></code> is a built-in Python module.</p>
 </div>
-<p>When setting up a Flask app on a server, there will be an option to set environment variables there. The lines in the Flask script referring to the environment variable will not change.</p>
+<p>When setting up a Flask app on a server, or at a host such as Render.com, there will be an option to set environment variables there. The lines in the Flask script referring to the environment variable will not change.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <p>Only one environment variable on your computer, or in an app, can be named <code class="docutils literal notranslate"><span class="pre">DATABASE_URL</span></code> — it’s a variable name, so you can change the string to something else, and you can set as many different variables as you need.</p>
