@@ -45,7 +45,7 @@ WTForms is “a flexible forms validation and rendering library for Python Web d
 Setup for using forms in Flask
 ------------------------------
 
-We will install the **Flask-WTF** extension to help us work with forms in Flask. There are many extensions for Flask, and each one adds a different set of functions and capabilities. See the `list of Flask extensions <https://flask.palletsprojects.com/en/2.2.x/extensions/>`_ for more.
+We will install the **Flask-WTF** extension to help us work with forms in Flask. There are many extensions for Flask, and each one adds a different set of functions and capabilities. See the `list of Flask extensions <https://flask.palletsprojects.com/en/latest/extensions/>`_ for more.
 
 In Terminal, change into your Flask projects folder and **activate your virtual environment** there. Then, at the command prompt — where you see ``$`` (Mac) or ``C:\Users\yourname>`` (Windows )— ::
 
