@@ -1,7 +1,7 @@
 Flask and Databases
 ===================
 
-*Updated April 3, 2023*
+*Major update: April 3, 2023. All URLs checked and updated: April 9, 2024.*
 
 To add database functionality to a Flask app, we will use SQLAlchemy.
 
@@ -14,13 +14,13 @@ To add database functionality to a Flask app, we will use SQLAlchemy.
 * `Code for this chapter <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases>`_
 
 
-.. note:: SQLAlchemy 2.0 was released in October 2022 and was a major update. This document has been updated for SQLAlchemy 2.0. 
+.. note:: SQLAlchemy 2.0 was released in October 2022 and was a major update. This document has been updated for SQLAlchemy 2.0.
 
 
 Setup: Flask-SQLAlchemy
 -----------------------
 
-We will install the **Flask-SQLAlchemy** extension to enable us to work with a SQL database in Flask. There are many extensions for Flask; each one adds a different set of functions and capabilities. See the `list of Flask extensions <https://flask.palletsprojects.com/en/1.1.x/extensions/>`_ for more.
+We will install the **Flask-SQLAlchemy** extension to enable us to work with a SQL database in Flask. There are many extensions for Flask; each one adds a different set of functions and capabilities. See the `list of Flask extensions <https://flask.palletsprojects.com/en/2.3.x/extensions/>`_ for more.
 
 In Terminal, change into your Flask projects folder and **activate your virtual environment** there. Then install the extension at the command prompt — where you see ``$`` (Mac) or ``C:\Users\yourname>`` (Windows) — ::
 
@@ -62,7 +62,7 @@ The Flask-SQLAlchemy statement *to the right of the first equals sign,* above, i
 It is assumed you are familiar with how to write basic SQL queries.
 
 
-* `Details about writing queries with Flask-SQLAlchemy. <https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/queries/>`_
+* `Details about writing queries with Flask-SQLAlchemy. <https://flask-sqlalchemy.palletsprojects.com/en/3.1.x/queries/>`_
 
 * Complete SQLAlchemy documentation: `ORM Querying Guide <https://docs.sqlalchemy.org/en/20/orm/queryguide/index.html>`_
 
@@ -117,7 +117,7 @@ Unlike other database systems, a SQLite database does not have a username or pas
 * `Download and install SQLite for your operating system <https://www.sqlite.org/download.html>`_ (note: MacOS already has SQLite)
 * Download the free `DB Browser for SQLite <https://sqlitebrowser.org/>`_ (you can easily create tables by importing CSV files) — use this to create a new database, add tables, set data types for columns, etc.
 * `SQLite Tutorial <https://www.sqlitetutorial.net/>`_
-* SQLite can be used *without* SQLAlchemy: `Using SQLite3 with Flask <https://flask.palletsprojects.com/en/2.2.x/patterns/sqlite3/>`_
+* SQLite can be used *without* SQLAlchemy: `Using SQLite3 with Flask <https://flask.palletsprojects.com/en/2.3.x/patterns/sqlite3/>`_
 
 Connecting to a MySQL database
 ++++++++++++++++++++++++++++++
@@ -128,7 +128,7 @@ In addition, when running the MySQL database locally, a socket string must be in
 
 If you do not want to run the database locally, but instead you have the database on a remote server — while you are writing your Flask app (and testing it) on your own computer — you will need to `remotely connect to your MySQL database <http://bit.ly/mm-remote-mysql>`_.
 
-* `See other examples of connection strings. <https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/config/#connection-url-format>`_
+* `See other examples of connection strings. <https://flask-sqlalchemy.palletsprojects.com/en/3.1.x/config/#connection-url-format>`_
 
 The connection string
 +++++++++++++++++++++
@@ -167,7 +167,7 @@ Look up how to set an environment variable for your operating system.
 
 .. note::  ``os`` is a built-in Python module.
 
-When setting up a Flask app on a server, there will be an option to set environment variables there. The lines in the Flask script referring to the environment variable will not change.
+When setting up a Flask app on a server, or at a host such as Render.com, there will be an option to set environment variables there. The lines in the Flask script referring to the environment variable will not change.
 
 .. important:: Only one environment variable on your computer, or in an app, can be named ``DATABASE_URL`` — it’s a variable name, so you can change the string to something else, and you can set as many different variables as you need.
 
