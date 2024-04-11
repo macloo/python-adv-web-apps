@@ -2,7 +2,7 @@
 
 *Updated April 11, 2023* for SQLAlchemy 2.0
 
-[Live app here.](https://weimergeeks.com/flask_db_select)
+[Live app here.](https://flask-sockmarket.onrender.com/) *New URL: April 10, 2024*
 
 See:
 
