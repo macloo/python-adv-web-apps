@@ -139,7 +139,7 @@ Here is a live form page shown beside the rendered source code for choices.
    :alt: Live form page shown beside rendered source code for choices
 
 
-   * `Live app <https://presidents-search.onrender.com/search>`_ (it will take about a minute to load)
+   * `Live app <https://presidents-search.onrender.com/search>`_ &mdash; Presidents Search (it will take about a minute to load)
    * `Code <https://github.com/macloo/flask_pres_search2/>`_
 
 
@@ -217,7 +217,7 @@ Examining the route function
 
 Before reading further, try out a `working version of this app <https://weimergeeks.com/flaskform/>`_. The complete code for the app is in the folder named `actors_app <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/actors_app>`_.
 
-1. You type an actor’s name into the form and submit it.
+1. You type an actor’s name into the form and submit it. Try Willem Dafoe, Viola Davis, Morgan Freeman, or Kate Winslet (there are only 100 names).
 2. If the actor’s name is in the data source (ACTORS), the app loads a detail page for that actor. (Photos of bears 🐻 stand in for real photos of the actors.)
 3. Otherwise, you stay on the same page, the form is cleared, and a message tells you that actor is not in the database.
 
