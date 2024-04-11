@@ -196,7 +196,7 @@
 </div>
 <p><strong>Flask forms app example</strong> (<em>flask_actors_app</em>):</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://actors-search.onrender.com">Live app</a></p></li>
+<li><p><a class="reference external" href="https://actors-search.onrender.com">Live app</a> (it will take about a minute to load)</p></li>
 <li><p><a class="reference external" href="https://github.com/macloo/flask_actors_app">Code</a></p></li>
 </ul>
 <div class="section" id="introduction">
@@ -287,14 +287,18 @@
 <div class="figure align-default">
 <img alt="Live form page shown beside rendered source code for choices" src="_images/choices_example_WTForms.png" />
 </div>
+<ul class="simple">
+<li><p><a class="reference external" href="https://presidents-search.onrender.com/search">Live app (Presidents)</a>  (it will take about a minute to load)</p></li>
+<li><p><a class="reference external" href="https://github.com/macloo/flask_pres_search2/">Code (Presidents)</a></p></li>
+</ul>
 <p>For more help with the FlaskForm class, <a class="reference external" href="https://bootstrap-flask-example.azurewebsites.net/form">see this Bootstrap-Flask page</a>. It shows great examples with the exact code needed.</p>
 <p>WTForms also has a long list of <a class="reference external" href="https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-validators.csv">validators</a> we can use. The <code class="docutils literal notranslate"><span class="pre">DataRequired()</span></code> validator prevents the form from being submitted if that field is empty. Note that these validators must also be <strong>imported</strong> at the top of the file. <a class="reference external" href="https://wtforms.readthedocs.io/en/3.0.x/crash_course/#validators">Validators</a> and <a class="reference external" href="https://wtforms.readthedocs.io/en/3.0.x/crash_course/#custom-validators">custom validators</a> are discussed further in the WTForms documentation.</p>
 </div>
 <div class="section" id="put-the-form-in-a-route-function">
 <h3>Put the form in a route function<a class="headerlink" href="#put-the-form-in-a-route-function" title="Permalink to this headline">¶</a></h3>
 <p>Now we will use the form in a Flask route:</p>
-<div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/actors_app/actors.py</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/actors_app/actors.py</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>29
 30
 31
@@ -343,8 +347,8 @@
 <div class="section" id="put-the-form-in-a-template">
 <h3>Put the form in a template<a class="headerlink" href="#put-the-form-in-a-template" title="Permalink to this headline">¶</a></h3>
 <p>Before we break all that down and explain it, let’s look at the code in the template <em>index.html</em>:</p>
-<div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/actors_app/templates/index.html</span><a class="headerlink" href="#id5" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/actors_app/templates/index.html</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
 <div class="highlight-jinja notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -448,8 +452,8 @@
 <li><p>If the actor’s name is in the data source (ACTORS), the app loads a detail page for that actor. (Photos of bears 🐻 stand in for real photos of the actors.)</p></li>
 <li><p>Otherwise, you stay on the same page, the form is cleared, and a message tells you that actor is not in the database.</p></li>
 </ol>
-<div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/actors_app/actors.py</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">../python_code_examples/flask/actors_app/actors.py</span><a class="headerlink" href="#id4" title="Permalink to this code">¶</a></div>
 <div class="highlight-default notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>29
 30
 31
