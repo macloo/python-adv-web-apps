@@ -45,7 +45,7 @@ WTForms is “a flexible forms validation and rendering library for Python Web d
 Setup for using forms in Flask
 ------------------------------
 
-We will install the **Flask-WTF** extension to help us work with forms in Flask. There are many extensions for Flask, and each one adds a different set of functions and capabilities. See the `list of Flask extensions <https://flask.palletsprojects.com/en/latest/extensions/>`_ for more.
+We will install the **Flask-WTF** extension to help us work with forms in Flask. There are many extensions for Flask, and each one adds a different set of functions and capabilities. See the `list of Flask extensions <https://flask.palletsprojects.com/en/3.0.x/extensions/>`_ for more.
 
 In Terminal, change into your Flask projects folder and **activate your virtual environment** there. Then, at the command prompt — where you see ``$`` (Mac) or ``C:\Users\yourname>`` (Windows )— ::
 
@@ -138,7 +138,12 @@ Here is a live form page shown beside the rendered source code for choices.
 .. figure:: _static/images/choices_example_WTForms.png
    :alt: Live form page shown beside rendered source code for choices
 
-For more help with the FlaskForm class, `see this Bootstrap-Flask page <http://173.212.227.186/form>`_. It shows great examples with the exact code needed.
+
+   * `Live app <https://presidents-search.onrender.com/search>`_ (it will take about a minute to load)
+   * `Code <https://github.com/macloo/flask_pres_search2/>`_
+
+
+For more help with the FlaskForm class, `see this Bootstrap-Flask page <https://bootstrap-flask-example.azurewebsites.net/form>`_. It shows great examples with the exact code needed.
 
 WTForms also has a long list of `validators <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-validators.csv>`_ we can use. The ``DataRequired()`` validator prevents the form from being submitted if that field is empty. Note that these validators must also be **imported** at the top of the file. `Validators <https://wtforms.readthedocs.io/en/3.0.x/crash_course/#validators>`__ and `custom validators <https://wtforms.readthedocs.io/en/3.0.x/crash_course/#custom-validators>`_ are discussed further in the WTForms documentation.
 
