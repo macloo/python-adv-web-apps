@@ -182,7 +182,7 @@ The one difference in the **database query** is that instead of getting only rec
 A different database query
 --------------------------
 
-If you’re familiar with SQL, you know there are many different kinds of queries we can write against a database. All of them can be constructed `one way or another <https://flask-sqlalchemy.palletsprojects.com/en/3.0.x/queries/>`_ with Flask-SQLAlchemy.
+If you’re familiar with SQL, you know there are many different kinds of queries we can write against a database. All of them can be constructed `one way or another <https://flask-sqlalchemy.palletsprojects.com/en/3.1.x/queries/>`_ with Flask-SQLAlchemy.
 
 * Search the `ORM Querying Guide <https://docs.sqlalchemy.org/en/20/orm/queryguide/index.html>`_ in the SQLAlchemy documentation when you need to work out the syntax for an unusual query.
 
@@ -252,7 +252,7 @@ One more example
 
 The example explained here (flask_db_read) provides two very different queries on the sockmarket database — which is a SQLite database.
 
-A *separate* example (see `a live version <https://weimergeeks.com/flask_db_select>`_) provides two *other* very different queries. The code for that example (flask_db_select) is `here <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/databases/flask_db_select>`_. The sockmarket database used in that example is a MySQL database.
+A *separate* example (see `a live version <https://flask-sockmarket.onrender.com/>`_) provides two *other* very different queries. The code for that example (flask_db_select) is `here <https://github.com/macloo/flask_db_select>`_. The sockmarket database used in that example is a MySQL database.
 
 Summary
 -------
