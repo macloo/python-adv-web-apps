@@ -1,7 +1,7 @@
 Flask: Read from a Database
 ===========================
 
-*Updated April 11, 2023*
+*Major update: April 11, 2023. All URLs checked and updated: April 10, 2024.*
 
 It is essential to get your **database connection** working without errors before you try to do more with the database and Flask.
 
