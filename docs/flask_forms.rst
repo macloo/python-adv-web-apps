@@ -22,7 +22,7 @@ In the **Flask Templates** chapter, we built a functioning Flask app. In this ch
 
 **Flask forms app example** (*flask_actors_app*):
 
-* `Live app <https://actors-search.onrender.com>`_
+* `Live app <https://actors-search.onrender.com>`_ (it will take about a minute to load)
 * `Code <https://github.com/macloo/flask_actors_app>`_
 
 
@@ -136,11 +136,11 @@ Note that several field types (such as ``RadioField`` and ``SelectField``) must 
 Here is a live form page shown beside the rendered source code for choices.
 
 .. figure:: _static/images/choices_example_WTForms.png
-   :alt: Live form page shown beside rendered source code for choices
+  :alt: Live form page shown beside rendered source code for choices
 
 
-   * `Live app <https://presidents-search.onrender.com/search>`_ &mdash; Presidents Search (it will take about a minute to load)
-   * `Code <https://github.com/macloo/flask_pres_search2/>`_
+* `Live app (Presidents) <https://presidents-search.onrender.com/search>`_  (it will take about a minute to load)
+* `Code (Presidents) <https://github.com/macloo/flask_pres_search2/>`_
 
 
 For more help with the FlaskForm class, `see this Bootstrap-Flask page <https://bootstrap-flask-example.azurewebsites.net/form>`_. It shows great examples with the exact code needed.
