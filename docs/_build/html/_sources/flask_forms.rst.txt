@@ -215,7 +215,7 @@ Note that it *is* possible to use Bootstrap-Flask *without* any forms! The `acto
 Examining the route function
 ----------------------------
 
-Before reading further, try out a `working version of this app <https://actors-search.onrender.com/>`_. The complete code for the app is `here <https://github.com/macloo/flask_actors_app/>`_ (updated April 2024).
+Before reading further, try out a `working version of this app <https://actors-search.onrender.com/>`_. The complete code for the app is `on GitHub <https://github.com/macloo/flask_actors_app/>`_ (updated April 2024).
 
 1. You type an actor’s name into the form and submit it. Try Willem Dafoe, Viola Davis, Morgan Freeman, or Kate Winslet (there are only 100 names).
 2. If the actor’s name is in the data source (ACTORS), the app loads a detail page for that actor. (Photos of bears 🐻 stand in for real photos of the actors.)
