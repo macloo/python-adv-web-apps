@@ -1,7 +1,7 @@
 Flask: Web Forms
 ================
 
-*Updated March 31, 2023*
+*Updated April 11, 2024*
 
 Previous:
 
@@ -20,10 +20,10 @@ In the **Flask Templates** chapter, we built a functioning Flask app. In this ch
 .. figure:: _static/images/actors_app.png
    :alt: Actors app screenshots
 
-**Flask forms app example** (*actors_app*):
+**Flask forms app example** (*flask_actors_app*):
 
-* `Live app <https://weimergeeks.com/flaskform/>`_
-* `Code <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/actors_app>`_
+* `Live app <https://actors-search.onrender.com>`_
+* `Code <https://github.com/macloo/flask_actors_app>`_
 
 
 Introduction
@@ -164,9 +164,9 @@ A crucial line is where we assign our configured form object to a new variable: 
 
     form = NameForm()
 
-We must also pass that variable to the template, as seen in the final line above.
+We must also **pass that variable to the template,** as seen in the final line above.
 
-Be aware that if we had created **more than one** form class, each of those would need to be assigned to a unique variable.
+Be aware that if we had created **more than one** form class, each of those would need to be assigned to a unique variable. (They cannot all be named *form.*)
 
 
 Put the form in a template
@@ -215,7 +215,7 @@ Note that it *is* possible to use Bootstrap-Flask *without* any forms! The `acto
 Examining the route function
 ----------------------------
 
-Before reading further, try out a `working version of this app <https://weimergeeks.com/flaskform/>`_. The complete code for the app is in the folder named `actors_app <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/actors_app>`_.
+Before reading further, try out a `working version of this app <https://actors-search.onrender.com/>`_. The complete code for the app is `here <https://github.com/macloo/flask_actors_app/>`_ (updated April 2024).
 
 1. You type an actor’s name into the form and submit it. Try Willem Dafoe, Viola Davis, Morgan Freeman, or Kate Winslet (there are only 100 names).
 2. If the actor’s name is in the data source (ACTORS), the app loads a detail page for that actor. (Photos of bears 🐻 stand in for real photos of the actors.)
