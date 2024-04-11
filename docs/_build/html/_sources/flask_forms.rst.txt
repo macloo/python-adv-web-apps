@@ -1,7 +1,7 @@
 Flask: Web Forms
 ================
 
-*Updated March 31, 2023*
+*Updated April 11, 2024*
 
 Previous:
 
@@ -20,10 +20,10 @@ In the **Flask Templates** chapter, we built a functioning Flask app. In this ch
 .. figure:: _static/images/actors_app.png
    :alt: Actors app screenshots
 
-**Flask forms app example** (*actors_app*):
+**Flask forms app example** (*flask_actors_app*):
 
-* `Live app <https://weimergeeks.com/flaskform/>`_
-* `Code <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/actors_app>`_
+* `Live app <https://actors-search.onrender.com>`_
+* `Code <https://github.com/macloo/flask_actors_app>`_
 
 
 Introduction
@@ -45,7 +45,7 @@ WTForms is “a flexible forms validation and rendering library for Python Web d
 Setup for using forms in Flask
 ------------------------------
 
-We will install the **Flask-WTF** extension to help us work with forms in Flask. There are many extensions for Flask, and each one adds a different set of functions and capabilities. See the `list of Flask extensions <https://flask.palletsprojects.com/en/latest/extensions/>`_ for more.
+We will install the **Flask-WTF** extension to help us work with forms in Flask. There are many extensions for Flask, and each one adds a different set of functions and capabilities. See the `list of Flask extensions <https://flask.palletsprojects.com/en/3.0.x/extensions/>`_ for more.
 
 In Terminal, change into your Flask projects folder and **activate your virtual environment** there. Then, at the command prompt — where you see ``$`` (Mac) or ``C:\Users\yourname>`` (Windows )— ::
 
@@ -138,7 +138,12 @@ Here is a live form page shown beside the rendered source code for choices.
 .. figure:: _static/images/choices_example_WTForms.png
    :alt: Live form page shown beside rendered source code for choices
 
-For more help with the FlaskForm class, `see this Bootstrap-Flask page <http://173.212.227.186/form>`_. It shows great examples with the exact code needed.
+
+   * `Live app <https://presidents-search.onrender.com/search>`_ &mdash; Presidents Search (it will take about a minute to load)
+   * `Code <https://github.com/macloo/flask_pres_search2/>`_
+
+
+For more help with the FlaskForm class, `see this Bootstrap-Flask page <https://bootstrap-flask-example.azurewebsites.net/form>`_. It shows great examples with the exact code needed.
 
 WTForms also has a long list of `validators <https://github.com/macloo/python-adv-web-apps/blob/master/python_code_examples/flask/forms/WTForms-validators.csv>`_ we can use. The ``DataRequired()`` validator prevents the form from being submitted if that field is empty. Note that these validators must also be **imported** at the top of the file. `Validators <https://wtforms.readthedocs.io/en/3.0.x/crash_course/#validators>`__ and `custom validators <https://wtforms.readthedocs.io/en/3.0.x/crash_course/#custom-validators>`_ are discussed further in the WTForms documentation.
 
@@ -159,9 +164,9 @@ A crucial line is where we assign our configured form object to a new variable: 
 
     form = NameForm()
 
-We must also pass that variable to the template, as seen in the final line above.
+We must also **pass that variable to the template,** as seen in the final line above.
 
-Be aware that if we had created **more than one** form class, each of those would need to be assigned to a unique variable.
+Be aware that if we had created **more than one** form class, each of those would need to be assigned to a unique variable. (They cannot all be named *form.*)
 
 
 Put the form in a template
@@ -210,9 +215,9 @@ Note that it *is* possible to use Bootstrap-Flask *without* any forms! The `acto
 Examining the route function
 ----------------------------
 
-Before reading further, try out a `working version of this app <https://weimergeeks.com/flaskform/>`_. The complete code for the app is in the folder named `actors_app <https://github.com/macloo/python-adv-web-apps/tree/master/python_code_examples/flask/actors_app>`_.
+Before reading further, try out a `working version of this app <https://actors-search.onrender.com/>`_. The complete code for the app is `here <https://github.com/macloo/flask_actors_app/>`_ (updated April 2024).
 
-1. You type an actor’s name into the form and submit it.
+1. You type an actor’s name into the form and submit it. Try Willem Dafoe, Viola Davis, Morgan Freeman, or Kate Winslet (there are only 100 names).
 2. If the actor’s name is in the data source (ACTORS), the app loads a detail page for that actor. (Photos of bears 🐻 stand in for real photos of the actors.)
 3. Otherwise, you stay on the same page, the form is cleared, and a message tells you that actor is not in the database.
 
