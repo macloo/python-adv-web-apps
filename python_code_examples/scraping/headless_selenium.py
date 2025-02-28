@@ -1,4 +1,4 @@
-# tested March 2023
+# tested February 2025
 # run Selenium without seeing the browser
 
 from selenium import webdriver
@@ -17,8 +17,8 @@ driver.get('https://en.wikipedia.org/wiki/Antarctica');
 page = driver.page_source
 soup = BeautifulSoup(page, 'html.parser')
 
-# example of scraping from one page
-heds = soup.find_all('span', class_="mw-headline")
+# example of scraping from one page - h2s and h3s
+heds = soup.find_all('div', class_="mw-heading")
 
 for hed in heds:
     print( hed.text )
