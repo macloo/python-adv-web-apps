@@ -1,4 +1,4 @@
-# chromedriver test Feb. 2023
+# chromedriver - tested Feb. 2025
 #
 # This requires Selenium to be installed in your virtualenv
 # And you need to download and install chromedriver as explained here:
@@ -9,17 +9,16 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-
-# open page
+# open a page
 driver.get('http://www.google.com/');
-# find the search box
+# find the Google search box
 search_box = driver.find_element("name", "q")
-# type 'ChromeDriver' into the search box
-search_box.send_keys('ChromeDriver')
-
-# submit the text - typical Google search - see search results appear
-time.sleep(5) # let the user actually see something!
+# type text into the search box
+search_box.send_keys('elephants')
+# wait 5 seconds, time to let the user see the text
+time.sleep(5)
 search_box.submit()
-time.sleep(5) # let the user actually see something!
-
+# let the user see the result! 30 seconds, then quit
+time.sleep(30)
+# close the instance of Chrome opened by this script
 driver.quit()

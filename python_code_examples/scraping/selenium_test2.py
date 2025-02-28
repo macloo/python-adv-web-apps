@@ -1,4 +1,4 @@
-# tested Feb. 2023
+# tested Feb. 27, 2025
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -30,4 +30,5 @@ for tile in tiles:
 
 print("There are " + str( len(movie_titles) ) + " movies in the list.")
 
+# IMPORTANT!!  Tell the ChromeDriver to quit 
 driver.quit()

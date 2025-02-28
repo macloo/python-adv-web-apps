@@ -1,4 +1,4 @@
-# tested Feb. 2023
+# tested Feb. 2025
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
