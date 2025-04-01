@@ -1,7 +1,7 @@
 Flask: Deploy an App
 ====================
 
-*Updated 26 March 2024*
+*Updated 31 March 2025*
 
 Previous:
 
@@ -20,7 +20,7 @@ Introduction
 
 When professionals deploy their Python web apps, nowadays they commonly deploy to a cloud service such as `Amazon’s AWS <https://aws.amazon.com/>`_, `Heroku <https://www.heroku.com/>`_, or `Google App Engine <https://cloud.google.com/free/>`_.
 
-One thing to understand, though, is that *often* they do not deploy a Python executable. That is, the site they upload to a web server is not the Flask app and its associated templates, etc., but rather a traditional website with hard-coded HTML files that has been *“baked out”* from Flask.
+One thing to understand, though, is that *often* professional developers do not deploy a Python executable. That is, the site they upload to a web server is not the Flask app and its associated templates, etc., but rather a traditional website with hard-coded HTML files that has been *“baked out”* from Flask.
 
 In this document, we’ll learn how to do that. Then we will also learn how to install a Flask app (one that has not been “baked out”) on `Render.com <https://render.com/>`_.
 
@@ -110,9 +110,11 @@ In those cases, you will need to have Python running on a web server — and NOT
 
 There are various ways to do this if you pay to use a cloud service, but if you’re a student and your app is not going to attract thousands of users, there are some free options.
 
-In the past, it was possible to run Python apps on hosted web server accounts (“shared hosting”) that provide **cPanel** — a set of services accessed from a simple dashboard. Unfortunately, **this option is no longer available.** Another free option that is no longer offered was the “hobby” level of service at Heroku.
+In the past, it was possible to run Python apps on most hosted web server accounts (“shared hosting”) that provide **cPanel** — a set of services accessed from a simple dashboard. Unfortunately, **this option is no longer available from many hosting companies.** However, Namecheap still offers it. You can find out more `here <https://www.namecheap.com/support/knowledgebase/article.aspx/10048/2182/how-to-work-with-python-app/>`_. For detailed instructions for deploying a Flask app at Namecheap, see `this document <https://bit.ly/mm-flask-deploy2025>`_.
 
-In 2023, the best free option I am aware of for deploying a Python app is to use Render.com. `This document <https://bit.ly/mm-render-flask>`_ walks you through how to sign up, get started, and deploy your first Python app there. It’s relatively straightforward.
+Another free option that is no longer offered was the “hobby” level of service at Heroku.
+
+The best free option for deploying a Python app might be to use Render.com. `This document <https://bit.ly/mm-render-flask>`_ walks you through how to sign up, get started, and deploy your first Python app there. It’s relatively straightforward.
 
 
 Conclusion
